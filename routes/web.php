@@ -109,6 +109,11 @@
 		Route::post('pack/update','Admin\Website\PackageController@update');
 		//删除数据
 		Route::post('pack/destroy','Admin\Website\PackageController@destroy');
+
+		//----------------------------------户型介绍-------------------------------------//
+		//户型介绍展示页面
+		Route::get('introduction','Admin\Website\IntroductionController@index');
+
 	});
 
 
