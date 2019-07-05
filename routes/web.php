@@ -113,7 +113,7 @@
 
 
 
-	//查看网站管理信息
+	//查看网站管理信息(项目简介.配套设施)
 	Route::get('view/{nid}','Admin\Website\ViewController@index');
 
 
