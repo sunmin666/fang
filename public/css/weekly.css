@@ -1,0 +1,48 @@
+#status_search{
+	padding: 10px;
+}
+
+#search_for{
+	width: 100px;
+	height: 30px;
+	border: 1px solid #D73925;
+}
+#search{
+	margin-left: -5px;
+	margin-top: -2px;
+	border-radius: 0;
+}
+
+#count_weekly{
+	float : right;
+	position : absolute;
+	margin-top : -25px;
+	margin-left : 75px;
+}
+#store{
+	float: right;
+	margin-bottom: 30px;
+}
+#store1{
+	float: right;
+	margin-bottom: 30px;
+}
+.modal-body{
+	padding: 20px;
+}
+
+.add_button{
+	padding-right: 10px;
+}
+
+#store-edit{
+	float: right;
+	margin-bottom: 30px;
+}
+
+#aaa{
+	width: 200px;
+	height: 30px;
+	border:1px solid #D73925;
+	padding-left: 10px;
+}

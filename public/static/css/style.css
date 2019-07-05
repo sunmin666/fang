@@ -1,0 +1,283 @@
+﻿/*﻿@charset "utf-8";*/
+/*=CSS Reset
+-------------------------------------------*/
+body,h1,h2,h3,h4,h5,h6,hr,p,blockquote,dl,dt,dd,ul,ol,li,pre,form,fieldset,legend,button,input,textarea,th,td{margin:0;padding:0;}body,button,input,select,textarea{font:14px/1.8 tahoma,arial,\5b8b\4f53,sans-serif;}h1,h2,h3,h4,h5,h6{font-size:100%;}address,cite,dfn,em,var{font-style:normal;}code,kbd,pre,samp{font-family:courier new,courier,monospace;}small{font-size:12px;}ul,ol{list-style:none;}a{text-decoration:none;}a:hover{text-decoration:underline;}sup{vertical-align:text-top;}sub{vertical-align:text-bottom;}abbr[title]{border-bottom:1px dotted;cursor:help;}legend{color:#000;}fieldset,img{border:0;}button,input,select,textarea{font-size:100%;}button,input,select{vertical-align:middle;}button{cursor:pointer;}table{border-collapse:collapse;border-spacing:0;}:focus{outline:0;}table{border-collapse:collapse;border-spacing:0;}
+/*=Common Style (根据需求自行删减)
+-------------------------------------------*/
+
+/**文本对齐**/
+.tl{text-align:left;}
+.tc{text-align:center;}
+.tr{text-align:right;}
+.tj{text-align:justify;}
+/**文本缩进**/
+.t2{text-indent:2em;}
+/**居中**/
+.auto-center{margin-left:auto;margin-right:auto;}/*使用前提，它是块级的和有宽度*/
+/**浮动 与 清除**/
+.fl{float:left;display:inline;}
+.fr{float:right;display:inline;}
+
+.group:after{display:block; content:"."; height:0; clear:both; overflow:hidden; visibility:hidden;}
+.group{*zoom:1;}
+
+/**图片替换**/
+.screen-reader-text{position:absolute; left:-9999px; top:-9999px;}
+.tin{text-indent:-9999px;}
+
+/*=Layout
+-------------------------------------------*/
+/** 居中 **/
+#header,#content,#footer {margin:0 auto;}
+.aside{ width:260px;}
+.article{ width:610px; padding:0 65px 0 25px;}
+
+
+#container,#wraper{ min-height:580px;}
+#container{ background:#C61400 url(../images/hd_bg.png) no-repeat center 0;}
+#wraper{ background:url(../images/ft_bg.png) repeat-x 0 bottom;}
+.mod-bd{_padding-left:1px;}
+	.mod .mod-inner{background:url(../images/mod_bd_bg.png) repeat-x 0 67px; background-size: 970px 100% ; width:970px; margin:0 auto; border-left:1px solid #FAECEA; border-right:1px solid #FAECEA;}
+.mod .mod-ender{height:30px;background:url(../images/mod_ft_bg.png) no-repeat center bottom;}
+
+.welcome{ height:30px;background:url(../images/w12380.png) no-repeat center 0; margin:30px 0 20px; text-indent:-9999px; }
+/*=Header
+-------------------------------------------*/
+#header{ height:160px;}
+#logo{ width:972px; height:129px; margin:0 auto;}
+/*=Content
+-------------------------------------------*/
+/*aside*/
+.main-nav{ margin-top:5px;}
+.main-nav li{ margin:0 0 27px 30px;}
+.n-home,.n-notice,.n-feedback,.n-law,.n-law1,.n-advice,.n-links,.n-home:hover,.n-notice:hover,.n-feedback:hover,.n-fg:hover,.n-advice:hover,.n-links:hover{ display:block;width:200px;height:45px;background:url(../images/s_icons.gif) no-repeat 0 0; text-indent:-9999px; }
+
+.n-publicity,.n-dynamic,.n-discipline,.n-bulletin,.n-download{display:block;width:200px;height:45px;background:url(../images/123.png) no-repeat 0 0; text-indent:-9999px;}
+
+.n-publicity{background-position:0 -1px;}
+.n-publicity:hover{background-position:-228px -1px;}
+.n-dynamic{background-position:0 -73px;}
+.n-dynamic:hover{background-position:-228px -73px;}
+.n-discipline{background-position:0 -145px;}
+.n-discipline:hover{background-position:-228px -145px;}
+.n-bulletin{background-position:0 -217px;}
+.n-bulletin:hover{background-position:-228px -217px;}
+.n-download{background-position:0 -289px;}
+.n-download:hover{background-position:-228px -289px;}
+
+.n-home{background-position:0 -1px;}
+.n-home:hover{background-position:-228px -1px;}
+.n-notice{background-position:0 -73px;}
+.n-notice:hover{background-position:-228px -73px;}
+.n-feedback{background-position:0 -145px;}
+.n-feedback:hover{background-position:-228px -145px;}
+.n-law{background-position:0 -217px;}
+.n-law:hover{background-position:-228px -217px;}
+.n-advice{background-position:0 -289px;}
+.n-advice:hover{background-position:-228px -289px;}
+.n-links{background-position:-2px -360px;}
+.n-links:hover{background-position:-230px -360px;}
+.n-law1{background-position:0 -431px;}
+.n-law1:hover{background-position:-228px -431px;}
+/*article*/
+.article{}
+.article .title{ height:30px; line-height:30px; margin-top:30px; padding-left:85px; font-weight:bold; color:#CC0000; background:url(../images/tit_bg.png) no-repeat 0 bottom;}
+.article {}
+.quick-links{ margin:35px 0 35px 100px;}
+.quick-links li{ float:left; display:inline; width:225px; margin-bottom:25px;}
+.quick-links li a{ display:inline-block; height:48px; line-height:48px; width:152px; background:url(../images/btn-link.gif) no-repeat 0 0;font-weight:bold;color:#CC0000; text-align:center; }
+.quick-links li a:hover{color:#a80000; text-decoration:none;}
+/*notice*/
+.notice{ margin:20px 0;}
+.notice-bd{ background-color:#fff; padding:10px; border:1px solid #ddd;}
+.notice-bd p{ margin-bottom:5px;}
+.btn{ height:48px; line-height:48px; width:152px; background:url(../images/btn.gif) no-repeat 0 0; border:0; font-weight:bold;color:#CC0000; text-align:center;}
+/*feedback*/
+.feedback{ padding:35px 0;}
+.feedback #feedbackno{ height:22px; text-indent:5px;}
+/*law*/
+.law,.links{ padding:25px 0 10px;}
+.law-list,.links-list{}
+.law-list li,.links-list li{ background:url(../images/dot.png) no-repeat 0 center; padding-left:10px; border-bottom:1px dotted #fff; line-height:30px;}
+.law-list li a,.links-list li a{ color:#cc0000;}						
+.pagination {height:22px; margin-top: 10px}
+.pagination-wrapper{float:right;}
+
+.pagination a{cursor:pointer; }
+
+.pagination .info,
+.pagination .start,
+.pagination .prev,
+.pagination .next,
+.pagination .end,
+.pagination .page,
+.pagination .skip-to,
+.pagination .data-limit{float:left;height:20px;margin-left:10px;line-height:20px;}
+
+.pagination .skip-to{margin-left:6px;}
+.pagination .skip-to input{width:32px;height:18px;margin:0 2px;line-height:20px;text-align:center;vertical-align:middle;border:1px solid #ccc;}
+.pagination .skip-to button{margin-left:2px;height:22px;line-height:14px;vertical-align:middle;}
+
+.pagination .data-limit{margin-left:10px;}
+.pagination .data-limit select{margin-left:2px;vertical-align:middle;}
+
+.pagination  a{color:#ff9900;}
+.pagination  a:hover,
+.pagination  a:active{color:#cc0000;text-decoration:none;}
+
+.pagination span{color:#ff9900;}
+.pagination .info{padding-top:1px;}
+
+/*advice*/
+.advice{}
+.red{ color:#cc0000;}
+
+/*=Footer
+-------------------------------------------*/
+#footer{ height:115px; }
+.copyright{ padding-top:25px;color:#990000; text-align:center; font-size:12px;}
+.mod-ender{margin-right: 1px}
+
+#image{
+	width: 152px;
+	height: 48px;
+	background:url(../images/btn-ok.gif) no-repeat center 0;
+	border: none;
+}
+
+#feedback{
+	width: 96px;
+	height: 27px;
+	background:url(../images/search.png) no-repeat center 0;
+	border: none;
+}
+
+.cha_xun{
+	padding: 30px;
+}
+
+.h2{
+	margin: 20px 0 10px 0;
+}
+
+.regional_organization{
+	margin: 0 0 0 10px;
+}
+
+.regional_organization .organization{
+	display: inline-block;
+	padding: 10px 5px;
+	border: 1px solid #B5B5B5;
+	border-radius: 5px;
+	color: #AA0000;
+	background-color: #EEEDED;
+	text-decoration: none;
+	width: 138px;
+	text-align: center;
+	margin-bottom: 5px;
+}
+
+.pull-right ul li{
+	display: inline-block;
+	/*float: right;*/
+	margin: 0 10px ;
+}
+
+.pull-right ul{
+	float: right;
+	display: inline-block;
+	margin: 0;
+}
+
+.pull-right ul li span{
+	color: #CC0000;
+}
+
+.h3{
+	margin: 40px 0 40px 0;
+	text-align: center;
+}
+
+.regional_organizations{
+	text-align: center;
+}
+
+.regional_organizations .organization{
+	display: inline-block;
+	padding: 10px 5px;
+	border: 1px solid #B5B5B5;
+	border-radius: 5px;
+	color: #AA0000;
+	background-color: #EEEDED;
+	text-decoration: none;
+	width: 138px;
+	text-align: center;
+	margin-bottom: 5px;
+}
+
+h1{
+	margin: 30px 0;
+	text-align: center;
+}
+.online{
+	text-align: center;
+}
+
+.online a{
+	text-decoration: none;
+	color: #000;
+}
+.access_code{
+	display : flex;
+	align-items: center;
+	margin: 20px 0 0 20px;
+}
+
+.access_code canvas{
+	padding-top: 5px;
+}
+
+.report_result{
+	margin: 20px 0 0 30px;
+}
+
+
+.topic{
+	margin: 30px;
+	text-align: center;
+}
+
+.topics{
+	margin-left: 20px;
+}
+
+
+.options{
+	margin-left: 10px;
+}
+
+.submits{
+	margin: 20px;
+	text-align: center;
+}
+
+.submits input{
+	width: 60px;
+	height: 25px;
+}
+
+input:hover{
+	cursor:pointer
+}
+
+.correct{
+	text-align: center;
+}
+
+
+.color{
+	color: red;
+}
+/*.mod .mod-inner{*/
+	/*background-color: #FDF3F0;*/
+/*}*/

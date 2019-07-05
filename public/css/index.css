@@ -1,0 +1,20 @@
+.index{
+	width: 200px;
+	height: 300px;
+	margin: 0 auto;
+	margin-top: 200px;
+}
+
+.index,div{
+	margin-bottom: 30px;
+}
+
+.index1{
+	width: 600px;
+	margin: 0 auto;
+	margin-top: 200px;
+}
+
+.answer{
+	padding-left: 20px;
+}

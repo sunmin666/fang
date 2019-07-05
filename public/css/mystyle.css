@@ -1,0 +1,31 @@
+.login-page {
+	background: url("../img/bg.jpg") no-repeat center;
+	background-size  : 100% 100%;
+	background-color : #f2f2f2;
+	position         : absolute;
+	top              : 0;
+	right            : 0;
+	left             : 0;
+}
+
+.login-box-border {
+	border-radius : 5px;
+	border        : 1px solid #eee;
+}
+
+.captcha_style {
+	width : 187px;
+}
+
+.captcha_image_style {
+	position   : relative;
+	float      : right;
+	margin-top : -49px;
+}
+
+#total_num {
+	float : right;
+	position : absolute;
+	margin-top : -25px;
+	margin-left : 75px;
+}
