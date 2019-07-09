@@ -140,12 +140,15 @@
 
 		$( "#store1" ).attr( 'disabled' , true );
 
+		var regEn = {{config('myconfig.config.regEn')}};
+		var regCn = {{config('myconfig.config.regCn')}};
+
 		var n_title = $( '#n_title' ).val();
 		var n_img = $( '#n_img' ).val();
 		var content = $( '#summernote' ).summernote( 'code' );       //获取编辑器内容
 		var token = $( '[name=_token]' ).val();
 
-		if ( n_title == '' ) {
+		if ( n_title == '' || regEn.test(n_title) || regCn.test(n_title)) {
 			layer.msg( '{{trans('pro.name_n_title')}}' , { time : 1500 } );
 			$( "#store1" ).attr( 'disabled' , false );
 			return false;

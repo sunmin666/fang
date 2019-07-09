@@ -13,6 +13,7 @@ class VerifyCsrfToken extends Middleware
      */
     protected $except = [
         'mupload',
-				'lupload'
+				'lupload',
+				'upload',
     ];
 }

@@ -22,7 +22,6 @@ class MenberinfoController extends SessionController
     public function index(){
 
 			$data = $this -> session();
-
 			$data['page_name'] = trans( 'memberinfo.page_name' );
 			$data['page_detail'] = trans( 'memberinfo.page_detail' );
 			$data['page_tips'] = trans( 'index.page_tips' );
@@ -30,7 +29,6 @@ class MenberinfoController extends SessionController
 			$page = config('myconfig.config.page_num');
 			$data['member'] = Member::get_all_member($page);
 			$data['per_menu'] = $this -> get_per();
-//			dd($data['member']);
     	return view('Admin.Settings.Memberinfo.index') -> with($data);
 		}
 

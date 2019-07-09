@@ -26,6 +26,8 @@
 		Route::post('mupload','UploadController@mupload');
 		//layur 图片上传
 		Route::post('lupload','UploadController@lupload');
+		//普通图片上传
+		Route::post('upload','UploadController@upload');
 
 		//系
 		//统
@@ -113,14 +115,42 @@
 		//----------------------------------户型介绍-------------------------------------//
 		//户型介绍展示页面
 		Route::get('introduction','Admin\Website\IntroductionController@index');
+		//户型介绍添加页面展示
+		Route::get('intr/create','Admin\Website\IntroductionController@create');
+		//户型介绍添加
+		Route::post('intr/store','Admin\Website\IntroductionController@store');
+		//户型介绍修改页面展示
+		Route::get('intr/edit/{intr_id}','Admin\Website\IntroductionController@edit');
+		//户型信息更新
+		Route::post('intr/update','Admin\Website\IntroductionController@update');
+		//删除户型介绍信息
+		Route::post('intr/destroy','Admin\Website\IntroductionController@destroy');
+		//多选删除
+		Route::post('intr/destroy_all','Admin\Website\IntroductionController@destroy_all');
 
+		//---------------------------------------------实景展示------------------------------------、、
+		//实景展示展示页面
+		Route::get('display','Admin\Website\DisplayController@index');
+		//实景展示添加页面
+		Route::get('display/create','Admin\Website\DisplayController@create');
+		//实景展示添加
+		Route::post('display/store','Admin\Website\DisplayController@store');
+		//实景展示修改页面
+		Route::get('display/edit/{intr_id}','Admin\Website\DisplayController@edit');
+		//实景展示数据更新
+		Route::post('display/update','Admin\Website\DisplayController@update');
+		//实景展示删除
+		Route::post('display/destroy','Admin\Website\DisplayController@destroy');
+		//多选删除
+		Route::post('display/destroy_all','Admin\Website\DisplayController@destroy_all');
 	});
 
 
 
 	//查看网站管理信息(项目简介.配套设施)
 	Route::get('view/{nid}','Admin\Website\ViewController@index');
-
+	//查看户型介绍
+	Route::get('view/intr/{intr_id}','Admin\Website\ViewController@intr');
 
 Route::get('/', function () {
     return view('welcome');
