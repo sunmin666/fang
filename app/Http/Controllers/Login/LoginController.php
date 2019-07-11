@@ -51,9 +51,8 @@ class LoginController extends Controller
 				];
 			}
 
-			$chptcha = $query -> input('captcha');
 
-			if(!captcha_check($chptcha)){
+			if(!captcha_check($query -> input('captcha'))){
 				return [
 					'code'  => config('myconfig.login.captcha_fail_code'),
 					'msg'   => config('myconfig.login.captcha_fail_msg')
@@ -98,10 +97,77 @@ class LoginController extends Controller
 			}
 		}
 
-
+	/**
+	 * 用户退出
+	 *
+	 * @return \Illuminate\Http\RedirectResponse
+	 */
 		public function logout(){
 			Session::forget( 'session_member' );
 			return redirect()->action( 'Login\LoginController@login' );
 		}
 
+	/**
+	 * 修改密码展示页面
+	 *
+	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+	 */
+		public function change_password(){
+
+			return view('Login.change');
+		}
+
+	/**
+	 *
+	 * 更改当前用户密码
+	 *
+	 * @param Request $query
+	 *
+	 * @return array|int
+	 */
+		public function update_password(Request $query){
+
+			$memberid = Session::get('session_member.id');
+
+
+			$password = Login::get_d_password($memberid);
+
+			$old_password = $query -> input('old_password');
+
+			if(!Hash::check( $old_password , $password->password )){
+				return [
+					'code'  => config('myconfig.login.old_password_code'),
+					'msg'   => config('myconfig.login.old_password_msg')
+				];
+			}
+
+			$validator = Validator::make($query->all(),[
+				'old_password' => "max:16" ,
+				'password' => "max:16" ,
+				'password_confirmation' => 'min:3|max:16|same:password'
+			]);
+
+			if($validator -> errors('same') ->get('password_confirmation')){
+				return [
+					'code'   => config('myconfig.login.password_confirmation_same_code'),
+					'msg'    => config('myconfig.login.password_confirmation_same_msg')
+				];
+			}
+			$data['password'] = Hash::make($query -> input('password'));
+
+			$info = Login::update_password($memberid,$data);
+
+			if($info){
+				return [
+					'code'   => config('myconfig.login.update_password_success_code'),
+					'msg'    => config('myconfig.login.update_password_success_msg')
+				];
+			}else{
+				return [
+					'code'   => config('myconfig.login.update_password_error_code'),
+					'msg'    => config('myconfig.login.update_password_error_msg')
+				];
+			}
+
+		}
 }

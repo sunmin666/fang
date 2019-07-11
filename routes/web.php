@@ -17,7 +17,10 @@
 		Route::get('index','Index\IndexController@index');
 		//用户退出
 		Route::get('logout','Login\LoginController@logout');
-
+		//修改密码页面展示
+		Route::get('change_password','Login\LoginController@change_password');
+		//用户密码更新
+		Route::post('change/password','Login\LoginController@update_password');
 		//图
 		//片
 		//上
@@ -35,7 +38,7 @@
 		//置
 		//--------------------------------用户管理--------------------------------------------------//
 		//用户展示页面
-		Route::get('memberinfo','Admin\Settings\MenberinfoController@index');
+		Route::get('memberinfo/{perid}','Admin\Settings\MenberinfoController@index');
 		//用户添加展示页面
 		Route::get('member/create','Admin\Settings\MenberinfoController@create');
 		//添加用户信息到数据库
@@ -53,7 +56,7 @@
 
 		//-------------------------------菜单管理--------------------------------------------------------//
 		//菜单展示页面
-		Route::get('permission','Admin\Settings\PermissionController@index');
+		Route::get('permission/{perid}','Admin\Settings\PermissionController@index');
 		//菜单添加页面
 		Route::get('per/create','Admin\Settings\PermissionController@create');
 		//菜单添加
@@ -68,7 +71,7 @@
 		Route::post('per/status','Admin\Settings\PermissionController@status');
 		//--------------------------------------角色管理------------------------------------------//
 		//角色列表展示页面
-		Route::get('character','Admin\Settings\CharacterController@index');
+		Route::get('character/{perid}','Admin\Settings\CharacterController@index');
 		//角色加页面展示
 		Route::get('cha/create','Admin\Settings\CharacterController@create');
 		//添加到数据库
@@ -86,7 +89,7 @@
 		//理
 		//--------------------------------项目简介-----------------------------------------------//
 		//项目简介展示页面
-		Route::get('project','Admin\Website\ProjectController@index');
+		Route::get('project/{perid}','Admin\Website\ProjectController@index');
 		//项目简介添加页面展示
 		Route::get('pro/create','Admin\Website\ProjectController@create');
 		//项目简介添加到数据库
@@ -100,7 +103,7 @@
 
 		//---------------------------------区域配套----------------------------------------//
 		//区域配套页面展示
-		Route::get('package','Admin\Website\PackageController@index');
+		Route::get('package/{perid}','Admin\Website\PackageController@index');
 		//区域配套新增页面展示
 		Route::get('pack/create','Admin\Website\PackageController@create');
 		//区域配套新增
@@ -114,7 +117,7 @@
 
 		//----------------------------------户型介绍-------------------------------------//
 		//户型介绍展示页面
-		Route::get('introduction','Admin\Website\IntroductionController@index');
+		Route::get('introduction/{perid}','Admin\Website\IntroductionController@index');
 		//户型介绍添加页面展示
 		Route::get('intr/create','Admin\Website\IntroductionController@create');
 		//户型介绍添加
@@ -130,9 +133,10 @@
 
 		//---------------------------------------------实景展示------------------------------------、、
 		//实景展示展示页面
-		Route::get('display','Admin\Website\DisplayController@index');
+		Route::get('display/{perid}','Admin\Website\DisplayController@index');
 		//实景展示添加页面
-		Route::get('display/create','Admin\Website\DisplayController@create');
+		Route::get('displays/create','Admin\Website\DisplayController@create');
+//		Route::get('displays/create','');
 		//实景展示添加
 		Route::post('display/store','Admin\Website\DisplayController@store');
 		//实景展示修改页面
@@ -143,10 +147,20 @@
 		Route::post('display/destroy','Admin\Website\DisplayController@destroy');
 		//多选删除
 		Route::post('display/destroy_all','Admin\Website\DisplayController@destroy_all');
+
+		//--------------------------------联系我们------------------------------------------------//
+		Route::get('contact/{perid}','Admin\Website\ContactController@index');
+		//删除用户留言
+		Route::post('conta/destroy','Admin\Website\ContactController@destroy');
+		//多选翻译
+		Route::post('conta/destroy_all','Admin\Website\ContactController@destroy_all');
+
 	});
 
 
-
+	//用户联系我们页面
+	Route::get('we','Admin\Website\ContactController@create');
+	Route::post('we/store','Admin\Website\ContactController@store');
 	//查看网站管理信息(项目简介.配套设施)
 	Route::get('view/{nid}','Admin\Website\ViewController@index');
 	//查看户型介绍

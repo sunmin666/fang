@@ -17,7 +17,7 @@ class DisplayController extends SessionController
 	 *
 	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
 	 */
-    public function index(){
+    public function index($perid){
 			$data = $this->session();
 			$data['per_menu'] = $this->get_per();
 			$data['page_name'] = trans( 'display.page_name' );
@@ -26,6 +26,7 @@ class DisplayController extends SessionController
 			$data['page_note'] = trans( 'index.page_note' );
 			$page = config('myconfig.config.page_num');
 			$data['intr'] = Display::get_intr($page);
+			$data['ids'] = $perid;
 			return view('Admin.Website.Display.index') -> with($data);
 		}
 
@@ -35,6 +36,8 @@ class DisplayController extends SessionController
 	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
 	 */
 		public function create(){
+
+//			return 132;
     	return view('Admin.Website.Display.create');
 		}
 

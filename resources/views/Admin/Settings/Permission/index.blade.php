@@ -231,7 +231,7 @@
 						else if (  data.code  == {{config('myconfig.perm.per_delete_success_code')}} ) {
 							layer.msg( data.msg , { time : 1000 } , function () {
 								if(page_count == 1){
-									location.href = "{{URL('permission')}}";
+									location.href = "{{URL('permission/2')}}";
 								}else{
 									window.location.reload();
 								}

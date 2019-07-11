@@ -168,7 +168,7 @@
 							if ( data.code == {{config('myconfig.member.memberinfo_delete_success_code')}} ) {
 								layer.msg( data.msg , { time : 2000 } , function () {
 									if(page_count == vote.length){
-										location.href = "{{URL('memberinfo')}}";
+										location.href = "{{URL('memberinfo/2')}}";
 									}else{
 										window.location.reload();
 									}
@@ -224,7 +224,7 @@
 						else if (  data.code  == {{config('myconfig.member.memberinfo_delete_success_code')}} ) {
 							layer.msg( data.msg , { time : 1000 } , function () {
 								if(page_count == 1){
-									location.href = "{{URL('memberinfo')}}";
+									location.href = "{{URL('memberinfo/2')}}";
 								}else{
 									window.location.reload();
 								}

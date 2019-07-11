@@ -110,15 +110,18 @@
 				{{--<!-- User Account Menu -->--}}
 				<li class="dropdown user user-menu">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-						<img src="{{URL::asset('img/avatars/white_default_avatar.png')}}" class="user-image"
+						{{--右上角头像--}}
+						<img src=" @if(Session::get('session_member.avatars') == '') {{URL::asset('img/avatars/white_default_avatar.png')}} @else {{Session::get('session_member.avatars')}} @endif" class="user-image"
 						     alt="User Image">
 						<span class="hidden-xs">{{ Session::get('session_member.username') }}</span>
 					</a>
 					<ul class="dropdown-menu">
 
 						<li class="user-header">
-							<img src="{{URL::asset('img/avatars/white_default_avatar.png')}}" class="img-circle"
+							<img src="@if(Session::get('session_member.avatars') == '') {{URL::asset('img/avatars/white_default_avatar.png')}} @else {{Session::get('session_member.avatars')}} @endif" class="img-circle"
 							     alt="User Image">
+
+							{{--退出的头像--}}
 							<p>
 								{{ Session::get('session_member.username') }} - {{ Session::get('session_member.cha_name') }}
 								<small>Email : {{ Session::get('session_member.email') }}</small>
@@ -173,17 +176,19 @@
 					layer.msg("{{trans('login.cancels')}}" ,{time:1325});
 				} );
 			} );
+
+
 			$("#change_password").click(function () {
 				layer.open( {
 					type : 2 ,
-					title : '{{ trans('global.change_password') }}' ,
+					title : '{{ trans('login.change_password') }}' ,
 					moveType : 0 , //拖拽模式，0或者1
 					skin : 'layui-layer-demo' , //样式类名
 					closeBtn : 1 , //不显示关闭按钮
 					shadeClose : false , //开启遮罩关闭
-					area : ['60%' , '53%'] ,
-					shade : 0.8 ,
-					content : ['/memberinfo/change_password/', 'yes'] , //iframe的url，no代表不显示滚动条
+					area : ['40%' , '53%'] ,
+					shade: 0.5,
+					content : ['{{URL('change_password')}}', 'yes'] , //iframe的url，no代表不显示滚动条
 				} );
 			})
 

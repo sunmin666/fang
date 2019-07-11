@@ -111,7 +111,6 @@ class UploadController extends Controller
 						'msg'    => '图片大小超出范围',
 					];
 				}
-
 			return [
 				'code'  => 789,
 				'msg'   => '上传成功',

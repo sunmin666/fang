@@ -9,7 +9,7 @@ use App\Models\Admin\Per;
 
 class PermissionController extends SessionController
 {
-    public function index(){
+    public function index($perid){
 			$data = $this -> session();
 			$data['page_name'] = trans( 'permission.page_name' );
 			$data['page_detail'] = trans( 'permission.page_detail' );
@@ -18,6 +18,7 @@ class PermissionController extends SessionController
 			$page = config('myconfig.config.page_num');
 			$data['per'] = Per::get_all_per($page);
 			$data['per_menu'] = $this -> get_per();
+			$data['ids'] = $perid;
 			return view('Admin.Settings.Permission.index') -> with($data);
 		}
 
@@ -52,12 +53,6 @@ class PermissionController extends SessionController
 					'msg'   => config('myconfig.perm.pername_msg')
 				];
 			}
-//			if($validator -> errors() -> get('perurl')){
-//				return [
-//					'code'   => config('myconfig.perm.perurl_code'),
-//					'msg'   => config('myconfig.perm.perurl_msg')
-//				];
-//			}
 			$data['pername'] = $query -> input('pername');
 			$data['perurl'] = $query -> input('perurl');
 			$superior = $query -> input('p_superior');
@@ -123,7 +118,7 @@ class PermissionController extends SessionController
 				$data['p_superior'] = $query -> input('p_superior');
 			}
 			$icon = $query -> input('p_icon');
-			if($icon == ''){
+			if($icon == '0'){
 				$data['p_icon'] = 'fa fa-circle-o';
 			}else{
 				$data['p_icon'] = $query -> input('p_icon');

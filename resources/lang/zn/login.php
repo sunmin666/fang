@@ -22,4 +22,16 @@
 		'cancel'   => '取消',
 
 		'cancels'   => '您取消了退出',
+
+		'old_password'   => '旧密码',
+
+		'new_password'   => '新密码',
+
+		'news_password'  => '确认密码',
+
+		'old_password_s'   => '旧密码不符合规范',
+		'old_password_ss'   => '新密码不符合规范',
+
+		'old_password_sss'  => '确认密码不符合规范',
+
 	];

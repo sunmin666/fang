@@ -43,21 +43,21 @@
 				<input type="text" class="form-control" placeholder="{{ trans('login.input_username') }}" id="username"
 				       name="username">
 				<span class="fa fa-user form-control-feedback"></span>
-				@if($errors->has('username'))
-					<div class="form-group has-feedback">
-						<p class="text-danger text-left"><strong>{{$errors->first('username')}}</strong></p>
-					</div>
-				@endif
+				{{--@if($errors->has('username'))--}}
+					{{--<div class="form-group has-feedback">--}}
+						{{--<p class="text-danger text-left"><strong>{{$errors->first('username')}}</strong></p>--}}
+					{{--</div>--}}
+				{{--@endif--}}
 			</div>
 			<div class="form-group has-feedback">
 				<input type="password" class="form-control" placeholder="{{ trans('login.input_password') }}" id="password"
 				       name="password" style="ime-mode:disabled">
 				<span class="fa fa-lock form-control-feedback"></span>
-				@if($errors->has('password'))
-					<div class="form-group has-feedback">
-						<p class="text-danger text-left"><strong>{{$errors->first('password')}}</strong></p>
-					</div>
-				@endif
+				{{--@if($errors->has('password'))--}}
+					{{--<div class="form-group has-feedback">--}}
+						{{--<p class="text-danger text-left"><strong>{{$errors->first('password')}}</strong></p>--}}
+					{{--</div>--}}
+				{{--@endif--}}
 			</div>
 			<div class="form-group has-feedback captcha_style">
 				<input type="text" class="form-control {{$errors->has('captcha')?'parsley-error':''}}" name="captcha"
@@ -71,11 +71,11 @@
 				     id="captcha_imgs">
 
 			</div>
-			@if($errors->has('captcha'))
-				<div class="form-group has-feedback">
-					<p class="text-danger text-left"><strong>{{$errors->first('captcha')}}</strong></p>
-				</div>
-			@endif
+			{{--@if($errors->has('captcha'))--}}
+				{{--<div class="form-group has-feedback">--}}
+					{{--<p class="text-danger text-left"><strong>{{$errors->first('captcha')}}</strong></p>--}}
+				{{--</div>--}}
+			{{--@endif--}}
 
 			<div class="row">
 				<div class="col-xs-12">

@@ -15,12 +15,12 @@
 		<div class="box-header with-border">
 			<button type="button" class="btn btn-dropbox btn-sm" id="refresh"><i
 					class="fa fa-refresh"></i> {{ trans('permission.refresh') }}</button>
-			<div class="box-tools pull-right">
-				<button type="button" class="btn btn-danger btn-sm weekly-day" id="news_day"
-				><i class="fa fa-plus"></i>
-					{{ trans('permission.news_add') }}
-				</button>
-			</div>
+			{{--<div class="box-tools pull-right">--}}
+				{{--<button type="button" class="btn btn-danger btn-sm weekly-day" id="news_day"--}}
+				{{--><i class="fa fa-plus"></i>--}}
+					{{--{{ trans('permission.news_add') }}--}}
+				{{--</button>--}}
+			{{--</div>--}}
 		</div>
 		{{--<div id="status_search">--}}
 		{{--<form action="{{route('weekly.status')}}" method="post">--}}
@@ -40,31 +40,34 @@
 							<button type="button" class="btn btn-warning btn-xs" id="data_select" data-select-all="true"><i
 									class="glyphicon glyphicon-ok"></i>{{ trans('memberinfo.allAlection') }}</button>
 						</th>
-						<th>{{ trans('display.i_title') }}</th>
-						<th>{{ trans('display.created_at') }}</th>
-						<th>{{ trans('display.operating') }}</th>
+						<th>{{ trans('contact.c_name') }}</th>
+						<th>{{ trans('contact.c_phone') }}</th>
+						<th>{{ trans('contact.c_email') }}</th>
+						<th>{{ trans('contact.created_at') }}</th>
+						<th>{{ trans('contact.operating') }}</th>
 					</tr>
 					</thead>
 					<tbody>
-					@foreach($intr as $value)
+					@foreach($contact as $value)
 						<tr id="news">
 							<td><input type="checkbox" class="i-checks" id="groupCheckbox" name="groupCheckbox[]"
-							           value="{{$value->intr_id}}"
+							           value="{{$value->c_id}}"
 								></td>
-							{{--<td>{{ $value -> nid}}</td>--}}
-							<td>{{$value -> i_title}}</td>
-							{{--<td><img src="{{$value->n_img}}" alt="图片未显示" width="50px" height="50px"></td>--}}
+							<td>{{ $value ->c_name}}</td>
+							<td>{{$value -> c_phone}}</td>
+							<td>{{$value -> c_email}}</td>
+{{--							<td><img src="{{$value->n_img}}" alt="图片未显示" width="50px" height="50px"></td>--}}
 							<td>{{date('Y-m-d H:i',$value -> created_at)}}</td>
-							{{--<td>{{$value -> n_admin_at}}</td>--}}
+
 							<td>
-								<button type="button" value="{{$value -> intr_id}}" onclick="edit({{$value -> intr_id}})"
-								        class="btn btn-warning btn-xs btn_edit" id="btn_edit"><i
-										class="fa fa-edit"></i> {{trans('memberinfo.news_edits')}}</button>
-								<button type="button" value="{{$value -> intr_id}}"
-								        onclick="d({{$value -> intr_id}})"
+								{{--<button type="button" value="{{$value -> c_id}}" onclick="edit({{$value -> c_id}})"--}}
+								        {{--class="btn btn-warning btn-xs btn_edit" id="btn_edit"><i--}}
+										{{--class="fa fa-edit"></i> {{trans('memberinfo.news_edits')}}</button>--}}
+								<button type="button" value="{{$value -> c_id}}"
+								        onclick="d({{$value -> c_id}})"
 								        class="btn btn-warning btn-xs btn_delete"><i
 										class="fa fa-trash"></i> {{trans('memberinfo.news_delete')}} </button>
-								<a href="{{URL('view/intr')}}/{{$value -> intr_id}}" target="_blank"
+								<a href="{{URL('view/intr')}}/{{$value -> c_id}}" target="_blank"
 								   class="btn btn-warning btn-xs btn_delete"><i
 										class="fa fa-trash"></i> {{trans('memberinfo.news_view')}} </a>
 							</td>
@@ -79,8 +82,8 @@
 		<div class="box-footer clearfix">
 			<a href="javascript:void(0)" class="btn btn-danger btn-xs pull-left select_all"><i
 					class="fa fa-trash"></i>{{ trans('memberinfo.select_all_delete') }}</a>
-			{{--<div class=" pull-right">{{$intr -> links()}}</div>--}}
-			{{--<input type="hidden" value="{{$intr -> count()}}" id="page_count">--}}
+			<div class=" pull-right">{{$contact -> links()}}</div>
+			<input type="hidden" value="{{$contact -> count()}}" id="page_count">
 		</div>
 	</div>
 @endsection
@@ -137,25 +140,25 @@
 				btn : ["{{trans('permission.confirm')}}" , "{{trans('permission.cancel')}}"]
 			} , function () {
 				$.ajax( {
-					url : '{{URL('display/destroy_all')}}' ,
+					url : '{{URL('conta/destroy_all')}}' ,
 					type : 'post' ,
 					data : {
-						'intr' : vote ,
+						'c_id' : vote ,
 						'_token' : "{{csrf_token()}}"
 					} ,
 					success : function ( data ) {
 						console.log( data );
-						if ( data.code == {{config('myconfig.intr.intr_delete_success_code')}} ) {
+						if ( data.code == {{config('myconfig.contact.delete_contact_success_code')}} ) {
 							layer.msg( data.msg , { time : 2000 } , function () {
 								if ( page_count == vote.length ) {
-									location.href = "{{URL('display/6')}}";
+									location.href = "{{URL('contact/6')}}";
 								}
 								else {
 									window.location.reload();
 								}
 							} );
 						}
-						else if ( data.code == {{config('myconfig.intr.intr_delete_error_code')}} ) {
+						else if ( data.code == {{config('myconfig.contact.delete_contact_error_code')}} ) {
 							layer.msg( data.msg , { time : 2000 } );
 						}
 					} ,
@@ -172,39 +175,39 @@
 		} );
 
 		//添加
-		$( '#news_day' ).click( function () {
-			layer.open( {
-				type : 2 ,
-				title : '{{ trans('permission.news_add') }}' ,
-				moveType : 0 ,
-				skin : 'layui-layer-demo' , //加上边框
-				closeBtn : 1 ,
-				area : ['60%' , '70%'] , //宽高
-				shadeClose : false ,
-				shade : 0.5 ,
-				content : ["{{URL('displays/create')}}"] ,
-				success : function ( layero , index ) {
-					$( ':focus' ).blur();
-				}
-			} );
-		} );
+		{{--$( '#news_day' ).click( function () {--}}
+			{{--layer.open( {--}}
+				{{--type : 2 ,--}}
+				{{--title : '{{ trans('permission.news_add') }}' ,--}}
+				{{--moveType : 0 ,--}}
+				{{--skin : 'layui-layer-demo' , //加上边框--}}
+				{{--closeBtn : 1 ,--}}
+				{{--area : ['60%' , '70%'] , //宽高--}}
+				{{--shadeClose : false ,--}}
+				{{--shade : 0.5 ,--}}
+				{{--content : ["{{URL('displays/create')}}"] ,--}}
+				{{--success : function ( layero , index ) {--}}
+					{{--$( ':focus' ).blur();--}}
+				{{--}--}}
+			{{--} );--}}
+		{{--} );--}}
 
-		function d( intr_id ) {
+		function d( c_id ) {
 			var page_count = $( '#page_count' ).val();
 			layer.confirm( "{{trans('permission.is_delete_info')}}" , {
 				btn : ["{{trans('permission.confirm')}}" , "{{trans('permission.cancel')}}"] //按钮
 			} , function () {
-				$.post( "{{URL('display/destroy')}}" , { 'intr_id' : intr_id , '_token' : "{{csrf_token()}}" } ,
+				$.post( "{{URL('conta/destroy')}}" , { 'c_id' : c_id , '_token' : "{{csrf_token()}}" } ,
 					function ( data ) {
 						console.log( data );
 
-						if ( data.code == {{config('myconfig.intr.intr_delete_error_code')}} ) {
+						if ( data.code == {{config('myconfig.contact.delete_contact_error_code')}} ) {
 							layer.msg( data.msg , { time : 2000 } );
 						}
-						else if ( data.code == {{config('myconfig.intr.intr_delete_success_code')}} ) {
+						else if ( data.code == {{config('myconfig.contact.delete_contact_success_code')}} ) {
 							layer.msg( data.msg , { time : 1000 } , function () {
 								if ( page_count == 1 ) {
-									location.href = "{{URL('display/6')}}";
+									window.location.href = "{{URL('contact/6')}}";
 								}
 								else {
 									window.location.reload();
@@ -220,21 +223,21 @@
 		}
 
 		//修改用户信息
-		function edit( intr_id ) {
-			layer.open( {
-				type : 2 ,
-				title : '{{ trans('permission.news_edits') }}' ,
-				moveType : 0 ,
-				skin : 'layui-layer-demo' , //加上边框
-				closeBtn : 1 ,
-				area : ['60%' , '70%'] , //宽高
-				shadeClose : false ,
-				shade : 0.5 ,
-				content : ["{{URL('display/edit')}}" + "/" + intr_id] ,
-				success : function ( layero , index ) {
-					$( ':focus' ).blur();
-				}
-			} );
-		}
+		{{--function edit( intr_id ) {--}}
+			{{--layer.open( {--}}
+				{{--type : 2 ,--}}
+				{{--title : '{{ trans('permission.news_edits') }}' ,--}}
+				{{--moveType : 0 ,--}}
+				{{--skin : 'layui-layer-demo' , //加上边框--}}
+				{{--closeBtn : 1 ,--}}
+				{{--area : ['60%' , '70%'] , //宽高--}}
+				{{--shadeClose : false ,--}}
+				{{--shade : 0.5 ,--}}
+				{{--content : ["{{URL('display/edit')}}" + "/" + intr_id] ,--}}
+				{{--success : function ( layero , index ) {--}}
+					{{--$( ':focus' ).blur();--}}
+				{{--}--}}
+			{{--} );--}}
+		{{--}--}}
 	</script>
 @endpush

@@ -19,7 +19,7 @@
 		'input_right_password_code'              => 4 ,
 		'input_right_password_msg'               => '请输入正确的密码！' ,
 
-		'captcha_fail_msgs'   => '请输入验证码',
+		'captcha_fail_msgs'   => '验证码不合法',
 
 		'captcha_fail_code'                      => 5 ,
 		'captcha_fail_msg'                       => '验证码错误！' ,
@@ -37,5 +37,16 @@
 		'login_error_msg' => '您输入的密码错误',
 
 
+		'password_confirmation_same_code'   => 10,
+		'password_confirmation_same_msg'    => '新密码与确认密码不相同',
+
+		'old_password_code'   => 11,
+		'old_password_msg'     => '旧密码与之前的不相同',
+
+		'update_password_success_code'   => 12,
+		'update_password_success_msg'    => '修改密码成功',
+
+		'update_password_error_code'  => 13,
+		'update_password_error_msg'   => '修改密码失败',
 
 	];

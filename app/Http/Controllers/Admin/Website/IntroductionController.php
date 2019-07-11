@@ -15,7 +15,7 @@ class IntroductionController extends SessionController
 	 *
 	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
 	 */
-    public function index(){
+    public function index($perid){
 			$data = $this->session();
 			$data['per_menu'] = $this->get_per();
 			$data['page_name'] = trans( 'intr.page_name' );
@@ -24,6 +24,7 @@ class IntroductionController extends SessionController
 			$data['page_note'] = trans( 'index.page_note' );
 			$page = config('myconfig.config.page_num');
 			$data['intr'] = Intr::get_intr($page);
+			$data['ids'] = $perid;
 			return view( 'Admin.Website.intr.index' )->with( $data );
 		}
 

@@ -15,6 +15,7 @@ class IndexController extends SessionController
 			$data['page_tips'] = trans( 'index.page_tips' );
 			$data['page_note'] = trans( 'index.page_note' );
 			$data['per_menu'] = $this -> get_per();
+			$data['ids'] = 0;
 			return view('Index.index') -> with($data);
 
 		}

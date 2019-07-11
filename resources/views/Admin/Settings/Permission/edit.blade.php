@@ -68,10 +68,10 @@
 		var p_superior = $('#p_superior').val();
 		var p_icon = $('#p_icon').val();
 		var token = $( '[name=_token]' ).val();
-
+		var res= /^[\u4e00-\u9fa5]+$/;
 		var realname_pattern = {{ config('myconfig.config.realname_pattern') }};    //中文验证
 
-		if ( pername == '' ||!realname_pattern.test( pername ) ) {
+		if ( pername == '' ||!res.test(pername) ) {
 			layer.msg( '{{trans('permission.name_pername')}}' , { time : 1500 } );
 			$( "#store1" ).attr( 'disabled' , false );
 			return false;

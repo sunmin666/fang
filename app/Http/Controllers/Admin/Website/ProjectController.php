@@ -16,7 +16,7 @@ class ProjectController extends SessionController
 	 *
 	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
 	 */
-    public function index(){
+    public function index($perid){
     	$data = $this -> session();
 			$data['per_menu'] = $this -> get_per();
 			$data['page_name'] = trans( 'pro.page_name' );
@@ -24,7 +24,7 @@ class ProjectController extends SessionController
 			$data['page_tips'] = trans( 'index.page_tips' );
 			$data['page_note'] = trans( 'index.page_note' );
 			$data['news'] = Pro::get_news();
-//			dd($data['news']);
+			$data['ids'] = $perid;
 			return view('Admin.Website.Project.index') -> with($data);
 		}
 

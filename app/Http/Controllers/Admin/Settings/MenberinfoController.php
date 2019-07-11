@@ -19,14 +19,14 @@ class MenberinfoController extends SessionController
 	 *
 	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
 	 */
-    public function index(){
-
+    public function index($perid){
 			$data = $this -> session();
 			$data['page_name'] = trans( 'memberinfo.page_name' );
 			$data['page_detail'] = trans( 'memberinfo.page_detail' );
 			$data['page_tips'] = trans( 'index.page_tips' );
 			$data['page_note'] = trans( 'index.page_note' );
 			$page = config('myconfig.config.page_num');
+			$data['ids'] = $perid;
 			$data['member'] = Member::get_all_member($page);
 			$data['per_menu'] = $this -> get_per();
     	return view('Admin.Settings.Memberinfo.index') -> with($data);

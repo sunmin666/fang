@@ -16,7 +16,9 @@ class CharacterController extends SessionController
 	 *
 	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
 	 */
-    public function index (){
+    public function index ($perid){
+
+
 			$data = $this -> session();
 			$data['per_menu'] = $this -> get_per();
 			$data['page_name'] = trans( 'cha.page_name' );
@@ -25,6 +27,7 @@ class CharacterController extends SessionController
 			$data['page_note'] = trans( 'index.page_note' );
 			$page = config('myconfig.config.page_num');
 			$data['cha'] = Cha::get_all_cha($page);
+			$data['ids'] = $perid;
 			return view('Admin.Settings.Cha.index') -> with($data);
 		}
 
