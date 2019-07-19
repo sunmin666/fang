@@ -149,7 +149,7 @@
 								<button href="#" class="btn btn-default btn-flat" id="change_password" value="{{ Session::get('session_member.id') }}">{{ trans('login.change_password') }}</button>
 							</div>
 							<div class="pull-right">
-								<button href="#" class="btn btn-default btn-flat" id="logout">{{ trans('login.drop_out') }}</button>
+								<button href="#" class="btn btn-default btn-flat" value="{{$status}}" id="logout">{{ trans('login.drop_out') }}</button>
 							</div>
 						</li>
 					</ul>
@@ -166,12 +166,15 @@
 		$( function () {
 			//退出提示
 			$( "#logout" ).click( function () {
+
+				var status = $(this).val();
+
 				//询问框
 				layer.confirm( "{{trans('login.layer_confirm_title')}}" , {
 					title : "{{trans('login.is_logout')}}" ,
 					btn : ["{{trans('login.yes')}}" , "{{trans('login.cancel')}}"] //按钮
 				} , function () {
-					location.href = "{{URL('logout')}}";
+					location.href = "{{URL('logout')}}/" + status;
 				} , function () {
 					layer.msg("{{trans('login.cancels')}}" ,{time:1325});
 				} );
@@ -179,6 +182,9 @@
 
 
 			$("#change_password").click(function () {
+
+				var status = $('#logout').val();
+
 				layer.open( {
 					type : 2 ,
 					title : '{{ trans('login.change_password') }}' ,
@@ -188,7 +194,7 @@
 					shadeClose : false , //开启遮罩关闭
 					area : ['40%' , '53%'] ,
 					shade: 0.5,
-					content : ['{{URL('change_password')}}', 'yes'] , //iframe的url，no代表不显示滚动条
+					content : ['{{URL('change_password')}}/'+ status, 'yes'] , //iframe的url，no代表不显示滚动条
 				} );
 			})
 

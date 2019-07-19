@@ -211,7 +211,14 @@ class MenberinfoController extends SessionController
 
 		}
 
-
+	/**
+	 *
+	 * 修改用户状态
+	 *
+	 * @param Request $query
+	 *
+	 * @return array
+	 */
 		public function status(Request $query){
 			$memberid =  $query -> input('memberid');
 			$status = $query -> input('status');

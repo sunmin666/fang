@@ -7,6 +7,7 @@ use App\Http\Controllers\SessionController;
 use App\Models\admin\Cha;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Admin\Member;
+use App\Models\admin\regi;
 
 class CharacterController extends SessionController
 {
@@ -149,7 +150,6 @@ class CharacterController extends SessionController
 			}
 		}
 
-
 	/**
 	 *
 	 * 删除角色信息
@@ -161,7 +161,10 @@ class CharacterController extends SessionController
 		public function destroy(Request $query){
 			$chid = $query -> input('chid');
 			$member = Member::get_d_character($chid);
-			if($member){
+
+			$houser = regi::get_d_character($chid);
+
+			if($member || $houser){
 				return [
 					'code'   => config('myconfig.member.ch_get_character_code'),
 					'msg'    => config('myconfig.member.ch_get_character_msg')

@@ -34,4 +34,33 @@
 
 		'old_password_sss'  => '确认密码不符合规范',
 
+		'zhuce'     => '注册',
+
+
+		'username'   => '请输入账号',
+
+		'password'   => '请输入密码',
+
+		'password_confirmation'   => '请再次输入密码',
+
+		'email'   => '请输入邮箱',
+
+		'realname'   => '请输入真实姓名',
+
+		'sex'          => '请选择性别',
+
+		'mobile'      => '请输入手机号',
+
+		'idcrad'      => '请输入身份证号',
+
+
+
+		'text_content'   => '信息不全无法注册',
+
+		'text_email'     =>  '邮箱不合法',
+
+		'text_mobile'    => '手机号格式不正确',
+
+		'text_idcrad'    => '身份证不合法',
+
 	];

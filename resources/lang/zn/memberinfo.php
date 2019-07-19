@@ -78,5 +78,5 @@
 
 			'news_enable'   =>   '启用',
 
-			'is_status_info'  => '您确认要更改该用户状态吗？'
+			'is_status_info'  => '您确认要更改该用户状态吗？',
 	];

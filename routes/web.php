@@ -7,8 +7,18 @@
 	 *
 	 */
 
-//登录页面展示
+//登录页面展示 系统管理人员登录页面
   Route::get('login','Login\LoginController@login');
+
+//销售人员登录页面
+	Route::get('sales','Login\LoginController@sales');
+	//iHOUSER使用者注册页面
+	Route::get('houser',function(){
+		return view('Login.zhuce');
+	});
+	//iHOUSER使用者注册页面
+	Route::post('zhuce','Regi\RegiController@index');
+
 //用户登录验证密码和账号
 	Route::post('login','Login\LoginController@login_btu');
 //以下路由访问需要用户登录
@@ -16,9 +26,9 @@
 		//用户登录之后显示的首页
 		Route::get('index','Index\IndexController@index');
 		//用户退出
-		Route::get('logout','Login\LoginController@logout');
+		Route::get('logout/{status}','Login\LoginController@logout');
 		//修改密码页面展示
-		Route::get('change_password','Login\LoginController@change_password');
+		Route::get('change_password/{status}','Login\LoginController@change_password');
 		//用户密码更新
 		Route::post('change/password','Login\LoginController@update_password');
 		//图
@@ -154,7 +164,79 @@
 		Route::post('conta/destroy','Admin\Website\ContactController@destroy');
 		//多选翻译
 		Route::post('conta/destroy_all','Admin\Website\ContactController@destroy_all');
+    //公
+		//司
+		//管
+		//理
+		//-------------------------------公司列表管理---------------------------------------------//
+		//公司列表展示页面
+		Route::get('company/{perid}','Admin\Company\CompanyController@index');
+		//公司信息添加页面
+		Route::get('companys/create','Admin\Company\CompanyController@create');
+		//公司信息添加
+		Route::post('company/store','Admin\Company\CompanyController@store');
+		//公司信息修改页面
+		Route::get('company/edit/{comp_id}','Admin\Company\CompanyController@edit');
+		//更新公司信息
+		Route::post('company/update','Admin\Company\CompanyController@update');
+		//删除公司信息数据
+		Route::post('company/destroy','Admin\Company\CompanyController@destroy');
+		//查看公司信息详情
+		Route::get('company/view/{comp_id}','Admin\Company\CompanyController@view');
+		//多选删除公司信息
+		Route::post('company/destroy_all','Admin\Company\CompanyController@destroy_all');
+		//改变公司信息状态
+		Route::post('company/status','Admin\Company\CompanyController@status');
 
+		//项
+		//目
+		//管
+		//理
+		//项目展示页面
+		Route::get('projectss/{perid}','Admin\Projectss\ProjectssController@index');
+		//项目添加页面
+		Route::get('pcreate','Admin\Projectss\ProjectssController@create');
+		//项目添加
+		Route::post('projectss/store','Admin\Projectss\ProjectssController@store');
+		//修改页面
+		Route::get('projectss/edit/{project_id}','Admin\Projectss\ProjectssController@edit');
+		//更新项目信息
+		Route::post('projectss/update','Admin\Projectss\ProjectssController@update');
+		//删除用户信息
+		Route::post('projectss/destroy','Admin\Projectss\ProjectssController@destroy');
+		//多选删除
+		Route::post('projectss/destroy_all','Admin\Projectss\ProjectssController@destroy_all');
+
+		//置
+		//业
+		//顾
+		//问
+		//--------------------------------------职业顾问-----------------------------------------//
+		//职业顾问管理
+		Route::get('consultant/{perid}','Admin\Consultant\ConsultantController@index');
+		//职业顾问添加
+		Route::get('consu/create','Admin\Consultant\ConsultantController@create');
+		//职业顾问信息
+		Route::post('consu/store','Admin\Consultant\ConsultantController@store');
+		//职业顾问信息修改
+		Route::get('consu/edit/{hous_id}','Admin\Consultant\ConsultantController@edit');
+		//更新职业顾问信息
+		Route::post('consu/update','Admin\Consultant\ConsultantController@update');
+		//禁用或启用
+		Route::post('consu/status','Admin\Consultant\ConsultantController@status');
+		//查看信息详情
+		Route::get('consu/view/{hous_id}','Admin\Consultant\ConsultantController@view');
+		//删除职业顾问
+		Route::post('consu/destroy','Admin\Consultant\ConsultantController@destroy');
+		//多选删除信息
+		Route::post('consu/destroy_all','Admin\Consultant\ConsultantController@destroy_all');
+		//客
+		//户
+		//管
+		//理
+		//-------------------------------客户列表管理----------------------------//
+		//客户信息展示页面
+		Route::get('	customer/{perid}','Admin\Customer\CustomerController@index');
 	});
 
 

@@ -28,7 +28,7 @@
 		'account_number_msg'     => '您的账号不存在',
 
 		'status_code'   => 7,
-		'status_msg'    => '您的账号被禁止',
+		'status_msg'    => '您的账号被禁止，请自行联系管理员处理。',
 
 		'login_success_code'  => 8,
 		'login_success_msg'   => '恭喜您，登录成功',

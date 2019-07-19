@@ -43,21 +43,11 @@
 				<input type="text" class="form-control" placeholder="{{ trans('login.input_username') }}" id="username"
 				       name="username">
 				<span class="fa fa-user form-control-feedback"></span>
-				{{--@if($errors->has('username'))--}}
-					{{--<div class="form-group has-feedback">--}}
-						{{--<p class="text-danger text-left"><strong>{{$errors->first('username')}}</strong></p>--}}
-					{{--</div>--}}
-				{{--@endif--}}
 			</div>
 			<div class="form-group has-feedback">
 				<input type="password" class="form-control" placeholder="{{ trans('login.input_password') }}" id="password"
 				       name="password" style="ime-mode:disabled">
 				<span class="fa fa-lock form-control-feedback"></span>
-				{{--@if($errors->has('password'))--}}
-					{{--<div class="form-group has-feedback">--}}
-						{{--<p class="text-danger text-left"><strong>{{$errors->first('password')}}</strong></p>--}}
-					{{--</div>--}}
-				{{--@endif--}}
 			</div>
 			<div class="form-group has-feedback captcha_style">
 				<input type="text" class="form-control {{$errors->has('captcha')?'parsley-error':''}}" name="captcha"
@@ -67,23 +57,18 @@
 			</div>
 
 			<div class="form-group has-feedback captcha_image_style">
-				<img src="{{captcha_src()}}" style="cursor: pointer" onclick="this.src='{{captcha_src()}}'+Math.random()"
+				<img src="{{captcha_src()}}" style="cursor: pointer;height: 32px" onclick="this.src='{{captcha_src()}}'+Math.random()"
 				     id="captcha_imgs">
 
 			</div>
-			{{--@if($errors->has('captcha'))--}}
-				{{--<div class="form-group has-feedback">--}}
-					{{--<p class="text-danger text-left"><strong>{{$errors->first('captcha')}}</strong></p>--}}
-				{{--</div>--}}
-			{{--@endif--}}
-
 			<div class="row">
 				<div class="col-xs-12">
 					<button class="btn btn-primary btn-block btn-flat" style="background-color: #4A90E2"
 					        id="submit_btn">{{ trans('login.login_btn') }}
 					</button>
+					<div style="margin-top: 10px;text-align: right"><a href="{{URL('sales')}}">销售人员登录</a></div>
 				</div>
-				<!-- /.col -->
+
 			</div>
 		</form>
 	</div>
@@ -160,10 +145,18 @@
 				return false;
 			}
 
+			var canshu = 2;
+
 			$.ajax( {
 				type : 'POST' ,
 				url : "{{URL('login')}}" ,
-				data : { username : username , password : password , captcha : captcha , _token : token } , // data: formInputs,
+				data : {
+					username : username ,
+					password : password ,
+					captcha : captcha ,
+					canshu: canshu,
+					_token : token
+				} , // data: formInputs,
 				// dataType : "json" ,
 				async : false ,
 				timeout : 3000 ,  //请求超时时间，毫秒

@@ -18,6 +18,7 @@
 					<input type="password" class="form-control" maxlength="16"
 					       name="password" id="password">
 				</div>
+				<input type="hidden" value="{{$status}}" id="status">
 				<div class="form-group">
 					<label>{{ trans('login.news_password') }}：</label>
 					<input type="password" class="form-control" maxlength="16"
@@ -56,12 +57,16 @@
 			return false;
 		}
 
+		var status = $('#status').val();     //区分内部成员与 外部成员
+
+
 		$.ajax({
 			url: "{{URL('change/password')}}",
 			type:"POST",
 			data:{
 				old_password:old_password,
 				password:password,
+				status:status,
 				password_confirmation:password_confirmation,
 				_token:"{{csrf_token()}}"
 			},
@@ -79,7 +84,7 @@
 				}
 				if(data.code == {{config('myconfig.login.update_password_success_code')}}){
 					layer.msg(data.msg,{time:1324},function(){
-						window.parent.location.href = "{{URL('logout')}}"
+						window.parent.location.href = "{{URL('logout')}}/" + data.status;
 					});                     //修改成功
 				}
 				if(data.code == {{config('myconfig.login.old_password_code')}}){

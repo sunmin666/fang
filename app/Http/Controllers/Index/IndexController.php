@@ -7,6 +7,14 @@ use App\Http\Controllers\SessionController;
 
 class IndexController extends SessionController
 {
+
+
+	/**
+	 *
+	 * 登录成功之后 跳转的首页
+	 *
+	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+	 */
     public function index(){
 
 			$data = $this -> session();

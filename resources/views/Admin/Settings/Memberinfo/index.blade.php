@@ -162,7 +162,7 @@
 						data : {
 							'memberid' : vote ,
 							'_token' : "{{csrf_token()}}"
-						} ,
+						},
 						success : function ( data ) {
 							console.log( data );
 							if ( data.code == {{config('myconfig.member.memberinfo_delete_success_code')}} ) {
@@ -208,6 +208,7 @@
 			});
 		});
 
+    //删除信息
 		function d( memberid ) {
 			var page_count = $('#page_count').val();
 

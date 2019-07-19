@@ -24,17 +24,13 @@
 				{{--</span>--}}
 			{{--</div>--}}
 		{{--</form>--}}
-		<!-- /.search form -->
-		<!-- Sidebar Menu -->
 		<ul class="sidebar-menu" data-widget="tree">
-
-			<?php if($id == 1){?>
+			<?php if($id == 1 && $status == 2){?>
 				<?php foreach ($per_menu as $k => $v){?>
-
 				<li class="treeview @if($v -> perid == $ids) menu-open @endif">
 					<a href="#"><i class="{{$v -> p_icon}}"></i> <span>{{$v -> pername}}</span>
 						<span class="pull-right-container">
-											<i class="fa fa-angle-left pull-right"></i>
+									<i class="fa fa-angle-left pull-right"></i>
 										</span>
 					</a>
 					<ul class="treeview-menu" @if($v -> perid == $ids) style="display: block;" @endif>
@@ -68,5 +64,4 @@
 			<?php }?>
 		</ul>
 	</section>
-
 </aside>
