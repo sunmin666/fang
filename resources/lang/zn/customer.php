@@ -15,11 +15,27 @@
 
 		'mobile'     => '手机号',
 
+		'telphone'   => '其他手机号',
+
 		'weixin'     => '微信号',
+
+		'qq'   => 'qq号',
+
+		'idcrad'   => '身份证号',
 
 		'email'     => '邮箱',
 
 		'created_at'  => '录入时间',
 
 		'operating'   => '操作',
+
+
+		'comp_id'   => '所属公司',
+
+		'proj_id'   => '所属项目',
+
+
+
+
+
 	];

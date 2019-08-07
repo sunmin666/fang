@@ -7,6 +7,10 @@
 	 */
 
 	return [
+		'page_name'  => '公司成员管理',
+		'page_detail'  => '公司成员信息',
+
+
 		'username'   => '账号',
 		'realname'   => '姓名',
 		'email'      => '邮箱',

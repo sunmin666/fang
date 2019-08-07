@@ -18,30 +18,30 @@
 	});
 	//iHOUSER使用者注册页面
 	Route::post('zhuce','Regi\RegiController@index');
+	//图
+	//片
+	//上
+	//传
+	//summernote  编辑器图片上传
+	Route::post('mupload','UploadController@mupload');
+	//layur 图片上传
+	Route::post('lupload','UploadController@lupload');
+	//普通图片上传
+	Route::post('upload','UploadController@upload');
+	//用户退出
+	Route::get('logout/{status}','Login\LoginController@logout');
+	//修改密码页面展示
+	Route::get('change_password/{status}','Login\LoginController@change_password');
+	//用户密码更新
+	Route::post('change/password','Login\LoginController@update_password');
+	//用户登录之后显示的首页
+	Route::get('index','Index\IndexController@index');
+
 
 //用户登录验证密码和账号
 	Route::post('login','Login\LoginController@login_btu');
 //以下路由访问需要用户登录
 	Route::group(['middleware' => ['login_btn']],function(){
-		//用户登录之后显示的首页
-		Route::get('index','Index\IndexController@index');
-		//用户退出
-		Route::get('logout/{status}','Login\LoginController@logout');
-		//修改密码页面展示
-		Route::get('change_password/{status}','Login\LoginController@change_password');
-		//用户密码更新
-		Route::post('change/password','Login\LoginController@update_password');
-		//图
-		//片
-		//上
-		//传
-		//summernote  编辑器图片上传
-		Route::post('mupload','UploadController@mupload');
-		//layur 图片上传
-		Route::post('lupload','UploadController@lupload');
-		//普通图片上传
-		Route::post('upload','UploadController@upload');
-
 		//系
 		//统
 		//设
@@ -71,7 +71,7 @@
 		Route::get('per/create','Admin\Settings\PermissionController@create');
 		//菜单添加
 		Route::post('per/store','Admin\Settings\PermissionController@store');
-		//菜单权限页面展示
+		//菜单修改	页面展示
 		Route::get('per/edit/{perid}','Admin\Settings\PermissionController@edit');
 		//菜单权限数据
 		Route::post('per/update','Admin\Settings\PermissionController@update');
@@ -79,20 +79,62 @@
 		Route::post('per/destroy','Admin\Settings\PermissionController@destroy');
 		//更改子类菜单状态
 		Route::post('per/status','Admin\Settings\PermissionController@status');
-		//--------------------------------------角色管理------------------------------------------//
-		//角色列表展示页面
-		Route::get('character/{perid}','Admin\Settings\CharacterController@index');
-		//角色加页面展示
-		Route::get('cha/create','Admin\Settings\CharacterController@create');
-		//添加到数据库
-		Route::post('cha/store','Admin\Settings\CharacterController@store');
-		//修改页面展示
-		Route::get('cha/edit/{chid}','Admin\Settings\CharacterController@edit');
-		//更新角色数据
-		Route::post('cha/update','Admin\Settings\CharacterController@update');
-		//删除角色信息管理
-		Route::post('cha/destroy','Admin\Settings\CharacterController@destroy');
 
+		//---------------------------------------职位管理--------------------------------------//
+		//职位管理展示页面
+		Route::get('position/{perid}','Admin\Settings\PositionController@index');
+		//职位添加页面
+		Route::get('positioninfo/create',function(){
+			return view('Admin.Settings.Position.create');
+		});
+		//职位新增
+		Route::post('positioninfo/store','Admin\Settings\PositionController@store');
+		//职位信息修改
+		Route::get('positioninfo/edit/{posi_id}','Admin\Settings\PositionController@edit');
+		//更新数据
+		Route::post('positioninfo/update','Admin\Settings\PositionController@update');
+		//删除数据
+		Route::post('positioninfo/destroy','Admin\Settings\PositionController@destroy');
+		//多选删除
+		Route::post('positioninfo/destroy_all','Admin\Settings\PositionController@destroy_all');
+
+		//_________________________________________________新版本角色管理______________________________________________//
+		//新本角色管理展示
+		Route::get('roleinfo/{perid}','Admin\Settings\RoleinfoController@index');
+		//添加页面
+		Route::get('roleinfoss/create',function(){
+			return view('Admin.Settings.Roleinfo.create');
+		});
+		//新增角色
+		Route::post('roleinfoss/store','Admin\Settings\RoleinfoController@store');
+		//修改新本角色信息页面
+		Route::get('roleinfo/edit/{role_id}','Admin\Settings\RoleinfoController@edit');
+		//更新新本角色信息
+		Route::post('roleinfoss/update','Admin\Settings\RoleinfoController@update');
+		//删除信息
+		Route::post('roleinfo/destroy','Admin\Settings\RoleinfoController@destroy');
+		//全选删除
+		Route::post('roleinfo/destroy_all','Admin\Settings\RoleinfoController@destroy_all');
+		//-----------------------------------系统url管理------------------------------------------//
+		//url管理展示页面
+		Route::get('url/{perid}','Admin\Settings\UrlController@index');
+		//url添加页面
+		Route::get('urlinfo/create','Admin\Settings\UrlController@create');
+		//url信息录入
+		Route::post('urlinfo/store','Admin\Settings\UrlController@store');
+		//修改信息页面
+		Route::get('urlinfo/edit/{url_id}','Admin\Settings\UrlController@edit');
+		//更新url地址
+		Route::post('urlinfo/update','Admin\Settings\UrlController@update');
+		//删除
+		Route::post('urlinfo/destroy','Admin\Settings\UrlController@destroy');
+		//多选删除
+		Route::post('urlinfo/destroy_all','Admin\Settings\UrlController@destroy_all');
+		//----------------------------------权限管理-----------------------------------------//
+		//权限管理
+		Route::get('permi/{perid}','Admin\Settings\PerminController@index');
+    //权限新增
+		Route::get('permin/create','Admin\Settings\PerminController@create');
 		//网
 		//站
 		//管
@@ -207,7 +249,7 @@
 		//多选删除
 		Route::post('projectss/destroy_all','Admin\Projectss\ProjectssController@destroy_all');
 
-		//置
+		//公司成员
 		//业
 		//顾
 		//问
@@ -230,6 +272,9 @@
 		Route::post('consu/destroy','Admin\Consultant\ConsultantController@destroy');
 		//多选删除信息
 		Route::post('consu/destroy_all','Admin\Consultant\ConsultantController@destroy_all');
+
+		Route::post('comp_id','Admin\Consultant\ConsultantController@comp_id');
+
 		//客
 		//户
 		//管
@@ -237,6 +282,18 @@
 		//-------------------------------客户列表管理----------------------------//
 		//客户信息展示页面
 		Route::get('	customer/{perid}','Admin\Customer\CustomerController@index');
+		//客户信息新增
+		Route::get('omer/create','Admin\Customer\CustomerController@create');
+		//添加客户信息
+		Route::post('omer/store','Admin\Customer\CustomerController@store');
+		//查看客户信息
+		Route::get('omer/view/{cust_id}','Admin\Customer\CustomerController@view');
+		//客户信息资料修改页面
+		Route::get('omer/edit/{cust_id}','Admin\Customer\CustomerController@edit');
+		//更新客户资料信息
+		Route::post('omer/update','Admin\Customer\CustomerController@update');
+		//删除用户信息
+		Route::post('omer/destroy','Admin\Customer\CustomerController@destroy');
 	});
 
 
@@ -251,3 +308,5 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+

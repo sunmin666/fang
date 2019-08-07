@@ -87,9 +87,9 @@
 				<div class="form-group">
 					<label>{{ trans('consu.comp_id') }}：</label>
 					<select name="comp_id" id="comp_id" class="form-control">
-						@if($company != null)
-							<option value="{{$company -> comp_id}}">{{$company ->comp_cname }}</option>
-						@endif
+						@foreach($company as $k => $v)
+							<option value="{{$v -> comp_id}}" @if($v -> comp_id == $hous -> comp_id) selected @endif>{{$v ->comp_cname }}</option>
+						@endforeach
 					</select>
 				</div>
 				{{--所属项目--}}
@@ -133,6 +133,26 @@
 
 </script>
 <script>
+
+	$("#comp_id").change(function(){
+		var comp_id = $(this).val();
+		$.ajax({
+			url:"{{URL('comp_id')}}",
+			type:"post",
+			data:{
+				comp_id:comp_id,
+				_token:"{{csrf_token()}}"
+			},
+			success:function(data){
+				console.log(data);
+				var str = '';
+				for(var ig =0 ; ig < data.length; ig++ ){
+					str += "<option value='" + data[ig]['project_id'] +"'> "+ data[ig]['pro_cname'] +" </option>"
+				}
+				$('#proj_id').html(str);
+			}
+		})
+	});
 
 	//添加到数据库
 

@@ -218,4 +218,17 @@ class LoginController extends Controller
 			}
 
 		}
+
+
+
+		public function ig(){
+			return '你真帅';
+		}
+
+
+		public function rng(Request $query){
+			$rngm = $query -> input('rngm');
+
+			return $rngm;
+		}
 }

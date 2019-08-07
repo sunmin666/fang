@@ -44,7 +44,7 @@ class PermissionController extends SessionController
 	 */
 		public function store(Request $query){
 			$validator = Validator::make( $query->all() , [
-				'pername' => "unique:perm,pername" ,
+				'pername' => "unique:perm,pername" ,   //判断名称是否重复
 			] );
 
 			if($validator -> errors() -> get('pername')){

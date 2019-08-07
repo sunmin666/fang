@@ -1,0 +1,79 @@
+<?php
+
+namespace App\Models\admin;
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
+
+class Role extends Model
+{
+
+	/**
+	 *
+	 * 添加新本角色数据
+	 *
+	 * @param $data
+	 *
+	 * @return bool
+	 */
+    public static function store_d_role($data){
+    	return DB::table('roleinfo') -> insert($data);
+		}
+
+
+	/**
+	 *
+	 * 查询新本角色数据
+	 *
+	 * @param $page
+	 *
+	 * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+	 */
+		public static function get_all_role($page){
+    	return DB::table('roleinfo') -> paginate($page);
+		}
+
+
+	/**
+	 *
+	 * 根据数据id查询指定的数据
+	 *
+	 * @param $role_id
+	 *
+	 * @return Model|\Illuminate\Database\Query\Builder|object|null
+	 */
+		public static function get_d_roleinfo($role_id){
+			return DB::table('roleinfo') -> where('role_id','=',$role_id) -> first();
+		}
+
+	/**
+	 *
+	 * 更新指定的数据
+	 *
+	 * @param $role_id
+	 * @param $data
+	 *
+	 * @return int
+	 */
+		public static function update_d_role($role_id,$data){
+			return DB::table('roleinfo') -> where('role_id','=',$role_id) -> update($data);
+		}
+
+	/**
+	 *
+	 * 删除角色信息
+	 *
+	 * @param $role_id
+	 *
+	 * @return int
+	 */
+		public static function delete_d_role($role_id){
+			return DB::table('roleinfo') -> where('role_id','=',$role_id) -> delete();
+		}
+
+
+		public static function delete_all_role($role_id){
+			return DB::table('roleinfo') -> whereIn('role_id',$role_id) -> delete();
+		}
+
+}

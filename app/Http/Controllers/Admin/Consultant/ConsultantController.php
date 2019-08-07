@@ -22,8 +22,8 @@ class ConsultantController extends SessionController
     public function index($perid){
 			$data = $this -> session();
 			$data['per_menu'] = $this -> get_per();
-			$data['page_name'] = trans( 'company.page_name' );
-			$data['page_detail'] = trans( 'company.page_detail' );
+			$data['page_name'] = trans( 'consu.page_name' );
+			$data['page_detail'] = trans( 'consu.page_detail' );
 			$data['page_tips'] = trans( 'index.page_tips' );
 			$data['page_note'] = trans( 'index.page_note' );
 			$page = config('myconfig.config.page_num');
@@ -41,7 +41,7 @@ class ConsultantController extends SessionController
 		public function create(){
     	$data['company'] = Consu::get_d_company();             //查询公司
 
-			$data['project'] = Consu::get_all_project();           //查询项目
+//			$data['project'] = Consu::get_all_project();           //查询项目
 
 			return view('Admin.Consu.Consu.create') -> with($data);
 		}
@@ -105,7 +105,13 @@ class ConsultantController extends SessionController
 			$data['description'] = $query -> input('description');       //自我描述
 			$data['created_at']   = time();
 			$data['character']     = 6;
-			$data['tina'] = Session::get('session_member.id');
+
+			if(Session::get('session_member.status') == 1){
+				$data['tina'] = Session::get('session_member.id');
+			}elseif(Session::get('session_member.status') == 2){
+				$people = Consu::get_company_people($data['comp_id']);
+				$data['tina'] = (int)$people -> people;
+			}
 
 			$info = Consu::store_consu($data);
 
@@ -132,11 +138,9 @@ class ConsultantController extends SessionController
 	 */
 		public function edit($hous_id){
 			$data['company'] = Consu::get_d_company();             //查询公司
-
-			$data['project'] = Consu::get_all_project();           //查询项目
-
 			$data['hous'] = Consu::get_d_hous($hous_id);
-
+			$comp_id = $data['hous']-> comp_id;
+			$data['project'] = Consu::get_company($comp_id);
 			return view('Admin.Consu.Consu.edit') -> with($data);
 		}
 
@@ -178,6 +182,12 @@ class ConsultantController extends SessionController
 			$data['proj_id'] = $query -> input('proj_id');         //所属项目id
 			$data['comp_id'] = $query -> input('comp_id');           //所属公司id
 			$data['description'] = $query -> input('description');       //自我描述
+			if(Session::get('session_member.status') == 1){
+				$data['tina'] = Session::get('session_member.id');
+			}elseif(Session::get('session_member.status') == 2){
+				$people = Consu::get_company_people($data['comp_id']);
+				$data['tina'] = (int)$people -> people;
+			}
 			$info = Consu::update_d_hous($hous_id,$data);
 			if($info){
 				return [
@@ -284,4 +294,21 @@ class ConsultantController extends SessionController
 				];
 			}
 		}
+
+	/**
+	 * 查询公司下的所属项目
+	 *
+	 * @param Request $query
+	 *
+	 * @return \Illuminate\Support\Collection
+	 */
+		public function comp_id(Request $query){
+			$comp_id = $query -> input('comp_id');
+
+			$info = Consu::get_company($comp_id);
+
+			return $info;
+
+		}
+
 }

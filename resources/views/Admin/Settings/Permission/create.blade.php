@@ -51,32 +51,24 @@
 </body>
 @include('Public.weekly_js')
 <script>
-
 	//添加到数据库
-
 	$( '#store1' ).click( function () {
-
 		$( "#store1" ).attr( 'disabled' , true );
-
 		var pername = $( '#pername' ).val();
 		var perurl = $( '#perurl' ).val();
 		var p_superior = $('#p_superior').val();
 		var p_icon = $('#p_icon').val();
 		var token = $( '[name=_token]' ).val();
-
 		var res= /^[\u4e00-\u9fa5]+$/;
-
 		if ( pername == '' || !res.test(pername)){
 			layer.msg( '{{trans('permission.name_pername')}}' , { time : 1500 } );
 			$( "#store1" ).attr( 'disabled' , false );
 			return false;
 		}
-
 		if ( perurl == '' ) {
 			layer.msg( '{{trans('permission.name_perurl')}}' , { time : 1500 } );
 			return false;
 		}
-
 
 		$.ajax( {
 			url : "{{URL('per/store')}}" ,
@@ -90,13 +82,11 @@
 			} ,
 			success : function ( data ) {
 				console.log( data );
-
 				if ( data.code == {{config('myconfig.perm.per_success_code')}}) {
 					layer.msg( data.msg , { time : 2000 } , function () {
 						window.parent.location.reload();
 					} );
 				}
-
 				if ( data.code == {{config('myconfig.perm.per_error_code')}}) {
 					layer.msg( data.msg , { time : 2000 } );
 					$( "#store1" ).attr( 'disabled' , false );
@@ -114,7 +104,6 @@
 			}
 		} )
 	} )
-
 
 </script>
 </html>

@@ -66,7 +66,7 @@
 					<button class="btn btn-primary btn-block btn-flat" style="background-color: #4A90E2"
 					        id="submit_btn">{{ trans('login.login_btn') }}
 					</button>
-					<div style="margin-top: 10px;text-align: right"><a href="{{URL('sales')}}">销售人员登录</a></div>
+					{{--<div style="margin-top: 10px;text-align: right"><a href="{{URL('sales')}}">销售人员登录</a></div>--}}
 				</div>
 
 			</div>

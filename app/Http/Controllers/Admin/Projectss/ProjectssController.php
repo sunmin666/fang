@@ -24,8 +24,8 @@
 		{
 			$data = $this->session();
 			$data['per_menu'] = $this->get_per();
-			$data['page_name'] = trans( 'company.page_name' );
-			$data['page_detail'] = trans( 'company.page_detail' );
+			$data['page_name'] = trans( 'project.page_name' );
+			$data['page_detail'] = trans( 'project.page_detail' );
 			$data['page_tips'] = trans( 'index.page_tips' );
 			$data['page_note'] = trans( 'index.page_note' );
 			$data['ids'] = $perid;

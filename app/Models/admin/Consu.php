@@ -16,7 +16,14 @@ class Consu extends Model
 	 */
 		public static function get_d_company(){
 			$people = Session::get('session_member.id');
-			return DB::table('company') ->  where('status','=',1) ->   where('people','=',$people) -> first();
+
+			$status = Session('session_member.status');
+			if($status == 1){
+				return DB::table('company') ->  where('status','=',1)  -> get();
+
+			}elseif($status == 2){
+				return DB::table('company') ->  where('status','=',1) -> get();
+			}
 		}
 
 
@@ -25,9 +32,8 @@ class Consu extends Model
 	 *
 	 * @return \Illuminate\Support\Collection
 	 */
-		public static function get_all_project(){
-			$people = Session::get('session_member.id');
-			return DB::table('projectinfo') -> where('ppeople','=',$people) -> get();
+		public static function get_company($comp_id){
+			return DB::table('projectinfo') -> where('comp_id','=',$comp_id) -> get();
 		}
 
 
@@ -145,5 +151,16 @@ class Consu extends Model
 	 */
 		public static function delete_all_hous($hous_id){
 			return DB::table('houserinfo') -> whereIn('hous_id',$hous_id) -> delete();
+		}
+
+	/**
+	 * 查询项目添加人
+	 *
+	 * @param $comp_id
+	 *
+	 * @return Model|\Illuminate\Database\Query\Builder|object|null
+	 */
+		public static function get_company_people($comp_id){
+			return DB::table('company') -> select('people') -> where('comp_id','=',$comp_id) -> first();
 		}
 }

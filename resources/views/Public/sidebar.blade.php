@@ -25,26 +25,7 @@
 			{{--</div>--}}
 		{{--</form>--}}
 		<ul class="sidebar-menu" data-widget="tree">
-			<?php if($id == 1 && $status == 2){?>
 				<?php foreach ($per_menu as $k => $v){?>
-				<li class="treeview @if($v -> perid == $ids) menu-open @endif">
-					<a href="#"><i class="{{$v -> p_icon}}"></i> <span>{{$v -> pername}}</span>
-						<span class="pull-right-container">
-									<i class="fa fa-angle-left pull-right"></i>
-										</span>
-					</a>
-					<ul class="treeview-menu" @if($v -> perid == $ids) style="display: block;" @endif>
-						<?php foreach ($v->xsuperior as $k1 => $v2){?>
-						<li><a href="{{URL($v2 ->perurl)}}/{{$v -> perid}}"><i class="{{$v2 -> p_icon}}"></i>{{$v2 -> pername}}</a></li>
-						<?php }?>
-					</ul>
-				</li>
-				<?php }?>
-			<?php }else{?>
-				<?php foreach ($per_menu as $k => $v){?>
-					<?php  $array = explode( ',' , $character );
-					if(in_array( $v->perid , $array )){
-					?>
 						<li class="treeview @if($v -> perid == $ids) menu-open @endif">
 							<a href="#"><i class="{{$v -> p_icon}}"></i> <span>{{$v -> pername}}</span>
 								<span class="pull-right-container">
@@ -53,15 +34,12 @@
 							</a>
 							<ul class="treeview-menu" @if($v -> perid == $ids) style="display: block;" @endif>
 								<?php foreach ($v->xsuperior as $k1 => $v2){?>
-									<?php if(in_array( $v2->perid , $array )){?>
 									 <li><a href="{{URL($v2 ->perurl)}}/{{$v -> perid}}"><i class="{{$v2 -> p_icon}}"></i>{{$v2 -> pername}}</a></li>
-									<?php }?>
 								<?php }?>
 							</ul>
 						</li>
-					<?php }?>
 				<?php }?>
-			<?php }?>
+
 		</ul>
 	</section>
 </aside>
