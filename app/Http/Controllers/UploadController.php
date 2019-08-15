@@ -46,7 +46,7 @@ class UploadController extends Controller
 		$file = $_FILES["file"];
 		$month = date('Ymd',time());
 		$dir = "./uploads/".$month."/";
-		$a = "/fang/public/uploads/".$month."/".$file["name"];
+		$a = "uploads/".$month."/".$file["name"];
 		//		$a = "/uploads/".$month."/".$file["name"];
 		$arr = array(
 			'code' => 1,

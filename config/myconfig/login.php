@@ -49,4 +49,7 @@
 		'update_password_error_code'  => 13,
 		'update_password_error_msg'   => '修改密码失败',
 
+		'is_ipad_no_code'    => 14,
+		'is_ipad_no_msg'     => '此账号只在ipad上登录',
+
 	];

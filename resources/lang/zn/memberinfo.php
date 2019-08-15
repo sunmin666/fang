@@ -79,4 +79,12 @@
 			'news_enable'   =>   '启用',
 
 			'is_status_info'  => '您确认要更改该用户状态吗？',
+
+			'positioninfo'   => '职位',
+
+			'permission'   => '权限',
+
+			'text'    => '信息不全,不能添加',
+
+
 	];

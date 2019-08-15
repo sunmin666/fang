@@ -115,8 +115,8 @@
 		<div class="box-footer clearfix">
 			<a href="javascript:void(0)" class="btn btn-danger btn-xs pull-left select_all"><i
 					class="fa fa-trash"></i>{{ trans('memberinfo.select_all_delete') }}</a>
-			{{--<div class=" pull-right">{{$company -> links()}}</div>--}}
-			{{--<input type="hidden" value="{{$company -> count()}}" id="page_count">--}}
+			<div class=" pull-right">{{$omer -> links()}}</div>
+			<input type="hidden" value="{{$omer -> count()}}" id="page_count">
 		</div>
 	</div>
 @endsection

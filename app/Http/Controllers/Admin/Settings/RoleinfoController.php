@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Settings;
 use Illuminate\Http\Request;
 use App\Http\Controllers\SessionController;
 use App\Models\admin\Role;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
 class RoleinfoController extends SessionController
@@ -42,7 +43,7 @@ class RoleinfoController extends SessionController
 	 */
 		public function store(Request $query){
 			$validator = Validator::make($query -> all(),[
-				'role_name'   => 'unique:roleinfo,role_name',
+				'role_name'   => 'max:10',
 			]);
 
 			if($validator -> errors() -> get('role_name')){

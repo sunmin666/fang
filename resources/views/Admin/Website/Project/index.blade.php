@@ -57,7 +57,7 @@
 						<tr id="news">
 							<td>{{ $value -> nid}}</td>
 							<td>{{$value -> n_title}}</td>
-							<td><img src="{{$value->n_img}}" alt="图片未显示" width="50px" height="50px"></td>
+							<td><img src="{{URL::asset($value->n_img)}}" alt="图片未显示" width="50px" height="50px"></td>
 							<td>{{date('Y-m-d H:i',$value -> created_at)}}</td>
 							<td>{{$value -> n_admin_at}}</td>
 							<td>

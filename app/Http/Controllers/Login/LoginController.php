@@ -43,16 +43,9 @@ class LoginController extends Controller
 		public function login_btu(Request $query){
 
 			$validator = Validator::make( $query->all() , [
-				'username' => "required|string|min:1|max:8" ,
+//				'username' => "required|string|min:1|max:8" ,
 				'password' => "required|string|min:3|max:16" ,
 			] );
-
-			if($validator -> errors() -> get('username')){
-				return [
-					'code'   => config('myconfig.login.username_code'),
-					'msg'    => config('myconfig.login.username_msg')
-				];
-			}
 
 			if($validator -> errors() -> get('password')){
 				return [
@@ -69,10 +62,20 @@ class LoginController extends Controller
 				];
 			}
 
-			$username = $query -> input('username');
+
 			if($query -> input('canshu') == 1){                       //1代表外部成员
-				$info = Login::get_username_houserinfo($username);
+				$mobile = $query -> input('mobile');
+				$info = Login::get_username_houserinfo($mobile);
+
+				if($info -> is_ipad == 2){
+					return [
+						'code'   => config('myconfig.login.is_ipad_no_code'),
+						'msg'    => config('myconfig.login.is_ipad_no_msg')
+					];
+				}
+
 			}elseif($query -> input('canshu') == 2){                    //2代表内部成员
+				$username = $query -> input('username');
 				$info = Login::get_username_memberinfo($username);
 			}
 
@@ -95,8 +98,8 @@ class LoginController extends Controller
 
 				if($query -> input('canshu') == 1){          //1代表外部成员
 					Session::put('session_member.id',$info-> hous_id);   //自增id
-					Session::put('session_member.account',$info-> username);  //账号
-					Session::put('session_member.username',$info-> realname);  //真是姓名
+					Session::put('session_member.account',$info-> mobile);  //账号
+					Session::put('session_member.username',$info-> name);  //真是姓名
 					Session::put('session_member.status',1);        //内部成员与外部成员的区分
 					$id = $info->hous_id;
 					$cc = Login::login_count($id);
@@ -106,12 +109,10 @@ class LoginController extends Controller
 					Session::put('session_member.account',$info-> account);  //账号
 					Session::put('session_member.username',$info-> username);  //真是姓名
 					Session::put('session_member.status',2);        //内部成员与外部成员的区分
+					Session::put('session_member.avatars',$info-> avatars);  //头像路径
 				}
 				Session::put('session_member.mobile',$info-> mobile);  //手机号
-				Session::put('session_member.avatars',$info-> avatars);  //头像路径
 				Session::put('session_member.email',$info-> email);   //邮箱
-				Session::put('session_member.character',$info-> ch_per);   //成员权限
-				Session::put('session_member.cha_name',$info-> ch_nsme);   // 内部成员名称
 
 				return [
 					'code'   => config('myconfig.login.login_success_code'),
@@ -220,15 +221,9 @@ class LoginController extends Controller
 		}
 
 
-
-		public function ig(){
-			return '你真帅';
+		public function permi(){
+			return view('Public.permi');
 		}
 
 
-		public function rng(Request $query){
-			$rngm = $query -> input('rngm');
-
-			return $rngm;
-		}
 }

@@ -40,8 +40,24 @@
 				<div class="form-group">
 					<label>{{ trans('memberinfo.character') }}：</label>
 					<select name="character" id="character" class="form-control">
-						@foreach($cha as $k => $v)
-						<option value="{{$v -> chid}}" @if($member -> character == $v -> chid) selected @endif>{{$v -> ch_nsme}}</option>
+						@foreach($role as $K => $v)
+							<option value="{{$v -> role_id}}" @if($member -> role_id == $v -> role_id) selected @endif>{{$v -> role_name}}</option>
+						@endforeach
+					</select>
+				</div>
+				<div class="form-group">
+					<label>{{ trans('memberinfo.positioninfo') }}：</label>
+					<select name="positioninfo" id="positioninfo" class="form-control">
+						@foreach($position as $K => $v)
+							<option value="{{$v -> posi_id}}" @if($member -> posi_id == $v -> posi_id) selected @endif>{{$v -> posi_name}}</option>
+						@endforeach
+					</select>
+				</div>
+				<div class="form-group">
+					<label>{{ trans('memberinfo.permission') }}：</label>
+					<select name="permission" id="permission" class="form-control">
+						@foreach($permi as $K => $v)
+							<option value="{{$v -> perm_id}}" @if($member -> perm_id == $v -> perm_id) selected @endif>{{$v -> perm_name}}</option>
 						@endforeach
 					</select>
 				</div>
@@ -70,7 +86,13 @@
 		var sex = $( '#sex' ).val();
 		var character = $( '#character' ).val();
 		var token = $( '[name=_token]' ).val();
-
+		var positioninfo = $( '#positioninfo' ).val();
+		var permission = $( '#permission' ).val();
+		if(positioninfo == '' || permission == '' || character == ''){
+			layer.msg('{{trans('memberinfo.text')}}',{time:1235});
+			$( "#store1" ).attr( 'disabled' , false );
+			return false;
+		}
 		var username_pattern = {{ config('myconfig.config.username_pattern') }};    //英文数字验证
 		var realname_pattern = {{ config('myconfig.config.realname_pattern') }};    //中文验证
 		var email_pattern = {{ config('myconfig.config.email_pattern') }};        //邮箱
@@ -113,7 +135,9 @@
 				email : email ,
 				mobile : mobile ,
 				sex : sex ,
-				character:character,
+				character:character,   //角色
+				positioninfo:positioninfo,   //角色
+				permission:permission,   //角色
 				_token : token
 			} ,
 			success : function ( data ) {

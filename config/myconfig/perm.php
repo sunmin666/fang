@@ -33,4 +33,11 @@
 		'per_delete_code'   => 9,
 		'per_delete_msg'    => '该菜单下有子类，您不能删除',
 
+		'per_status_success_code'  => 10,
+		'per_status_success_msg'   => '恭喜您，操作成功',
+
+
+		'per_status_error_code'   => 11,
+		'per_status_error_msg'    => '很遗憾，操作失败',
+
 	];

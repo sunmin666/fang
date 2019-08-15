@@ -149,7 +149,7 @@
 								<button href="#" class="btn btn-default btn-flat" id="change_password" value="{{ Session::get('session_member.id') }}">{{ trans('login.change_password') }}</button>
 							</div>
 							<div class="pull-right">
-								<button href="#" class="btn btn-default btn-flat" value="{{$status}}" id="logout">{{ trans('login.drop_out') }}</button>
+								<button href="#" class="btn btn-default btn-flat" value="{{ Session::get('session_member.status') }}" id="logout">{{ trans('login.drop_out') }}</button>
 							</div>
 						</li>
 					</ul>

@@ -81,4 +81,11 @@ class url extends Model
 	public static function delete_all($url_id){
 		return DB::table('urlinfo') -> whereIn('url_id',$url_id) -> delete();
 	}
+
+
+
+	//修改url状态
+	public static function update_status($url_id,$data){
+		return DB::table('urlinfo') -> where('url_id','=',$url_id) -> update($data);
+	}
 }

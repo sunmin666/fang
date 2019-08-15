@@ -40,37 +40,42 @@
 									class="glyphicon glyphicon-ok"></i>{{ trans('memberinfo.allAlection') }}</button>
 						</th>
 						{{--url名称--}}
-						<th >{{ trans('url.url_name') }}</th>
+						<th >{{ trans('permin.perm_title') }}</th>
 						{{-- url路径--}}
-						<th>{{ trans('url.url_path') }}</th>
+						<th>{{ trans('permin.perm_name') }}</th>
 						{{--url描述--}}
-						<th>{{ trans('url.description') }}</th>
 						{{--添加时间--}}
-						<th>{{ trans('url.created_at') }}</th>
-						<th>{{ trans('url.operating') }}</th>
+						<th>{{ trans('permin.http_method') }}</th>
+						<th>{{ trans('permin.http_path') }}</th>
+						<th>{{ trans('permin.created_at') }}</th>
+						<th>{{ trans('permin.description') }}</th>
+						<th>{{ trans('permin.operating') }}</th>
 					</tr>
 					</thead>
 					<tbody>
-					{{--@foreach($url as $value)--}}
-						{{--<tr>--}}
-							{{--<td><input type="checkbox" class="i-checks" id="groupCheckbox" name="groupCheckbox[]"--}}
-							           {{--value="{{$value->url_id}}"--}}
-								{{--></td>--}}
-							{{--<td>{{ $value -> url_name}}</td>--}}
-							{{--<td>{{$value -> url_path}}</td>--}}
-							{{--<td>{{$value -> description}}</td>--}}
-							{{--<td>{{date('Y-m-d H:s',$value -> created_at)}}</td>--}}
-							{{--<td>--}}
-								{{--<button type="button" value="{{$value -> url_id}}" onclick="edit({{$value -> url_id}})"--}}
-								        {{--class="btn btn-warning btn-xs btn_edit" id="btn_edit"><i--}}
-										{{--class="fa fa-edit"></i> {{trans('memberinfo.news_edits')}}</button>--}}
-								{{--<button type="button" value="{{$value -> url_id}}"--}}
-								        {{--onclick="d({{$value -> url_id}})"--}}
-								        {{--class="btn btn-warning btn-xs btn_delete"><i--}}
-										{{--class="fa fa-trash"></i> {{trans('memberinfo.news_delete')}} </button>--}}
-							{{--</td>--}}
-						{{--</tr>--}}
-					{{--@endforeach--}}
+					@foreach($permin as $value)
+						<tr>
+							<td><input type="checkbox" class="i-checks" id="groupCheckbox" name="groupCheckbox[]"
+							           value="{{$value->perm_id}}"
+								></td>
+							<td>{{ $value -> perm_title}}</td>
+							<td>{{$value -> perm_name}}</td>
+							<td>{{$value -> http_method}}</td>
+							<td>{{$value -> http_path}}</td>
+							<td>{{$value -> perm_name}}</td>
+							<td>{{date('Y-m-d H:s',$value -> created_at)}}</td>
+							<td>{{$value -> description}}</td>
+							<td>
+								<button type="button" value="{{$value -> perm_id}}" onclick="edit({{$value -> perm_id}})"
+								        class="btn btn-warning btn-xs btn_edit" id="btn_edit"><i
+										class="fa fa-edit"></i> {{trans('memberinfo.news_edits')}}</button>
+								<button type="button" value="{{$value -> perm_id}}"
+								        onclick="d({{$value -> perm_id}})"
+								        class="btn btn-warning btn-xs btn_delete"><i
+										class="fa fa-trash"></i> {{trans('memberinfo.news_delete')}} </button>
+							</td>
+						</tr>
+					@endforeach
 					</tbody>
 				</table>
 			</div>
@@ -78,8 +83,8 @@
 		<div class="box-footer clearfix">
 			<a href="javascript:void(0)" class="btn btn-danger btn-xs pull-left select_all"><i
 					class="fa fa-trash"></i>{{ trans('memberinfo.select_all_delete') }}</a>
-			{{--<div class=" pull-right">{{$url -> links()}}</div>--}}
-			{{--<input type="hidden" value="{{$url -> count()}}" id="page_count">--}}
+			<div class=" pull-right">{{$permin -> links()}}</div>
+			<input type="hidden" value="{{$permin -> count()}}" id="page_count">
 		</div>
 	</div>
 @endsection
@@ -132,25 +137,25 @@
 				btn : ["{{trans('permission.confirm')}}" , "{{trans('permission.cancel')}}"]
 			} , function () {
 				$.ajax( {
-					url : '{{URL('urlinfo/destroy_all')}}' ,
+					url : '{{URL('permin/destroy_all')}}' ,
 					type : 'post' ,
 					data : {
-						'url_id' : vote ,
+						'perm_id' : vote ,
 						'_token' : "{{csrf_token()}}"
 					} ,
 					success : function ( data ) {
 						console.log( data );
-						if ( data.code == {{config('myconfig.url.url_delete_success_code')}} ) {
+						if ( data.code == {{config('myconfig.permin.permin_delete_success_code')}} ) {
 							layer.msg( data.msg , { time : 2000 } , function () {
 								if ( page_count == vote.length ) {
-									location.href = "{{URL('url/2')}}";
+									location.href = "{{URL('permi/2')}}";
 								}
 								else {
 									window.location.reload();
 								}
 							} );
 						}
-						else if ( data.code == {{config('myconfig.url.url_delete_error_code')}} ) {
+						else if ( data.code == {{config('myconfig.permin.permin_delete_error_code')}} ) {
 							layer.msg( data.msg , { time : 2000 } );
 						}
 					} ,
@@ -182,21 +187,21 @@
 				}
 			} );
 		} );
-		function d( url_id ) {
+		function d( perm_id ) {
 			var page_count = $( '#page_count' ).val();
 			layer.confirm( "{{trans('permission.is_delete_info')}}" , {
 				btn : ["{{trans('permission.confirm')}}" , "{{trans('permission.cancel')}}"] //按钮
 			} , function () {
-				$.post( "{{URL('urlinfo/destroy')}}" , { 'url_id' : url_id , '_token' : "{{csrf_token()}}" } ,
+				$.post( "{{URL('permin/destroy')}}" , { 'perm_id' : perm_id , '_token' : "{{csrf_token()}}" } ,
 					function ( data ) {
 						console.log( data );
-						if ( data.code == {{config('myconfig.url.url_delete_error_code')}}) {
+						if ( data.code == {{config('myconfig.permin.permin_delete_error_code')}}) {
 							layer.msg( data.msg , { time : 1523 } );
 						}
-						else if ( data.code == {{config('myconfig.url.url_delete_success_code')}} ) {
+						else if ( data.code == {{config('myconfig.permin.permin_delete_success_code')}} ) {
 							layer.msg( data.msg , { time : 1000 } , function () {
 								if ( page_count == 1 ) {
-									location.href = "{{URL('url/2')}}";
+									location.href = "{{URL('permi/2')}}";
 								}
 								else {
 									window.location.reload();
@@ -211,17 +216,17 @@
 			} );
 		}
 		//修改新版角色信息
-		function edit( url_id ) {
+		function edit( perm_id ) {
 			layer.open( {
 				type : 2 ,
 				title : '{{ trans('permission.news_edits') }}' ,
 				moveType : 0 ,
 				skin : 'layui-layer-demo' , //加上边框
 				closeBtn : 1 ,
-				area : ['40%' , '50%'] , //宽高
+				area : ['50%' , '80%'] , //宽高
 				shadeClose : false ,
 				shade : 0.5 ,
-				content : ["{{URL('urlinfo/edit')}}" + "/" + url_id] ,
+				content : ["{{URL('permin/edit')}}" + "/" + perm_id] ,
 				success : function ( layero , index ) {
 					$( ':focus' ).blur();
 				}

@@ -21,8 +21,7 @@
 		public static function get_username_memberinfo( $username )
 		{
 			return DB::table( 'memberinfo' )
-							 ->select( 'memberinfo.*' , 'cha.ch_per' , 'cha.ch_nsme' )
-							 ->leftJoin( 'cha' , 'cha.chid' , '=' , 'memberinfo.character' )
+							 ->select( 'memberinfo.*')
 							 ->where( 'memberinfo.account' , '=' , $username )
 							 ->first();
 		}
@@ -36,12 +35,11 @@
 		 *
 		 * @return Model|\Illuminate\Database\Query\Builder|object|null
 		 */
-		public static function get_username_houserinfo( $username )
+		public static function get_username_houserinfo( $mobile )
 		{
 			return DB::table( 'houserinfo' )
-							 ->select( 'houserinfo.*' , 'cha.ch_per' , 'cha.ch_nsme' )
-							 ->leftJoin( 'cha' , 'cha.chid' , '=' , 'houserinfo.character' )
-							 ->where( 'houserinfo.username' , '=' , $username )
+							 ->select( 'houserinfo.*')
+							 ->where( 'houserinfo.mobile' , '=' , $mobile )
 							 ->first();
 		}
 

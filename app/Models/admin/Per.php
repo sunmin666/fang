@@ -4,6 +4,8 @@ namespace App\Models\admin;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
+
 
 class Per extends Model
 {
@@ -114,10 +116,38 @@ class Per extends Model
 	 * @return \Illuminate\Support\Collection
 	 */
 		public static function get_all_pers(){
-			$data = DB::table('perm') -> orderBy('created_at','desc') -> where('status','=',1) -> where('p_superior','=',0) -> get();
-			foreach ($data as $k => $v){
-				$data[$k] -> xsuperior = DB::table('perm') -> where('p_superior','=',$v -> perid) -> get();
+
+			$status = Session::get('session_member.status');
+
+			if($status == 1){
+				$data = DB::table('perm') -> orderBy('created_at','desc') -> where('status','=',1) -> where('p_superior','=',0) -> get();
+				foreach ($data as $k => $v){
+					$data[$k] -> xsuperior = DB::table('perm') -> where('status','=',1) -> where('p_superior','=',$v -> perid) -> get();
+				}
+				return $data;
+			}else{
+				$data = DB::table('perm') -> orderBy('created_at','desc') -> where('p_superior','=',0) -> get();
+				foreach ($data as $k => $v){
+					$data[$k] -> xsuperior = DB::table('perm') -> where('p_superior','=',$v -> perid) -> get();
+				}
+				return $data;
 			}
-			return $data;
+
+
+		}
+
+
+
+	/**
+	 *
+	 * 更改状态
+	 *
+	 * @param $per_id
+	 * @param $data
+	 *
+	 * @return int
+	 */
+		public static function update_status($per_id,$data){
+			return DB::table('perm') -> where('perid','=',$per_id) -> update($data);
 		}
 }

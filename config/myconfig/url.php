@@ -32,4 +32,11 @@
 		'url_delete_error_code'    => 8,
 		'url_delete_error_msg'     => '很遗憾，删除失败',
 
+		'url_status_success_code'  => 9,
+
+		'url_status_success_msg'   => '恭喜您，数据更新成功',
+
+
+		'url_status_error_code'   => 10,
+		'url_status_error_msg'    => '很遗憾，数据更新失败',
 	];

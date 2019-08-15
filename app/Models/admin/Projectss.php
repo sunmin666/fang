@@ -42,6 +42,7 @@
 		}
 
 
+
 		/**
 		 *
 		 * 查询项目信息
@@ -66,7 +67,7 @@
 								 ->select( 'projectinfo.*' , 'company.comp_cname' )
 								 ->orderBy( 'updated_at' , 'desc' )
 								 ->leftJoin( 'company' , 'projectinfo.comp_id' , '=' , 'company.comp_id' )
-					       ->where( 'projectinfo.ppeople' , '=' , $people_id )
+					       ->where( 'projectinfo.comp_id' , '=' , 2 )
 								 ->paginate( $page );
 			}
 		}
@@ -82,7 +83,6 @@
 		public static function get_d_project($project_id){
 			return DB::table('projectinfo') -> where('project_id','=',$project_id) -> first();
 		}
-
 
 
 		/**

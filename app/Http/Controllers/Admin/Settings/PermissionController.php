@@ -175,4 +175,32 @@ class PermissionController extends SessionController
 		}
 
 
+		public function status(Request $query){
+			$per_id = $query -> input('perid');
+			$status = $query -> input('status');
+
+			if($status == 1){
+				$data['status'] = 0;
+			}elseif($status == 0){
+				$data['status'] = 1;
+			}
+
+			$status_update = Per::update_status($per_id,$data);
+
+			if($status_update){
+				return [
+					'code'   => config('myconfig.perm.per_status_success_code'),
+					'msg'   => config('myconfig.perm.per_status_success_msg')
+				];
+			}else{
+				return [
+					'code'   => config('myconfig.perm.per_status_error_code'),
+					'msg'   => config('myconfig.perm.per_status_error_msg')
+				];
+			}
+
+
+		}
+
+
 }

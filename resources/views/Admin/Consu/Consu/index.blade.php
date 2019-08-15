@@ -42,26 +42,29 @@
 									class="glyphicon glyphicon-ok"></i>{{ trans('memberinfo.allAlection') }}</button>
 						</th>
 						{{--顾问账号--}}
-						<th>{{ trans('consu.username') }}</th>
-						{{--顾问真实姓名--}}
-						<th>{{ trans('consu.realname') }}</th>
-						{{--邮箱--}}
-						<th>{{ trans('consu.email') }}</th>
-						{{--性别--}}
-						<th>{{ trans('consu.sex') }}</th>
-						{{--手机号--}}
 						<th>{{ trans('consu.mobile') }}</th>
+						{{--顾问真实姓名--}}
+						<th>{{ trans('consu.name') }}</th>
+						{{--邮箱--}}
+						<th>{{ trans('consu.sex') }}</th>
+						{{--性别--}}
+						<th>{{ trans('consu.email') }}</th>
+						{{--手机号--}}
+						<th>{{ trans('consu.role') }}</th>
 						{{--状态--}}
-						<th>{{trans('consu.status')}}</th>
+						<th>{{trans('consu.permin')}}</th>
+						{{--<th>{{trans('consu.proj_id')}}</th>--}}
+
 						{{--录入时间--}}
-						<th>{{ trans('consu.created_at') }}</th>
+						{{--<th>{{ trans('consu.status') }}</th>--}}
+						{{--登录次数--}}
+						<th>{{ trans('consu.enjoy') }}</th>
 						{{--登录次数--}}
 						<th>{{ trans('consu.login_count') }}</th>
 						{{--登录次数--}}
-						<th>{{ trans('consu.comp_id') }}</th>
-						{{--登录次数--}}
-						<th>{{ trans('consu.proj_id') }}</th>
+						<th>{{ trans('consu.created_at') }}</th>
 						{{--操作--}}
+						<th>{{trans('consu.updated_at')}}</th>
 						<th>{{ trans('consu.operating') }}</th>
 					</tr>
 					</thead>
@@ -71,20 +74,21 @@
 							<td><input type="checkbox" class="i-checks" id="groupCheckbox" name="groupCheckbox[]"
 							           value="{{$value->hous_id}}"
 								></td>
-							<td>{{ $value -> username}}</td>
-							<td>{{$value -> realname}}</td>
+							<td>{{ $value -> mobile}}</td>
+							<td>{{$value -> name}}</td>
+							<td>@if($value -> sex == 1) 先生 @else 女士 @endif</td>
 							<td>{{$value -> email}}</td>
-							<td>@if($value -> sex == 1) 男 @else 女 @endif</td>
-							<td>{{$value-> mobile}}</td>
-							<td>@if($value -> status == 1) 正常 @elseif($value -> status == 0) 禁用 @endif</td>
-							<td>{{date('Y-m-d H:i',$value -> created_at)}}</td>
+							<td>{{$value-> role_name}}</td>
+							<td>{{$value-> perm_name}}</td>
+							<td>@if($value-> enjoys == '') 没有折扣@else {{$value-> enjoys}}@endif</td>
 							<td>@if($value -> login_count == '') 0 @else {{$value -> login_count}} @endif</td>
-							<td>{{$value -> comp_cname}}</td>
-							<td>{{$value -> pro_cname}}</td>
+							<td>{{date('Y-m-d H:i',$value -> created_at)}}</td>
+							<td>@if($value -> updated_at == '')暂无更新时间@else{{date('Y-m-d H:i',$value -> updated_at)}}@endif</td>
+
 							<td>
 								<button type="button" value="{{$value -> hous_id}}"
 								        onclick="status({{$value -> hous_id}},{{$value -> status}})"
-								        class="btn btn-warning btn-xs btn_delete"><i
+								        class="btn @if($value -> status == 1) btn-danger @else btn-success @endif btn-xs btn_delete"><i
 										class="fa fa-trash"></i>
 									@if($value -> status == 1)
 										{{trans('memberinfo.news_disable')}}
@@ -113,8 +117,8 @@
 		<div class="box-footer clearfix">
 			<a href="javascript:void(0)" class="btn btn-danger btn-xs pull-left select_all"><i
 					class="fa fa-trash"></i>{{ trans('memberinfo.select_all_delete') }}</a>
-			{{--<div class=" pull-right">{{$company -> links()}}</div>--}}
-			{{--<input type="hidden" value="{{$company -> count()}}" id="page_count">--}}
+			<div class=" pull-right">{{$consu -> links()}}</div>
+			<input type="hidden" value="{{$consu -> count()}}" id="page_count">
 		</div>
 	</div>
 @endsection

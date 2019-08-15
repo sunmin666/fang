@@ -8,7 +8,7 @@
 	return [
 
 		'role_name_code'    => 1,
-		'role_name_msg'     => '该名称已被占用',
+		'role_name_msg'     => '该名称不合法',
 
 		'role_store_success_code'  => 2,
 		'role_store_success_msg'   => '恭喜您，录入成功',

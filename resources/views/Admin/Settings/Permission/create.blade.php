@@ -14,7 +14,7 @@
 					<input type="text" class="form-control" name="pername" id="pername" maxlength="10">
 				</div>
 				<div class="form-group">
-					<label>{{ trans('permission.perurl') }}：</label>
+					<label>{{ trans('permission.perurl') }}:</label>
 					<input type="text" class="form-control" maxlength="50"
 					       name="perurl" id="perurl">
 				</div>

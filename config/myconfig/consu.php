@@ -14,6 +14,8 @@
 		'store_success_consu_code'   => 3,
 		'store_success_consu_msg'    => '添加成功',
 
+		'mobile_code'   => 11,
+		'mobile_msg'     => '手机号重复',
 
 		'store_error_consu_code'    => 4,
 		'store_error_consu_msg'     => '添加失败',

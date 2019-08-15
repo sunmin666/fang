@@ -44,8 +44,26 @@
 					<label>{{ trans('memberinfo.character') }}：</label>
 					<select name="character" id="character" class="form-control">
 						<option value="0">--请选择</option>
-						@foreach($cha as $K => $v)
-						<option value="{{$v -> chid}}">{{$v -> ch_nsme}}</option>
+						@foreach($role as $K => $v)
+						<option value="{{$v -> role_id}}">{{$v -> role_name}}</option>
+						@endforeach
+					</select>
+				</div>
+				<div class="form-group">
+					<label>{{ trans('memberinfo.positioninfo') }}：</label>
+					<select name="positioninfo" id="positioninfo" class="form-control">
+						<option value="">--请选择</option>
+						@foreach($position as $K => $v)
+							<option value="{{$v -> posi_id}}">{{$v -> posi_name}}</option>
+						@endforeach
+					</select>
+				</div>
+				<div class="form-group">
+					<label>{{ trans('memberinfo.permission') }}：</label>
+					<select name="permission" id="permission" class="form-control">
+						<option value="">--请选择</option>
+						@foreach($permi as $K => $v)
+							<option value="{{$v -> perm_id}}">{{$v -> perm_name}}</option>
 						@endforeach
 					</select>
 				</div>
@@ -74,6 +92,15 @@
 		var mobile = $( '#mobile' ).val();
 		var sex = $( '#sex' ).val();
 		var character = $( '#character' ).val();
+		var positioninfo = $( '#positioninfo' ).val();
+		var permission = $( '#permission' ).val();
+
+		if(positioninfo == '' || permission == ''){
+			layer.msg('{{trans('memberinfo.text')}}',{time:1235});
+			$( "#store1" ).attr( 'disabled' , false );
+			return false;
+		}
+
 		var token = $( '[name=_token]' ).val();
 
 		var username_pattern = {{ config('myconfig.config.username_pattern') }};    //英文数字验证
@@ -81,6 +108,8 @@
 		var email_pattern = {{ config('myconfig.config.email_pattern') }};        //邮箱
 		var mobile_pattern = {{ config('myconfig.config.mobile_pattern') }};    //手机号
 		var password_pattern = {{ config('myconfig.config.password_pattern') }};   //密码验证
+
+
 		if ( account == '' ||!username_pattern.test( account ) ) {
 			layer.msg( '{{trans('memberinfo.name_account')}}' , { time : 1500 } );
 			$( "#store1" ).attr( 'disabled' , false );
@@ -111,7 +140,7 @@
 		}
 
 		if(character == 0){
-			layer.msg('{{trans('memberinfo.name_character')}}',{time:1235});
+			layer.msg('{{trans('memberinfo.text')}}',{time:1235});
 			$( "#store1" ).attr( 'disabled' , false );
 			return false;
 		}
@@ -126,7 +155,9 @@
 				password : password ,
 				mobile : mobile ,
 				sex : sex ,
-				character:character,
+				character:character,   //角色
+				positioninfo:positioninfo,   //角色
+				permission:permission,   //角色
 				_token : token
 			} ,
 			success : function ( data ) {

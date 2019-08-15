@@ -20,7 +20,7 @@ class MenberinfoController extends SessionController
 	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
 	 */
     public function index($perid){
-			$data = $this -> session();
+
 			$data['page_name'] = trans( 'memberinfo.page_name' );
 			$data['page_detail'] = trans( 'memberinfo.page_detail' );
 			$data['page_tips'] = trans( 'index.page_tips' );
@@ -39,7 +39,12 @@ class MenberinfoController extends SessionController
 	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
 	 */
 		public function create(){
-			$data['cha'] = Cha::get_all_chas();
+			//查询所有的职位信息
+			$data['position'] = Member::get_all_position();
+			//查询所有的角色信息
+			$data['role'] = Member::get_all_role();
+			//查询所有权限信息
+			$data['permi'] = Member::get_all_permin();
     	return view('Admin.Settings.Memberinfo.create') -> with($data);
 		}
 
@@ -92,13 +97,17 @@ class MenberinfoController extends SessionController
 			$data['password'] = Hash::make( $query -> input('password') );
 			$data['mobile'] = $query -> input('mobile');
 			$data['sex'] = $query -> input('sex');
-			$data['character'] = $query -> input('character');
 			$data['created_at'] = time();
 			$data['status']  =  1;
-
 			$info = Member::store_member($data);
-
 			if($info){
+				$data1['memberid'] = $info;
+				$data1['role_id'] = $query -> input('character');
+				$data1['posi_id'] = $query -> input('positioninfo');
+				$data1['perm_id'] = $query -> input('permission');
+				$data1['created_at'] = time();
+				Member::store_relationinfo($data1);
+
 				return [
 					'code'   => config('myconfig.member.memberinfo_success_code'),
 					'msg'   => config('myconfig.member.memberinfo_success_msg')
@@ -122,7 +131,11 @@ class MenberinfoController extends SessionController
 	 */
 		public function edit($memberid){
 
-			$data['cha'] = Cha::get_all_chas();
+			$data['position'] = Member::get_all_position();
+			//查询所有的角色信息
+			$data['role'] = Member::get_all_role();
+			//查询所有权限信息
+			$data['permi'] = Member::get_all_permin();
 			$data['member'] = Member::get_d_memberinfo($memberid);
 			return view('Admin.Settings.Memberinfo.edit') -> with($data);
 		}
@@ -142,11 +155,18 @@ class MenberinfoController extends SessionController
 			$data['email'] = $query -> input('email');
 			$data['mobile'] = $query -> input('mobile');
 			$data['sex'] = $query -> input('sex');
-			$data['character'] = $query -> input('character');
 
 			$info = Member::update_d_memberinfo($memberid,$data);
 
-			if($info){
+			$data1['role_id'] = $query -> input('character');
+			$data1['posi_id'] = $query -> input('positioninfo');
+			$data1['perm_id'] = $query -> input('permission');
+			$data1['updated_at'] = time();
+			$info1 = Member::update_relationinfo($memberid,$data1);
+
+			if($info || $info1){
+
+
 				return [
 					'code'   => config('myconfig.member.memberinfo_update_success_code'),
 					'msg'   => config('myconfig.member.memberinfo_update_success_msg')

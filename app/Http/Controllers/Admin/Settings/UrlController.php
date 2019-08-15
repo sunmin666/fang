@@ -186,5 +186,40 @@
 		}
 
 
+		/**
+		 *
+		 * 修改链接状态
+		 *
+		 * @param Request $query
+		 *
+		 * @return array
+		 */
+		public function status(Request $query){
+			$url_id = $query ->input('url_id');
+
+			$status = $query -> input('status');
+
+			if($status == 1){
+				$data['status'] = 0;
+			}else{
+				$data['status'] = 1;
+			}
+			$status_utl = url::update_status($url_id,$data);
+
+			if($status_utl){
+				return [
+					'code'           => config('myconfig.url.url_status_success_code'),
+					'msg'            => config('myconfig.url.url_status_success_msg')
+				];
+			}else{
+				return [
+					'code'           => config('myconfig.url.url_status_error_code'),
+					'msg'            => config('myconfig.url.url_status_error_msg')
+				];
+			}
+
+
+		}
+
 
 	}

@@ -43,8 +43,7 @@ class CustomerController extends SessionController
 	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
 	 */
 	public function create(){
-		$data['company'] = Consu::get_d_company();             //查询公司
-		return view('Admin.Customer.Customer.create') ->with($data);
+		return view('Admin.Customer.Customer.create');
 	}
 
 

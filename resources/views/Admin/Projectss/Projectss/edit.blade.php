@@ -50,7 +50,9 @@
 	//添加到数据库
 
 	$( '#store1' ).click( function () {
-		$( "#store1" ).attr( 'disabled' , true );
+		// $( "#store1" ).attr( 'disabled' , true );
+
+		// alert(123);
 
 		var pro_cname = $('#pro_cname').val();   //公司中文名称
 		var pro_ename = $('#pro_ename').val();   //公司英文名称

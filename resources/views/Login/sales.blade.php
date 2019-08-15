@@ -21,8 +21,6 @@
 	<link rel="stylesheet" href="{{URL::asset('css/mystyle.css')}}">
 	<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-
-
 	<!-- Google Font -->
 	<link rel="stylesheet"
 	      href="https://fonts.loli.net/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
@@ -47,8 +45,8 @@
 		<form action="login" method="post" name="login_form" id="login_form">
 			{{ csrf_field() }}
 			<div class="form-group has-feedback">
-				<input type="text" class="form-control" placeholder="{{ trans('login.input_username') }}" id="username"
-				       name="username">
+				<input type="text" class="form-control" placeholder="手机号" id="mobile"
+				       name="mobile" maxlength="11">
 				<span class="fa fa-user form-control-feedback"></span>
 			</div>
 			<div class="form-group has-feedback">
@@ -73,7 +71,7 @@
 					<button class="btn btn-primary btn-block btn-flat" style="background-color: #4A90E2"
 					        id="submit_btn">{{ trans('login.login_btn') }}
 					</button>
-					<div style="margin-top: 10px;text-align: right"><a href="{{URL('houser')}}">注册</a></div>
+					{{--<div style="margin-top: 10px;text-align: right"><a href="{{URL('houser')}}">注册</a></div>--}}
 				</div>
 
 			</div>
@@ -103,7 +101,7 @@
 	$( document ).ready( function () {
 		$( "#submit_btn" ).click( function () {
 			$( "#submit_btn" ).attr( 'disabled' , true );
-			var username = $.trim( $( "#username" ).val() );
+			var mobile = $.trim( $( "#mobile" ).val() );
 			var password = $.trim( $( "#password" ).val() );
 			var captcha = $.trim( $( "#captcha" ).val() );
 			var token = $( "input[name='_token']" ).val();
@@ -112,13 +110,13 @@
 			$( "#captcha_imgs" ).attr( 'src' , '{{captcha_src()}}' + Math.random() );
 
 			//下面的正则在js中无法用
-			var username_pattern = {{ config('myconfig.config.username_pattern') }};
+			var mobile_pattern = {{ config('myconfig.config.mobile_pattern') }};
 			var password_pattern = {{ config('myconfig.config.password_pattern') }};
 			var captcha_pattern = {{ config('myconfig.config.captcha_pattern') }};
 
-			if ( username == '' || !username_pattern.test( username ) ) {
+			if ( mobile == '' || !mobile_pattern.test( mobile ) ) {
 
-				layer.msg( '{{ config('myconfig.login.input_right_username_msg') }}' );
+				layer.msg( '手机号码不合法' );
 				$( "#captcha_imgs" ).attr( 'src' , '{{captcha_src()}}' + Math.random() );
 				$( "#username" ).val( "" );
 				$( "#password" ).val( "" );
@@ -157,7 +155,7 @@
 				type : 'POST' ,
 				url : "{{URL('login')}}" ,
 				data : {
-					username : username ,
+					mobile : mobile ,
 					password : password ,
 					canshu:canshu,
 					captcha : captcha ,
@@ -210,7 +208,7 @@
 						$( "#submit_btn" ).attr( 'disabled' , false );
 						return false;
 					}
-					if ( result.code  == {{ config('myconfig.login.username_code') }} ) {
+					if ( result.code  == {{ config('myconfig.login.is_ipad_no_code') }} ) {
 						layer.msg(result.msg);
 						$( "#captcha_imgs" ).attr( 'src' , '{{captcha_src()}}' + Math.random() );
 						$( "#username" ).val( "" );

@@ -58,6 +58,7 @@
 		}
 	});
 
+
 	$('input[type="checkbox"]').on('ifUnchecked', function() {
 		var perid = $(this).val();
 		$('.fuxuan'+ perid).iCheck('uncheck');

@@ -20,6 +20,7 @@ class ConsultantController extends SessionController
 	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
 	 */
     public function index($perid){
+
 			$data = $this -> session();
 			$data['per_menu'] = $this -> get_per();
 			$data['page_name'] = trans( 'consu.page_name' );
@@ -39,10 +40,11 @@ class ConsultantController extends SessionController
 	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
 	 */
 		public function create(){
-    	$data['company'] = Consu::get_d_company();             //查询公司
 
-//			$data['project'] = Consu::get_all_project();           //查询项目
-
+			$data['poje'] = Consu::get_poje();      //查询所属项目
+			$data['role'] = Consu::get_all_role();  //查询角色
+			$data['permin'] = Consu::get_permin();  //查询权限
+			$data['enjoy'] = Consu::get_enjoy();   //查询顾问折扣
 			return view('Admin.Consu.Consu.create') -> with($data);
 		}
 
@@ -57,15 +59,15 @@ class ConsultantController extends SessionController
 		public function store(Request $query){
 
 			$validator  = Validator::make($query -> all(),[
-				'username'  => 'unique:houserinfo,username',
+				'mobile'  => 'unique:houserinfo,mobile',
 				'idcrad'  => 'unique:houserinfo,idcrad',
 				'password'   => 'required|min:6|min:8',
 				'password_confirmation'   => 'same:password',
 			]);
 			if($validator -> errors() -> get('username')){
 				return [
-					'code'    => config('myconfig.consu.username_code'),
-					'msg'     => config('myconfig.consu.username_msg')
+					'code'    => config('myconfig.consu.mobile_code'),
+					'msg'     => config('myconfig.consu.mobile_msg')
 				];
 			}
 
@@ -90,32 +92,27 @@ class ConsultantController extends SessionController
 				];
 			}
 
-			$data['username'] = $query -> input('username');               //职业顾问账号
-			$data['realname'] = $query -> input('realname');                //职业顾问姓名
+			$data['mobile'] = $query -> input('mobile');               //职业顾问账号
 			$data['password'] = Hash::make($query -> input('password'));      //登录密码
+			$data['name'] = $query -> input('name');      //登录密码
 			$data['email'] = $query -> input('email');          //邮箱
 			$data['sex'] = $query -> input('sex');              //性别
-			$data['mobile'] = $query -> input('mobile');          //手机号
 			$data['idcrad'] = $query -> input('idcrad');           //身份证号
-			$data['birthday'] = strtotime($query -> input('birthday'));          //生日
-			$data['weixin'] = $query -> input('weixin');         //微信
-			$data['qq'] = $query -> input('qq');                  //qq
-			$data['proj_id'] = $query -> input('proj_id');         //所属项目id
-			$data['comp_id'] = $query -> input('comp_id');           //所属公司id
-			$data['description'] = $query -> input('description');       //自我描述
-			$data['created_at']   = time();
-			$data['character']     = 6;
+			$data['enjoy'] = $query -> input('enjoy');          //生日
+			$data['proj_id'] = $query -> input('proj_id');      //项目
+			$data['is_ipad'] = $query -> input('is_ipad');
 
-			if(Session::get('session_member.status') == 1){
-				$data['tina'] = Session::get('session_member.id');
-			}elseif(Session::get('session_member.status') == 2){
-				$people = Consu::get_company_people($data['comp_id']);
-				$data['tina'] = (int)$people -> people;
-			}
-
+			$data['login_count'] = 0;             //登录次数默认0
+  		$data['created_at'] = time();
 			$info = Consu::store_consu($data);
-
 			if($info){
+
+				$data1['memberid'] = $info;
+				$data1['role_id'] = $query -> input('role_id');
+				$data1['perm_id'] = $query -> input('perm_id');
+				$data1['posi_id'] = 5;
+				$data1['created_at'] = time();
+				Consu::store_user($data1);
 				return [
 					'code'    => config('myconfig.consu.store_success_consu_code'),
 					'msg'     => config('myconfig.consu.store_success_consu_msg')
@@ -137,10 +134,11 @@ class ConsultantController extends SessionController
 	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
 	 */
 		public function edit($hous_id){
-			$data['company'] = Consu::get_d_company();             //查询公司
+			$data['poje'] = Consu::get_poje();      //查询所属项目
+			$data['role'] = Consu::get_all_role();  //查询角色
+			$data['permin'] = Consu::get_permin();  //查询权限
+			$data['enjoy'] = Consu::get_enjoy();   //查询顾问折扣
 			$data['hous'] = Consu::get_d_hous($hous_id);
-			$comp_id = $data['hous']-> comp_id;
-			$data['project'] = Consu::get_company($comp_id);
 			return view('Admin.Consu.Consu.edit') -> with($data);
 		}
 
@@ -154,13 +152,14 @@ class ConsultantController extends SessionController
 		public function update(Request $query){
 			$hous_id  = $query -> input('hous_id');
 			$validator  = Validator::make($query -> all(),[
-				'username'  => 'unique:houserinfo,username,'.$hous_id.",hous_id",
+
+				'mobile'  => 'unique:houserinfo,mobile,'.$hous_id.",hous_id",
 				'idcrad'  => 'unique:houserinfo,idcrad,'.$hous_id.",hous_id",
 			]);
 			if($validator -> errors() -> get('username')){
 				return [
-					'code'    => config('myconfig.consu.username_code'),
-					'msg'     => config('myconfig.consu.username_msg')
+					'code'    => config('myconfig.consu.mobile_code'),
+					'msg'     => config('myconfig.consu.mobile_msg')
 				];
 			}
 			if($validator -> errors() -> get('idcrad')){
@@ -169,27 +168,30 @@ class ConsultantController extends SessionController
 					'msg'     => config('myconfig.consu.idcrad_msg')
 				];
 			}
-			$data['username'] = $query -> input('username');               //职业顾问账号
-			$data['realname'] = $query -> input('realname');                //职业顾问姓名
-			$data['password'] = Hash::make($query -> input('password'));      //登录密码
+			$data['mobile'] = $query -> input('mobile');               //职业顾问账号
+			$password = $query -> input('password');
+			if($password != ''){
+				$data['password'] = Hash::make($password);      //登录密码
+			}
+			$data['name'] = $query -> input('name');      //登录密码
 			$data['email'] = $query -> input('email');          //邮箱
 			$data['sex'] = $query -> input('sex');              //性别
-			$data['mobile'] = $query -> input('mobile');          //手机号
 			$data['idcrad'] = $query -> input('idcrad');           //身份证号
-			$data['birthday'] = strtotime($query -> input('birthday'));          //生日
-			$data['weixin'] = $query -> input('weixin');         //微信
-			$data['qq'] = $query -> input('qq');                  //qq
-			$data['proj_id'] = $query -> input('proj_id');         //所属项目id
-			$data['comp_id'] = $query -> input('comp_id');           //所属公司id
-			$data['description'] = $query -> input('description');       //自我描述
-			if(Session::get('session_member.status') == 1){
-				$data['tina'] = Session::get('session_member.id');
-			}elseif(Session::get('session_member.status') == 2){
-				$people = Consu::get_company_people($data['comp_id']);
-				$data['tina'] = (int)$people -> people;
-			}
+			$data['enjoy'] = $query -> input('enjoy');          //生日
+			$data['proj_id'] = $query -> input('proj_id');      //项目
+			$data['is_ipad'] = $query -> input('is_ipad');
+			$data['updated_at'] = time();
+
 			$info = Consu::update_d_hous($hous_id,$data);
+
 			if($info){
+
+				$data1['role_id'] = $query -> input('role_id');
+				$data1['perm_id'] = $query -> input('perm_id');
+				$data1['posi_id'] = 5;
+				$data1['updated_at'] = time();
+				Consu::update_d_user($hous_id,$data1);
+
 				return [
 					'code'   => config('myconfig.consu.update_success_hous_code'),
 					'msg'    => config('myconfig.consu.update_success_hous_msg')
@@ -242,7 +244,7 @@ class ConsultantController extends SessionController
 	 */
 		public function view($hous_id){
 			$data['hous'] = Consu::get_dd_hous($hous_id);
-//			dd($data['hous']);
+//			dd($data);
 			return view('Admin.Consu.Consu.view') -> with($data);
 		}
 
@@ -258,6 +260,9 @@ class ConsultantController extends SessionController
 			$info = Consu::delete_d_hous($hous_id);
 
 			if($info){
+
+				Consu::delete_user($hous_id);
+
 				return [
 					'code'   => config('myconfig.consu.delete_hous_success_code'),
 					'msg'    => config('myconfig.consu.delete_hous_success_msg')
@@ -283,6 +288,8 @@ class ConsultantController extends SessionController
 			$hous_id = $query -> input('hous_id');
 			$info = Consu::delete_all_hous($hous_id);
 			if($info){
+
+				Consu::delete_all_user($hous_id);
 				return [
 					'code'   => config('myconfig.consu.delete_hous_success_code'),
 					'msg'    => config('myconfig.consu.delete_hous_success_msg')
@@ -295,19 +302,104 @@ class ConsultantController extends SessionController
 			}
 		}
 
-	/**
-	 * 查询公司下的所属项目
-	 *
-	 * @param Request $query
-	 *
-	 * @return \Illuminate\Support\Collection
-	 */
-		public function comp_id(Request $query){
-			$comp_id = $query -> input('comp_id');
+//	/**
+//	 * 查询公司下的所属项目
+//	 *
+//	 * @param Request $query
+//	 *
+//	 * @return \Illuminate\Support\Collection
+//	 */
+//		public function comp_id(Request $query){
+//			$comp_id = $query -> input('comp_id');
+//			$info = Consu::get_company($comp_id);
+//			return $info;
+//		}
 
-			$info = Consu::get_company($comp_id);
 
-			return $info;
+
+
+
+
+
+
+
+
+		//-----------------------------------------职业顾问折扣信息表----------------------------------//
+
+	public function enjoy($perid){
+
+		$data = $this -> session();
+		$data['per_menu'] = $this -> get_per();
+		$data['page_name'] = trans( 'consu.page_name' );
+		$data['page_detail'] = trans( 'consu.page_detail2' );
+		$data['page_tips'] = trans( 'index.page_tips' );
+		$data['page_note'] = trans( 'index.page_note' );
+		$page = config('myconfig.config.page_num');
+		$data['enjoy'] = Consu::get_all_enjoy($page);
+		$data['ids'] = $perid;
+		return view('Admin.Consu.Enjoy.index') -> with($data);
+	}
+
+	//添加顾问折扣信息
+	public function store_enjoy(Request $query){
+			$data['enjoy'] = $query -> input('enjoy');
+			$data['created_at'] = time();
+			$store = Consu::store_enjoy($data);
+
+			if($store){
+				return [
+					'code'   => config('myconfig.consu.store_success_consu_code'),
+					'msg'    => config('myconfig.consu.store_success_consu_msg')
+				];
+			}else{
+				return [
+					'code'   => config('myconfig.consu.store_error_consu_code'),
+					'msg'    => config('myconfig.consu.store_error_consu_msg')
+				];
+			}
+	}
+
+	//修改页面
+	public function edit_enjoy($enjoy_id){
+			$data['enjoy'] = Consu::get_d_enjoy($enjoy_id);
+			return view('Admin.Consu.Enjoy.edit') -> with($data);
+	}
+
+//修改顾问折扣信息
+	public function update_enjoy(Request $query){
+			$enjoy_id = $query -> input('enjoy_id');
+			$data['enjoy'] = $query -> input('enjoy');
+
+			$update = Consu::update_d_enjoy($enjoy_id,$data);
+			if($update){
+				return [
+					'code'   => config('myconfig.consu.update_success_hous_code'),
+					'msg'    => config('myconfig.consu.update_success_hous_msg')
+				];
+			}else{
+				return [
+					'code'   => config('myconfig.consu.update_success_hous_code'),
+					'msg'    => config('myconfig.consu.update_success_hous_msg')
+				];
+			}
+		}
+
+		public function destroy_enjoy(Request $query){
+			$enjoy_id = $query -> input('enjoy_id');
+
+			$delete = Consu::delete_d_enjoy($enjoy_id);
+
+			if($delete){
+				return [
+					'code'   => config('myconfig.consu.delete_hous_success_code'),
+					'msg'    => config('myconfig.consu.delete_hous_success_msg')
+				];
+			}else{
+				return [
+					'code'   => config('myconfig.consu.delete_hous_error_code'),
+					'msg'    => config('myconfig.consu.delete_hous_error_msg')
+				];
+			}
 
 		}
 

@@ -122,8 +122,9 @@
 
 				console.log(res);
 				if ( res.code == 1 ) {
-					$( '#imgs' ).attr( 'src' , res.data.src );
+					// $( '#imgs' ).attr( 'src' , res.data.src );
 					$( '#n_img' ).val( res.data.src );
+					$( '#imgs' ).attr( 'src' , "{{URL::asset("")}}" + res.data.src );
 					layer.msg( '上傳成功' , { time : 1000 } )
 				}
 				else {

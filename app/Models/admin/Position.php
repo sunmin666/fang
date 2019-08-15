@@ -4,6 +4,8 @@ namespace App\Models\admin;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
+
 
 class Position extends Model
 {
@@ -17,7 +19,13 @@ class Position extends Model
 	 * @return bool
 	 */
     public static function store_d_position($data){
-    	return DB::table('positioninfo') -> insert($data);
+			$status = Session::get('session_member.status');
+			if($status == 1){
+				return DB::table('user_positioninfo') -> insert($data);
+			}else{
+				return DB::table('positioninfo') -> insert($data);
+			}
+
 		}
 
 	/**
@@ -28,7 +36,15 @@ class Position extends Model
 	 * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
 	 */
 		public static function get_all_per($page){
-    	return DB::table('positioninfo') -> paginate($page);
+
+			$status = Session::get('session_member.status');
+			if($status == 1){
+				return DB::table('user_positioninfo') -> orderByDesc('created_at') -> paginate($page);
+			}else{
+				return DB::table('positioninfo') -> orderByDesc('created_at') -> paginate($page);
+			}
+
+
 		}
 
 	/**
@@ -40,7 +56,12 @@ class Position extends Model
 	 * @return Model|\Illuminate\Database\Query\Builder|object|null
 	 */
 		public static function get_d_position($posi_id){
-			return DB::table('positioninfo') -> where('posi_id','=',$posi_id) -> first();
+			$status = Session::get('session_member.status');
+			if($status == 1){
+				return DB::table('user_positioninfo') -> where('posi_id','=',$posi_id) -> first();
+			}else{
+				return DB::table('positioninfo') -> where('posi_id','=',$posi_id) -> first();
+			}
 		}
 
 	/**
@@ -53,7 +74,13 @@ class Position extends Model
 	 * @return int
 	 */
 		public static function update_d_position($posi_id,$data){
-			return DB::table('positioninfo') -> where('posi_id','=',$posi_id) -> update($data);
+			$status = Session::get('session_member.status');
+			if($status == 1){
+				return DB::table('user_positioninfo') -> where('posi_id','=',$posi_id) -> update($data);
+			}else{
+				return DB::table('positioninfo') -> where('posi_id','=',$posi_id) -> update($data);
+			}
+
 		}
 
 	/**
@@ -65,7 +92,13 @@ class Position extends Model
 	 * @return int
 	 */
 		public static function delete_d_position($posi_id){
-			return DB::table('positioninfo') -> where('posi_id','=',$posi_id) -> delete();
+			$status = Session::get('session_member.status');
+			if($status == 1){
+				return DB::table('user_positioninfo') -> where('posi_id','=',$posi_id) -> delete();
+			}else{
+				return DB::table('positioninfo') -> where('posi_id','=',$posi_id) -> delete();
+			}
+
 		}
 
 
@@ -78,7 +111,13 @@ class Position extends Model
 	 * @return int
 	 */
 		public static function delete_all_position($posi_id){
-			return DB::table('positioninfo') -> whereIn('posi_id',$posi_id) -> delete();
+			$status = Session::get('session_member.status');
+			if($status == 1){
+				return DB::table('user_positioninfo') -> whereIn('posi_id',$posi_id) -> delete();
+			}else{
+				return DB::table('positioninfo') -> whereIn('posi_id',$posi_id) -> delete();
+			}
+
 		}
 
 }

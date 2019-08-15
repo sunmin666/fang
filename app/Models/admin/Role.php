@@ -4,6 +4,8 @@ namespace App\Models\admin;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
+
 
 class Role extends Model
 {
@@ -17,7 +19,15 @@ class Role extends Model
 	 * @return bool
 	 */
     public static function store_d_role($data){
-    	return DB::table('roleinfo') -> insert($data);
+    	$status = Session::get('session_member.status');
+
+    	if($status == 1){
+				return DB::table('user_roleinfo') -> insert($data);
+			}else{
+				return DB::table('roleinfo') -> insert($data);
+			}
+
+
 		}
 
 
@@ -30,7 +40,14 @@ class Role extends Model
 	 * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
 	 */
 		public static function get_all_role($page){
-    	return DB::table('roleinfo') -> paginate($page);
+			$status = Session::get('session_member.status');
+			if($status == 1){
+				return DB::table('user_roleinfo') -> orderByDesc('created_at') -> paginate($page);
+			}else{
+				return DB::table('roleinfo') -> orderByDesc('created_at')-> paginate($page);
+			}
+
+
 		}
 
 
@@ -43,7 +60,13 @@ class Role extends Model
 	 * @return Model|\Illuminate\Database\Query\Builder|object|null
 	 */
 		public static function get_d_roleinfo($role_id){
-			return DB::table('roleinfo') -> where('role_id','=',$role_id) -> first();
+			$status = Session::get('session_member.status');
+			if($status == 1){
+				return DB::table('user_roleinfo') -> where('role_id','=',$role_id) -> first();
+			}else{
+				return DB::table('roleinfo') -> where('role_id','=',$role_id) -> first();
+			}
+
 		}
 
 	/**
@@ -56,7 +79,13 @@ class Role extends Model
 	 * @return int
 	 */
 		public static function update_d_role($role_id,$data){
-			return DB::table('roleinfo') -> where('role_id','=',$role_id) -> update($data);
+			$status = Session::get('session_member.status');
+			if($status == 1){
+				return DB::table('user_roleinfo') -> where('role_id','=',$role_id) -> update($data);
+			}else{
+				return DB::table('roleinfo') -> where('role_id','=',$role_id) -> update($data);
+			}
+
 		}
 
 	/**
@@ -68,12 +97,25 @@ class Role extends Model
 	 * @return int
 	 */
 		public static function delete_d_role($role_id){
-			return DB::table('roleinfo') -> where('role_id','=',$role_id) -> delete();
+			$status = Session::get('session_member.status');
+			if($status == 1){
+				return DB::table('user_roleinfo') -> where('role_id','=',$role_id) -> delete();
+			}else{
+				return DB::table('roleinfo') -> where('role_id','=',$role_id) -> delete();
+			}
+
+
 		}
 
 
 		public static function delete_all_role($role_id){
-			return DB::table('roleinfo') -> whereIn('role_id',$role_id) -> delete();
+			$status = Session::get('session_member.status');
+			if($status == 1){
+				return DB::table('user_roleinfo') -> whereIn('role_id',$role_id) -> delete();
+			}else{
+				return DB::table('roleinfo') -> whereIn('role_id',$role_id) -> delete();
+			}
+
 		}
 
 }

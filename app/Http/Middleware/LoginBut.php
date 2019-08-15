@@ -19,7 +19,7 @@ class LoginBut
 
 			if ( !Session::has( 'session_member' ) )
 			{
-				return redirect( '/login' );
+				return redirect( '/sales' );
 			}
         return $next($request);
     }

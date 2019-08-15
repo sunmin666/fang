@@ -63,6 +63,16 @@
 								        onclick="d({{$value -> perid}})"
 								        class="btn btn-warning btn-xs btn_delete"><i
 										class="fa fa-trash"></i> {{trans('memberinfo.news_delete')}} </button>
+								<button type="button" value="{{$value -> perid}}"
+								        onclick="status({{$value -> perid}},{{$value -> status}})"
+								        class="btn btn-warning btn-xs btn_delete"><i
+										class="fa fa-trash"></i>
+									@if($value -> status == 1)
+										{{trans('memberinfo.news_disable')}}
+									@elseif($value -> status == 0)
+										{{trans('memberinfo.news_enable')}}
+									@endif
+								</button>
 							</td>
 						</tr>
 
@@ -81,16 +91,16 @@
 									        onclick="d({{$value1 -> perid}})"
 									        class="btn btn-warning btn-xs btn_delete"><i
 											class="fa fa-trash"></i> {{trans('memberinfo.news_delete')}} </button>
-									{{--<button type="button" value="{{$value -> perid}}"--}}
-									        {{--onclick="status({{$value -> perid}},{{$value -> status}})"--}}
-									        {{--class="btn btn-warning btn-xs btn_delete"><i--}}
-											{{--class="fa fa-trash"></i>--}}
-										{{--@if($value -> status == 1)--}}
-											{{--{{trans('memberinfo.news_disable')}}--}}
-										{{--@elseif($value -> status == 0)--}}
-											{{--{{trans('memberinfo.news_enable')}}--}}
-										{{--@endif--}}
-									{{--</button>--}}
+									<button type="button" value="{{$value1 -> perid}}"
+									        onclick="status({{$value1 -> perid}},{{$value1 -> status}})"
+									        class="btn btn-warning btn-xs btn_delete"><i
+											class="fa fa-trash"></i>
+										@if($value1 -> status == 1)
+											{{trans('memberinfo.news_disable')}}
+										@elseif($value1 -> status == 0)
+											{{trans('memberinfo.news_enable')}}
+										@endif
+									</button>
 								</td>
 							</tr>
 						@endforeach
@@ -264,29 +274,29 @@
 		}
 
 
-		//禁用启用
-		{{--function status(perid ,status) {--}}
-			{{--layer.confirm( "{{trans('memberinfo.is_status_info')}}" , {--}}
-				{{--btn : ["{{trans('memberinfo.confirm')}}" , "{{trans('memberinfo.cancel')}}"] //按钮--}}
-			{{--} , function () {--}}
-				{{--$.post( "{{URL('per/status')}}" , { 'perid' : perid ,status:status, '_token' : "{{csrf_token()}}" } ,--}}
-					{{--function ( data ) {--}}
-						{{--console.log(data);--}}
+		{{--//禁用启用--}}
+		function status(perid ,status) {
+			layer.confirm( "{{trans('memberinfo.is_status_info')}}" , {
+				btn : ["{{trans('memberinfo.confirm')}}" , "{{trans('memberinfo.cancel')}}"] //按钮
+			} , function () {
+				$.post( "{{URL('per/status')}}" , { 'perid' : perid ,status:status, '_token' : "{{csrf_token()}}" } ,
+					function ( data ) {
+						console.log(data);
 
-						{{--if ( data.code  == {{config('myconfig.member.memberinfo_status_error_code')}} ) {--}}
-							{{--layer.msg( data.msg , { time : 2000 } );--}}
-						{{--}--}}
-						{{--else if (  data.code  == {{config('myconfig.member.memberinfo_status_success_code')}} ) {--}}
-							{{--layer.msg( data.msg , { time : 1000 } , function () {--}}
-								{{--window.location.reload();--}}
-							{{--} );--}}
-						{{--}--}}
-					{{--} );--}}
-			{{--} , function () {--}}
-				{{--layer.msg( "{{trans('memberinfo.delete_cancel')}}" , {--}}
-					{{--time : 1000 , //10秒鐘后自動關閉--}}
-				{{--} );--}}
-			{{--} );--}}
-		{{--}--}}
+						if ( data.code  == {{config('myconfig.perm.per_status_error_code')}} ) {
+							layer.msg( data.msg , { time : 2000 } );
+						}
+						else if (  data.code  == {{config('myconfig.perm.per_status_success_code')}} ) {
+							layer.msg( data.msg , { time : 1000 } , function () {
+								window.location.reload();
+							} );
+						}
+					} );
+			} , function () {
+				layer.msg( "{{trans('memberinfo.delete_cancel')}}" , {
+					time : 1000 , //10秒鐘后自動關閉
+				} );
+			} );
+		}
 	</script>
 @endpush
