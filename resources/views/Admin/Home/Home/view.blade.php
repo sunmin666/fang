@@ -10,7 +10,6 @@
 		div {
 			margin-bottom : 10px;
 		}
-
 		span {
 			display       : inline-block;
 			width         : 50%;
@@ -31,7 +30,6 @@
 <div><span>总价：</span>{{$home -> total}}</div>
 <div><span>折扣：</span>{{$home-> discount}}</div>
 <div><span>房子状态：</span>
-
 	@if($home -> status == 0)
 		<span style="color:green">认购前</span>
 	@elseif($home-> status == 1)
