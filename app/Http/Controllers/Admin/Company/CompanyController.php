@@ -29,7 +29,7 @@ class CompanyController extends SessionController
 			$page = config('myconfig.config.page_num');
 			$people= Session::get('session_member.id');
 			$data['company'] = Company::get_all_company($page,$people);
-			$data['ids'] = $perid;
+		 	$data['ids'] = $perid;
 			return view('Admin.Company.Company.index') -> with($data);
 		}
 
