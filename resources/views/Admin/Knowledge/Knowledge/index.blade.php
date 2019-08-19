@@ -11,13 +11,14 @@
 	<div class="box box-info">
 		<div class="box-header with-border">
 			<button type="button" class="btn btn-dropbox btn-sm" id="refresh"><i
-					class="fa fa-refresh"></i> {{ trans('permission.refresh') }}</button>
+					class="fa fa-refresh"></i> {{ trans('memberinfo.refresh') }}</button>
 			<div class="box-tools pull-right">
 				<button type="button" class="btn btn-danger btn-sm weekly-day" id="news_day"
 				><i class="fa fa-plus"></i>
-					{{ trans('permission.news_add') }}
+					{{ trans('memberinfo.news_add') }}
 				</button>
 			</div>
+
 		</div>
 		{{--<div id="status_search">--}}
 		{{--<form action="{{route('weekly.status')}}" method="post">--}}
@@ -28,57 +29,68 @@
 		{{--</button>--}}
 		{{--</form>--}}
 		{{--</div>--}}
+
 		<div class="box-body">
 			<div class="table-responsive">
 				<table class="table no-margin">
 					<thead>
-					{{--<i class="fa fa-fw fa-sort"></i>--}}
 					<tr>
 						<th width="130px">
 							<button type="button" class="btn btn-warning btn-xs" id="data_select" data-select-all="true"><i
 									class="glyphicon glyphicon-ok"></i>{{ trans('memberinfo.allAlection') }}</button>
 						</th>
-						{{--职位标题--}}
-						<th>{{ trans('role.role_title') }}</th>
-						{{-- 职位名称--}}
-						<th>{{ trans('role.role_name') }}</th>
-						{{--职位描述--}}
-						<th>{{ trans('role.description') }}</th>
-						{{--添加时间--}}
-						<th>{{ trans('role.created_at') }}</th>
-						<th>{{ trans('role.operating') }}</th>
+						{{--客户真实姓名--}}
+						<th>{{ trans('knowledge.title') }}</th>
+						{{--客户性别--}}
+						<th>{{ trans('knowledge.class_id') }}</th>
+						{{--客户手机号--}}
+						<th>{{ trans('knowledge.class_ids') }}</th>
+
+						<th>{{ trans('knowledge.created_at') }}</th>
+						{{--<th>{{ trans('home.updated_at') }}</th>--}}
+						<th>{{ trans('home.operating') }}</th>
 					</tr>
 					</thead>
 					<tbody>
-					@foreach($role as $value)
-						<tr>
+					@foreach($k as $value)
+						<tr id="news">
 							<td><input type="checkbox" class="i-checks" id="groupCheckbox" name="groupCheckbox[]"
-							           value="{{$value->role_id}}"
+							           value="{{$value->know_id}}"
 								></td>
-							<td>{{ $value -> role_title}}</td>
-							<td>{{$value -> role_name}}</td>
-							<td>{{$value -> description}}</td>
-							<td>{{date('Y-m-d H:s',$value -> created_at)}}</td>
+							<td>{{ $value -> title}}</td>
+							<td>{{ $value -> name}}</td>
 							<td>
-								<button type="button" value="{{$value -> role_id}}" onclick="edit({{$value -> role_id}})"
+								@if($value -> is_public == 0)
+									公开
+								@elseif($value-> is_public == 1)
+									不公开
+								@endif
+							</td>
+							<td>{{date('Y-m-d H:i',$value -> created_at)}}</td>
+							<td>
+								<button type="button" value="{{$value -> know_id}}" onclick="view({{$value -> know_id}})"
+								        class="btn btn-warning btn-xs btn_edit" id="btn_edit"><i
+										class="fa fa-edit"></i> {{trans('memberinfo.news_view')}}</button>
+								<button type="button" value="{{$value -> know_id}}" onclick="edit({{$value -> know_id}})"
 								        class="btn btn-warning btn-xs btn_edit" id="btn_edit"><i
 										class="fa fa-edit"></i> {{trans('memberinfo.news_edits')}}</button>
-								<button type="button" value="{{$value -> role_id}}"
-								        onclick="d({{$value -> role_id}})"
-								        class="btn btn-warning btn-xs btn_delete"><i
-										class="fa fa-trash"></i> {{trans('memberinfo.news_delete')}} </button>
+								<button type="button" value="{{$value -> know_id}}" onclick="d({{$value -> know_id}})"
+								        class="btn btn-warning btn-xs btn_edit" id="btn_edit"><i
+										class="fa fa-edit"></i> {{trans('memberinfo.news_delete')}}</button>
 							</td>
 						</tr>
 					@endforeach
 					</tbody>
 				</table>
 			</div>
+			<!-- /.table-responsive -->
 		</div>
+		<!-- /.box-body -->
 		<div class="box-footer clearfix">
 			<a href="javascript:void(0)" class="btn btn-danger btn-xs pull-left select_all"><i
 					class="fa fa-trash"></i>{{ trans('memberinfo.select_all_delete') }}</a>
-			<div class=" pull-right">{{$role -> links()}}</div>
-			<input type="hidden" value="{{$role -> count()}}" id="page_count">
+			<div class=" pull-right">{{$k -> links()}}</div>
+			<input type="hidden" value="{{$k -> count()}}" id="page_count">
 		</div>
 	</div>
 @endsection
@@ -88,6 +100,7 @@
 	<script src="{{URL::asset('bower_components/bootstrap-fileinput/js/locales/zh.js')}}"></script>
 	<script src="{{URL::asset('bower_components/layui/dist/layui.js')}}"></script>
 	<script type="text/javascript">
+
 		{{--$( document ).ready( function () {--}}
 		//複選框樣式
 		$( ".i-checks" ).iCheck( {
@@ -97,6 +110,8 @@
 		$( '#refresh' ).click( function () {
 			window.location.reload();
 		} );
+
+
 		//一键选择与取消
 		var select_all_btn = 0;
 		$( "#data_select" ).click( function () {
@@ -113,6 +128,7 @@
 				select_all_btn = 0;
 			}
 		} );
+
 		//全选删除
 		$( '.select_all' ).click( function () {
 			var page_count = $( '#page_count' ).val();
@@ -126,30 +142,31 @@
 				layer.msg( '{{trans('permission.delete_data')}}' , { time : 1000 } );
 				return false;
 			}
+
 			//生成询问框
 			layer.confirm( "{{trans('permission.is_delete_info')}}" , {
 				btn : ["{{trans('permission.confirm')}}" , "{{trans('permission.cancel')}}"]
 			} , function () {
 				$.ajax( {
-					url : '{{URL('roleinfo/destroy_all')}}' ,
+					url : '{{URL('knowledge/destroy_all')}}' ,
 					type : 'post' ,
 					data : {
-						'role_id' : vote ,
+						'know_id' : vote ,
 						'_token' : "{{csrf_token()}}"
 					} ,
 					success : function ( data ) {
 						console.log( data );
-						if ( data.code == {{config('myconfig.role.delete_role_success_code')}} ) {
+						if ( data.code == {{config('myconfig.knowledge.delete_k_success_code')}} ) {
 							layer.msg( data.msg , { time : 2000 } , function () {
 								if ( page_count == vote.length ) {
-									location.href = "{{URL('roleinfo/2')}}";
+									location.href = "{{URL('knowledge/32')}}";
 								}
 								else {
 									window.location.reload();
 								}
 							} );
 						}
-						else if ( data.code == {{config('myconfig.role.delete_role_error_code')}} ) {
+						else if ( data.code == {{config('myconfig.knowledge.delete_k_error_code')}} ) {
 							layer.msg( data.msg , { time : 2000 } );
 						}
 					} ,
@@ -164,43 +181,41 @@
 				} );
 			} );
 		} );
+
+
 		//添加
 		$( '#news_day' ).click( function () {
 			layer.open( {
 				type : 2 ,
-				title : '{{ trans('permission.news_add') }}' ,
+				title : '{{ trans('memberinfo.news_add') }}' ,
 				moveType : 0 ,
 				skin : 'layui-layer-demo' , //加上边框
 				closeBtn : 1 ,
-				area : ['40%' , '60%'] , //宽高
+				area : ['50%' , '90%'] , //宽高
 				shadeClose : false ,
 				shade : 0.5 ,
-				content : ["{{URL('roleinfoss/create')}}"] ,
+				content : ["{{URL('knowledgeinfo/create')}}"] ,
 				success : function ( layero , index ) {
 					$( ':focus' ).blur();
 				}
 			} );
 		} );
-		function d( role_id ) {
+		//删除信息
+		function d( know_id) {
 			var page_count = $( '#page_count' ).val();
-			layer.confirm( "{{trans('permission.is_delete_info')}}" , {
-				btn : ["{{trans('permission.confirm')}}" , "{{trans('permission.cancel')}}"] //按钮
+			layer.confirm( "{{trans('memberinfo.is_delete_info')}}" , {
+				btn : ["{{trans('memberinfo.confirm')}}" , "{{trans('memberinfo.cancel')}}"] //按钮
 			} , function () {
-				$.post( "{{URL('roleinfo/destroy')}}" , { 'role_id' : role_id , '_token' : "{{csrf_token()}}" } ,
+				$.post( "{{URL('knowledgeinfo/destroy')}}" , { 'know_id' : know_id , '_token' : "{{csrf_token()}}" } ,
 					function ( data ) {
 						console.log( data );
-
-						if(data.code == null){
-							window.location.href = '{{URL('permi')}}';
+						if ( data.code == {{config('myconfig.knowledge.delete_k_error_code')}} ) {
+							layer.msg( data.msg , { time : 2000 } );
 						}
-
-						if ( data.code == {{config('myconfig.role.delete_role_error_code')}}) {
-							layer.msg( data.msg , { time : 1523 } );
-						}
-						else if ( data.code == {{config('myconfig.role.delete_role_success_code')}} ) {
+						if ( data.code == {{config('myconfig.knowledge.delete_k_success_code')}} ) {
 							layer.msg( data.msg , { time : 1000 } , function () {
 								if ( page_count == 1 ) {
-									location.href = "{{URL('roleinfo/2')}}";
+									location.href = "{{URL('knowledge/32')}}";
 								}
 								else {
 									window.location.reload();
@@ -209,50 +224,46 @@
 						}
 					} );
 			} , function () {
-				layer.msg( "{{trans('permission.delete_cancel')}}" , {
+				layer.msg( "{{trans('memberinfo.delete_cancel')}}" , {
 					time : 1000 , //10秒鐘后自動關閉
 				} );
 			} );
 		}
-		//修改新版角色信息
-		function edit( role_id ) {
+
+		//修改用户信息
+		function edit( know_id ) {
 			layer.open( {
 				type : 2 ,
-				title : '{{ trans('permission.news_edits') }}' ,
+				title : '{{ trans('memberinfo.news_edits') }}' ,
 				moveType : 0 ,
 				skin : 'layui-layer-demo' , //加上边框
 				closeBtn : 1 ,
-				area : ['40%' , '50%'] , //宽高
+				area : ['50%' , '70%'] , //宽高
 				shadeClose : false ,
 				shade : 0.5 ,
-				content : ["{{URL('roleinfo/edit')}}" + "/" + role_id] ,
+				content : ["{{URL('knowledgeinfo/edit')}}" + "/" + know_id] ,
 				success : function ( layero , index ) {
 					$( ':focus' ).blur();
 				}
 			} );
 		}
-		//禁用启用
-		{{--function status(perid ,status) {--}}
-		{{--layer.confirm( "{{trans('memberinfo.is_status_info')}}" , {--}}
-		{{--btn : ["{{trans('memberinfo.confirm')}}" , "{{trans('memberinfo.cancel')}}"] //按钮--}}
-		{{--} , function () {--}}
-		{{--$.post( "{{URL('per/status')}}" , { 'perid' : perid ,status:status, '_token' : "{{csrf_token()}}" } ,--}}
-		{{--function ( data ) {--}}
-		{{--console.log(data);--}}
-		{{--if ( data.code  == {{config('myconfig.member.memberinfo_status_error_code')}} ) {--}}
-		{{--layer.msg( data.msg , { time : 2000 } );--}}
-		{{--}--}}
-		{{--else if (  data.code  == {{config('myconfig.member.memberinfo_status_success_code')}} ) {--}}
-		{{--layer.msg( data.msg , { time : 1000 } , function () {--}}
-		{{--window.location.reload();--}}
-		{{--} );--}}
-		{{--}--}}
-		{{--} );--}}
-		{{--} , function () {--}}
-		{{--layer.msg( "{{trans('memberinfo.delete_cancel')}}" , {--}}
-		{{--time : 1000 , //10秒鐘后自動關閉--}}
-		{{--} );--}}
-		{{--} );--}}
-		{{--}--}}
+
+		//查看详情
+		function view( know_id ) {
+			layer.open( {
+				type : 2 ,
+				title : '{{ trans('memberinfo.news_view') }}' ,
+				moveType : 0 ,
+				skin : 'layui-layer-demo' , //加上边框
+				closeBtn : 1 ,
+				area : ['50%' , '90%'] , //宽高
+				shadeClose : false ,
+				shade : 0.5 ,
+				content : ["{{URL('knowledgeinfo/view')}}" + "/" + know_id] ,
+				success : function ( layero , index ) {
+					$( ':focus' ).blur();
+				}
+			} );
+		}
 	</script>
 @endpush

@@ -119,5 +119,58 @@ class UploadController extends Controller
 		}
 	}
 
+//	public function ssss(){
+//		return 132;
+//	}
+
+
+	//上传视频
+	public function videos(){
+
+
+		if($_FILES)
+		{
+			$car_files = $_FILES;
+			//var_dump($car_files); exit;
+			$file_size = $car_files['car_image']['size'];              //文件大小(数组)
+			$file_name = $car_files['car_image']['name'];              //文件新名称
+			$file_type = $car_files['car_image']['type'];              //文件的类型
+			//echo $file_type;
+			$file_tmp_name = $car_files['car_image']['tmp_name'];      //上传文件的临时路径
+			//var_dump($file_tmp_name); exit;
+			//保存图片
+			$allow_file_type = array('video/mp4');  //允许上传的类型
+			$str = "";
+			if($file_size < 200*1024*1024)
+			{
+				if(in_array($file_type, $allow_file_type))
+				{
+					$file_name_arr = explode(".",$file_name);
+					$ext = end($file_name_arr);
+					$new_name = date("Ymds").rand(10000,99999).'.'.$ext;
+					$str = $new_name;
+					move_uploaded_file($file_tmp_name, './uploads/shipin/' . iconv('UTF-8', 'UTF-8', $new_name));
+				}else
+				{
+					return [
+						'code'  => 123,
+						'msg'   => '视频类型不允许'
+					];
+				}
+			}else
+			{
+				return [
+					'code'   => 465,
+					'msg'    => '视频大小超出范围',
+				];
+			}
+			return [
+				'code'  => 789,
+				'msg'   => '上传成功',
+				'data'  => $str
+			];
+		}
+	}
+
 
 }

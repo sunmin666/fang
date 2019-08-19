@@ -193,7 +193,11 @@
 				var layEvent = obj.event;
 				var field_id = data.id;
 				if (layEvent === 'del') {
-					d(field_id);
+					if(field_id == 1 || field_id == 6 || field_id == 17){
+						layer.msg('对不起父类信息，不能删除',{time:1230});
+					}else{
+						d(field_id);
+					}
 				} else if (layEvent === 'edit') {
 					edit(field_id);
 				}

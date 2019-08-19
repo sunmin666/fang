@@ -31,6 +31,11 @@
 	//以下路由访问需要登录
 	Route::group(['middleware' => ['login_btn']],function(){
 
+		//上传视频
+		Route::post('video','UploadController@videos');
+
+
+
 		//房源信息楼号下拉联动单元号
 		Route::post('buildnum','Admin\Homeinfo\HomeController@buildnum');
 		//房源信息单元号联动房号
@@ -133,6 +138,11 @@
 		Route::post('home/store','Admin\Homeinfo\HomeController@store');
 		//房子表（销控表）更新
 		Route::post('home/update','Admin\Homeinfo\HomeController@update');
+
+		//营销知识库添加
+		Route::post('knowledgeinfo/store','Admin\Knowledge\KnowledgeController@store');
+		//更新
+		Route::post('knowledgeinfo/update','Admin\Knowledge\KnowledgeController@update');
 
 	});
 
@@ -409,6 +419,20 @@
 		Route::post('home/destroy_all','Admin\Homeinfo\HomeController@destroy_all');
 		//查看详情
 		Route::get('home/view/{homeid}','Admin\Homeinfo\HomeController@view');
+
+		//企业文化
+		//企业文化分类展示页面
+		Route::get('knowledge/{perid}','Admin\Knowledge\KnowledgeController@index');
+		//营销知识库新增页面
+		Route::get('knowledgeinfo/create','Admin\Knowledge\KnowledgeController@create');
+		//修改页面
+		Route::get('knowledgeinfo/edit/{know_id}','Admin\Knowledge\KnowledgeController@edit');
+		//修改
+		Route::post('knowledgeinfo/destroy','Admin\Knowledge\KnowledgeController@destroy');
+		//权限删除
+		Route::post('knowledge/destroy_all','Admin\Knowledge\KnowledgeController@destroy_all');
+		//查看
+		Route::get('knowledgeinfo/view/{know_id}','Admin\Knowledge\KnowledgeController@view');
 	});
 
 

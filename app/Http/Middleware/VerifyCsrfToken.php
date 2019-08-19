@@ -15,6 +15,8 @@ class VerifyCsrfToken extends Middleware
         'mupload',
 				'lupload',
 				'upload',
-				'rngm'
+				'rngm',
+				'video',
+				'ssss'
     ];
 }
