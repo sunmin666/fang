@@ -420,6 +420,7 @@
 		//查看详情
 		Route::get('home/view/{homeid}','Admin\Homeinfo\HomeController@view');
 
+
 		//企业文化
 		//企业文化分类展示页面
 		Route::get('knowledge/{perid}','Admin\Knowledge\KnowledgeController@index');
@@ -433,6 +434,25 @@
 		Route::post('knowledge/destroy_all','Admin\Knowledge\KnowledgeController@destroy_all');
 		//查看
 		Route::get('knowledgeinfo/view/{know_id}','Admin\Knowledge\KnowledgeController@view');
+
+
+		//企业文化
+		Route::get('culture/{perid}','Admin\Cultrue\CultrueController@index');
+		//添加企业文化页面
+		Route::get('cultrue/create','Admin\Cultrue\CultrueController@create');
+		//添加企业文化页面
+		Route::post('cultrue/store','Admin\Cultrue\CultrueController@store');
+		//企业文化数据修改页面
+		Route::get('cultrue/edit/{cult_id}','Admin\Cultrue\CultrueController@edit');
+		//企业文化数据修改
+		Route::post('cultrue/update','Admin\Cultrue\CultrueController@update');
+		//企业文化全选删除
+		Route::post('cultrue/destroy_all','Admin\Cultrue\CultrueController@destroy_all');
+		//单条删除企业文化
+		Route::post('cultrue/destroy','Admin\Cultrue\CultrueController@destroy');
+		//企业详情
+		Route::get('cultrue/view/{cult_id}','Admin\Cultrue\CultrueController@view');
+
 	});
 
 
