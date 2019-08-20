@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Admin\Homeinfo;
 use Illuminate\Http\Request;
 use App\Http\Controllers\SessionController;
 use Illuminate\Support\Facades\Validator;
-
 use App\Models\admin\Home;
+use Illuminate\Support\Facades\Input;
 
 class HomeController extends SessionController
 {
@@ -187,5 +187,67 @@ class HomeController extends SessionController
 //    	dd($data['home']);
     	return view('Admin.Home.Home.view') -> with($data);
 	}
+
+
+
+
+
+
+
+
+
+
+	//----------------------------------------------------------房子图形信息查看-----------------------//
+
+	//图形信息首页
+	public function homegrp($perid){
+		$data = $this -> session();
+		$data['per_menu'] = $this -> get_per();
+		$data['page_name'] = trans( 'home.page_name' );
+		$data['page_detail'] = trans( 'home.page_detail' );
+		$data['page_tips'] = trans( 'index.page_tips' );
+		$data['page_note'] = trans( 'index.page_note' );
+		$data['buildnum'] = Home::get_all_buildnum();
+		$data['unit'] = $shu = Input::get('buildnums');
+		 $data['tu'] = Home::get_tu($shu);
+//		 dd($data['tu']);
+		$data['ids'] = $perid;
+		return view('Admin/Home/Homegrp/index') -> with($data);
+	}
+
+	//修改页面展示状态
+	public function update_s($homeid){
+		$data['home'] = Home::view_d_home($homeid);
+		return view('Admin/Home/Homegrp/update') -> with($data);
+	}
+
+	//更新房源信息状态
+	public function update_ss(Request $query){
+    	$homeid = $query -> input('homeid');
+
+    	$data['status'] = $query -> input('status');
+
+    	$update_ss = Home::update_status_d($homeid,$data);
+
+		if($update_ss){
+			return [
+				'code'        => config('myconfig.home.home_update_success_code'),
+				'msg'         => config('myconfig.home.home_update_success_msg')
+			];
+		}else{
+			return [
+				'code'        => config('myconfig.home.home_update_error_code'),
+				'msg'         => config('myconfig.home.home_update_error_msg')
+			];
+		}
+
+
+
+	}
+
+
+
+
+
 
 }

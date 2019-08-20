@@ -73,4 +73,39 @@ class Home extends Model
 	}
 
 
+
+
+
+
+	//-----------------------------------房子图形管理------------------------------------------------//
+	public static function get_tu($shu){
+		//查询该楼层有几个单元
+		$unit = DB::table('fieldinfo') -> where('parent_field_id','=',$shu) -> get()
+			-> map(function($value){
+				return (array)$value;
+			}) -> toArray();
+		$data = array();
+		foreach($unit as $k  => $v ){
+			$data[$k]['unit'] = $v['name'];
+			$data[$k]['fang'] = DB::table('homeinfo')
+				-> select('homeinfo.*','fieldinfob.name as buildnums','fieldinfou.name as unitnums','fieldinfor.name as roomnums')
+				-> leftJoin('fieldinfo as fieldinfob','homeinfo.buildnum','=','fieldinfob.field_id')
+				-> leftJoin('fieldinfo as fieldinfou','homeinfo.unitnum','=','fieldinfou.field_id')
+				-> leftJoin('fieldinfo as fieldinfor','homeinfo.roomnum','=','fieldinfor.field_id')
+														-> where('homeinfo.unitnum','=',$v['field_id'])
+														->get()
+				-> map(function($value){
+					return (array)$value;
+				}) -> toArray();
+		}
+		return $data;
+	}
+
+
+
+	//更新房子状态信息
+	public static function update_status_d($homeid,$data){
+		return DB::table('homeinfo') -> where('homeid','=',$homeid) -> update($data);
+	}
+
 }

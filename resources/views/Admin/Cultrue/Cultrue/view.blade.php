@@ -30,6 +30,6 @@
     @endforeach
 </div>
 <div><span>企业文化添加时间：</span>{{date('Y-m-d H:i:s',$info -> created_at)}}</div>
-<div><span>企业文化修改时间：</span>{{date('Y-m-d H:i:s',$info -> updated_at)}}</div>
+<div><span>企业文化修改时间：</span> @if($info -> updated_at == '') 暂无更新时间 @else {{date('Y-m-d H:i:s',$info -> updated_at)}} @endif</div>
 </body>
 </html>

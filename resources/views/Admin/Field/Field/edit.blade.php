@@ -19,14 +19,14 @@
 					       maxlength="50" value="{{$field -> name}}">
 				</div>
 				{{--项目英文名称--}}
-				<div class="form-group">
-					<label>{{ trans('field.parent_field_id') }}：</label> <br>
-					<div class="layui-input-block" style="width: 100%;margin-left: 0">
-						<input type="text" id="tree2" lay-filter="tree" class="layui-input">
-					</div>
+				{{--<div class="form-group">--}}
+					{{--<label>{{ trans('field.parent_field_id') }}：</label> <br>--}}
+					{{--<div class="layui-input-block" style="width: 100%;margin-left: 0">--}}
+						{{--<input type="text" id="tree2" lay-filter="tree" class="layui-input">--}}
+					{{--</div>--}}
 					<input type="hidden" value="{{$field -> parent_field_id}}" id="parent_field_id">
 					<input type="hidden" value="{{$field -> pathlist}}" id="pathlist">
-				</div>
+				{{--</div>--}}
 				{{ csrf_field()}}
 			</form>
 		</div>

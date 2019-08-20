@@ -95,7 +95,6 @@
 						<option value="1" style="background-color: yellow;color:#000">预定房源申请中</option>
 						<option value="2" style="background-color: blue;color:#fff">以认购</option>
 						<option value="3" style="background-color: red;color:#fff">以签约</option>
-
 					</select>
 				</div>
 
