@@ -420,11 +420,16 @@
 		Route::get('home/edit/{homeid}','Admin\Homeinfo\HomeController@edit');
 		//房子信息表删除
 		Route::post('home/destroy','Admin\Homeinfo\HomeController@destroy');
-		//权限删除
+		//全选删除
 		Route::post('home/destroy_all','Admin\Homeinfo\HomeController@destroy_all');
 		//查看详情
 		Route::get('home/view/{homeid}','Admin\Homeinfo\HomeController@view');
-
+		//----------------------------------房子图形信息查看-------------------------------------------//
+		Route::get('homegrp/{perid}','Admin\Homeinfo\HomeController@homegrp');
+		//房子状态修改
+		Route::get('homegrp/update_s/{homeid}','Admin\Homeinfo\HomeController@update_s');
+		//更新房子状态信息表
+		Route::post('homegrp/update_ss','Admin\Homeinfo\HomeController@update_ss');
 
 		//营销知识库
 		//营销知识库展示页面

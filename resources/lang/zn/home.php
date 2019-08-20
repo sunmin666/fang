@@ -40,4 +40,6 @@
 
 		'operating'           => '操作',
 
+		'home_find'         => '查找',
+
 	];

@@ -293,28 +293,5 @@
 				}
 			} );
 		}
-		{{--//禁用启用--}}
-		{{--function status(comp_id ,status) {--}}
-			{{--layer.confirm( "{{trans('memberinfo.is_status_info')}}" , {--}}
-				{{--btn : ["{{trans('memberinfo.confirm')}}" , "{{trans('memberinfo.cancel')}}"] //按钮--}}
-			{{--} , function () {--}}
-				{{--$.post( "{{URL('company/status')}}" , { 'comp_id' : comp_id ,status:status, '_token' : "{{csrf_token()}}" } ,--}}
-					{{--function ( data ) {--}}
-						{{--console.log(data);--}}
-						{{--if ( data.code  == {{config('myconfig.member.memberinfo_status_error_code')}} ) {--}}
-							{{--layer.msg( data.msg , { time : 2000 } );--}}
-						{{--}--}}
-						{{--else if (  data.code  == {{config('myconfig.member.memberinfo_status_success_code')}} ) {--}}
-							{{--layer.msg( data.msg , { time : 1000 } , function () {--}}
-								{{--window.location.reload();--}}
-							{{--} );--}}
-						{{--}--}}
-					{{--} );--}}
-			{{--} , function () {--}}
-				{{--layer.msg( "{{trans('memberinfo.delete_cancel')}}" , {--}}
-					{{--time : 1000 , //10秒鐘后自動關閉--}}
-				{{--} );--}}
-			{{--} );--}}
-		{{--}--}}
 	</script>
 @endpush
