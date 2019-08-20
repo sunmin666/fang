@@ -57,6 +57,7 @@ class CultrueController extends SessionController
     public function edit($cult_id)
     {
         $data['name']=Cultrue::get_fieldinfo();
+        //dd($data['name']);
         $data['cultrue']=Cultrue::get_d_culture($cult_id);
         $data['cultrue'] -> imgpath = array_filter(explode('/',$data['cultrue'] -> imgpath));
 

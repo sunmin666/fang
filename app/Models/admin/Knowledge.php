@@ -9,7 +9,7 @@ class Knowledge extends Model
 {
 	//查询分类
     public static function get_type_field(){
-    	return DB::table('fieldinfo') -> where('parent_field_id','=',18) -> get();
+    	return DB::table('fieldinfo') -> where('parent_field_id','=',19) -> get();
 		}
 
 		//添加入库

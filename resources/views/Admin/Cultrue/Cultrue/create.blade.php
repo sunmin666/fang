@@ -9,7 +9,7 @@
         <div class="box-body">
             {{ csrf_field() }}
             <form id="fileForm" style="display: none;">
-                <input type="file"  id="uphoto" style="display: none;" name="car_image">
+                <input type="file"  id="uphoto" style="qdisplay: none;" name="car_image">
             </form>
             <form role="form" action="#" method="post" name="reg_memberinfo" id="reg_memberinfo">
                {{--企业文化分类--}}
