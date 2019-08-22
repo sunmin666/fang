@@ -27,7 +27,7 @@ class CreateCultureClassifyTable extends Migration
             //创建时间
             $table -> integer('created_at',false,false) -> nullable(FALSE) ->comment('创建时间');
         });
-        DB::statement( "ALTER TABLE `culture_classify` fieldinfo '企业文化的分类信息表'" );
+        DB::statement( "ALTER TABLE `culture_classify` comment '企业文化的分类信息表'" );
     }
 
     /**

@@ -426,6 +426,8 @@
 		Route::get('home/view/{homeid}','Admin\Homeinfo\HomeController@view');
 		//----------------------------------房子图形信息查看-------------------------------------------//
 		Route::get('homegrp/{perid}','Admin\Homeinfo\HomeController@homegrp');
+		//post
+		Route::post('homegrp/housing','Admin\Homeinfo\HomeController@housing');
 		//房子状态修改
 		Route::get('homegrp/update_s/{homeid}','Admin\Homeinfo\HomeController@update_s');
 		//更新房子状态信息表
