@@ -39,7 +39,7 @@
 								 ->select( 'customer.*' , 'company.comp_cname' , 'projectinfo.pro_cname' )
 								 ->leftJoin( 'company' , 'customer.comp_id' , '=' , 'company.comp_id' )
 								 ->leftJoin( 'projectinfo' , 'customer.proj_id' , '=' , 'projectinfo.project_id' )
-								 ->where( 'customer.hous_id' , '=' , Session::get( 'session_member.id' ) )
+//								 ->where( 'customer.hous_id' , '=' , Session::get( 'session_member.id' ) )
 									-> where('is_show','=',1)
 								 ->paginate( $page );
 			} else if($status == 2){

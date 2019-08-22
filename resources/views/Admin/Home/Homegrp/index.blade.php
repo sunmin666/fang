@@ -81,19 +81,19 @@
 							<div class="tu">
 								<div>{{$v['unit']}}:</div>
 								@for($a = 31;$a > 0;$a--)
-									<div style="height: 30px">
+									<div style="height: 30px;margin-top: 10px">
 										<span style="height: 30px;width: 100px;display: inline-block;text-align: right">第{{$a}}层:</span>
 										<span>
 											@foreach($v['fang'] as $k7 => $v7)
 												@if($a == $v7['floor'])
 													@if($v7['status'] == 0)
-													 <button onclick="update({{$v7['homeid']}})" style="margin-left: 20px;background-color: green;border: none;padding: 5px">{{$v7['roomnums']}}</button>
+													 <button onclick="update({{$v7['homeid']}})" class="btn btn-success btn-sm" style="margin-left: 20px;">{{$v7['roomnums']}}</button>
 													@elseif($v7['status'] == 1)
-														<button onclick="update({{$v7['homeid']}})" style="margin-left: 20px;background-color: yellow;border: none;padding: 5px">{{$v7['roomnums']}}</button>
+														<button onclick="update({{$v7['homeid']}})" class="btn btn-warning btn-sm" style="margin-left: 20px;padding: 5px">{{$v7['roomnums']}}</button>
 													@elseif($v7['status'] == 2)
-														<button onclick="update({{$v7['homeid']}})" style="margin-left: 20px;background-color: blue;border: none;padding: 5px">{{$v7['roomnums']}}</button>
+														<button onclick="update({{$v7['homeid']}})" class="btn btn-info btn-sm" style="margin-left: 20px;padding: 5px;">{{$v7['roomnums']}}</button>
 													@elseif($v7['status'] == 3)
-														<button onclick="update({{$v7['homeid']}})" style="margin-left: 20px;background-color: red;border: none;padding: 5px">{{$v7['roomnums']}}</button>
+														<button onclick="update({{$v7['homeid']}})" class="btn btn-danger btn-sm" style="margin-left: 20px;padding: 5px">{{$v7['roomnums']}}</button>
 													@endif
 												@endif
 											@endforeach

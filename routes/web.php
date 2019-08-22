@@ -34,12 +34,19 @@
 		//上传视频
 		Route::post('video','UploadController@videos');
 
-
-
 		//房源信息楼号下拉联动单元号
 		Route::post('buildnum','Admin\Homeinfo\HomeController@buildnum');
 		//房源信息单元号联动房号
 		Route::post('unitnum','Admin\Homeinfo\HomeController@buildnum');
+
+		//根据单元号去homeinfo表里查询单元下的房子并且status只等与1
+		Route::post('homeinfo/unitnum','Admin\Buy\BuyController@unitnum');
+
+		//根据用户id查询用户信息
+		Route::post('customer/change','Admin\Buy\BuyController@customer_change');
+		//根据房子id查询房子信息
+		Route::post('homeinfo/view','Admin\Buy\BuyController@homeinfo_view');
+
 
 		//用户登录之后显示的首页
 		Route::get('index','Index\IndexController@index');
@@ -149,6 +156,10 @@
 		Route::post('cultrue/store','Admin\Cultrue\CultrueController@store');
 		//企业文化数据修改
 		Route::post('cultrue/update','Admin\Cultrue\CultrueController@update');
+
+		//认购信息
+		Route::post('buyinfoss/store','Admin\Buy\BuyController@store');
+
 	});
 
 
@@ -458,6 +469,17 @@
 		Route::post('cultrue/destroy','Admin\Cultrue\CultrueController@destroy');
 		//企业详情
 		Route::get('cultrue/view/{cult_id}','Admin\Cultrue\CultrueController@view');
+
+		//认
+		//购
+		//管
+		//理
+		//---------------------------------------认购信息---------------------------------//
+		//认购信息列表展示
+		Route::get('buyinfo/{perid}','Admin\Buy\BuyController@index');
+		//认购添加页面
+		Route::get('buyinfoss/create','Admin\Buy\BuyController@create');
+
 
 	});
 

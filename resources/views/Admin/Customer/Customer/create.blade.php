@@ -77,9 +77,9 @@
 					<label>{{ trans('customer.comp_id') }}：</label>
 					<select name="comp_id" id="comp_id" class="form-control">
 						<option value=""> 请选择</option>
-						@foreach($company as $k => $v)
-							<option value="{{$v -> comp_id}}">{{$v ->comp_cname }}</option>
-						@endforeach
+						{{--@foreach($company as $k => $v)--}}
+							{{--<option value="{{$v -> comp_id}}">{{$v ->comp_cname }}</option>--}}
+						{{--@endforeach--}}
 					</select>
 				</div>
 

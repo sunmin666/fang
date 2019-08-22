@@ -152,13 +152,17 @@
 </script>
 <script>
 
+	function htmlEncodeJQ ( str ) {
+		return $('<span/>').text( str ).html();
+	}
+
 	//添加到数据库
 	$( '#store1' ).click( function () {
 		// $( "#store1" ).attr( 'disabled' , true );
 		var title = $( '#title' ).val();          //标题
 		var class_id = $( '#class_id' ).val();            //分类id
 		var video = $( '#video' ).val();            //视频
-		var content = $( '#summernote' ).summernote( 'code' );  //内容
+		var content = htmlEncodeJQ($( '#summernote' ).summernote( 'code' ));  //内容
 		var is_public = $('#is_public').val();
 
 		var regEn = {{config('myconfig.config.regEn')}};

@@ -7,6 +7,7 @@ use App\Http\Controllers\SessionController;
 use Illuminate\Support\Facades\Session;
 use App\Models\admin\Knowledge;
 use Illuminate\Support\Facades\Validator;
+use Mews\Purifier\Facades\Purifier;
 
 class KnowledgeController extends SessionController
 {
@@ -46,7 +47,7 @@ class KnowledgeController extends SessionController
     	$data['title'] = $query -> input('title');
     	$data['class_id'] = $query -> input('class_id');
     	$data['video'] = $query -> input('video');
-    	$data['content'] = $query -> input('content');
+    	$data['content'] = clean($query -> input('content'));
     	$data['hous_id'] = Session::get('session_member.id');
     	$data['is_public'] = $query -> input('is_public');
 			$data['created_at'] = time();

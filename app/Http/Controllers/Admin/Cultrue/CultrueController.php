@@ -125,9 +125,10 @@ class CultrueController extends SessionController
     //企业文化详情
     public function view($cult_id)
     {
-        $data['name']=Cultrue::get_fieldinfo();
+//        $data['name']=Cultrue::get_fieldinfo();
         $data['info']=Cultrue::view($cult_id);
         $data['info'] -> imgpath = array_filter(explode('/',$data['info'] -> imgpath));
+//        dd($data);
         return view('Admin.Cultrue.Cultrue.view')->with($data);
     }
 }

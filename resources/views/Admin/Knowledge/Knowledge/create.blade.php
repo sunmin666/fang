@@ -157,14 +157,21 @@
 </script>
 <script>
 
+	function htmlEncodeJQ ( str ) {
+		return $('<span/>').text( str ).html();
+	}
+
+
 	//添加到数据库
 	$( '#store1' ).click( function () {
 		// $( "#store1" ).attr( 'disabled' , true );
 		var title = $( '#title' ).val();          //标题
 		var class_id = $( '#class_id' ).val();            //分类id
 		var video = $( '#video' ).val();            //视频
-		var content = $( '#summernote' ).summernote( 'code' );  //内容
+		var content = htmlEncodeJQ($( '#summernote' ).summernote( 'code' ));  //内容
 		var is_public = $('#is_public').val();
+
+		// console.log(content);
 
 		var regEn = {{config('myconfig.config.regEn')}};
 		var regCn = {{config('myconfig.config.regCn')}};
@@ -194,12 +201,12 @@
 			url : "{{URL('knowledgeinfo/store')}}" ,
 			type : 'post' ,
 			data : {
-				title : title ,         //楼号
-				class_id : class_id ,         //单元号
-				video : video ,         //房号
-				content : content ,           //楼层
+				title : title ,
+				class_id : class_id ,
+				video : video ,
+				content : content ,
 				is_public:is_public,
-				_token : "{{csrf_token()}}"             //post提交token验证
+				_token : "{{csrf_token()}}"
 			} ,
 			success : function ( data ) {
 				console.log( data );

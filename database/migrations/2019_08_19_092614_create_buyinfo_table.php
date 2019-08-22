@@ -51,7 +51,7 @@ class CreateBuyinfoTable extends Migration
             //'信息更新时间，UNIX时间戳
             $table -> integer('updated_at',false,false) -> nullable(TRUE) ->comment('信息更新时间，UNIX时间戳');
         });
-//        DB::statement( "ALTER TABLE `buyinfo` fieldinfo '认购发起信息表'" );
+			DB::statement( "ALTER TABLE `buyinfo` comment '内部成员信息表'" );
     }
 
     /**

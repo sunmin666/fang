@@ -151,7 +151,6 @@
 					$( "#store1" ).attr( 'disabled' , false );
 					return false;
 				}
-
 				if ( data.code == {{config('myconfig.home.home_update_success_code')}}) {
 					layer.msg( data.msg , { time : 2000 } , function () {
 						window.parent.location.reload();
