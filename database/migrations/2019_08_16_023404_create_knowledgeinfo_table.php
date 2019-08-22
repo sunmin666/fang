@@ -26,7 +26,7 @@ class CreateKnowledgeinfoTable extends Migration
         	$table -> string('created_at',15) -> nullable(FALSE) -> comment('录入时间');
         	$table -> string('updated_at',15) -> nullable(TRUE) ->comment('更新时间');
         });
-			DB::statement( "ALTER TABLE `knowledgeinfo` fieldinfo '营销知识库数据表'" );
+			DB::statement( "ALTER TABLE `knowledgeinfo` comment '营销知识库数据表'" );
     }
 
     /**

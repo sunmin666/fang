@@ -37,6 +37,19 @@
 			line-height      : 30px;
 			text-align       : center;
 		}
+
+		#unitnum{
+			width: 200px;
+			height: 30px;
+			border:1px solid #D73925;
+			padding-left: 10px;
+		}
+		#floor{
+			width: 200px;
+			height: 30px;
+			border:1px solid #D73925;
+			padding-left: 10px;
+		}
 	</style>
 @endpush
 
@@ -57,21 +70,41 @@
 
 		</div>
 		<div id="status_search">
-			<form action="{{URL('homegrp/{perid}')}}" method="get">
+			<form action="{{URL('homegrp/housing')}}" method="post">
 				{{ csrf_field() }}
 				<select name="buildnums" id="aaa">
-					<option value="0">--请选择--</option>
 					@foreach($buildnum as $k => $v)
 						<option value="{{$v -> field_id}}" @if( $unit == $v -> field_id) selected @endif>{{$v -> name}}</option>
 					@endforeach
+
 				</select>
+				{{--单元号--}}
+				<label>{{ trans('home.unitnum') }}：</label>
+				<select name="unitnum" id="unitnum">
+					<option value="">--请选择--</option>
+					@if($dan!=1)
+						@foreach($dan as $kk=>$vv)
+							<option value="{{$vv}}" @if( $unitnum == $vv) selected @endif>{{$vv}}</option>
+						@endforeach
+					@endif
+				</select>
+				{{--楼层--}}
+					<label>{{ trans('home.floor') }}：</label>
+					<select name="floor" id="floor">
+						<option value="">--请选择--</option>
+						@for ($a=31; $a>0; $a--)
+							<option value="{{$a}}">{{$a}}</option>
+						@endfor
+					</select>
+
+				<input type="hidden" value="30" name="perid">
 				<button type='submit' id="search" class="btn btn-sm {{config('myconfig.config.button_skin')}}">
 					<i class="glyphicon glyphicon-search"></i>&nbsp;{{trans('home.home_find')}}
 				</button>
 			</form>
 		</div>
-
 		<div class="box-body">
+			<?php if($tu != 1){?>
 			<?php if(count( $tu ) != 0){?>
 				<?php foreach($tu as $k => $v){?>
 						@if( count($v['fang']) == 0)
@@ -87,7 +120,9 @@
 											@foreach($v['fang'] as $k7 => $v7)
 												@if($a == $v7['floor'])
 													@if($v7['status'] == 0)
+
 													 <button onclick="update({{$v7['homeid']}})" class="btn btn-success btn-sm" style="margin-left: 20px;">{{$v7['roomnums']}}</button>
+
 													@elseif($v7['status'] == 1)
 														<button onclick="update({{$v7['homeid']}})" class="btn btn-warning btn-sm" style="margin-left: 20px;padding: 5px">{{$v7['roomnums']}}</button>
 													@elseif($v7['status'] == 2)
@@ -98,14 +133,18 @@
 												@endif
 											@endforeach
 										</span>
-									</div>
-								@endfor
-							</div>
-						@endif
-				<?php }?>
-			<?php }else{?>
-				<div>暂无房源信息</div>
+						</div>
+					@endfor
+				</div>
+			@endif
 			<?php }?>
+			<?php }else{?>
+			<div>暂无房源信息</div>
+			<?php }?>
+			<?php }else{?>
+				暂无数据
+			<?php }?>
+
 		</div>
 	</div>
 @endsection
@@ -115,6 +154,43 @@
 	<script src="{{URL::asset('bower_components/bootstrap-fileinput/js/locales/zh.js')}}"></script>
 	<script src="{{URL::asset('bower_components/layui/dist/layui.js')}}"></script>
 	<script type="text/javascript">
+
+		//下拉框联动 楼号联动单元号
+		$( "#aaa" ).change( function () {
+			//alert(13);
+			var field_id = $('#aaa').val();
+//			alert(field_id);
+			$.ajax( {
+				url : "{{URL('buildnum')}}" ,
+				type : "post" ,
+				data : {
+					field_id : field_id ,
+					_token : "{{csrf_token()}}"
+				} ,
+				success : function ( data ) {
+					console.log(data);
+					var str = "";
+					for ( var ig = 0 ; ig < data.length ; ig++ ) {
+						str += "<option value='" + data[ig]['field_id'] + "'> " + data[ig]['name'] + " </option>"
+					}
+					var cc = '<option value="">--请选择--</option>';
+
+					$( '#unitnum' ).html( cc + str );
+					$( '#roomnum' ).html( cc + str );
+				}
+			} )
+		} );
+		$(function() {
+			if (sessionStorage.getItem('floor')) {
+				$("#floor option").eq(sessionStorage.getItem('floor')).prop('selected', true);
+			}
+
+			$("#floor").on('change', function() {
+				sessionStorage.setItem('floor', $('option:selected', this).index());
+			});
+
+		});
+
 
 		//判断是否选择楼号
 

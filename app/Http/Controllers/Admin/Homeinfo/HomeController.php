@@ -208,12 +208,42 @@ class HomeController extends SessionController
 		$data['page_tips'] = trans( 'index.page_tips' );
 		$data['page_note'] = trans( 'index.page_note' );
 		$data['buildnum'] = Home::get_all_buildnum();
+		//dd($data['buildnum']);
 		$data['unit'] = $shu = Input::get('buildnums');
-		 $data['tu'] = Home::get_tu($shu);
-//		 dd($data['tu']);
+		//dd($data['unit']);
+//		$data['tu'] = Home::get_tu($shu);
+		$data['dan'] = 1;
+		$data['tu'] = 1;
+		//dd($data['tu']);
 		$data['ids'] = $perid;
 		return view('Admin/Home/Homegrp/index') -> with($data);
 	}
+
+	//post
+	public function	housing(Request $query)
+	{	$data = $this -> session();
+		$data['per_menu'] = $this -> get_per();
+		$data['page_name'] = trans( 'home.page_name' );
+		$data['page_detail'] = trans( 'home.page_detail' );
+		$data['page_tips'] = trans( 'index.page_tips' );
+		$data['page_note'] = trans( 'index.page_note' );
+		$data['buildnum'] = Home::get_all_buildnum();
+		$data['unit'] = $shu = $query->input('buildnums');
+		//dd($data['unit']);
+		$data['tu'] = Home::get_tu($shu);
+		//dd($data['tu']);
+		$data['dan']=[];
+			foreach($data['tu'] as $k=>$v){
+				 array_push($data['dan'],$v['unit']);
+			}
+//		/dd($data['dan']);
+		$data['ids'] = $query -> input('perid');
+		$data['unitnum']=$unitnum = $query->input('unitnum');
+		//dd($unitnum);
+		return view('Admin/Home/Homegrp/index') -> with($data);
+	}
+
+
 
 	//修改页面展示状态
 	public function update_s($homeid){

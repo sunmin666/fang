@@ -85,8 +85,10 @@ class Home extends Model
 				return (array)$value;
 			}) -> toArray();
 		$data = array();
+		//dd($unit);
 		foreach($unit as $k  => $v ){
 			$data[$k]['unit'] = $v['name'];
+			//dd($data[$k]['unit']);
 			$data[$k]['fang'] = DB::table('homeinfo')
 				-> select('homeinfo.*','fieldinfob.name as buildnums','fieldinfou.name as unitnums','fieldinfor.name as roomnums')
 				-> leftJoin('fieldinfo as fieldinfob','homeinfo.buildnum','=','fieldinfob.field_id')
@@ -97,6 +99,7 @@ class Home extends Model
 				-> map(function($value){
 					return (array)$value;
 				}) -> toArray();
+			//dd($data[$k]['fang']);
 		}
 		return $data;
 	}

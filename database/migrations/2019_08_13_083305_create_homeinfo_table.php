@@ -52,7 +52,7 @@ class CreateHomeinfoTable extends Migration
 					//更新时间
 					$table -> string('updated_at',15) -> nullable(TRUE) -> comment('房子信息更新时间');
         });
-			DB::statement( "ALTER TABLE `homeinfo` fieldinfo '房子信息表'" );
+			DB::statement( "ALTER TABLE `homeinfo` comment '房子信息表'" );
     }
 
     /**

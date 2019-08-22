@@ -25,7 +25,6 @@ class CreateCultureinfoTable extends Migration
 					//更新时间
 					$table -> integer('updated_at',false,false) -> nullable(TRUE) -> comment('更新时间');
         });
-			DB::statement( "ALTER TABLE `cultureinfo` fieldinfo '企业文化信息表'" );
     }
 
     /**
