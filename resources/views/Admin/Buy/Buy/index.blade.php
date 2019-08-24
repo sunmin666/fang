@@ -41,60 +41,69 @@
 							<button type="button" class="btn btn-warning btn-xs" id="data_select" data-select-all="true"><i
 									class="glyphicon glyphicon-ok"></i>{{ trans('memberinfo.allAlection') }}</button>
 						</th>
-						{{--公司中文名称--}}
-						<th>{{ trans('company.comp_cname') }}</th>
-						{{--公司中文名称--}}
-						<th>{{ trans('company.comp_ename') }}</th>
-						{{--法人代表信息--}}
-						<th>{{ trans('company.corporation') }}</th>
-						{{--法人身份证号--}}
-						<th>{{ trans('company.corp_idcard') }}</th>
-						{{--法人手机号--}}
-						<th>{{ trans('company.corp_mobile') }}</th>
-						{{--注册时间--}}
-						<th>{{trans('company.created_at')}}</th>
-						{{--状态--}}
-						<th>{{trans('company.status')}}</th>
+						{{--认购客户--}}
+						<th>{{ trans('buy.cust_id') }}</th>
+						{{--认购房源--}}
+						<th>{{ trans('buy.homeid') }}</th>
+						{{--认购标号--}}
+						<th>{{ trans('buy.buy_number') }}</th>
+						{{--认购定金--}}
+						<th>{{ trans('buy.pay_num') }}</th>
+						{{--付款方案--}}
+						<th>{{ trans('buy.pay_type') }}</th>
+						{{--月供--}}
+						<th>{{trans('buy.month_pay')}}</th>
+						{{--年限--}}
+						<th>{{trans('buy.loan_term')}}</th>
+						{{--总金额--}}
+						<th>{{trans('buy.total_price')}}</th>
+
+						<th>{{trans('buy.created_at')}}</th>
 						{{--操作--}}
-						<th>{{ trans('company.operating') }}</th>
+						<th>{{ trans('buy.operating') }}</th>
 					</tr>
 					</thead>
 					<tbody>
-					{{--@foreach($company as $value)--}}
-						{{--<tr>--}}
-							{{--<td><input type="checkbox" class="i-checks" id="groupCheckbox" name="groupCheckbox[]"--}}
-							           {{--value="{{$value->comp_id}}"--}}
-								{{--></td>--}}
-							{{--<td>{{ $value -> comp_cname}}</td>--}}
-							{{--<td>{{$value -> comp_ename}}</td>--}}
-							{{--<td>{{$value -> corporation}}</td>--}}
-							{{--<td>{{$value-> corp_idcard}}</td>--}}
-							{{--<td>{{$value-> corp_mobile}}</td>--}}
-							{{--<td>{{date('Y-m-d H:i',$value -> created_at)}}</td>--}}
-							{{--<td>@if($value -> status == 1) 正常 @elseif($value -> status == 0) 禁用 @endif</td>--}}
-							{{--<td>--}}
-								{{--<button type="button" value="{{$value -> comp_id}}"--}}
-								        {{--onclick="status({{$value -> comp_id}},{{$value -> status}})"--}}
-								        {{--class="btn btn-warning btn-xs btn_delete"><i--}}
-										{{--class="fa fa-trash"></i>--}}
-									{{--@if($value -> status == 1)--}}
-										{{--{{trans('memberinfo.news_disable')}}--}}
-									{{--@elseif($value -> status == 0)--}}
-										{{--{{trans('memberinfo.news_enable')}}--}}
-									{{--@endif--}}
-								{{--</button>--}}
-								{{--<button type="button" value="{{$value -> comp_id}}" onclick="view({{$value -> comp_id}})"--}}
-								        {{--class="btn btn-warning btn-xs btn_edit" id="btn_edit"><i--}}
-										{{--class="fa fa-edit"></i> {{trans('memberinfo.news_view')}}</button>--}}
-								{{--<button type="button" value="{{$value -> comp_id}}" onclick="edit({{$value -> comp_id}})"--}}
-								        {{--class="btn btn-warning btn-xs btn_edit" id="btn_edit"><i--}}
-										{{--class="fa fa-edit"></i> {{trans('memberinfo.news_edits')}}</button>--}}
-								{{--<button type="button" value="{{$value -> comp_id}}" onclick="d({{$value -> comp_id}})"--}}
-								        {{--class="btn btn-warning btn-xs btn_delete"><i--}}
-										{{--class="fa fa-trash"></i> {{trans('memberinfo.news_delete')}} </button>--}}
-							{{--</td>--}}
-						{{--</tr>--}}
-					{{--@endforeach--}}
+					@foreach($buy as $value)
+						<tr>
+							<td><input type="checkbox" class="i-checks" id="groupCheckbox" name="groupCheckbox[]"
+							           value="{{$value->buyid}}"
+								></td>
+							<td>{{ $value -> realname}}</td>
+							<td>{{$value -> roomnums}}</td>
+							<td>{{$value -> buy_number}}</td>
+							<td>{{$value-> pay_num}}</td>
+							<td>@if($value -> pay_type == 1) 按揭付款 @elseif($value -> pay_type == 0) 一次性付款 @endif</td>
+							<td>@if($value -> month_pay == '') 一次性付款 @else {{$value -> month_pay}} @endif</td>
+							<td>@if($value -> loan_term == '') 一次性付款 @else {{$value -> loan_term}} @endif</td>
+							<td>{{$value-> total_price}}</td>
+							<td>{{date('Y-m-d H:i',$value -> created_at)}}</td>
+
+							<td>
+
+								@if($value -> manager_verify_status == '')
+									<button type="button" value="{{$value -> buyid}}" onclick="view({{$value -> buyid}})"
+									        class="btn btn-warning btn-xs btn_edit" id="btn_edit"><i
+											class="fa fa-edit"></i> 经理审核</button>
+								@endif
+								@if($value -> manager_verify_status == 1)
+										<button type="button" value="{{$value -> buyid}}" onclick="view({{$value -> buyid}})"
+										        class="btn btn-warning btn-xs btn_edit" id="btn_edit"><i
+												class="fa fa-edit"></i> 财务审核</button>
+								@endif
+
+								<button type="button" value="{{$value -> buyid}}" onclick="view({{$value -> buyid}})"
+								        class="btn btn-warning btn-xs btn_edit" id="btn_edit"><i
+										class="fa fa-edit"></i> {{trans('memberinfo.news_view')}}</button>
+								<button type="button" value="{{$value -> buyid}}" onclick="edit({{$value -> buyid}})"
+								        class="btn btn-warning btn-xs btn_edit" id="btn_edit"><i
+										class="fa fa-edit"></i> {{trans('memberinfo.news_edits')}}</button>
+								<button type="button" value="{{$value -> buyid}}" onclick="d({{$value -> buyid}})"
+								        class="btn btn-warning btn-xs btn_delete"><i
+										class="fa fa-trash"></i> {{trans('memberinfo.news_delete')}} </button>
+							</td>
+						</tr>
+					@endforeach
 					</tbody>
 				</table>
 			</div>
@@ -215,6 +224,7 @@
 				}
 			} );
 		} );
+
 		//删除信息
 		function d( comp_id ) {
 			var page_count = $( '#page_count' ).val();
@@ -249,7 +259,7 @@
 		}
 
 		//修改用户信息
-		function edit( comp_id ) {
+		function edit( buyid ) {
 			layer.open( {
 				type : 2 ,
 				title : '{{ trans('memberinfo.news_edits') }}' ,
@@ -259,7 +269,7 @@
 				area : ['50%' , '70%'] , //宽高
 				shadeClose : false ,
 				shade : 0.5 ,
-				content : ["{{URL('company/edit')}}" + "/" + comp_id] ,
+				content : ["{{URL('buyinfoss/edit')}}" + "/" + buyid] ,
 				success : function ( layero , index ) {
 					$( ':focus' ).blur();
 				}
@@ -267,7 +277,7 @@
 		}
 
 		//查看详情
-		function view( comp_id ) {
+		function view( buyid ) {
 			layer.open( {
 				type : 2 ,
 				title : '{{ trans('memberinfo.news_view') }}' ,
@@ -277,35 +287,12 @@
 				area : ['50%' , '70%'] , //宽高
 				shadeClose : false ,
 				shade : 0.5 ,
-				content : ["{{URL('company/view')}}" + "/" + comp_id] ,
+				content : ["{{URL('buyinfoss/view')}}" + "/" + buyid] ,
 				success : function ( layero , index ) {
 					$( ':focus' ).blur();
 				}
 			} );
 		}
 
-		//禁用启用
-		function status(comp_id ,status) {
-			layer.confirm( "{{trans('memberinfo.is_status_info')}}" , {
-				btn : ["{{trans('memberinfo.confirm')}}" , "{{trans('memberinfo.cancel')}}"] //按钮
-			} , function () {
-				$.post( "{{URL('company/status')}}" , { 'comp_id' : comp_id ,status:status, '_token' : "{{csrf_token()}}" } ,
-					function ( data ) {
-						console.log(data);
-						if ( data.code  == {{config('myconfig.member.memberinfo_status_error_code')}} ) {
-							layer.msg( data.msg , { time : 2000 } );
-						}
-						else if (  data.code  == {{config('myconfig.member.memberinfo_status_success_code')}} ) {
-							layer.msg( data.msg , { time : 1000 } , function () {
-								window.location.reload();
-							} );
-						}
-					} );
-			} , function () {
-				layer.msg( "{{trans('memberinfo.delete_cancel')}}" , {
-					time : 1000 , //10秒鐘后自動關閉
-				} );
-			} );
-		}
 	</script>
 @endpush

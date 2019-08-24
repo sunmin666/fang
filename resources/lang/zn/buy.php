@@ -15,4 +15,11 @@
 			'remarks'      => '认购发起备注',
 			'lock_time'    => '锁定时间',
 			'text_content2'  => '备注信息不合法',
+			'month_pay'          => '月供',
+			'loan_term'         => '年限',
+			'total_price'      => '应缴哪总经额',
+			'operating'    => '操作',
+			'buy_number'     => '认购编号',
+
+			'created_at'      => '认购发起时间',
 	];

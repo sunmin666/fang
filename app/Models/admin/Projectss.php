@@ -67,7 +67,7 @@
 								 ->select( 'projectinfo.*' , 'company.comp_cname' )
 								 ->orderBy( 'updated_at' , 'desc' )
 								 ->leftJoin( 'company' , 'projectinfo.comp_id' , '=' , 'company.comp_id' )
-					       ->where( 'projectinfo.comp_id' , '=' , 2 )
+					       ->where( 'projectinfo.comp_id' , '=' , 1 )
 								 ->paginate( $page );
 			}
 		}

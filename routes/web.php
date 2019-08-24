@@ -47,7 +47,6 @@
 		//根据房子id查询房子信息
 		Route::post('homeinfo/view','Admin\Buy\BuyController@homeinfo_view');
 
-
 		//用户登录之后显示的首页
 		Route::get('index','Index\IndexController@index');
 		//图
@@ -157,9 +156,12 @@
 		//企业文化数据修改
 		Route::post('cultrue/update','Admin\Cultrue\CultrueController@update');
 
-		//认购信息
+		//认购信息新增
 		Route::post('buyinfoss/store','Admin\Buy\BuyController@store');
-
+		//认购信息更新
+		Route::post('buyinfoss/update','Admin\Buy\BuyController@update');
+		//认购信息详情
+		Route::get('buyinfoss/view/{buyid}','Admin\Buy\BuyController@view');
 	});
 
 
@@ -481,7 +483,8 @@
 		Route::get('buyinfo/{perid}','Admin\Buy\BuyController@index');
 		//认购添加页面
 		Route::get('buyinfoss/create','Admin\Buy\BuyController@create');
-
+		//认购修改页面
+		Route::get('buyinfoss/edit/{buyid}','Admin\Buy\BuyController@edit');
 
 	});
 

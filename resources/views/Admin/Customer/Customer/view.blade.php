@@ -33,7 +33,7 @@
 <div><span>客户扣扣：</span>{{$omer -> qq}}</div>
 <div><span>客户邮箱：</span>{{$omer -> email}}</div>
 <div><span>客户身份证信息：</span>{{$omer -> idcard}}</div>
-<div><span>客户所属公司：</span>{{$omer -> comp_cname}}</div>
+<div><span>客户所属公司：</span>西安开米</div>
 <div><span>客户所属项目：</span>{{$omer -> pro_cname}}</div>
 <div><span>客户录入时间：</span>{{date('Y-m-d',$omer -> created_at)}}</div>
 </body>

@@ -32,7 +32,7 @@ class Consu extends Model
 	 * @return \Illuminate\Support\Collection
 	 */
 		public static function get_poje(){
-			return DB::table('projectinfo') -> where('comp_id','=',2) -> get();
+			return DB::table('projectinfo') -> where('comp_id','=',1) -> get();
 		}
 
 	/**

@@ -26,9 +26,10 @@
 					<label>{{ trans('project.comp_id') }}：</label>
 					<select name="comp_id" id="comp_id" class="form-control">
 						<option value="0">请选择项目所属公司</option>
-						@foreach($company as $k => $v)
-							<option value="{{$v -> comp_id}}"> {{$v -> comp_cname}}</option>
-						@endforeach	
+						<option value="1">西安开米</option>
+						{{--@foreach($company as $k => $v)--}}
+							{{--<option value="{{$v -> comp_id}}"> {{$v -> comp_cname}}</option>--}}
+						{{--@endforeach	--}}
 					</select>
 					{{--<input type="text" class="form-control" name="comp_type"  id="comp_type" maxlength="10">--}}
 				</div>

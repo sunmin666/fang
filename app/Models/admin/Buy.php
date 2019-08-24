@@ -58,10 +58,92 @@
 							 ->get();
 		}
 
+		//修改用户信息
+		public static function update_d_customer($cust_id,$cust){
+			return DB::table('customer') -> where('cust_id','=',$cust_id) -> update($cust);
+		}
 
-		//	//查询房子状态是否符合要求
-		//	public static function get_home_d($homeid){
-		//		return DB::table('homeinfo') ->select('status') -> where('homeid','=',$homeid) -> first();
-		//	}
+		//添加认购信息
+		public static function store_buy($buy){
+			return DB::table('buyinfo') -> insertGetId($buy);
+		}
+
+		//更新认购编号
+		public static function update_buy_number($store_buy,$buyu){
+			return DB::table('buyinfo') -> where('buyid','=',$store_buy) -> update($buyu);
+		}
+
+
+		//添加房屋共有人
+		public static function store_coowner($coowner){
+			return DB::table('coownerinfo') -> insert($coowner);
+		}
+
+		//查看房子状态是否合法
+		public static function get_d_home($homeid){
+			return DB::table('homeinfo') -> select('status') -> where('homeid','=',$homeid) -> first();
+		}
+
+		//更改房子状态
+		public static function update_status_home($homeid,$hstatus){
+			return DB::table('homeinfo') -> where('homeid','=',$homeid) -> update($hstatus);
+		}
+
+
+		//查询认购信息
+		public static function get_all_buy($page){
+			return DB::table('buyinfo')
+							 ->select('buyinfo.*','customer.realname','homeinfo.buildnum','homeinfo.unitnum','homeinfo.roomnum','fieldinfob.name as buildnums','fieldinfou.name as unitnums','fieldinfor.name as roomnums')
+							 -> leftJoin('customer','buyinfo.cust_id','=','customer.cust_id')
+								-> leftJoin('homeinfo','buyinfo.homeid','=','homeinfo.homeid')
+				-> leftJoin('fieldinfo as fieldinfob','homeinfo.buildnum','=','fieldinfob.field_id')
+				-> leftJoin('fieldinfo as fieldinfou','homeinfo.unitnum','=','fieldinfou.field_id')
+				-> leftJoin('fieldinfo as fieldinfor','homeinfo.roomnum','=','fieldinfor.field_id')
+				-> paginate($page);
+		}
+
+		//查询楼号下所对应的单元号
+		public static function get_all_filed($buildnum){
+			return DB::table('fieldinfo') -> where('parent_field_id','=',$buildnum) -> first();
+		}
+
+
+
+		//查询单挑认购信息
+		public static function get_d_buy($buyid){
+			return DB::table('buyinfo')
+							 ->select('buyinfo.*','customer.realname','customer.mobile','customer.idcard','homeinfo.buildnum','homeinfo.unitnum','homeinfo.roomnum','homeinfo.total','homeinfo.discount','fieldinfob.name as buildnums','fieldinfou.name as unitnums','fieldinfor.name as roomnums')
+							 -> leftJoin('customer','buyinfo.cust_id','=','customer.cust_id')
+							 -> leftJoin('homeinfo','buyinfo.homeid','=','homeinfo.homeid')
+							 -> leftJoin('fieldinfo as fieldinfob','homeinfo.buildnum','=','fieldinfob.field_id')
+							 -> leftJoin('fieldinfo as fieldinfou','homeinfo.unitnum','=','fieldinfou.field_id')
+							 -> leftJoin('fieldinfo as fieldinfor','homeinfo.roomnum','=','fieldinfor.field_id')
+								-> where('buyinfo.buyid','=',$buyid)
+							 -> first();
+		}
+
+		//更新认购信息
+		public static function update_buy($buyid,$buy){
+			return DB::table('buyinfo') -> where('buyid','=',$buyid) -> update($buy);
+		}
+
+
+		//查询认购信息详情
+		public static function get_d_buy_cg($buyid){
+			$data =DB::table('buyinfo')
+											 ->select('buyinfo.*','customer.realname','customer.mobile','customer.idcard','homeinfo.buildnum','homeinfo.unitnum','homeinfo.floor','homeinfo.roomnum','homeinfo.total','homeinfo.discount','fieldinfob.name as buildnums','fieldinfou.name as unitnums','fieldinfor.name as roomnums')
+											 -> leftJoin('customer','buyinfo.cust_id','=','customer.cust_id')
+											 -> leftJoin('homeinfo','buyinfo.homeid','=','homeinfo.homeid')
+											 -> leftJoin('fieldinfo as fieldinfob','homeinfo.buildnum','=','fieldinfob.field_id')
+											 -> leftJoin('fieldinfo as fieldinfou','homeinfo.unitnum','=','fieldinfou.field_id')
+											 -> leftJoin('fieldinfo as fieldinfor','homeinfo.roomnum','=','fieldinfor.field_id')
+											 -> where('buyinfo.buyid','=',$buyid)
+											 -> first();
+
+			$data -> coownerinfo = DB::table('coownerinfo') -> where('cust_id','=',$data -> cust_id) -> get();
+
+			return $data;
+		}
+
 
 	}
