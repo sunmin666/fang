@@ -12,7 +12,7 @@
 		//查询所有客户信息
 		public static function get_cus()
 		{
-			return DB::table( 'customer' )->get();
+			return DB::table( 'customer' ) -> where('is_show','=',1)->get();
 		}
 
 
@@ -99,6 +99,7 @@
 				-> leftJoin('fieldinfo as fieldinfob','homeinfo.buildnum','=','fieldinfob.field_id')
 				-> leftJoin('fieldinfo as fieldinfou','homeinfo.unitnum','=','fieldinfou.field_id')
 				-> leftJoin('fieldinfo as fieldinfor','homeinfo.roomnum','=','fieldinfor.field_id')
+				-> where('buyinfo.status','!=',0)
 				-> paginate($page);
 		}
 
@@ -141,9 +142,43 @@
 											 -> first();
 
 			$data -> coownerinfo = DB::table('coownerinfo') -> where('cust_id','=',$data -> cust_id) -> get();
-
 			return $data;
 		}
 
+
+		//删除认购信息
+		public static function delete_buy($buyid){
+			return DB::table('buyinfo') -> where('buyid','=',$buyid) -> update(
+				array('status' => 0)
+			);
+		}
+
+		//更改状态
+		public static function update_status($buyid){
+			return DB::table('buyinfo') -> where('buyid','=',$buyid) -> update(array('status' => 3));
+		}
+
+		//换房
+		public static function home_huan($homeid){
+			return DB::table('homeinfo') -> where('homeid','=',$homeid) -> update(array('status' => 0));
+		}
+
+
+		public static function update_home_statuss($homeid){
+			return DB::table('homeinfo') -> where('homeid','=',$homeid) -> update(array('status' => 2));
+
+		}
+
+		//经理审核
+		public static function update_review($buyid,$data){
+			return DB::table('buyinfo') -> where('buyid','=',$buyid) -> update($data);
+		}
+
+		//经理不通过审核时更改房子状态
+		public static function update_home_status($home){
+			return DB::table('homeinfo') -> where('homeid','=',$home) -> update(
+				array('status' => 0)
+			);
+		}
 
 	}

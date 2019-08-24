@@ -162,6 +162,11 @@
 		Route::post('buyinfoss/update','Admin\Buy\BuyController@update');
 		//认购信息详情
 		Route::get('buyinfoss/view/{buyid}','Admin\Buy\BuyController@view');
+
+		//经理审核提交
+		Route::post('buyinfoss/update_review','Admin\Buy\BuyController@update_review');
+		//财务审核提交
+		Route::post('buyinfoss/update_cwview','Admin\Buy\BuyController@update_cwview');
 	});
 
 
@@ -485,7 +490,14 @@
 		Route::get('buyinfoss/create','Admin\Buy\BuyController@create');
 		//认购修改页面
 		Route::get('buyinfoss/edit/{buyid}','Admin\Buy\BuyController@edit');
-
+		//经理审核
+		Route::get('buyinfoss/review/{buyid}/{homeid}','Admin\Buy\BuyController@review');
+		//删除认购信息
+		Route::post('buyinfoss/destroy','Admin\Buy\BuyController@destroy');
+		//换房
+		Route::post('buyinfoss/huan','Admin\Buy\BuyController@huan');
+		//财务审核
+		Route::get('buyinfoss/cwview/{buyid}/{homeid}','Admin\Buy\BuyController@cwview');
 	});
 
 

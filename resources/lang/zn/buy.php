@@ -22,4 +22,10 @@
 			'buy_number'     => '认购编号',
 
 			'created_at'      => '认购发起时间',
+
+			'review'     => '经理审核',
+			'review_bei'   => '经理审核备注',
+
+			'status'      => '状态',
+
 	];

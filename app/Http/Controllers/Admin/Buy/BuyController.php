@@ -201,5 +201,122 @@ class BuyController extends SessionController
 		return view('Admin.Buy.Buy.view') -> with($data);
 	}
 
+	public function destroy(Request $query){
+			$buyid = $query -> input('buyid');
+
+			$delete = Buy::delete_buy($buyid);
+			if($delete){
+				return [
+					'code'          => config('myconfig.buy.buy_delete_success_code'),
+					'msg'           => config('myconfig.buy.buy_delete_success_msg'),
+				];
+			}else{
+				return [
+					'code'          => config('myconfig.buy.buy_delete_error_code'),
+					'msg'           => config('myconfig.buy.buy_delete_error_msg'),
+				];
+			}
+	}
+
+
+	//换房
+	public function huan(Request $query){
+			$homeid = $query -> input('homeid');
+			$buyid  = $query -> input('buyid');
+			$update = Buy::update_status($buyid);
+
+		if($update){
+			Buy::home_huan($homeid);
+			return [
+				'code'          => config('myconfig.buy.buy_huan_success_code'),
+				'msg'           => config('myconfig.buy.buy_huan_success_msg'),
+			];
+		}else{
+			return [
+				'code'          => config('myconfig.buy.buy_huan_error_code'),
+				'msg'           => config('myconfig.buy.buy_huan_error_msg'),
+			];
+		}
+
+	}
+
+
+
+	//经理审核
+	public function review($buyid,$homeid){
+			$data['buyid'] = $buyid;
+			$data['homeid'] = $homeid;
+			return view('Admin.Buy.Buy.review') -> with($data);
+	}
+
+	//财务审核页面
+	public function cwview($buyid,$homeid){
+		$data['buyid'] = $buyid;
+		$data['homeid'] = $homeid;
+		return view('Admin.Buy.Buy.cwview') -> with($data);
+	}
+
+	//经理审核提交
+	public function update_review(Request $query){
+			$buyid = $query -> input('buyid');
+			$data['manager_verify_status'] = $query -> input('manager_verify_status');
+			$data['manager_verify_remarks'] = $query -> input('manager_verify_remarks');
+			$data['manager_verify_time'] = time();
+			$review = Buy::update_review($buyid,$data);
+
+			if($review){
+
+				if($data['manager_verify_status'] == 0){
+					//更改房子状态
+					Buy::update_home_status($query -> input('homeid'));
+					return [
+						'code'          => config('myconfig.buy.buy_review_successe_code'),
+						'msg'           => config('myconfig.buy.buy_review_successe_msg'),
+					];
+				}else{
+					return [
+						'code'          => config('myconfig.buy.buy_review_success_code'),
+						'msg'           => config('myconfig.buy.buy_review_success_msg'),
+					];
+				}
+			}else{
+				return [
+					'code'          => config('myconfig.buy.buy_review_error_code'),
+					'msg'           => config('myconfig.buy.buy_review_error_msg'),
+				];
+			}
+	}
+
+	public function update_cwview(Request $query){
+		$buyid = $query -> input('buyid');
+		$data['finance_verify_status'] = $query -> input('manager_verify_status');
+		$data['finance_verify_remarks'] = $query -> input('manager_verify_remarks');
+		$data['finance_verify_time'] = time();
+		$review = Buy::update_review($buyid,$data);
+
+		if($review){
+
+			if($data['finance_verify_status'] == 0){
+				//更改房子状态
+				Buy::update_home_status($query -> input('homeid'));
+				return [
+					'code'          => config('myconfig.buy.buy_cwview_successe_code'),
+					'msg'           => config('myconfig.buy.buy_cwview_successe_msg'),
+				];
+			}else{
+				Buy::update_home_statuss($query -> input('homeid'));
+				return [
+					'code'          => config('myconfig.buy.buy_cwview_success_code'),
+					'msg'           => config('myconfig.buy.buy_cwview_success_msg'),
+				];
+			}
+		}else{
+			return [
+				'code'          => config('myconfig.buy.buy_cwview_error_code'),
+				'msg'           => config('myconfig.buy.buy_cwview_error_msg'),
+			];
+		}
+	}
+
 
 }
