@@ -60,7 +60,9 @@
 								></td>
 							<td>{{ $value -> pro_cname}}</td>
 							<td>{{$value -> pro_ename}}</td>
-							<td>{{$value -> comp_cname}}</td>
+							<td>@if($value -> comp_cname == '')西安开米@else {{$value -> comp_cname}}@endif</td>
+
+							{{--<td>{{$value -> comp_cname}}</td>--}}
 							{{--<td>{{$value-> corp_idcard}}</td>--}}
 							{{--<td>{{$value-> corp_mobile}}</td>--}}
 							<td>{{date('Y-m-d H:i',$value -> created_at)}}</td>

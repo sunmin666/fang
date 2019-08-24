@@ -19,6 +19,7 @@ class CultrueController extends SessionController
         $data['page_tips'] = trans( 'index.page_tips' );
         $data['page_note'] = trans( 'index.page_note' );
         $page = config('myconfig.config.page_num');
+        $data['cultrue'] = Cultrue::get_all_cultrue($page);
         $data['ids'] = $perid;
         return view('Admin.Cultrue.Cultrue.index')->with($data);
     }
@@ -123,9 +124,10 @@ class CultrueController extends SessionController
     //企业文化详情
     public function view($cult_id)
     {
-        $data['name']=Cultrue::get_fieldinfo();
+//        $data['name']=Cultrue::get_fieldinfo();
         $data['info']=Cultrue::view($cult_id);
         $data['info'] -> imgpath = array_filter(explode('/',$data['info'] -> imgpath));
+//        dd($data);
         return view('Admin.Cultrue.Cultrue.view')->with($data);
     }
 }

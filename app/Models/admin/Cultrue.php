@@ -51,6 +51,10 @@ class Cultrue extends Model
     //企业文化详情
     public static function view($cult_id)
     {
-        return DB::table('cultureinfo') -> where('cult_id','=',$cult_id) -> first();
+        return DB::table('cultureinfo')
+
+					-> select('cultureinfo.*','fieldinfo.name')
+					-> leftJoin('fieldinfo','cultureinfo.class_id','=','fieldinfo.field_id')
+					-> where('cultureinfo.cult_id','=',$cult_id) -> first();
     }
 }

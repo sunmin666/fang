@@ -88,8 +88,8 @@
         <div class="box-footer clearfix">
             <a href="javascript:void(0)" class="btn btn-danger btn-xs pull-left select_all"><i
                         class="fa fa-trash"></i>{{ trans('memberinfo.select_all_delete') }}</a>
-            {{--<div class=" pull-right">{{$consu -> links()}}</div>
-            <input type="hidden" value="{{$consu -> count()}}" id="page_count">--}}
+            <div class=" pull-right">{{$cultrue -> links()}}</div>
+            <input type="hidden" value="{{$cultrue -> count()}}" id="page_count">
         </div>
     </div>
     @endsection

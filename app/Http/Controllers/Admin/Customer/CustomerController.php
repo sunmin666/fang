@@ -43,9 +43,9 @@ class CustomerController extends SessionController
 	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
 	 */
 	public function create(){
-		//查询项目
-		$data['project'] = Customer::get_all_pro();
-//		dd($data);
+
+		//查询属项目
+		$data['project'] = Consu::get_poje();
 		return view('Admin.Customer.Customer.create') -> with($data);
 	}
 
@@ -135,10 +135,9 @@ class CustomerController extends SessionController
 	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
 	 */
 	public function edit($cust_id){
-		$data['company'] = Consu::get_d_company();             //查询公司
+//		$data['company'] = Consu::get_d_company();             //查询公司
 		$data['omer'] = Customer::get_d_omer($cust_id);
-		$comp_id = $data['omer']-> comp_id;
-		$data['project'] = Consu::get_company($comp_id);
+		$data['project'] = Consu::get_poje();
 		return view('Admin.Customer.Customer.edit')  -> with($data);
 	}
 

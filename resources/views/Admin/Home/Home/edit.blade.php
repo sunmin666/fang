@@ -44,7 +44,7 @@
 					<label>{{ trans('home.floor') }}：</label>
 					<input type="text" class="form-control" name="floor"
 					       placeholder="请输入楼层" id="floor"  value="{{$home -> floor}}"
-					       onkeyup="this.value=this.value.replace(/\D/g,'')"
+					       onkeyup="value=value.replace(/[^\d.]/g,'')"
 					       maxlength="15">
 				</div>
 
@@ -52,7 +52,7 @@
 				<div class="form-group">
 					<label>{{ trans('home.build_area')}}：</label>
 					<input type="text" class="form-control"
-					       onkeyup="if(isNaN(value))execCommand('undo')" value="{{$home -> build_area}}"
+					       onkeyup="value=value.replace(/[^\d.]/g,'')" value="{{$home -> build_area}}"
 					       name="build_area" placeholder='请输入建筑面积' id="build_area"
 					       maxlength="11">
 				</div>
@@ -81,14 +81,14 @@
 				<div class="form-group">
 					<label>{{ trans('home.price') }}：</label>
 					<input type="text" class="form-control" name="price"
-					       onkeyup="if(isNaN(value))execCommand('undo')" value="{{$home -> price}}"
+					       onkeyup="value=value.replace(/[^\d.]/g,'')" value="{{$home -> price}}"
 					       placeholder="请输入房子单价" id="price" maxlength="12">
 				</div>
 				{{--折扣--}}
 				<div class="form-group">
 					<label>{{ trans('home.discount') }}：</label>
 					<input type="text" class="form-control" name="discount" value="{{$home -> discount}}"
-					       onkeyup="if(isNaN(value))execCommand('undo')"
+					       onkeyup="value=value.replace(/[^\d.]/g,'')"
 					       placeholder="请输入折扣" id="discount"
 					       maxlength="50">
 				</div>
@@ -97,14 +97,12 @@
 					<label>{{ trans('home.status') }}：</label>
 					<select name="status" id="status" class="form-control">
 						<option value="">--请选择--</option>
-						<option value="0" style="background-color: green;color:#fff" @if($home -> status == 0) selected @endif>认购前</option>
-						<option value="1" style="background-color: yellow;color:#000" @if($home -> status == 1) selected @endif>预定房源申请中</option>
-						<option value="2" style="background-color: blue;color:#fff" @if($home -> status == 2) selected @endif>以认购</option>
-						<option value="3" style="background-color: red;color:#fff" @if($home -> status == 3) selected @endif>以签约</option>
-
+						<option value="0" class=" btn-success btn-sm"  @if($home -> status == 0) selected @endif>认购前</option>
+						<option value="1" class="btn-warning btn-sm" @if($home -> status == 1) selected @endif>预定房源申请中</option>
+						<option value="2" class="btn-info btn-sm" @if($home -> status == 2) selected @endif>已认购</option>
+						<option value="3" class="btn-danger btn-sm" @if($home -> status == 3) selected @endif>已签约</option>
 					</select>
 				</div>
-
 				{{--认购编号--}}
 				<div class="form-group">
 					<label>{{ trans('home.buyid') }}：</label>

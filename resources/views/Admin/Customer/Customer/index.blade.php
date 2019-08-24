@@ -69,21 +69,11 @@
 							<td>@if($value -> sex == 1) 男 @elseif($value -> sex == 2) 女 @endif</td>
 							<td>{{$value -> mobile}}</td>
 							<td>@if($value-> email == '') 该客户暂未留下邮箱 @else {{$value -> email}} @endif</td>
-							<td>{{$value-> comp_cname}}</td>
+							<td>@if($value -> comp_id == 1) 西安开米@endif</td>
 							<td>{{$value-> pro_cname}}</td>
 							<td>{{date('Y-m-d H:i',$value -> created_at)}}</td>
 							{{--<td>@if($value -> status_id == 1) 正常 @elseif($value -> status_id == 0) 禁用 @endif</td>--}}
 							<td>
-								{{--<button type="button" value="{{$value -> cust_id}}"--}}
-								        {{--onclick="status({{$value -> cust_id}},{{$value -> status_id}})"--}}
-								        {{--class="btn btn-warning btn-xs btn_delete"><i--}}
-										{{--class="fa fa-trash"></i>--}}
-									{{--@if($value -> status_id == 1)--}}
-										{{--{{trans('memberinfo.news_disable')}}--}}
-									{{--@elseif($value -> status_id == 0)--}}
-										{{--{{trans('memberinfo.news_enable')}}--}}
-									{{--@endif--}}
-								{{--</button>--}}
 								<button type="button" value="{{$value -> cust_id}}" onclick="view({{$value -> cust_id}})"
 								        class="btn btn-warning btn-xs btn_edit" id="btn_edit"><i
 										class="fa fa-edit"></i> {{trans('memberinfo.news_view')}}</button>

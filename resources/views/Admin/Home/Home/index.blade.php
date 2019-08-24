@@ -85,13 +85,18 @@
 							<td>{{$value -> discount}}折</td>
 							<td>
 								@if($value -> status == 0)
-										<span style="color:green">认购前</span>
+
+									{{--btn btn-block btn-success btn-xs--}}
+									<span class=" btn-success btn-sm">认购前</span>
 								@elseif($value-> status == 1)
-										<span style="color:yellow">预定房源申请中</span>
+									{{--btn btn-block btn-warning btn-flat--}}
+										<span class="btn-warning btn-sm">预定房源申请中</span>
 								@elseif($value -> status == 2)
-									  <span style="color:blue">以认购</span>
+									{{--btn btn-block btn-info btn-flat--}}
+									  <span class="btn-info btn-sm">已认购</span>
 								@else
-									<span style="color:red">以签约</span>
+									{{--btn btn-block btn-danger btn-flat--}}
+									<span class="btn-danger btn-sm">已签约</span>
 								@endif
 							</td>
 							<td>{{date('Y-m-d H:i',$value -> created_at)}}</td>

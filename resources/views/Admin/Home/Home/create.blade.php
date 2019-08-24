@@ -38,7 +38,7 @@
 					<label>{{ trans('home.floor') }}：</label>
 					<input type="text" class="form-control" name="floor"
 					       placeholder="请输入楼层" id="floor"
-					       onkeyup="this.value=this.value.replace(/\D/g,'')"
+					       onkeyup="value=value.replace(/[^\d.]/g,'')"
 					       maxlength="15">
 				</div>
 
@@ -46,7 +46,7 @@
 				<div class="form-group">
 					<label>{{ trans('home.build_area')}}：</label>
 					<input type="text" class="form-control"
-					       onkeyup="if(isNaN(value))execCommand('undo')"
+					       onkeyup="value=value.replace(/[^\d.]/g,'')"
 					       name="build_area" placeholder='请输入建筑面积' id="build_area"
 					       maxlength="11">
 				</div>
@@ -75,14 +75,14 @@
 				<div class="form-group">
 					<label>{{ trans('home.price') }}：</label>
 					<input type="text" class="form-control" name="price"
-					       onkeyup="if(isNaN(value))execCommand('undo')"
+					       onkeyup="value=value.replace(/[^\d.]/g,'')"
 					       placeholder="请输入房子单价" id="price" maxlength="12">
 				</div>
 				{{--折扣--}}
 				<div class="form-group">
 					<label>{{ trans('home.discount') }}：</label>
 					<input type="text" class="form-control" name="discount"
-					       onkeyup="if(isNaN(value))execCommand('undo')"
+					       onkeyup="value=value.replace(/[^\d.]/g,'')"
 					       placeholder="请输入折扣" id="discount"
 					       maxlength="50">
 				</div>
@@ -91,10 +91,10 @@
 					<label>{{ trans('home.status') }}：</label>
 					<select name="status" id="status" class="form-control">
 						<option value="">--请选择--</option>
-						<option value="0" style="background-color: green;color:#fff">认购前</option>
-						<option value="1" style="background-color: yellow;color:#000">预定房源申请中</option>
-						<option value="2" style="background-color: blue;color:#fff">以认购</option>
-						<option value="3" style="background-color: red;color:#fff">以签约</option>
+						<option value="0" class=" btn-success btn-sm">认购前</option>
+						<option value="1" class="btn-warning btn-sm" >预定房源申请中</option>
+						<option value="2" class="btn-info btn-sm" >已认购</option>
+						<option value="3" class="btn-danger btn-sm" >已签约</option>
 					</select>
 				</div>
 
@@ -182,7 +182,7 @@
 					var cc = '<option value="">--请选择--</option>';
 
 					$( '#unitnum' ).html( cc + str );
-				  $( '#roomnum' ).html( cc + str );
+				  $( '#roomnum' ).html( cc );
 			}
 		} )
 	} );

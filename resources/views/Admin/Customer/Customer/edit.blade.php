@@ -84,10 +84,8 @@
 				<div class="form-group">
 					<label>{{ trans('customer.comp_id') }}：</label>
 					<select name="comp_id" id="comp_id" class="form-control">
-						<option value=""> 请选择</option>
-						@foreach($company as $k => $v)
-							<option value="{{$v -> comp_id}}" @if($v -> comp_id == $omer -> comp_id) selected @endif>{{$v ->comp_cname }}</option>
-						@endforeach
+						<option value="1" selected>西安开米</option>
+
 					</select>
 				</div>
 

@@ -26,8 +26,8 @@
                 <div class="form-group">
                     <label>{{ trans('cultrue.page_title') }}：</label>
                     <input type="text" class="form-control" name="title"
-                           placeholder="请输入标题" id="title" onkeyup=""
-                           maxlength="11">
+                           placeholder="请输入标题" id="title"
+                           maxlength="20">
                 </div>
                 {{--企业文化图片--}}
 

@@ -34,12 +34,18 @@
 		//上传视频
 		Route::post('video','UploadController@videos');
 
-
-
 		//房源信息楼号下拉联动单元号
 		Route::post('buildnum','Admin\Homeinfo\HomeController@buildnum');
 		//房源信息单元号联动房号
 		Route::post('unitnum','Admin\Homeinfo\HomeController@buildnum');
+
+		//根据单元号去homeinfo表里查询单元下的房子并且status只等与1
+		Route::post('homeinfo/unitnum','Admin\Buy\BuyController@unitnum');
+
+		//根据用户id查询用户信息
+		Route::post('customer/change','Admin\Buy\BuyController@customer_change');
+		//根据房子id查询房子信息
+		Route::post('homeinfo/view','Admin\Buy\BuyController@homeinfo_view');
 
 		//用户登录之后显示的首页
 		Route::get('index','Index\IndexController@index');
@@ -149,6 +155,13 @@
 		Route::post('cultrue/store','Admin\Cultrue\CultrueController@store');
 		//企业文化数据修改
 		Route::post('cultrue/update','Admin\Cultrue\CultrueController@update');
+
+		//认购信息新增
+		Route::post('buyinfoss/store','Admin\Buy\BuyController@store');
+		//认购信息更新
+		Route::post('buyinfoss/update','Admin\Buy\BuyController@update');
+		//认购信息详情
+		Route::get('buyinfoss/view/{buyid}','Admin\Buy\BuyController@view');
 	});
 
 
@@ -461,12 +474,36 @@
 		//企业详情
 		Route::get('cultrue/view/{cult_id}','Admin\Cultrue\CultrueController@view');
 
+
 		//客户跟踪
 		Route::get('trackinfo/{perid}','Admin\Trackinfo\TrackinfoController@index');
 		//客户跟踪添加页面展示
 		Route::get('trackinfo/showtrack/{cust_id}','Admin\Trackinfo\TrackinfoController@showtrack');
 		//添加客户跟踪信息
 		Route::post('trackinfo/store','Admin\Trackinfo\TrackinfoController@store');
+		//客户跟踪修改页面
+		Route::get('trackinfo/edit/{trackid}','Admin\Trackinfo\TrackinfoController@edit');
+		//更新数据
+		Route::post('trackinfo/destroy','Admin\Trackinfo\TrackinfoController@destroy');
+		//客户跟踪详情
+		Route::get('trackinfo/view/{trackid}','Admin\Trackinfo\TrackinfoController@view');
+		//单条删除客户跟踪
+		Route::post('trackinfo/del','Admin\Trackinfo\TrackinfoController@del');
+		//全选删除客户跟踪
+		Route::post('trackinfo/destroy_all','Admin\Trackinfo\TrackinfoController@destroy_all');
+
+		//认
+		//购
+		//管
+		//理
+		//---------------------------------------认购信息---------------------------------//
+		//认购信息列表展示
+		Route::get('buyinfo/{perid}','Admin\Buy\BuyController@index');
+		//认购添加页面
+		Route::get('buyinfoss/create','Admin\Buy\BuyController@create');
+		//认购修改页面
+		Route::get('buyinfoss/edit/{buyid}','Admin\Buy\BuyController@edit');
+
 	});
 
 

@@ -110,12 +110,12 @@
 				</button>
 			</form>
 		</div>
-
 		<div class="box-body">
 
 
 			<?php if($tu != 1){?>
 			<?php if(count( $tu ) != 0){?>
+
 			<?php foreach($tu as $k => $v){?>
 			@if($unitnum!='' && $unitnum==$v['unit'] && $floor=='')
 				@if( count($v['fang']) == 0)

@@ -44,8 +44,21 @@
 		</div>
 		<div class= "content">
 			<video src="{{URL::asset('uploads/shipin/'.$data->video)}}" controls="controls" id="myvideo" class="none"></video>
-			<div><?php echo $data -> content?></div>
+			<div id="nnn">
+			</div>
 		</div>
 	</div>
 </body>
+@include('Public.weekly_js')
+<script>
+
+	var ig = '{{$data -> content}}';
+
+	function htmlDecodeJQ ( str ) {
+		return $('<span/>').html( str ).text();
+	}
+
+	$('#nnn').html(htmlDecodeJQ(ig));
+
+</script>
 </html>
