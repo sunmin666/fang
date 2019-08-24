@@ -22,6 +22,11 @@
 			return DB::table( 'customer' )->insert( $data );
 		}
 
+
+		public static function get_all_pro(){
+			return DB::table('projectinfo')  -> where('ppeople','=',1) -> get();
+		}
+
 		/**
 		 *
 		 * 查询客户资料信息

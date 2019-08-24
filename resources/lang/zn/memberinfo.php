@@ -88,5 +88,6 @@
 
 			'update_status'            => '修改状态',
 
+			'trackinfo'					=> '跟踪',
 
 	];

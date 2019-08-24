@@ -72,7 +72,6 @@
 				</div>
 
 
-				{{--所属公司--}}
 				<div class="form-group">
 					<label>{{ trans('customer.comp_id') }}：</label>
 					<select name="comp_id" id="comp_id" class="form-control">
@@ -80,7 +79,6 @@
 						<option value="1">西安开米</option>
 					</select>
 				</div>
-
 
 				{{--所属项目--}}
 				<div class="form-group">

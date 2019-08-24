@@ -73,6 +73,7 @@
 			<form action="{{URL('homegrp/housing')}}" method="post">
 				{{ csrf_field() }}
 				<select name="buildnums" id="aaa">
+					<option value="">--请选择--</option>
 					@foreach($buildnum as $k => $v)
 						<option value="{{$v -> field_id}}" @if( $unit == $v -> field_id) selected @endif>{{$v -> name}}</option>
 					@endforeach
@@ -83,8 +84,8 @@
 				<select name="unitnum" id="unitnum">
 					<option value="">--请选择--</option>
 					@if($dan!=1)
-						@foreach($dan as $kk=>$vv)
-							<option value="{{$vv}}" @if( $unitnum == $vv) selected @endif>{{$vv}}</option>
+						@foreach($tu as $kk=>$vv)
+							<option value="{{$vv['unit']}}" @if( $unitnum == $vv['unit']) selected @endif>{{$vv['unit']}}</option>
 						@endforeach
 					@endif
 				</select>
@@ -92,9 +93,15 @@
 					<label>{{ trans('home.floor') }}：</label>
 					<select name="floor" id="floor">
 						<option value="">--请选择--</option>
+						@if($floor != '')
 						@for ($a=31; $a>0; $a--)
-							<option value="{{$a}}">{{$a}}</option>
+							<option value="{{$a}}" @if($floor == $a) selected @endif>{{$a}}</option>
 						@endfor
+						@else
+							@for ($a=31; $a>0; $a--)
+								<option value="{{$a}}">{{$a}}</option>
+							@endfor
+						@endif
 					</select>
 
 				<input type="hidden" value="30" name="perid">
@@ -104,47 +111,103 @@
 			</form>
 		</div>
 		<div class="box-body">
+
+
 			<?php if($tu != 1){?>
 			<?php if(count( $tu ) != 0){?>
-				<?php foreach($tu as $k => $v){?>
-						@if( count($v['fang']) == 0)
-						<div class="tu"><?php echo count($v['fang'])?>没有房源录入
-						</div>
-						@else
-							<div class="tu">
-								<div>{{$v['unit']}}:</div>
-								@for($a = 31;$a > 0;$a--)
-									<div style="height: 30px;margin-top: 10px">
-										<span style="height: 30px;width: 100px;display: inline-block;text-align: right">第{{$a}}层:</span>
-										<span>
-											@foreach($v['fang'] as $k7 => $v7)
-												@if($a == $v7['floor'])
-													@if($v7['status'] == 0)
 
-													 <button onclick="update({{$v7['homeid']}})" class="btn btn-success btn-sm" style="margin-left: 20px;">{{$v7['roomnums']}}</button>
-
-													@elseif($v7['status'] == 1)
-														<button onclick="update({{$v7['homeid']}})" class="btn btn-warning btn-sm" style="margin-left: 20px;padding: 5px">{{$v7['roomnums']}}</button>
-													@elseif($v7['status'] == 2)
-														<button onclick="update({{$v7['homeid']}})" class="btn btn-info btn-sm" style="margin-left: 20px;padding: 5px;">{{$v7['roomnums']}}</button>
-													@elseif($v7['status'] == 3)
-														<button onclick="update({{$v7['homeid']}})" class="btn btn-danger btn-sm" style="margin-left: 20px;padding: 5px">{{$v7['roomnums']}}</button>
-													@endif
-												@endif
-											@endforeach
-										</span>
+			<?php foreach($tu as $k => $v){?>
+			@if($unitnum!='' && $unitnum==$v['unit'] && $floor=='')
+				@if( count($v['fang']) == 0)
+				<div class="tu"><?php echo $v['unit']?>没有房源录入
+				</div>
+				@else
+				<div class="tu">
+					<div>{{$v['unit']}}:</div>
+					@for($a = 31;$a > 0;$a--)
+						<div style="height: 30px">
+							<span style="height: 30px;width: 100px;display: inline-block;text-align: right">第{{$a}}层:</span>
+				<span>
+				@foreach($v['fang'] as $k7 => $v7)
+						@if($a == $v7['floor'])
+							@if($v7['status'] == 0)
+								<button onclick="update({{$v7['homeid']}})" style="margin-left: 20px;background-color: green;border: none;padding: 5px">{{$v7['roomnums']}}</button>
+							@elseif($v7['status'] == 1)
+								<button onclick="update({{$v7['homeid']}})" style="margin-left: 20px;background-color: yellow;border: none;padding: 5px">{{$v7['roomnums']}}</button>
+							@elseif($v7['status'] == 2)
+								<button onclick="update({{$v7['homeid']}})" style="margin-left: 20px;background-color: blue;border: none;padding: 5px">{{$v7['roomnums']}}</button>
+							@elseif($v7['status'] == 3)
+								<button onclick="update({{$v7['homeid']}})" style="margin-left: 20px;background-color: red;border: none;padding: 5px">{{$v7['roomnums']}}</button>
+							@endif
+						@endif
+					@endforeach
+				</span>
 						</div>
 					@endfor
+					@endif
 				</div>
+			@elseif($unitnum =='' && $floor == '' && $unit!='')
+						@if( count($v['fang']) == 0)
+						<div class="tu"><?php echo $v['unit']?>没有房源录入
+						</div>
+						@else
+						<div class="tu">
+						<div>{{$v['unit']}}:</div>
+						@for($a = 31;$a > 0;$a--)
+						<div style="height: 30px">
+						<span style="height: 30px;width: 100px;display: inline-block;text-align: right">第{{$a}}层:</span>
+						<span>
+						@foreach($v['fang'] as $k7 => $v7)
+						@if($a == $v7['floor'])
+						@if($v7['status'] == 0)
+						<button onclick="update({{$v7['homeid']}})" style="margin-left: 20px;background-color: green;border: none;padding: 5px">{{$v7['roomnums']}}</button>
+						@elseif($v7['status'] == 1)
+						<button onclick="update({{$v7['homeid']}})" style="margin-left: 20px;background-color: yellow;border: none;padding: 5px">{{$v7['roomnums']}}</button>
+						@elseif($v7['status'] == 2)
+						<button onclick="update({{$v7['homeid']}})" style="margin-left: 20px;background-color: blue;border: none;padding: 5px">{{$v7['roomnums']}}</button>
+						@elseif($v7['status'] == 3)
+						<button onclick="update({{$v7['homeid']}})" style="margin-left: 20px;background-color: red;border: none;padding: 5px">{{$v7['roomnums']}}</button>
+						@endif
+						@endif
+						@endforeach
+						</span>
+						</div>
+						@endfor
+						</div>
+						@endif
+			@endif
+			@if($unitnum==$v['unit'] && $floor!='')
+							<div class="tu">
+								@foreach($v['fang'] as $k7 => $v7)
+									@if($floor == $v7['floor'])
+
+											<div style="margin-top: 10px;">{{$v['unit']}}:</div>
+											<div style="margin-top: -18px; margin-left: 50px;">{{$v7['floor']}}层:</div>
+											<div style="margin-top: -20px;">
+											@if($v7['status'] == 0)
+												<button onclick="update({{$v7['homeid']}})" style="margin-left: 90px;background-color: green;border: none;padding: 5px">{{$v7['roomnums']}}</button>
+											@elseif($v7['status'] == 1)
+												<button onclick="update({{$v7['homeid']}})" style="margin-left:  90px;background-color: yellow;border: none;padding: 5px">{{$v7['roomnums']}}</button>
+											@elseif($v7['status'] == 2)
+												<button onclick="update({{$v7['homeid']}})" style="margin-left:  90px;background-color: blue;border: none;padding: 5px">{{$v7['roomnums']}}</button>
+											@elseif($v7['status'] == 3)
+												<button onclick="update({{$v7['homeid']}})" style="margin-left:  90px;background-color: red;border: none;padding: 5px">{{$v7['roomnums']}}</button>
+											@endif
+											</div>
+											@endif
+									@if($floor != $v7['floor'])
+										<div>该楼层没有房源</div>
+									@endif
+											@endforeach
+							</div>
 			@endif
 			<?php }?>
 			<?php }else{?>
 			<div>暂无房源信息</div>
 			<?php }?>
 			<?php }else{?>
-				暂无数据
+			暂无数据
 			<?php }?>
-
 		</div>
 	</div>
 @endsection
@@ -157,9 +220,8 @@
 
 		//下拉框联动 楼号联动单元号
 		$( "#aaa" ).change( function () {
-			//alert(13);
 			var field_id = $('#aaa').val();
-//			alert(field_id);
+			//alert(field_id);
 			$.ajax( {
 				url : "{{URL('buildnum')}}" ,
 				type : "post" ,
@@ -176,21 +238,9 @@
 					var cc = '<option value="">--请选择--</option>';
 
 					$( '#unitnum' ).html( cc + str );
-					$( '#roomnum' ).html( cc + str );
 				}
 			} )
 		} );
-		$(function() {
-			if (sessionStorage.getItem('floor')) {
-				$("#floor option").eq(sessionStorage.getItem('floor')).prop('selected', true);
-			}
-
-			$("#floor").on('change', function() {
-				sessionStorage.setItem('floor', $('option:selected', this).index());
-			});
-
-		});
-
 
 		//判断是否选择楼号
 
@@ -198,6 +248,17 @@
 			var floor = $( '#aaa' ).val();
 			if ( floor == 0 ) {
 				layer.msg( '对不起,请选择楼号' , { time : 1236 } );
+				return false;
+			}
+		} );
+		//判断是否选择楼号
+
+		$( '#search' ).click( function () {
+			var buildnums = $( '#aaa' ).val();
+			var unitnum = $( '#unitnum' ).val();
+			var floor = $( '#floor' ).val();
+			if (buildnums!=0 && floor!=0 && unitnum==0 ) {
+				layer.msg( '对不起,请选择单元号' , { time : 1236 } );
 				return false;
 			}
 		} );

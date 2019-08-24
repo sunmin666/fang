@@ -479,6 +479,24 @@
 		//企业详情
 		Route::get('cultrue/view/{cult_id}','Admin\Cultrue\CultrueController@view');
 
+
+		//客户跟踪
+		Route::get('trackinfo/{perid}','Admin\Trackinfo\TrackinfoController@index');
+		//客户跟踪添加页面展示
+		Route::get('trackinfo/showtrack/{cust_id}','Admin\Trackinfo\TrackinfoController@showtrack');
+		//添加客户跟踪信息
+		Route::post('trackinfo/store','Admin\Trackinfo\TrackinfoController@store');
+		//客户跟踪修改页面
+		Route::get('trackinfo/edit/{trackid}','Admin\Trackinfo\TrackinfoController@edit');
+		//更新数据
+		Route::post('trackinfo/destroy','Admin\Trackinfo\TrackinfoController@destroy');
+		//客户跟踪详情
+		Route::get('trackinfo/view/{trackid}','Admin\Trackinfo\TrackinfoController@view');
+		//单条删除客户跟踪
+		Route::post('trackinfo/del','Admin\Trackinfo\TrackinfoController@del');
+		//全选删除客户跟踪
+		Route::post('trackinfo/destroy_all','Admin\Trackinfo\TrackinfoController@destroy_all');
+
 		//认
 		//购
 		//管
