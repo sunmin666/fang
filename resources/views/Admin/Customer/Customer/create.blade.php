@@ -73,25 +73,25 @@
 
 
 				{{--所属公司--}}
-				<div class="form-group">
-					<label>{{ trans('customer.comp_id') }}：</label>
-					<select name="comp_id" id="comp_id" class="form-control">
-						<option value=""> 请选择</option>
-						@foreach($company as $k => $v)
-							<option value="{{$v -> comp_id}}">{{$v ->comp_cname }}</option>
-						@endforeach
-					</select>
-				</div>
+				{{--<div class="form-group">--}}
+					{{--<label>{{ trans('customer.comp_id') }}：</label>--}}
+					{{--<select name="comp_id" id="comp_id" class="form-control">--}}
+						{{--<option value=""> 请选择</option>--}}
+						{{--@foreach($company as $k => $v)--}}
+							{{--<option value="{{$v -> comp_id}}">{{$v ->comp_cname }}</option>--}}
+						{{--@endforeach--}}
+					{{--</select>--}}
+				{{--</div>--}}
 
 
 				{{--所属项目--}}
 				<div class="form-group">
 					<label>{{ trans('customer.proj_id') }}：</label>
 					<select name="proj_id" id="proj_id" class="form-control">
-						{{--<option value="">请选择项目</option>--}}
-						{{--@foreach($project as $k => $v)--}}
-						{{--<option value="{{$v -> project_id}}">{{$v -> pro_cname}}</option>--}}
-						{{--@endforeach--}}
+						<option value="">请选择项目</option>
+						@foreach($project as $k => $v)
+						<option value="{{$v -> project_id}}">{{$v -> pro_cname}}</option>
+						@endforeach
 					</select>
 				</div>
 				{{ csrf_field()}}

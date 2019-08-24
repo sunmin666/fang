@@ -461,6 +461,12 @@
 		//企业详情
 		Route::get('cultrue/view/{cult_id}','Admin\Cultrue\CultrueController@view');
 
+		//客户跟踪
+		Route::get('trackinfo/{perid}','Admin\Trackinfo\TrackinfoController@index');
+		//客户跟踪添加页面展示
+		Route::get('trackinfo/showtrack/{cust_id}','Admin\Trackinfo\TrackinfoController@showtrack');
+		//添加客户跟踪信息
+		Route::post('trackinfo/store','Admin\Trackinfo\TrackinfoController@store');
 	});
 
 

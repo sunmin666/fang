@@ -19,8 +19,6 @@ class CultrueController extends SessionController
         $data['page_tips'] = trans( 'index.page_tips' );
         $data['page_note'] = trans( 'index.page_note' );
         $page = config('myconfig.config.page_num');
-        $data['cultrue'] = Cultrue::get_all_cultrue($page);
-        //dd($data['cultrue']);
         $data['ids'] = $perid;
         return view('Admin.Cultrue.Cultrue.index')->with($data);
     }
