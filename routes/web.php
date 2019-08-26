@@ -497,6 +497,17 @@
 		//全选删除客户跟踪
 		Route::post('trackinfo/destroy_all','Admin\Trackinfo\TrackinfoController@destroy_all');
 
+
+		//房屋共有人
+		Route::get('coownerinfo/{perid}','Admin\Coownerinfo\CoownerinfoController@index');
+		//房屋共有人修改页面
+		Route::get('coownerinfo/edit/{coow_id}','Admin\Coownerinfo\CoownerinfoController@edit');
+		//房屋共有人更新数据
+//		Route::post('coownerinfo/destroy')
+
+
+
+
 		//认
 		//购
 		//管
