@@ -503,9 +503,13 @@
 		//房屋共有人修改页面
 		Route::get('coownerinfo/edit/{coow_id}','Admin\Coownerinfo\CoownerinfoController@edit');
 		//房屋共有人更新数据
-//		Route::post('coownerinfo/destroy')
-
-
+		Route::post('coownerinfo/destroy','Admin\Coownerinfo\CoownerinfoController@destroy');
+		//房屋共有人详情
+		Route::get('coownerinfo/view/{coow_id}','Admin\Coownerinfo\CoownerinfoController@view');
+		//房屋共有人单条删除
+		Route::post('coownerinfo/del','Admin\Coownerinfo\CoownerinfoController@del');
+		//房屋共有人全选删除
+		Route::post('coownerinfo/destroy_all','Admin\Coownerinfo\CoownerinfoController@destroy_all');
 
 
 		//认

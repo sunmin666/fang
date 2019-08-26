@@ -20,13 +20,13 @@ return [
 
     'birthday'      =>'共有人生日',
 
-    'relation'      =>'共有人与客户之间的关系',
+    'relation'      =>'关系',
 
     'mobile'        =>'工有人手机号',
 
-    'created_at'    =>'共有人创建时间',
+    'created_at'    =>'创建时间',
 
-    'updated_at'    =>'共有人信息更新时间',
+    'updated_at'    =>'更新时间',
 
     'operating'     =>'操作',
 

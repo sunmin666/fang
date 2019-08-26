@@ -26,7 +26,7 @@
                     <input type="text" class="form-control" name="realname"
                            placeholder="请输客户姓名" id="realname"
                            onkeyup="value=value.replace(/[\d]/g,'') "
-                           value=" {{$coowner->realname}}"
+                           value="{{$coowner->realname}}"
                            maxlength="15">
                 </div>
 
@@ -35,8 +35,8 @@
                     <label>{{ trans('coownerinfo.mobile') }}：</label>
                     <input type="text" class="form-control" name="mobile"
                            placeholder="请输共有人手机号" id="mobile"
-                           onkeyup="value=value.replace(/[\d]/g,'') "
-                           value=" {{$coowner->mobile}}"
+                           onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"
+                           value="{{$coowner->mobile}}"
                            maxlength="11">
                 </div>
 
@@ -45,8 +45,8 @@
                     <label>{{ trans('coownerinfo.idcard') }}：</label>
                     <input type="text" class="form-control" name="idcard"
                            placeholder="请输共有人身份证号码" id="idcard"
-                           onkeyup="value=value.replace(/[\d]/g,'') "
-                           value=" {{$coowner->idcard}}"
+                           onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"
+                           value="{{$coowner->idcard}}"
                            maxlength="18">
                 </div>
 
@@ -63,8 +63,8 @@
                     {{--共有人性别--}}
                     <label>{{ trans('coownerinfo.sex') }}：</label>
                         <select name="sex" id="sex" class="form-control">s
-                            <option value="1" @if($coowner -> sex==0) selected @endif>女士</option>
-                            <option value="0" @if($coowner -> sex==1) selected @endif>男士</option>
+                            <option value="1" @if($coowner -> sex==0)selected @endif>女士</option>
+                            <option value="0" @if($coowner -> sex==1)selected @endif>男士</option>
                         </select>
                 </div>
 
@@ -120,8 +120,11 @@
         var sex = $( '#sex' ).val();                //共有人性别
         var relation = $( '#relation' ).val();      //共有人与客户之间的关系
 
-        var regEn = {{config('myconfig.config.regEn')}};
-        var regCn = {{config('myconfig.config.regCn')}};
+//        console.log(mobile,idcard);
+//        return false;
+
+        var mobile_pattern = {{config('myconfig.config.mobile_pattern')}};   //手机号正则匹配
+        var idcard_pattern = {{config('myconfig.config.idcard_pattern')}};           //身份证正则表达式
 
         if ( cust_id == '' || realname == '' || mobile == '' || idcard == ''
                 ||birthday==''|| sex=='' || relation==''
@@ -131,11 +134,23 @@
             return false;
         }
 
+        if ( !mobile_pattern.test( mobile ) ) {
+            layer.msg( '用户手机号不合法' , { time : 1456 } );
+            $( '#store1' ).attr( 'disabled' , false );
+            return false;
+        }
+
+        if ( !idcard_pattern.test( idcard ) ) {
+            layer.msg( '用户身份信息不合法' , { time : 1546 } );
+            $( '#store1' ).attr( 'disabled' , false );
+            return false;
+        }
+
         $.ajax( {
             url : "{{URL('coownerinfo/destroy')}}" ,
             type : 'post' ,
             data : {
-                c_id:"{{$$coowner-> coow_id}}",
+                c_id:"{{$coowner-> coow_id}}",
                 cust_id : cust_id ,         //客户姓名
                 realname : realname ,         //共有人姓名
                 mobile : mobile ,        //共有人手机号
@@ -147,13 +162,13 @@
             } ,
             success : function ( data ) {
                 console.log( data );
-                if ( data.code == {{config('myconfig.trackinfo.trackinfo_destroy_error_code')}}) {
+                if ( data.code == {{config('myconfig.coownerinfo.coownerinfo_destroy_error_code')}}) {
                     layer.msg( data.msg , { time : 2151 } );
                     $( "#store1" ).attr( 'disabled' , false );
                     return false;
                 }
 
-                if ( data.code == {{config('myconfig.trackinfo.trackinfo_destroy_success_code')}}) {
+                if ( data.code == {{config('myconfig.coownerinfo.coownerinfo_destroy_success_code')}}) {
                     layer.msg( data.msg , { time : 2000 } , function () {
                         window.parent.location.reload();
                     } );

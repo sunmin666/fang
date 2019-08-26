@@ -76,8 +76,8 @@
                                 @elseif($v -> relation==4)母亲@elseif($v -> relation==5)亲戚
                                 @endif
                             </td>
-                            <td>{{date('Y-m-d H:i',$v -> created_at)}}</td>
-                            <td>{{date('Y-m-d H:i',$v -> updated_at)}}</td>
+                            <td>{{date('Y-m-d H:i:s',$v -> created_at)}}</td>
+                            <td>@if($v -> updated_at == '')暂无更新时间@else{{date('Y-m-d H:i:s',$v -> updated_at)}}@endif</td>
                             <td>
                                 <button type="button" value="{{$v->coow_id}}" onclick="view({{$v->coow_id}})"
                                         class="btn btn-warning btn-xs btn_edit" id="btn_edit"><i
@@ -140,58 +140,58 @@
             }
         } );
 
-        {{--//全选删除--}}
-        {{--$( '.select_all' ).click( function () {--}}
-            {{--var page_count = $( '#page_count' ).val();--}}
-            {{--var vote = [];--}}
-            {{--for ( var i = 0 ; i < $( ".i-checks" ).length ; i++ ) {--}}
-                {{--if ( $( ".i-checks" ).eq( i ).prop( "checked" ) ) {--}}
-                    {{--vote.push( $( ".i-checks" ).eq( i ).val() )--}}
-                {{--}--}}
-            {{--}--}}
-            {{--if ( vote.length == 0 ) {--}}
-                {{--layer.msg( '{{trans('permission.delete_data')}}' , { time : 1000 } );--}}
-                {{--return false;--}}
-            {{--}--}}
+        //全选删除
+        $( '.select_all' ).click( function () {
+            var page_count = $( '#page_count' ).val();
+            var vote = [];
+            for ( var i = 0 ; i < $( ".i-checks" ).length ; i++ ) {
+                if ( $( ".i-checks" ).eq( i ).prop( "checked" ) ) {
+                    vote.push( $( ".i-checks" ).eq( i ).val() )
+                }
+            }
+            if ( vote.length == 0 ) {
+                layer.msg( '{{trans('permission.delete_data')}}' , { time : 1000 } );
+                return false;
+            }
 
-            {{--//生成询问框--}}
-            {{--layer.confirm( "{{trans('permission.is_delete_info')}}" , {--}}
-                {{--btn : ["{{trans('permission.confirm')}}" , "{{trans('permission.cancel')}}"]--}}
-            {{--} , function () {--}}
-                {{--$.ajax( {--}}
-                    {{--url : '{{URL('trackinfo/destroy_all')}}' ,--}}
-                    {{--type : 'post' ,--}}
-                    {{--data : {--}}
-                        {{--'all_id' : vote,--}}
-                        {{--'_token' : "{{csrf_token()}}"--}}
-                    {{--} ,--}}
-                    {{--success : function ( data ) {--}}
-                        {{--console.log( data );--}}
-                        {{--if ( data.code == {{config('myconfig.trackinfo.trackinfo_del_success_code')}} ) {--}}
-                            {{--layer.msg( data.msg , { time : 2000 } , function () {--}}
-                                {{--if ( page_count == vote.length ) {--}}
-                                    {{--location.href = "{{URL('trackinfo/37')}}";--}}
-                                {{--}--}}
-                                {{--else {--}}
-                                    {{--window.location.reload();--}}
-                                {{--}--}}
-                            {{--} );--}}
-                        {{--}--}}
-                        {{--else if ( data.code == {{config('myconfig.trackinfo.trackinfo_del_error_code')}} ) {--}}
-                            {{--layer.msg( data.msg , { time : 2000 } );--}}
-                        {{--}--}}
-                    {{--} ,--}}
-                    {{--error : function ( result ) {--}}
-                        {{--// 由于返回422的错误状态码，所以会自动调用ajax的错误函数，不需要人为再手工判断--}}
-                        {{--console.log( result );--}}
-                    {{--}--}}
-                {{--} )--}}
-            {{--} , function () {--}}
-                {{--layer.msg( "{{trans('permission.delete_cancel')}}" , {--}}
-                    {{--time : 1000 , //20s后自动关闭--}}
-                {{--} );--}}
-            {{--} );--}}
-        {{--} );--}}
+            //生成询问框
+            layer.confirm( "{{trans('permission.is_delete_info')}}" , {
+                btn : ["{{trans('permission.confirm')}}" , "{{trans('permission.cancel')}}"]
+            } , function () {
+                $.ajax( {
+                    url : '{{URL('coownerinfo/destroy_all')}}' ,
+                    type : 'post' ,
+                    data : {
+                        'all_id' : vote,
+                        '_token' : "{{csrf_token()}}"
+                    } ,
+                    success : function ( data ) {
+                        console.log( data );
+                        if ( data.code == {{config('myconfig.coownerinfo.coownerinfo_del_success_code')}} ) {
+                            layer.msg( data.msg , { time : 2000 } , function () {
+                                if ( page_count == vote.length ) {
+                                    location.href = "{{URL('coownerinfo/41')}}";
+                                }
+                                else {
+                                    window.location.reload();
+                                }
+                            } );
+                        }
+                        else if ( data.code == {{config('myconfig.coownerinfo.coownerinfo_del_error_code')}} ) {
+                            layer.msg( data.msg , { time : 2000 } );
+                        }
+                    } ,
+                    error : function ( result ) {
+                        // 由于返回422的错误状态码，所以会自动调用ajax的错误函数，不需要人为再手工判断
+                        console.log( result );
+                    }
+                } )
+            } , function () {
+                layer.msg( "{{trans('permission.delete_cancel')}}" , {
+                    time : 1000 , //20s后自动关闭
+                } );
+            } );
+        } );
 
 
         {{--//添加--}}
@@ -212,35 +212,35 @@
         {{--} );--}}
         {{--}--}}
 
-        {{--//删除信息--}}
-        {{--function d( trackid ) {--}}
-            {{--var page_count = $( '#page_count' ).val();--}}
-            {{--layer.confirm( "{{trans('memberinfo.is_delete_info')}}" , {--}}
-                {{--btn : ["{{trans('memberinfo.confirm')}}" , "{{trans('memberinfo.cancel')}}"] //按钮--}}
-            {{--} , function () {--}}
-                {{--$.post( "{{URL('trackinfo/del')}}" , { 'trackid' : trackid , '_token' : "{{csrf_token()}}" } ,--}}
-                        {{--function ( data ) {--}}
-                            {{--console.log( data );--}}
-                            {{--if ( data.code == {{config('myconfig.trackinfo.trackinfo_del_error_code')}} ) {--}}
-                                {{--layer.msg( data.msg , { time : 2000 } );--}}
-                            {{--}--}}
-                            {{--if ( data.code == {{config('myconfig.trackinfo.trackinfo_del_success_code')}} ) {--}}
-                                {{--layer.msg( data.msg , { time : 1000 } , function () {--}}
-                                    {{--if ( page_count == 1 ) {--}}
-                                        {{--location.href = "{{URL('trackinfo/37')}}";--}}
-                                    {{--}--}}
-                                    {{--else {--}}
-                                        {{--window.location.reload();--}}
-                                    {{--}--}}
-                                {{--} );--}}
-                            {{--}--}}
-                        {{--} );--}}
-            {{--} , function () {--}}
-                {{--layer.msg( "{{trans('memberinfo.delete_cancel')}}" , {--}}
-                    {{--time : 1000 , //10秒鐘后自動關閉--}}
-                {{--} );--}}
-            {{--} );--}}
-        {{--}--}}
+        //删除信息
+        function d( coow_id ) {
+            var page_count = $( '#page_count' ).val();
+            layer.confirm( "{{trans('memberinfo.is_delete_info')}}" , {
+                btn : ["{{trans('memberinfo.confirm')}}" , "{{trans('memberinfo.cancel')}}"] //按钮
+            } , function () {
+                $.post( "{{URL('coownerinfo/del')}}" , { 'coow_id' : coow_id , '_token' : "{{csrf_token()}}" } ,
+                        function ( data ) {
+                            console.log( data );
+                            if ( data.code == {{config('myconfig.coownerinfo.coownerinfo_del_error_code')}} ) {
+                                layer.msg( data.msg , { time : 2000 } );
+                            }
+                            if ( data.code == {{config('myconfig.coownerinfo.coownerinfo_del_success_code')}} ) {
+                                layer.msg( data.msg , { time : 1000 } , function () {
+                                    if ( page_count == 1 ) {
+                                        location.href = "{{URL('coownerinfo/41')}}";
+                                    }
+                                    else {
+                                        window.location.reload();
+                                    }
+                                } );
+                            }
+                        } );
+            } , function () {
+                layer.msg( "{{trans('memberinfo.delete_cancel')}}" , {
+                    time : 1000 , //10秒鐘后自動關閉
+                } );
+            } );
+        }
 
         //修改用户信息
         function edit( coow_id ) {
@@ -261,7 +261,7 @@
         }
 
         //查看详情
-        function view( trackid ) {
+        function view( coow_id ) {
             layer.open( {
                 type : 2 ,
                 title : '{{ trans('memberinfo.news_view') }}' ,
@@ -271,7 +271,7 @@
                 area : ['50%' , '70%'] , //宽高
                 shadeClose : false ,
                 shade : 0.5 ,
-                content : ["{{URL('trackinfo/view')}}" + "/" + trackid] ,
+                content : ["{{URL('coownerinfo/view')}}" + "/" + coow_id] ,
                 success : function ( layero , index ) {
                     $( ':focus' ).blur();
                 }
