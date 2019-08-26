@@ -60,7 +60,7 @@
 				{{--职业顾折扣--}}
 				<div class="form-group">
 					<label>{{ trans('consu.enjoy') }}：</label>
-					<select name="is_ipad" id="is_ipad" class="form-control">
+					<select name="enjoy" id="enjoy" class="form-control">
 						<option value="0">--请选择--</option>
 						@foreach($enjoy as $k => $v)
 							<option value="{{$v -> enjoy_id }}" @if($hous -> enjoy == $v -> enjoy_id) selected @endif> {{$v -> enjoy}} </option>
@@ -141,6 +141,10 @@
 		var idcrad = $( '#idcrad' ).val();    //职业顾问身份证号    *
 		var enjoy = $( '#enjoy' ).val();   //折扣  *
 		var is_ipad = $('#is_ipad').val();
+
+		// console.log(is_ipad);
+		// return false;
+
 		var proj_id = $( '#proj_id' ).val();    //顾问所属项目   *
 		var role_id = $( '#role_id' ).val();     //顾问所属公司   *
 		var perm_id = $( '#perm_id' ).val();     //顾问所属公司   *

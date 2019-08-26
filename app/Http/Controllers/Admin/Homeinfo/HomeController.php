@@ -12,6 +12,7 @@ class HomeController extends SessionController
 {
 	//房子信息展示页面
     public function index($perid){
+    	$this -> automatic();
 			$data = $this -> session();
 			$data['per_menu'] = $this -> get_per();
 			$data['page_name'] = trans( 'home.page_name' );
@@ -201,6 +202,7 @@ class HomeController extends SessionController
 
 	//图形信息首页
 	public function homegrp($perid){
+    	$this -> automatic();
 		$data = $this -> session();
 		$data['per_menu'] = $this -> get_per();
 		$data['page_name'] = trans( 'home.page_name' );
@@ -253,13 +255,29 @@ class HomeController extends SessionController
 				'msg'         => config('myconfig.home.home_update_error_msg')
 			];
 		}
-
-
-
 	}
 
 
 
+
+
+	//房子自动变为绿色
+
+	public function automatic(){
+    	//查询所有房子
+    $home = Home::get_all_homeinfos();
+		if(count($home) != 0){
+			foreach ($home as $k => $v){
+				$data = Home::get_buy($v -> homeid);
+				if($data -> finance_verify_status != 1 || $data -> finance_verify_status == null ){
+					if($data -> lock_time <= time()){
+						$update['status'] = 0;
+						Home::update_status_d($v-> homeid,$update);
+					}
+				}
+			}
+		}
+	}
 
 
 
