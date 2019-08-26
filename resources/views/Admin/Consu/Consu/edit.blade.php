@@ -141,6 +141,10 @@
 		var idcrad = $( '#idcrad' ).val();    //职业顾问身份证号    *
 		var enjoy = $( '#enjoy' ).val();   //折扣  *
 		var is_ipad = $('#is_ipad').val();
+
+		// console.log(is_ipad);
+		// return false;
+
 		var proj_id = $( '#proj_id' ).val();    //顾问所属项目   *
 		var role_id = $( '#role_id' ).val();     //顾问所属公司   *
 		var perm_id = $( '#perm_id' ).val();     //顾问所属公司   *

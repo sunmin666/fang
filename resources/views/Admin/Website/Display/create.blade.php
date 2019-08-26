@@ -92,10 +92,8 @@
 								'\t\t\t\t\t\t<div style="float: left;width: 88%;margin-top: 15px"><input type="text" id="text'+ counter +'" class="form-control" placeholder="请输入文字描述" value="" style="width: 100%"></div>\n' +
 								'\t\t\t\t\t</div>';
 							$('#imgssss').html($('#imgssss').html() + str);
-
 							var mun = Number(counter) + 1;
 							$('#counter').val(mun);
-
 							$('.delte_img').click(function(){
 								$(this).parent().remove();
 							});
@@ -139,7 +137,6 @@
 			$( "#store1" ).attr( 'disabled' , false );
 			return false;
 		}
-
 		$.ajax( {
 			url : "{{URL('display/store')}}" ,
 			type : 'post' ,
