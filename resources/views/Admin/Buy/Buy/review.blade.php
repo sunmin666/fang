@@ -15,7 +15,6 @@
 						<option value="">--请选则--</option>
 						<option value="1">通过</option>
 						<option value="0">不通过</option>
-
 					</select>
 				</div>
 

@@ -207,40 +207,25 @@ class HomeController extends SessionController
 		$data['page_detail'] = trans( 'home.page_detail' );
 		$data['page_tips'] = trans( 'index.page_tips' );
 		$data['page_note'] = trans( 'index.page_note' );
+		//查询所有的楼号
 		$data['buildnum'] = Home::get_all_buildnum();
+		//用户选择的楼号
 		$data['unit'] = $shu = Input::get('buildnums');
-		$data['dan'] = 1;
-		//dd($data['dan']);
-		$data['tu'] = 1;
-		$data['floor'] = '';
+		//根据楼号查询出单元号
+		$data['dan'] = Home::get_unitnum($shu);
+//		dd($data['unit'],$data['dan']);
+		//获取单元号
+		$data['unitnum'] = Input::get('unitnum');
+		//获取楼层
+		$data['floor'] = Input::get('floor');
+
+		$data['tu'] = Home::get_tu($shu);
+
+//		dd($data['tu']);
+
 		$data['ids'] = $perid;
 		return view('Admin/Home/Homegrp/index') -> with($data);
 	}
-
-	//post
-	public function	housing(Request $query)
-	{
-		$data = $this -> session();
-		$data['per_menu'] = $this -> get_per();
-		$data['page_name'] = trans( 'home.page_name' );
-		$data['page_detail'] = trans( 'home.page_detail' );
-		$data['page_tips'] = trans( 'index.page_tips' );
-		$data['page_note'] = trans( 'index.page_note' );
-		$data['buildnum'] = Home::get_all_buildnum();
-		$data['unit'] = $shu = $query->input('buildnums');
-		//dd($data);
-		$data['tu'] = Home::get_tu($shu);
-		$data['dan']=[];
-			foreach($data['tu'] as $k=>$v){
-				 array_push($data['dan'],$v['unit']);
-		}
-		//dd($data['dan']);
-		$data['unitnum'] = $query->input('unitnum');
-		$data['floor'] = $query->input('floor');
-		$data['ids'] = $query -> input('perid');
-		return view('Admin/Home/Homegrp/index') -> with($data);
-	}
-
 
 
 	//修改页面展示状态

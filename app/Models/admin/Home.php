@@ -32,6 +32,7 @@ class Home extends Model
 	}
 
 
+
 	//数据修改查询单挑数据
 	public static function get_d_home($homeid){
 		return DB::table('homeinfo') -> where('homeid','=',$homeid) -> first();
@@ -85,9 +86,10 @@ class Home extends Model
 				return (array)$value;
 			}) -> toArray();
 		$data = array();
-		//dd($unit);
+//		dd($unit);
 		foreach($unit as $k  => $v ){
 			$data[$k]['unit'] = $v['name'];
+			$data[$k]['unit_id'] = $v['field_id'];
 			//dd($data[$k]['unit']);
 			$data[$k]['fang'] = DB::table('homeinfo')
 				-> select('homeinfo.*','fieldinfob.name as buildnums','fieldinfou.name as unitnums','fieldinfor.name as roomnums')
