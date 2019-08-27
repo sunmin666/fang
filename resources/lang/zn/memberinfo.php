@@ -90,4 +90,6 @@
 
 			'trackinfo'					=> '跟踪',
 
+			'buyinfo'           => '认购',
+
 	];

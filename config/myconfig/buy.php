@@ -11,6 +11,8 @@
 			'homeinfo_status_code'   => 2,
 			'homeinfo_status_msg'    => '房源不能被认购',
 
+
+
 			'buy_store_success_code'  => 3,
 			'buy_store_success_msg'    => '恭喜你，认购成功',
 
@@ -53,4 +55,8 @@
 
 			'buy_cwview_error_code'   => 16,
 			'buy_cwview_error_msg'    => '系统错误',
+
+
+			'shen_code'          => 17,
+			'shen_msg'           => '客户身份证号已存在'
 	];

@@ -79,7 +79,7 @@
 							<td>@if($value -> loan_term == '') 一次性付款 @else {{$value -> loan_term}} @endif</td>
 							<td>{{$value-> total_price}}</td>
 							<td>
-								@if($value-> status != 3)
+								@if($value-> status != 3 && $value-> status != 4)
 									@if($value -> manager_verify_status == '')
 										经理未审核
 									@elseif($value -> manager_verify_status == 0)
@@ -93,14 +93,16 @@
 											财务审核通过
 										@endif
 									@endif
-								@else
+								@elseif($value-> status == 4)
+									认购时间以到
+									@else
 									客户已换房
 								@endif
 							</td>
 							<td>{{date('Y-m-d H:i',$value -> created_at)}}</td>
 
 							<td>
-								@if($value -> status != 3)
+								@if($value -> status != 3 && $value -> status != 4)
 									@if($value -> manager_verify_status == '')
 										<button type="button" value="{{$value -> buyid}}" onclick="huan({{$value -> buyid}},{{$value -> homeid}})"
 										        class="btn btn-warning btn-xs btn_edit" id="btn_edit"><i

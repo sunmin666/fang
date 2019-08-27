@@ -96,6 +96,9 @@
 								<button type="button" value="{{$value -> cust_id}}" onclick="trackinfo({{$value -> cust_id}})"
 										class="btn btn-warning btn-xs btn_edit" id="btn_trackinfo"><i
 										class="fa fa-edit"></i> {{trans('memberinfo.trackinfo')}}</button>
+								<button type="button" value="{{$value -> cust_id}}" onclick="buyinfo({{$value -> cust_id}})"
+								        class="btn btn-warning btn-xs btn_edit" id="btn_trackinfo"><i
+										class="fa fa-edit"></i> {{trans('memberinfo.buyinfo')}}</button>
 							</td>
 						</tr>
 					@endforeach
@@ -312,7 +315,6 @@
 			} );
 		}
 		//跟踪
-		//修改用户信息
 		function trackinfo( cust_id ) {
 			layer.open( {
 				type : 2 ,
@@ -324,6 +326,23 @@
 				shadeClose : false ,
 				shade : 0.5 ,
 				content : ["{{URL('trackinfo/showtrack')}}" + "/" + cust_id] ,
+				success : function ( layero , index ) {
+					$( ':focus' ).blur();
+				}
+			} );
+		}
+		//认购信息
+		function buyinfo(cust_id){
+			layer.open( {
+				type : 2 ,
+				title : '{{ trans('memberinfo.trackinfo') }}' ,
+				moveType : 0 ,
+				skin : 'layui-layer-demo' , //加上边框
+				closeBtn : 1 ,
+				area : ['50%' , '70%'] , //宽高
+				shadeClose : false ,
+				shade : 0.5 ,
+				content : ["{{URL('buyinfo/initiate')}}" + "/" + cust_id] ,
 				success : function ( layero , index ) {
 					$( ':focus' ).blur();
 				}

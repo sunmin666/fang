@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\SessionController;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Session;
+use App\Http\Controllers\Admin\Homeinfo\HomeController;
 
 class BuyController extends SessionController
 {
@@ -19,6 +20,9 @@ class BuyController extends SessionController
 	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
 	 */
     public function index($perid){
+
+    	$home = new HomeController();
+    	$home -> automatic();
 			$data = $this -> session();
 			$data['per_menu'] = $this -> get_per();
 			$data['page_name'] = trans( 'buy.page_name' );
@@ -47,6 +51,7 @@ class BuyController extends SessionController
 		public function create(){
     	//查询所有的楼号
 			$data['home'] = Buy::fieid();
+			$data['status'] = 2;
 			//查询所有用户
 			$data['customer'] = Buy::get_cus();
 			return view('Admin.Buy.Buy.create') -> with($data);
@@ -68,9 +73,11 @@ class BuyController extends SessionController
 
  		//添加认购信息
 	public function store(Request $query){
+		$cust_id = $query -> input('cust_id');     //客户id
 		$validator = Validator::make($query -> all(),[
 			'remarks'  => 'min:5|max:255',
 		]);
+
 		if($validator -> errors() -> get('remarks')){
 			return [
 				'code'          => config('myconfig.buy.remarks_code'),
@@ -86,10 +93,19 @@ class BuyController extends SessionController
 			];
 		}
 		//更新用户信息
-		$cust_id = $query -> input('cust_id');     //客户id
+
 		$cust['realname'] = $query -> input('names');  // 客户姓名
 		$cust['mobile'] = $query -> input('iphones'); //客户手机号
-		$cust['idcard'] = $query -> input('shens');  //客户身份号
+		$cust['idcard'] = $idcard =  $query -> input('shens');  //客户身份号
+
+		$info = Buy::get_cust_idcard($cust_id,$idcard);
+
+		if($info != 0){
+			return [
+				'code'          => config('myconfig.buy.shen_code'),
+				'msg'          => config('myconfig.buy.shen_msg'),
+			];
+		}
 		Buy::update_d_customer($cust_id,$cust);
 		//获取认购信息
 		$buy['cust_id'] = $cust_id;    //认购客户id
@@ -287,6 +303,7 @@ class BuyController extends SessionController
 			}
 	}
 
+	//财务审核提交
 	public function update_cwview(Request $query){
 		$buyid = $query -> input('buyid');
 		$data['finance_verify_status'] = $query -> input('manager_verify_status');
@@ -317,6 +334,20 @@ class BuyController extends SessionController
 			];
 		}
 	}
+
+
+	//在客户信息里面发起认购
+	public function initiate($cust_id){
+		//查询客户信息
+		$data['home'] = Buy::fieid();
+		//查询所有用户
+		$data['customer'] = Buy::get_d_cus($cust_id);
+		$data['status'] = 1;
+//		dd($data);
+		return view('Admin.Buy.Buy.create') -> with($data);
+	}
+
+
 
 
 }

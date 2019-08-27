@@ -269,10 +269,13 @@ class HomeController extends SessionController
 		if(count($home) != 0){
 			foreach ($home as $k => $v){
 				$data = Home::get_buy($v -> homeid);
-				if($data -> finance_verify_status != 1 || $data -> finance_verify_status == null ){
+				if($data -> finance_verify_status != 1 || $data -> finance_verify_status == null && $data -> status == 1){
 					if($data -> lock_time <= time()){
 						$update['status'] = 0;
 						Home::update_status_d($v-> homeid,$update);
+						//认购信息不能再使用
+						$buy['status'] = 4;
+						Home::update_buy_status($data -> buyid,$buy);
 					}
 				}
 			}

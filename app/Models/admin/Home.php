@@ -150,5 +150,10 @@
 							 ->first();
 		}
 
+		//更改认购状态
+		public static function update_buy_status($buy_id,$buy){
+			return DB::table('buyinfo') -> where('buyid','=',$buy_id) -> update($buy);
+		}
+
 
 	}
