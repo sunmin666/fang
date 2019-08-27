@@ -93,7 +93,7 @@
 		//查询认购信息
 		public static function get_all_buy($page){
 			return DB::table('buyinfo')
-							 ->select('buyinfo.*','customer.realname','homeinfo.buildnum','homeinfo.unitnum','homeinfo.roomnum','fieldinfob.name as buildnums','fieldinfou.name as unitnums','fieldinfor.name as roomnums')
+							 ->select('buyinfo.*','customer.realname','homeinfo.buildnum','homeinfo.unitnum','homeinfo.status as home_status','homeinfo.roomnum','fieldinfob.name as buildnums','fieldinfou.name as unitnums','fieldinfor.name as roomnums')
 							 -> leftJoin('customer','buyinfo.cust_id','=','customer.cust_id')
 								-> leftJoin('homeinfo','buyinfo.homeid','=','homeinfo.homeid')
 				-> leftJoin('fieldinfo as fieldinfob','homeinfo.buildnum','=','fieldinfob.field_id')
@@ -163,7 +163,7 @@
 			return DB::table('homeinfo') -> where('homeid','=',$homeid) -> update(array('status' => 0));
 		}
 
-
+		//更新房子状态
 		public static function update_home_statuss($homeid){
 			return DB::table('homeinfo') -> where('homeid','=',$homeid) -> update(array('status' => 2));
 
@@ -180,5 +180,23 @@
 				array('status' => 0)
 			);
 		}
+
+		//查询客户信息
+		public static function get_d_cus($cust_id){
+			return DB::table('customer')
+							 -> select('customer.cust_id','customer.realname','customer.mobile','customer.idcard')
+								-> where('cust_id','=',$cust_id)
+							-> first();
+		}
+
+
+
+		//查询客户身份证是否重复
+		public static function get_cust_idcard($cust_id,$idcard){
+			return DB::table('customer')
+							 -> where('cust_id','!=',$cust_id)
+							 ->where('idcard','=',$idcard) -> count();
+		}
+
 
 	}

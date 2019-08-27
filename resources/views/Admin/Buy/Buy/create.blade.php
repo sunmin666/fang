@@ -16,6 +16,8 @@
 		<div class="box-body">
 			{{ csrf_field() }}
 			<form role="form" action="#" method="post" name="reg_memberinfo" id="reg_memberinfo">
+
+			@if($status == 2)
 				<div class="form-group">
 					<label>{{ trans('buy.cust_id') }}：</label>
 					<select name="cust_id" id="cust_id" class="form-control">
@@ -46,9 +48,36 @@
 					<label>身份证号：</label>
 					<input type="text" class="form-control"
 					       {{--onkeyup="value=value.replace(/[^\d.]/g,'')"--}}
-					       name="shen" placeholder="" id="shens"
-					       maxlength="12">
+					       name="idcard" placeholder="" id="shens"
+					       maxlength="18">
 				</div>
+			@else
+					<input type="hidden" id="cust_id" value="{{$customer -> cust_id}}">
+					<div class="form-group">
+						{{--<label>{{ trans('buy.pay_num')}}：</label>--}}
+						<label>用户姓名：</label>
+						<input type="text" class="form-control"
+						       value="{{$customer -> realname}}"
+						       name="name" placeholder="" id="names"
+						       maxlength="12">
+					</div>
+					<div class="form-group">
+						{{--<label>{{ trans('buy.pay_num')}}：</label>--}}
+						<label>手机号：</label>
+						<input type="text" class="form-control"
+						       value="{{$customer -> mobile}}"
+						       name="iphone" placeholder="" id="iphones"
+						       maxlength="12">
+					</div>
+					<div class="form-group" >
+						{{--<label>{{ trans('buy.pay_num')}}：</label>--}}
+						<label>身份证号：</label>
+						<input type="text" class="form-control"
+						       value="{{$customer -> idcard}}"
+						       name="idcard" placeholder="" id="shens"
+						       maxlength="18">
+					</div>
+			@endif
 				{{--<div class="form-group none" id="dizhi">--}}
 				{{--<label>{{ trans('buy.pay_num')}}：</label>--}}
 				{{--<label>地址：</label>--}}
@@ -75,7 +104,6 @@
 					</select>
 				</div>
 				<br><br>
-
 
 				<div class="form-group none" id="buildnumss">
 					{{--<label>{{ trans('buy.pay_num')}}：</label>--}}
@@ -460,7 +488,7 @@
 		var iphones = $( '#iphones' ).val();     //客户手机号
 		var shens = $( '#shens' ).val();    // 身份证号
 		if ( names == '' || iphones == '' || shens == '' ) {
-			layer.msg( '请选择用户' , { time : 1563 } );
+			layer.msg( '用户信息不全' , { time : 1563 } );
 			return false;
 		}
 
@@ -624,6 +652,10 @@
 					$( "#store1" ).attr( 'disabled' , false );
 				}
 				if ( data.code == {{config('myconfig.buy.remarks_code')}}) {
+					layer.msg( data.msg , { time : 2000 } );
+					$( "#store1" ).attr( 'disabled' , false );
+				}
+				if ( data.code == {{config('myconfig.buy.shen_code')}}) {
 					layer.msg( data.msg , { time : 2000 } );
 					$( "#store1" ).attr( 'disabled' , false );
 				}
