@@ -16,6 +16,12 @@ class Coownerinfo extends Model
             -> paginate($page);
     }
 
+    //添加房屋共有人
+    public static function store_coowner($data)
+    {
+        return DB::table('coownerinfo')->insert($data);
+    }
+
     //房屋共有人修改查询单条数据
     public static function get_d_coowner($coow_id){
         return DB::table('coownerinfo')
@@ -23,6 +29,12 @@ class Coownerinfo extends Model
             -> leftJoin('customer','coownerinfo.cust_id','=','customer.cust_id')
             ->where('coownerinfo.coow_id','=',$coow_id)
             -> first();
+    }
+
+    //查询当前用户
+    public static function get_customer($cust_id)
+    {
+        return DB::table('customer')->where('cust_id','=',$cust_id)->get();
     }
 
     //房屋共有人数据修改

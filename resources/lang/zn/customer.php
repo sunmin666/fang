@@ -36,5 +36,26 @@
 
 
 
+		'cognition'	=> '客户认知渠道',
+
+		'family_str' => '家庭结构',
+
+		'work_type'  => '工作类型',
+
+		'address'	=> '联系地址',
+
+		'intention_area' => '意向面积',
+
+		'floor_like'	=>'楼层偏好',
+
+		'furniture_need' => '家具需求',
+
+		'house_num' => '置业此数',
+
+		'first_contact'	=>'首次接触方式',
+
+		'status_id'	=>	'客户状态',
+
+		'hous_id' =>'职业顾问',
 
 	];

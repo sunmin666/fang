@@ -31,6 +31,8 @@ class CustomerController extends SessionController
 		$data['page_note'] = trans( 'index.page_note' );
 		$page = config('myconfig.config.page_num');
 		$data['omer'] = Customer::get_all_omer($page);
+		//查询所有职业顾问
+		$data['hous_id'] = Customer::get_hous_id_all();
 //		dd($data['omer']);
 		$data['ids'] = $perid;
 		return view('Admin.Customer.Customer.index') -> with($data);
@@ -46,6 +48,27 @@ class CustomerController extends SessionController
 
 		//查询属项目
 		$data['project'] = Consu::get_poje();
+		//查询所有客户认知渠道
+		$data['cognition'] = Customer::get_cognition_all();
+		//dd($data['cognition']);
+		//查询所有家庭结构
+		$data['family_str'] = Customer::get_family_str_all();
+		//查询所有工作类型get_intention_area_all
+		$data['work_type'] =Customer::get_work_type_all();
+		//查询所有意向面积get_floor_like_all
+		$data['intention_area'] = Customer::get_intention_area_all();
+		//查询所有楼层偏好
+		$data['floor_like']	= Customer::get_floor_like_all();
+		//查询所有家具
+		$data['furniture_need'] = Customer::get_furniture_need_all();
+		//查询所有置业此数
+		$data['house_num'] =Customer::get_house_num_all();
+		//查询所有首次接触方式
+		$data['first_contact'] = Customer::get_first_contact_all();
+		//查询所有客户状态
+		$data['status_id'] = Customer::get_status_id_all();
+		//查询所有职业顾问
+		$data['hous_id'] = Customer::get_hous_id_all();
 		return view('Admin.Customer.Customer.create') -> with($data);
 	}
 
@@ -92,11 +115,17 @@ class CustomerController extends SessionController
 		$data['idcard'] = $query -> input('idcrad');
 		$data['proj_id'] = $query -> input('proj_id');
 		$data['comp_id'] = $query -> input('comp_id');
-		if(Session::get('session_member.status') == 1){
-			$data['hous_id'] = Session::get('session_member.id');
-		}else{
-			$data['hous_id']  = 0;
-		}
+		$data['cognition'] = $query -> input('cognition');
+		$data['family_str'] = $query -> input('family_str');
+		$data['work_type'] = $query -> input('work_type');
+		$data['address'] = $query -> input('address');
+		$data['intention_area'] = $query -> input('intention_area');
+		$data['floor_like'] = $query -> input('floor_like');
+		$data['furniture_need'] = $query -> input('furniture_need');
+		$data['house_num'] = $query -> input('house_num');
+		$data['first_contact'] = $query -> input('first_contact');
+		$data['status_id'] = $query -> input('status_id');
+		$data['hous_id'] = $query -> input('hous_id');
 		$data['created_at'] = time();
 		$info = Customer::store_d_customer($data);
 		if($info){
@@ -121,8 +150,32 @@ class CustomerController extends SessionController
 	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
 	 */
 	public function view($cust_id){
+		//查询属项目
+		$data['project'] = Consu::get_poje();
+		//客户单条信息
 		$data['omer'] = Customer::get_d_omer($cust_id);
-//		dd($data);
+		//查询所有客户认知渠道
+		$data['cognition'] = Customer::get_cognition_all();
+		//dd($data['cognition']);
+		//查询所有家庭结构
+		$data['family_str'] = Customer::get_family_str_all();
+		//查询所有工作类型get_intention_area_all
+		$data['work_type'] =Customer::get_work_type_all();
+		//查询所有意向面积get_floor_like_all
+		$data['intention_area'] = Customer::get_intention_area_all();
+		//查询所有楼层偏好
+		$data['floor_like']	= Customer::get_floor_like_all();
+		//查询所有家具
+		$data['furniture_need'] = Customer::get_furniture_need_all();
+		//查询所有置业此数
+		$data['house_num'] =Customer::get_house_num_all();
+		//查询所有首次接触方式
+		$data['first_contact'] = Customer::get_first_contact_all();
+		//查询所有客户状态
+		$data['status_id'] = Customer::get_status_id_all();
+		//查询所有职业顾问
+		$data['hous_id'] = Customer::get_hous_id_all();
+
 		return view('Admin.Customer.Customer.view') -> with($data);
 	}
 
@@ -135,9 +188,33 @@ class CustomerController extends SessionController
 	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
 	 */
 	public function edit($cust_id){
-//		$data['company'] = Consu::get_d_company();             //查询公司
-		$data['omer'] = Customer::get_d_omer($cust_id);
+		//查询属项目
 		$data['project'] = Consu::get_poje();
+		//客户单条信息
+		$data['omer'] = Customer::get_d_omer($cust_id);
+		//查询所有客户认知渠道
+		$data['cognition'] = Customer::get_cognition_all();
+		//dd($data['cognition']);
+		//查询所有家庭结构
+		$data['family_str'] = Customer::get_family_str_all();
+		//查询所有工作类型get_intention_area_all
+		$data['work_type'] =Customer::get_work_type_all();
+		//查询所有意向面积get_floor_like_all
+		$data['intention_area'] = Customer::get_intention_area_all();
+		//查询所有楼层偏好
+		$data['floor_like']	= Customer::get_floor_like_all();
+		//查询所有家具
+		$data['furniture_need'] = Customer::get_furniture_need_all();
+		//查询所有置业此数
+		$data['house_num'] =Customer::get_house_num_all();
+		//查询所有首次接触方式
+		$data['first_contact'] = Customer::get_first_contact_all();
+		//查询所有客户状态
+		$data['status_id'] = Customer::get_status_id_all();
+		//查询所有职业顾问
+		$data['hous_id'] = Customer::get_hous_id_all();
+		//dd($data);
+		//dd($data['hous_id']);
 		return view('Admin.Customer.Customer.edit')  -> with($data);
 	}
 
@@ -185,6 +262,17 @@ class CustomerController extends SessionController
 		$data['idcard'] = $query -> input('idcrad');
 		$data['proj_id'] = $query -> input('proj_id');
 		$data['comp_id'] = $query -> input('comp_id');
+		$data['cognition'] = $query -> input('cognition');
+		$data['family_str'] = $query -> input('family_str');
+		$data['work_type'] = $query -> input('work_type');
+		$data['address'] = $query -> input('address');
+		$data['intention_area'] = $query -> input('intention_area');
+		$data['floor_like'] = $query -> input('floor_like');
+		$data['furniture_need'] = $query -> input('furniture_need');
+		$data['house_num'] = $query -> input('house_num');
+		$data['first_contact'] = $query -> input('first_contact');
+		$data['status_id'] = $query -> input('status_id');
+		$data['hous_id'] = $query -> input('hous_id');
 		$info = Customer::update_d_omer($cust_id,$data);
 		if($info){
 			return [

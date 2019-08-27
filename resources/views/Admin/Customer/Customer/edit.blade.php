@@ -99,6 +99,125 @@
 						@endforeach
 					</select>
 				</div>
+
+				{{--客户认知渠道--}}
+				<div class="form-group">
+					<label>{{ trans('customer.cognition') }}：</label>
+					<select name="cognition" id="cognition" class="form-control">
+						{{--<option value="{{$omer -> cognition}}">@if($omer -> cognition==$cognition -> field_id){{$v -> name}}@endif</option>--}}
+						@foreach($cognition as $k => $v)
+							<option value="{{$v -> field_id}}" @if($omer -> cognition==$v-> field_id) selected @endif>{{$v -> name}}</option>
+						@endforeach
+					</select>
+				</div>
+
+				{{--家庭结构--}}
+				<div class="form-group">
+					<label>{{ trans('customer.family_str') }}：</label>
+					<select name="family_str" id="family_str" class="form-control">
+						<option value="">--请选择--</option>
+						@foreach($family_str as $k => $v)
+							<option value="{{$v -> field_id}}" @if($omer -> family_str==$v-> field_id) selected @endif>{{$v -> name}}</option>
+						@endforeach
+					</select>
+				</div>
+
+				{{--工作类型--}}
+				<div class="form-group">
+					<label>{{ trans('customer.work_type') }}：</label>
+					<select name="work_type" id="work_type" class="form-control">
+						<option value="">--请选择--</option>
+						@foreach($work_type as $k => $v)
+							<option value="{{$v -> field_id}}" @if($omer -> work_type==$v-> field_id) selected @endif>{{$v -> name}}</option>
+						@endforeach
+					</select>
+				</div>
+
+				{{--联系地址--}}
+				<div class="form-group">
+					<label>{{ trans('customer.address') }}：</label>
+					<input type="text" class="form-control" name="address"
+						   placeholder="请输入联系地址"
+						   id="address" value="{{$omer -> address}}"
+						   maxlength="25">
+				</div>
+
+				{{--意向面积--}}
+				<div class="form-group">
+					<label>{{ trans('customer.intention_area') }}：</label>
+					<select name="intention_area" id="intention_area" class="form-control">
+						<option value="">--请选择--</option>
+						@foreach($intention_area as $k => $v)
+							<option value="{{$v -> field_id}}" @if($omer -> intention_area==$v-> field_id) selected @endif>{{$v -> name}}</option>
+						@endforeach
+					</select>
+				</div>
+
+				{{--楼层偏好--}}
+				<div class="form-group">
+					<label>{{ trans('customer.floor_like') }}：</label>
+					<select name="floor_like" id="floor_like" class="form-control">
+						<option value="">--请选择--</option>
+						@foreach($floor_like as $k => $v)
+							<option value="{{$v -> field_id}}" @if($omer -> floor_like==$v-> field_id) selected @endif>{{$v -> name}}</option>
+						@endforeach
+					</select>
+				</div>
+
+				{{--家具需求--}}
+				<div class="form-group">
+					<label>{{ trans('customer.furniture_need') }}：</label>
+					<select name="furniture_need" id="furniture_need" class="form-control">
+						<option value="">--请选择--</option>
+						@foreach($furniture_need as $k => $v)
+							<option value="{{$v -> field_id}}" @if($omer -> furniture_need==$v-> field_id) selected @endif>{{$v -> name}}</option>
+						@endforeach
+					</select>
+				</div>
+
+				{{--置业此数--}}
+				<div class="form-group">
+					<label>{{ trans('customer.house_num') }}：</label>
+					<select name="house_num" id="house_num" class="form-control">
+						<option value="">--请选择--</option>
+						@foreach($house_num as $k => $v)
+							<option value="{{$v -> field_id}}" @if($omer -> house_num==$v-> field_id) selected @endif>{{$v -> name}}</option>
+						@endforeach
+					</select>
+				</div>
+
+				{{--首次接触方式--}}
+				<div class="form-group">
+					<label>{{ trans('customer.first_contact') }}：</label>
+					<select name="first_contact" id="first_contact" class="form-control">
+						<option value="">--请选择--</option>
+						@foreach($first_contact as $k => $v)
+							<option value="{{$v -> field_id}}" @if($omer -> first_contact==$v-> field_id) selected @endif>{{$v -> name}}</option>
+						@endforeach
+					</select>
+				</div>
+
+				{{--客户状态--}}
+				<div class="form-group">
+					<label>{{ trans('customer.status_id') }}：</label>
+					<select name="status_id" id="status_id" class="form-control">
+						<option value="">--请选择--</option>
+						@foreach($status_id as $k => $v)
+							<option value="{{$v -> field_id}}" @if($omer -> status_id==$v-> field_id) selected @endif>{{$v -> name}}</option>
+						@endforeach
+					</select>
+				</div>
+
+				{{--职业顾问--}}
+				<div class="form-group">
+					<label>{{ trans('customer.hous_id') }}：</label>
+					<select name="hous_id" id="hous_id" class="form-control">
+						<option value="">--请选择--</option>
+						@foreach($hous_id as $k => $v)
+							<option value="{{$v -> hous_id}}" @if($omer -> hous_id==$v-> hous_id) selected @endif>{{$v -> name}}</option>
+						@endforeach
+					</select>
+				</div>
 				{{ csrf_field()}}
 			</form>
 		</div>
@@ -141,7 +260,7 @@
 	//添加到数据库
 	$( '#store1' ).click( function () {
 
-		$( "#store1" ).attr( 'disabled' , true );
+//		$( "#store1" ).attr( 'disabled' , true );
 		var realname = $( '#realname' ).val();   //客户姓名   *
 		var sex = $( 'input[name= sex]:checked' ).val();   //客户性别  *
 		var mobile = $( '#mobile' ).val();  //客户手机号    *
@@ -153,10 +272,24 @@
 		var proj_id = $( '#proj_id' ).val();    //客户所属项目   *
 		var comp_id = $( '#comp_id' ).val();     //客户所属公司   *
 		var cust_id = $('#cust_id').val();      //要更新客户资料的自增id
-
-
+		var cognition = $( '#cognition' ).val(); //客户认知渠道
+		var family_str = $( '#family_str' ).val(); //家庭结构
+		var work_type = $( '#work_type' ).val(); //工作类型
+		var address = $( '#address' ).val(); //联系地址
+		var intention_area = $( '#intention_area' ).val(); //意向面积
+		var floor_like = $( '#floor_like' ).val(); //楼层偏好
+		var furniture_need = $( '#furniture_need' ).val(); //家具需求
+		var house_num = $( '#house_num' ).val(); //置业此数
+		var first_contact = $( '#first_contact' ).val(); //首次接触方式
+		var status_id = $( '#status_id' ).val(); //客户状态hous_id
+		var hous_id = $( '#hous_id' ).val(); 	//职业顾问
+		//alert(hous_id);
 		if (
-			realname == '' || sex == '' || mobile == '' || proj_id == '' || comp_id == '' ) {
+			realname == '' || sex == '' || mobile == '' || proj_id == '' || comp_id == '' ||
+			cognition == '' || family_str == '' || work_type =='' || address == '' ||
+			intention_area == '' || floor_like == '' || furniture_need == ''|| house_num == ''||
+			first_contact == ''	||	status_id == '' || hous_id == ''
+		) {
 			layer.msg( '{{trans('company.text_content1')}}' , { time : 1235 } );
 			$( "#store1" ).attr( 'disabled' , false );
 			return false;
@@ -213,6 +346,17 @@
 				idcrad : idcrad ,          //身份证号
 				proj_id : proj_id ,      //所属项目id
 				comp_id : comp_id ,    //所属公司id
+				cognition : cognition,	 //客户认知渠道
+				family_str : family_str,  //家庭结构
+				work_type : work_type,   //工作类型
+				address : address,		//联系地址
+				intention_area : intention_area,  //意向面积
+				floor_like : floor_like,     //楼层偏好
+				furniture_need : furniture_need, //家具需求
+				house_num : house_num,		//置业此数
+				first_contact : first_contact,   //首次接触方式
+				status_id : status_id,      //客户状态
+				hous_id : hous_id,			//职业顾问
 				_token : "{{csrf_token()}}"             //post提交token验证
 			} ,
 			success : function ( data ) {

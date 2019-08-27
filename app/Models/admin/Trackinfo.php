@@ -19,7 +19,8 @@ class Trackinfo extends Model
     }
 
     //客户跟踪添加数据
-    public static function store_track($data){
+    public static function store_track($data)
+    {
         return DB::table('trackinfo') -> insert($data);
     }
 
@@ -34,7 +35,8 @@ class Trackinfo extends Model
     }
 
     //客户跟踪修改查询单条数据
-    public static function get_d_trackinfo($trackid){
+    public static function get_d_trackinfo($trackid)
+    {
         return DB::table('trackinfo')
             -> select('trackinfo.*','customer.realname','houserinfo.name')
             -> leftJoin('customer','trackinfo.cust_id','=','customer.cust_id')
@@ -43,12 +45,14 @@ class Trackinfo extends Model
     }
 
     //客户跟踪修改信息
-    public static function update_d_trackinfo($c_id,$data){
+    public static function update_d_trackinfo($c_id,$data)
+    {
         return DB::table('trackinfo') -> where('trackid','=',$c_id) -> update($data);
     }
 
     //客户跟踪单条删除
-    public static function del_d_trackinfo($trackid){
+    public static function del_d_trackinfo($trackid)
+    {
         return DB::table('trackinfo') -> where('trackid','=',$trackid) -> delete();
     }
 

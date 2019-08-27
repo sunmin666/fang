@@ -19,4 +19,9 @@ return [
     'coownerinfo_del_error_code'          =>'4',
     'coownerinfo_del_error_msg'           =>'删除失败',
 
+    'coownerinfo_store_success_code'      =>'5',
+    'coownerinfo_store_success_msg'       =>'添加成功',
+
+    'coownerinfo_store_error_code'        =>'6',
+    'coownerinfo_store_error_msg'         =>'添加失败',
 ];

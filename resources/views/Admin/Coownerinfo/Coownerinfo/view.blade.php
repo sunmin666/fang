@@ -29,7 +29,7 @@
                                 @elseif($coowner -> relation==2)女儿@elseif($coowner -> relation==3)父亲
                                 @elseif($coowner -> relation==4)母亲@elseif($coowner -> relation==5)亲戚
                                 @endif</div>
-<div><span>共有创建时间：</span>{{date('Y-m-d H:i:s',$coowner -> created_at)}}</div>
-<div><span>共有人信息更新时间：</span>@if($coowner -> updated_at == '')暂无更新时间@else{{date('Y-m-d H:i:s',$coowner -> updated_at)}}@endif</div>
+<div><span>创建时间：</span>{{date('Y-m-d H:i:s',$coowner -> created_at)}}</div>
+<div><span>信息更新时间：</span>@if($coowner -> updated_at == '')暂无更新时间@else{{date('Y-m-d H:i:s',$coowner -> updated_at)}}@endif</div>
 </body>
 </html>

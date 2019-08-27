@@ -22,7 +22,7 @@ return [
 
     'relation'      =>'关系',
 
-    'mobile'        =>'工有人手机号',
+    'mobile'        =>'共有人手机号',
 
     'created_at'    =>'创建时间',
 

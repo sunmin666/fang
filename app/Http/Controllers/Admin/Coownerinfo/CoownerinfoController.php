@@ -25,6 +25,39 @@ class CoownerinfoController extends SessionController
         return view('Admin/Coownerinfo/Coownerinfo/index')->with($data);
     }
 
+    //房屋共有人添加页面
+    public static function show_cowner($cust_id)
+    {
+        $data['name'] = Coownerinfo::get_customer($cust_id);
+        //dd($data['name']);
+        return view('Admin/Coownerinfo/Coownerinfo/create') ->with($data);
+    }
+
+    //房屋共有人添加
+    public function store(Request $query)
+    {
+        $data['cust_id'] = $query -> input('cust_id');       //客户姓名
+        $data['realname'] = $query->input('realname');         //共有人姓名
+        $data['mobile'] = $query->input('mobile');              //共有人手机号
+        $data['idcard'] = $query->input('idcard');              //共有人身份证号
+        $data['birthday'] = strtotime($query->input('birthday'));          //共有人生日
+        $data['sex'] = $query->input('sex');                     //共有人性别
+        $data['relation'] = $query->input('relation');          //共有人与客户之间的关系
+        $data['created_at'] = time();                       //添加时间
+        $add_coowner = Coownerinfo::store_coowner($data);
+        if($add_coowner){
+            return [
+                'code'   => config('myconfig.coownerinfo.coownerinfo_store_success_code'),
+                'msg'    => config('myconfig.coownerinfo.coownerinfo_store_success_msg')
+            ];
+        }else{
+            return [
+                'code'   => config('myconfig.coownerinfo.coownerinfo_store_error_code'),
+                'msg'    => config('myconfig.coownerinfo.coownerinfo_store_error_msg')
+            ];
+        }
+    }
+
     //房屋共有人修改页面展示
     public function edit($coow_id)
     {

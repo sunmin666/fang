@@ -510,7 +510,10 @@
 		Route::post('coownerinfo/del','Admin\Coownerinfo\CoownerinfoController@del');
 		//房屋共有人全选删除
 		Route::post('coownerinfo/destroy_all','Admin\Coownerinfo\CoownerinfoController@destroy_all');
-
+		//房屋共有人添加页面
+		Route::get('coownerinfo/get_coowner/{cust_id}','Admin\Coownerinfo\CoownerinfoController@show_cowner');
+		//房屋共有人添加
+		Route::post('coownerinfo/store','Admin\Coownerinfo\CoownerinfoController@store');
 
 		//认
 		//购

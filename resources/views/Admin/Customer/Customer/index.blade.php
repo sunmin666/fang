@@ -53,6 +53,8 @@
 						<th>{{trans('customer.comp_id')}}</th>
 						{{--所属醒目--}}
 						<th>{{trans('customer.proj_id')}}</th>
+						{{--所属醒目--}}
+						<th>{{trans('customer.hous_id')}}</th>
 						{{--客户录入时间--}}
 						<th>{{trans('customer.created_at')}}</th>
 						{{--操作--}}
@@ -71,6 +73,10 @@
 							<td>@if($value-> email == '') 该客户暂未留下邮箱 @else {{$value -> email}} @endif</td>
 							<td>@if($value -> comp_id == 1) 西安开米@endif</td>
 							<td>{{$value-> pro_cname}}</td>
+							<td>@foreach($hous_id as $k => $v)
+									@if($v -> hous_id == $value -> hous_id) {{$v -> name}}  @endif
+								@endforeach
+							</td>
 							<td>{{date('Y-m-d H:i',$value -> created_at)}}</td>
 							{{--<td>@if($value -> status_id == 1) 正常 @elseif($value -> status_id == 0) 禁用 @endif</td>--}}
 							<td>
@@ -96,6 +102,9 @@
 								<button type="button" value="{{$value -> cust_id}}" onclick="trackinfo({{$value -> cust_id}})"
 										class="btn btn-warning btn-xs btn_edit" id="btn_trackinfo"><i
 										class="fa fa-edit"></i> {{trans('memberinfo.trackinfo')}}</button>
+								<button type="button" value="{{$value -> cust_id}}" onclick="customer({{$value -> cust_id}})"
+										class="btn btn-warning btn-xs btn_edit" id="btn_customero"><i
+											class="fa fa-edit"></i> {{trans('memberinfo.customer')}}</button>
 							</td>
 						</tr>
 					@endforeach
@@ -219,6 +228,25 @@
 				}
 			} );
 		} );
+
+		//共有人
+		function customer( cust_id ) {
+			layer.open( {
+				type : 2 ,
+				title : '{{ trans('memberinfo.news_edits') }}' ,
+				moveType : 0 ,
+				skin : 'layui-layer-demo' , //加上边框
+				closeBtn : 1 ,
+				area : ['50%' , '70%'] , //宽高
+				shadeClose : false ,
+				shade : 0.5 ,
+				content : ["{{URL('coownerinfo/get_coowner')}}" + "/" + cust_id] ,
+				success : function ( layero , index ) {
+					$( ':focus' ).blur();
+				}
+			} );
+		}
+
 		//删除信息
 		function d( cust_id ,is_show) {
 			var page_count = $( '#page_count' ).val();
