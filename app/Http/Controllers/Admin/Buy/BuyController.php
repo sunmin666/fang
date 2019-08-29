@@ -349,6 +349,25 @@ class BuyController extends SessionController
 	}
 
 
+	//多选删除认购信息
+	public function destroy_all(Request $query){
+			$buy_id = $query -> input('buyid');
+
+			$delete_buy = Buy::update_buyinfo($buy_id);
+
+		if($delete_buy){
+			return [
+				'code'          => config('myconfig.buy.buy_delete_success_code'),
+				'msg'           => config('myconfig.buy.buy_delete_success_msg'),
+			];
+		}else{
+			return [
+				'code'          => config('myconfig.buy.buy_delete_error_code'),
+				'msg'           => config('myconfig.buy.buy_delete_error_msg'),
+			];
+		}
+
+	}
 
 
 }

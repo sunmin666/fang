@@ -12,8 +12,6 @@
 		<div class="box-header with-border">
 			<button type="button" class="btn btn-dropbox btn-sm" id="refresh"><i
 					class="fa fa-refresh"></i> {{ trans('memberinfo.refresh') }}</button>
-
-
 			<div class="box-tools pull-right">
 				<button type="button" class="btn btn-danger btn-sm weekly-day" id="news_day"
 				><i class="fa fa-plus"></i>
@@ -37,10 +35,10 @@
 				<table class="table no-margin">
 					<thead>
 					<tr>
-						{{--<th width="130px">--}}
-							{{--<button type="button" class="btn btn-warning btn-xs" id="data_select" data-select-all="true"><i--}}
-									{{--class="glyphicon glyphicon-ok"></i>{{ trans('memberinfo.allAlection') }}</button>--}}
-						{{--</th>--}}
+						<th width="130px">
+							<button type="button" class="btn btn-warning btn-xs" id="data_select" data-select-all="true"><i
+									class="glyphicon glyphicon-ok"></i>{{ trans('memberinfo.allAlection') }}</button>
+						</th>
 						{{--认购客户--}}
 						<th>{{ trans('buy.cust_id') }}</th>
 						{{--认购房源--}}
@@ -67,9 +65,9 @@
 					<tbody>
 					@foreach($buy as $value)
 						<tr>
-							{{--<td><input type="checkbox" class="i-checks" id="groupCheckbox" name="groupCheckbox[]"--}}
-							           {{--value="{{$value->buyid}}"--}}
-								{{--></td>--}}
+							<td><input type="checkbox" class="i-checks" id="groupCheckbox" name="groupCheckbox[]"
+							           value="{{$value->buyid}}"
+								></td>
 							<td>{{ $value -> realname}}</td>
 							<td>{{$value -> roomnums}}</td>
 							<td>{{$value -> buy_number}}</td>
@@ -150,8 +148,8 @@
 		</div>
 		<!-- /.box-body -->
 		<div class="box-footer clearfix">
-			{{--<a href="javascript:void(0)" class="btn btn-danger btn-xs pull-left select_all"><i--}}
-					{{--class="fa fa-trash"></i>{{ trans('memberinfo.select_all_delete') }}</a>--}}
+			<a href="javascript:void(0)" class="btn btn-danger btn-xs pull-left select_all"><i
+					class="fa fa-trash"></i>{{ trans('memberinfo.select_all_delete') }}</a>
 			<div class=" pull-right">{{$buy -> links()}}</div>
 			<input type="hidden" value="{{$buy -> count()}}" id="page_count">
 		</div>
@@ -176,74 +174,74 @@
 
 
 		//一键选择与取消
-		{{--var select_all_btn = 0;--}}
-		{{--$( "#data_select" ).click( function () {--}}
-			{{--if ( select_all_btn == 0 ) {--}}
-				{{--$( "#data_select" ).html( "<i class='glyphicon glyphicon-remove'></i> {{ trans('permission.cancel') }}" );--}}
-				{{--$( '.i-checks' ).each( function () {--}}
-					{{--$( this ).iCheck( 'check' );--}}
-				{{--} );--}}
-				{{--select_all_btn = 1;--}}
-			{{--}--}}
-			{{--else {--}}
-				{{--$( "#data_select" ).html( "<i class='glyphicon glyphicon-ok'></i> {{ trans('permission.allAlection') }}" );--}}
-				{{--$( '.i-checks' ).iCheck( 'uncheck' );--}}
-				{{--select_all_btn = 0;--}}
-			{{--}--}}
-		{{--} );--}}
+		var select_all_btn = 0;
+		$( "#data_select" ).click( function () {
+			if ( select_all_btn == 0 ) {
+				$( "#data_select" ).html( "<i class='glyphicon glyphicon-remove'></i> {{ trans('permission.cancel') }}" );
+				$( '.i-checks' ).each( function () {
+					$( this ).iCheck( 'check' );
+				} );
+				select_all_btn = 1;
+			}
+			else {
+				$( "#data_select" ).html( "<i class='glyphicon glyphicon-ok'></i> {{ trans('permission.allAlection') }}" );
+				$( '.i-checks' ).iCheck( 'uncheck' );
+				select_all_btn = 0;
+			}
+		} );
 
-		{{--//全选删除--}}
-		{{--$( '.select_all' ).click( function () {--}}
-			{{--var page_count = $( '#page_count' ).val();--}}
-			{{--var vote = [];--}}
-			{{--for ( var i = 0 ; i < $( ".i-checks" ).length ; i++ ) {--}}
-				{{--if ( $( ".i-checks" ).eq( i ).prop( "checked" ) ) {--}}
-					{{--vote.push( $( ".i-checks" ).eq( i ).val() )--}}
-				{{--}--}}
-			{{--}--}}
-			{{--if ( vote.length == 0 ) {--}}
-				{{--layer.msg( '{{trans('permission.delete_data')}}' , { time : 1000 } );--}}
-				{{--return false;--}}
-			{{--}--}}
+		//全选删除
+		$( '.select_all' ).click( function () {
+			var page_count = $( '#page_count' ).val();
+			var vote = [];
+			for ( var i = 0 ; i < $( ".i-checks" ).length ; i++ ) {
+				if ( $( ".i-checks" ).eq( i ).prop( "checked" ) ) {
+					vote.push( $( ".i-checks" ).eq( i ).val() )
+				}
+			}
+			if ( vote.length == 0 ) {
+				layer.msg( '{{trans('permission.delete_data')}}' , { time : 1000 } );
+				return false;
+			}
 
-			{{--//生成询问框--}}
-			{{--layer.confirm( "{{trans('permission.is_delete_info')}}" , {--}}
-				{{--btn : ["{{trans('permission.confirm')}}" , "{{trans('permission.cancel')}}"]--}}
-			{{--} , function () {--}}
-				{{--$.ajax( {--}}
-					{{--url : '{{URL('company/destroy_all')}}' ,--}}
-					{{--type : 'post' ,--}}
-					{{--data : {--}}
-						{{--'comp_id' : vote ,--}}
-						{{--'_token' : "{{csrf_token()}}"--}}
-					{{--} ,--}}
-					{{--success : function ( data ) {--}}
-						{{--console.log( data );--}}
-						{{--if ( data.code == {{config('myconfig.perm.per_delete_success_code')}} ) {--}}
-							{{--layer.msg( data.msg , { time : 2000 } , function () {--}}
-								{{--if ( page_count == vote.length ) {--}}
-									{{--location.href = "{{URL('company/17')}}";--}}
-								{{--}--}}
-								{{--else {--}}
-									{{--window.location.reload();--}}
-								{{--}--}}
-							{{--} );--}}
-						{{--}--}}
-						{{--else if ( data.code == {{config('myconfig.perm.per_delete_error_code')}} ) {--}}
-							{{--layer.msg( data.msg , { time : 2000 } );--}}
-						{{--}--}}
-					{{--} ,--}}
-					{{--error : function ( result ) {--}}
-						{{--// 由于返回422的错误状态码，所以会自动调用ajax的错误函数，不需要人为再手工判断--}}
-						{{--console.log( result );--}}
-					{{--}--}}
-				{{--} )--}}
-			{{--} , function () {--}}
-				{{--layer.msg( "{{trans('permission.delete_cancel')}}" , {--}}
-					{{--time : 1000 , //20s后自动关闭--}}
-				{{--} );--}}
-			{{--} );--}}
-		{{--} );--}}
+			//生成询问框
+			layer.confirm( "{{trans('permission.is_delete_info')}}" , {
+				btn : ["{{trans('permission.confirm')}}" , "{{trans('permission.cancel')}}"]
+			} , function () {
+				$.ajax( {
+					url : '{{URL('buyinfoss/destroy_all')}}' ,
+					type : 'post' ,
+					data : {
+						'buyid' : vote ,
+						'_token' : "{{csrf_token()}}"
+					} ,
+					success : function ( data ) {
+						console.log( data );
+						if ( data.code == {{config('myconfig.buy.buy_delete_success_code')}} ) {
+							layer.msg( data.msg , { time : 2000 } , function () {
+								if ( page_count == vote.length ) {
+									location.href = "{{URL('buyinfo/38')}}";
+								}
+								else {
+									window.location.reload();
+								}
+							} );
+						}
+						else if ( data.code == {{config('myconfig.buy.buy_delete_error_code')}} ) {
+							layer.msg( data.msg , { time : 2000 } );
+						}
+					} ,
+					error : function ( result ) {
+						// 由于返回422的错误状态码，所以会自动调用ajax的错误函数，不需要人为再手工判断
+						console.log( result );
+					}
+				} )
+			} , function () {
+				layer.msg( "{{trans('permission.delete_cancel')}}" , {
+					time : 1000 , //20s后自动关闭
+				} );
+			} );
+		} );
 
 
 		//添加

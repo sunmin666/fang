@@ -198,5 +198,13 @@
 							 ->where('idcard','=',$idcard) -> count();
 		}
 
+		//多选删除认购信息
+		public static function update_buyinfo($buy_id){
+			return DB::table('buyinfo') -> whereIn('buyid',$buy_id) -> update(
+				array('status' => 0)
+			);
+		}
+
+
 
 	}

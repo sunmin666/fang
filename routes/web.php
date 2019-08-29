@@ -583,6 +583,8 @@
 		Route::get('buyinfoss/cwview/{buyid}/{homeid}','Admin\Buy\BuyController@cwview');
 		//在客户信息里面发起认购
 		Route::get('buyinfo/initiate/{cust_id}','Admin\Buy\BuyController@initiate');
+		//多选删除认购信息
+		Route::post('buyinfoss/destroy_all','Admin\Buy\BuyController@destroy_all');
 
 		//签约管理
 		//签约展示
