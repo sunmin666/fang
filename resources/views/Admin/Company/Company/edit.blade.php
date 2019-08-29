@@ -67,7 +67,7 @@
 					<label>{{ trans('company.license') }}：</label>
 					<div class="zzz">
 						<button type="button" class="btn" id="test1">
-							<i class="layui-icon">&#xe67c;</i>上传图片
+							<i class="layui-icon">&#xe67c;</i>{{ trans('company.file_pic') }}
 						</button>
 						<input type="hidden" value="{{$company -> license}}" id="license" name="license">
 						<div id="img">
@@ -95,13 +95,13 @@
 				<div class="form-group">
 					<label>{{ trans('company.comp_type') }}：</label>
 					<select name="comp_type" id="comp_type" class="form-control">
-						<option value="0">请选择公司/企业类型</option>
-						<option value="1" @if($company -> comp_type == 1) selected @endif>个人独资</option>
-						<option value="2" @if($company -> comp_type == 2) selected @endif>合伙企业</option>
-						<option value="3" @if($company -> comp_type == 3) selected @endif>有限责任公司</option>
-						<option value="4" @if($company -> comp_type == 4) selected @endif>股份制公司</option>
-						<option value="5" @if($company -> comp_type == 5) selected @endif>集团公司</option>
-						<option value="6" @if($company -> comp_type == 6) selected @endif>一人制公司</option>
+						<option value="0">{{ trans('company.type') }}</option>
+						<option value="1" @if($company -> comp_type == 1) selected @endif>{{ trans('company.proprietorship') }}</option>
+						<option value="2" @if($company -> comp_type == 2) selected @endif>{{ trans('company.partnership') }}</option>
+						<option value="3" @if($company -> comp_type == 3) selected @endif>{{ trans('company.finite') }}</option>
+						<option value="4" @if($company -> comp_type == 4) selected @endif>{{ trans('company.shares') }}</option>
+						<option value="5" @if($company -> comp_type == 5) selected @endif>{{ trans('company.group') }}</option>
+						<option value="6" @if($company -> comp_type == 6) selected @endif>{{ trans('company.one_person') }}</option>
 					</select>
 					{{--<input type="text" class="form-control" name="comp_type"  id="comp_type" maxlength="10">--}}
 				</div>

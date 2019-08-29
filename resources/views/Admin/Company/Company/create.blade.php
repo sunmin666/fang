@@ -65,7 +65,7 @@
 					<label>{{ trans('company.license') }}：</label>
 					<div class="zzz">
 						<button type="button" class="btn" id="test1">
-							<i class="layui-icon">&#xe67c;</i>上传图片
+							<i class="layui-icon">&#xe67c;</i>{{ trans('company.file_pic') }}
 						</button>
 						<input type="hidden" value="" id="license" name="license">
 						<div id="img">
@@ -93,13 +93,13 @@
 				<div class="form-group">
 					<label>{{ trans('company.comp_type') }}：</label>
 					<select name="comp_type" id="comp_type" class="form-control">
-						<option value="0">请选择公司/企业类型</option>
-						<option value="1">个人独资</option>
-						<option value="2">合伙企业</option>
-						<option value="3">有限责任公司</option>
-						<option value="4">股份制公司</option>
-						<option value="5">集团公司</option>
-						<option value="6">一人制公司</option>
+						<option value="0">{{ trans('company.type') }}</option>
+						<option value="1">{{ trans('company.proprietorship') }}</option>
+						<option value="2">{{ trans('company.partnership') }}</option>
+						<option value="3">{{ trans('company.finite') }}</option>
+						<option value="4">{{ trans('company.shares') }}</option>
+						<option value="5">{{ trans('company.group') }}</option>
+						<option value="6">{{ trans('company.one_person') }}</option>
 					</select>
 					{{--<input type="text" class="form-control" name="comp_type"  id="comp_type" maxlength="10">--}}
 				</div>

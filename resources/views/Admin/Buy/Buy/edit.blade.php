@@ -113,9 +113,9 @@
 				<div class="form-group">
 					<label>{{ trans('buy.pay_type') }}：</label>
 					<select name="pay_type" id="pay_type" class="form-control">
-						<option value="">--请选则--</option>
-						<option value="0" @if($buy -> pay_type == 0) selected @endif>一次性付款</option>
-						<option value="1" @if($buy -> pay_type == 1) selected @endif>按揭付款</option>
+						<option value="">--{{ trans('buy.please_choose') }}--</option>
+						<option value="0" @if($buy -> pay_type == 0) selected @endif>{{ trans('buy.all_payment') }}</option>
+						<option value="1" @if($buy -> pay_type == 1) selected @endif>{{ trans('buy.mortgage') }}</option>
 					</select>
 				</div>
 

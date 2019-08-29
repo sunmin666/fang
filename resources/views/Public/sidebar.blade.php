@@ -14,6 +14,7 @@
 				<a href="#"><i class="fa fa-circle text-success"></i>{{ Session::get('session_member.username') }}</a>
 			</div>
 		</div>
+
 		<ul id="heiht" class="sidebar-menu" data-widget="tree" >
 				<?php foreach ($per_menu as $k => $v){?>
 						<li class="treeview @if($v -> perid == $ids) menu-open @endif">

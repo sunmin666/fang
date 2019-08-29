@@ -71,7 +71,7 @@
 							<td>{{$value-> corp_idcard}}</td>
 							<td>{{$value-> corp_mobile}}</td>
 							<td>{{date('Y-m-d H:i',$value -> created_at)}}</td>
-							<td>@if($value -> status == 1) 正常 @elseif($value -> status == 0) 禁用 @endif</td>
+							<td>@if($value -> status == 1) {{trans('company.normal')}} @elseif($value -> status == 0) {{trans('company.prohibit')}} @endif</td>
 							<td>
 								<button type="button" value="{{$value -> comp_id}}"
 								        onclick="status({{$value -> comp_id}},{{$value -> status}})"
