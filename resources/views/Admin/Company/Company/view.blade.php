@@ -30,17 +30,17 @@
 		<div><span>{{ trans('company.telphone') }}：</span>{{$company -> telphone}}</div>
 		<div><span>{{ trans('company.comp_type') }}：</span>
 			@if($company -> comp_type == 1)
-				个人独资
+				{{ trans('company.proprietorship') }}
 			@elseif($company -> comp_type == 2)
-				合伙企业
+				{{ trans('company.partnership') }}
 			@elseif($company -> comp_type == 3)
-				有限责任公司
+				{{ trans('company.finite') }}
 			@elseif($company -> comp_type == 4)
-				股份制公司
+				{{ trans('company.shares') }}
 			@elseif($company -> comp_type == 5)
-				集团公司
+				{{ trans('company.group') }}
 			@elseif($company -> comp_type == 6)
-				一人制公司
+				{{ trans('company.one_person') }}
 			@endif
 		</div>
 		<div><span>{{ trans('company.reg_capital') }}：</span>{{$company -> reg_capital}}万</div>

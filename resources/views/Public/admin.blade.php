@@ -133,6 +133,11 @@
 <script src="{{URL::asset('bower_components/admin-lte/dist/js/adminlte.js')}}"></script>
 <script src="{{URL::asset('bower_components/layui/dist/layui.all.js')}}"></script>
 @stack('include-js')
+<script>
+	var he = document.body.clientHeight - 150;
+	var style = "height:"+ he + "px;overflow-x: auto";
+	$('#heiht').attr('style',style);
+</script>
 </body>
 </html>
 

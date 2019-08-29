@@ -27,8 +27,6 @@
                     <input type="hidden" value="{{$v -> cust_id}}" id="cust_id">
                 @endforeach
 
-
-
                 <div class="form-group">
                     <label>{{ trans('purchase.type') }}：</label>
                     <select name="pay_type" id="pay_type" class="form-control">
@@ -45,6 +43,7 @@
                            name="total_price" placeholder="请输入缴费金额" id="total_prices"
                            maxlength="12">
                 </div>
+
                 <div id="month_pay" class="form-group none" >
                     <label>{{ trans('purchase.years') }}：</label>
                     <input type="text" class="form-control"

@@ -54,4 +54,24 @@
 		'text_content10'   => '您输入的座机号不正确',
 
 		'text_content20'   => '开始时间必须小于结束时间',
+
+		'file_pic' => '上传图片',
+
+		'type' 	=>'请选择公司/企业类型',
+
+		'proprietorship' => '个人独资',
+
+		'partnership' => '合伙企业',
+
+		'finite' => '有限责任公司',
+
+		'shares'		=>'股份制公司',
+
+		'group' => '集团公司',
+
+		'one_person' => '一人制公司',
+
+		'normal'	=>'正常',
+
+		'prohibit'	=>'禁用',
 	];

@@ -64,7 +64,7 @@ class ConsultantController extends SessionController
 				'password'   => 'required|min:6|min:8',
 				'password_confirmation'   => 'same:password',
 			]);
-			if($validator -> errors() -> get('username')){
+			if($validator -> errors() -> get('mobile')){
 				return [
 					'code'    => config('myconfig.consu.mobile_code'),
 					'msg'     => config('myconfig.consu.mobile_msg')

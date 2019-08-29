@@ -74,29 +74,29 @@
 							<td>{{$value -> roomnums}}</td>
 							<td>{{$value -> buy_number}}</td>
 							<td>{{$value-> pay_num}}</td>
-							<td>@if($value -> pay_type == 1) 按揭付款 @elseif($value -> pay_type == 0) 一次性付款 @endif</td>
-							<td>@if($value -> month_pay == '') 一次性付款 @else {{$value -> month_pay}} @endif</td>
-							<td>@if($value -> loan_term == '') 一次性付款 @else {{$value -> loan_term}} @endif</td>
+							<td>@if($value -> pay_type == 1) {{ trans('buy.mortgage') }} @elseif($value -> pay_type == 0) {{ trans('buy.all_payment') }} @endif</td>
+							<td>@if($value -> month_pay == '') {{ trans('buy.all_payment') }} @else {{$value -> month_pay}} @endif</td>
+							<td>@if($value -> loan_term == '') {{ trans('buy.all_payment') }} @else {{$value -> loan_term}} @endif</td>
 							<td>{{$value-> total_price}}</td>
 							<td>
 								@if($value-> status != 3 && $value-> status != 4)
 									@if($value -> manager_verify_status == '')
-										经理未审核
+									{{ trans('buy.review_no') }}
 									@elseif($value -> manager_verify_status == 0)
-										经理审核未通过
+										{{ trans('buy.review_wtg') }}
 									@else
 										@if($value -> finance_verify_status == '')
-										经理审核通过财务未审核
+											{{ trans('buy.finance') }}
 										@elseif($value -> finance_verify_status == 0)
-											财务审核未通过
+											{{ trans('buy.finance_wtg') }}
 										@else
-											财务审核通过
+											{{ trans('buy.finance_tg') }}
 										@endif
 									@endif
 								@elseif($value-> status == 4)
-									认购时间以到
+								{{ trans('buy.subscription_time') }}
 									@else
-									客户已换房
+									{{ trans('buy.username_change') }}
 								@endif
 							</td>
 							<td>{{date('Y-m-d H:i',$value -> created_at)}}</td>

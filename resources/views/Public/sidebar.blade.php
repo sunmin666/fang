@@ -14,32 +14,22 @@
 				<a href="#"><i class="fa fa-circle text-success"></i>{{ Session::get('session_member.username') }}</a>
 			</div>
 		</div>
-		<!-- search form (Optional) -->
-		{{--<form action="#" method="get" class="sidebar-form">--}}
-			{{--<div class="input-group">--}}
-				{{--<input type="text" name="q" class="form-control" placeholder="Search...">--}}
-				{{--<span class="input-group-btn">--}}
-            {{--<button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>--}}
-            {{--</button>--}}
-				{{--</span>--}}
-			{{--</div>--}}
-		{{--</form>--}}
-		<ul class="sidebar-menu" data-widget="tree">
-				<?php foreach ($per_menu as $k => $v){?>
-						<li class="treeview @if($v -> perid == $ids) menu-open @endif">
-							<a href="#"><i class="{{$v -> p_icon}}"></i> <span>{{$v -> pername}}</span>
-								<span class="pull-right-container">
-											<i class="fa fa-angle-left pull-right"></i>
-										</span>
-							</a>
-							<ul class="treeview-menu" @if($v -> perid == $ids) style="display: block;" @endif>
-								<?php foreach ($v->xsuperior as $k1 => $v2){?>
-									 <li><a href="{{URL($v2 ->perurl)}}/{{$v -> perid}}"><i class="{{$v2 -> p_icon}}"></i>{{$v2 -> pername}}</a></li>
-								<?php }?>
-							</ul>
-						</li>
-				<?php }?>
 
+		<ul id="heiht" class="sidebar-menu" data-widget="tree" style="">
+			<?php foreach ($per_menu as $k => $v){?>
+					<li class="treeview @if($v -> perid == $ids) menu-open @endif">
+						<a href="#"><i class="{{$v -> p_icon}}"></i> <span>{{$v -> pername}}</span>
+							<span class="pull-right-container">
+										<i class="fa fa-angle-left pull-right"></i>
+									</span>
+						</a>
+						<ul class="treeview-menu" @if($v -> perid == $ids) style="display: block;" @endif>
+							<?php foreach ($v->xsuperior as $k1 => $v2){?>
+								 <li><a href="{{URL($v2 ->perurl)}}/{{$v -> perid}}"><i class="{{$v2 -> p_icon}}"></i>{{$v2 -> pername}}</a></li>
+							<?php }?>
+						</ul>
+					</li>
+			<?php }?>
 		</ul>
 	</section>
 </aside>
