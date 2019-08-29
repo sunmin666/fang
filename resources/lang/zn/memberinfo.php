@@ -90,10 +90,9 @@
 
 			'trackinfo'					=> '跟踪',
 
-
 			'customer'					=> '共有人',
 
 			'buyinfo'           => '认购',
 
-
+			'signinfo'          => '签约',
 	];
