@@ -167,6 +167,17 @@
 		Route::post('buyinfoss/update_review','Admin\Buy\BuyController@update_review');
 		//财务审核提交
 		Route::post('buyinfoss/update_cwview','Admin\Buy\BuyController@update_cwview');
+
+		//签约新增数据库
+		Route::post('signinfo/store','Admin\Signinfo\SigninfoController@store');
+		//更新修改
+		Route::post('signinfo/update','Admin\Signinfo\SigninfoController@update');
+
+		//签约经理审核
+		Route::post('signinfo/update_review','Admin\Signinfo\SigninfoController@update_review');
+		//签约财务审核
+		Route::post('signinfo/update_cwview','Admin\Signinfo\SigninfoController@update_cwview');
+
 	});
 
 
@@ -572,6 +583,24 @@
 		Route::get('buyinfoss/cwview/{buyid}/{homeid}','Admin\Buy\BuyController@cwview');
 		//在客户信息里面发起认购
 		Route::get('buyinfo/initiate/{cust_id}','Admin\Buy\BuyController@initiate');
+
+		//签约管理
+		//签约展示
+		Route::get('signinfo/{perid}','Admin\Signinfo\SigninfoController@index');
+		//办理签约
+		Route::get('buyinfo/signinfo/{buyid}','Admin\Signinfo\SigninfoController@get_buy_cust');
+		//查看签约详情
+		Route::get('signinfo/view/{sigid}','Admin\Signinfo\SigninfoController@view');
+		//修改签约信息
+		Route::get('signinfo/edit/{sigid}','Admin\Signinfo\SigninfoController@edit');
+		//删除
+		Route::post('signinfo/destroy','Admin\Signinfo\SigninfoController@destroy');
+		//多选删除
+		Route::post('siginfo/destroy_all','Admin\Signinfo\SigninfoController@destroy_all');
+		//签约经理审核
+		Route::get('signinfo/review/{sigid}/{buyid}','Admin\Signinfo\SigninfoController@review');
+		//财务审核
+		Route::get('signinfo/cwview/{sigid}/{buyid}/{homeid}','Admin\Signinfo\SigninfoController@cwview');
 	});
 
 

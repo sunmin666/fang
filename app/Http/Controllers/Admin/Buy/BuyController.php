@@ -144,6 +144,7 @@ class BuyController extends SessionController
 				Buy::store_coowner($coowner);
 			}
 			$hstatus['status'] = 1;
+			$hstatus['buyid'] = $store_buy;
 			Buy::update_status_home($homeid,$hstatus);
 			return [
 				'code'          => config('myconfig.buy.buy_store_success_code'),
