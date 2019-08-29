@@ -513,6 +513,44 @@
 		//房屋共有人添加
 		Route::post('coownerinfo/store','Admin\Coownerinfo\CoownerinfoController@store');
 
+
+		//缴费记录
+		Route::get('payloginfo/{perid}','Admin\Payloginfo\PayloginfoController@index');
+		//缴费添加记录页面
+		Route::get('payloginfo/get_coowner/{cust_id}','Admin\Payloginfo\PayloginfoController@show_cowner');
+		//添加缴费记录
+		Route::post('payloginfo/store','Admin\Payloginfo\PayloginfoController@store');
+		//修改页面展示
+		Route::get('payloginfo/edit/{payl_id}','Admin\Payloginfo\PayloginfoController@edit');
+		//缴费记录更新数据
+		Route::post('payloginfo/destroy','Admin\Payloginfo\PayloginfoController@destroy');
+		//查看详情
+		Route::get('payloginfo/view/{payl_id}','Admin\Payloginfo\PayloginfoController@view');
+		//缴费记录删除单条
+		Route::post('payloginfo/del','Admin\Payloginfo\PayloginfoController@del');
+		//缴费记录删除多条
+		Route::post('payloginfo/destroy_all','Admin\Payloginfo\PayloginfoController@destroy_all');
+
+
+
+		//缴费方案
+		Route::get('purchase/{perid}','Admin\Purchase\PurchaseController@index');
+		//添加方案页面
+		Route::get('purchase/get_coowner/{cust_id}','Admin\Purchase\PurchaseController@show_cowner');
+		//添加方案信息
+		Route::post('purchase/store','Admin\Purchase\PurchaseController@store');
+		//修改页面展示
+		Route::get('purchase/edit/{planid}','Admin\Purchase\PurchaseController@edit');
+		//方案更新数据
+		Route::post('purchase/destroy','Admin\Purchase\PurchaseController@destroy');
+		//方案详情
+		Route::get('purchase/view/{planid}','Admin\Purchase\PurchaseController@view');
+		//方案删除单条
+		Route::post('purchase/del','Admin\Purchase\PurchaseController@del');
+		//方案全选删除
+		Route::post('purchase/destroy_all','Admin\Purchase\PurchaseController@destroy_all');
+
+
 		//认
 		//购
 		//管

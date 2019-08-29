@@ -45,7 +45,7 @@
 		var manager_verify_remarks = $('#manager_verify_remarks').val();
 
 		if(manager_verify_status == '' || manager_verify_remarks == ''){
-			layer.msg('信息不全',{time:1236});
+			layer.msg('{{ trans('buy.username_text') }}',{time:1236});
 			return false;
 		}
 

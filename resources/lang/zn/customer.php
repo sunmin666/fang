@@ -58,4 +58,6 @@
 
 		'hous_id' =>'职业顾问',
 
+		'purchase_plan' =>'方案',
+
 	];

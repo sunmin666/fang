@@ -10,7 +10,7 @@
 			{{ csrf_field() }}
 			<form role="form" action="#" method="post" name="reg_memberinfo" id="reg_memberinfo">
 				<div class="form-group">
-					<label>财务审核：</label>
+					<label>{{ trans('buy.manager_verify_status') }}：</label>
 					<select name="manager_verify_status" id="manager_verify_status" class="form-control">
 						<option value="">--请选则--</option>
 						<option value="1">通过</option>
@@ -20,7 +20,7 @@
 				</div>
 
 				<div class="form-group">
-					<label>财务审核备注：</label>
+					<label>{{ trans('buy.manager_verify_remarks') }}：</label>
 					<textarea name="manager_verify_remarks" id="manager_verify_remarks" class="form-control" cols="30" rows="5" style="resize:none"></textarea>
 				</div>
 
@@ -46,7 +46,7 @@
 		var manager_verify_remarks = $('#manager_verify_remarks').val();
 
 		if(manager_verify_status == '' || manager_verify_remarks == ''){
-			layer.msg('信息不全',{time:1236});
+			layer.msg('{{ trans('buy.username_text') }}',{time:1236});
 			return false;
 		}
 

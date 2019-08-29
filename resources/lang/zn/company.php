@@ -27,6 +27,8 @@
 		'business_date'  => '公司营业开始时间',
 		'expire_date'   => '公司营业结束时间',
 		'save' => '保存',
+		'created_att'=>'公司在iHOUSER注册日期',
+		'updated_att'=>'公司在iHOUSER修改日期',
 		'created_at'   => '注册时间',
 		'operating'   => '操作',
 		'status'    => '状态',

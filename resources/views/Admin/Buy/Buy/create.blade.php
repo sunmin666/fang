@@ -29,7 +29,7 @@
 				</div>
 				<div class="form-group none" id="name">
 					{{--<label>{{ trans('buy.pay_num')}}：</label>--}}
-					<label>用户姓名：</label>
+					<label>{{ trans('buy.names') }}：</label>
 					<input type="text" class="form-control"
 					       {{--onkeyup="value=value.replace(/[^\d.]/g,'')"--}}
 					       name="name" placeholder="" id="names"
@@ -37,7 +37,7 @@
 				</div>
 				<div class="form-group none" id="iphone">
 					{{--<label>{{ trans('buy.pay_num')}}：</label>--}}
-					<label>手机号：</label>
+					<label>{{ trans('buy.iphones') }}：</label>
 					<input type="text" class="form-control"
 					       {{--onkeyup="value=value.replace(/[^\d.]/g,'')"--}}
 					       name="iphone" placeholder="" id="iphones"
@@ -45,7 +45,7 @@
 				</div>
 				<div class="form-group none" id="shen">
 					{{--<label>{{ trans('buy.pay_num')}}：</label>--}}
-					<label>身份证号：</label>
+					<label>{{ trans('buy.shens') }}：</label>
 					<input type="text" class="form-control"
 					       {{--onkeyup="value=value.replace(/[^\d.]/g,'')"--}}
 					       name="idcard" placeholder="" id="shens"
@@ -55,7 +55,7 @@
 					<input type="hidden" id="cust_id" value="{{$customer -> cust_id}}">
 					<div class="form-group">
 						{{--<label>{{ trans('buy.pay_num')}}：</label>--}}
-						<label>用户姓名：</label>
+						<label>{{ trans('buy.names') }}：</label>
 						<input type="text" class="form-control"
 						       value="{{$customer -> realname}}"
 						       name="name" placeholder="" id="names"
@@ -63,7 +63,7 @@
 					</div>
 					<div class="form-group">
 						{{--<label>{{ trans('buy.pay_num')}}：</label>--}}
-						<label>手机号：</label>
+						<label>{{ trans('buy.iphones') }}：</label>
 						<input type="text" class="form-control"
 						       value="{{$customer -> mobile}}"
 						       name="iphone" placeholder="" id="iphones"
@@ -71,7 +71,7 @@
 					</div>
 					<div class="form-group" >
 						{{--<label>{{ trans('buy.pay_num')}}：</label>--}}
-						<label>身份证号：</label>
+						<label>{{ trans('buy.shens') }}：</label>
 						<input type="text" class="form-control"
 						       value="{{$customer -> idcard}}"
 						       name="idcard" placeholder="" id="shens"
@@ -96,18 +96,18 @@
 						@endforeach
 					</select>
 					<select name="unitnum" id="unitnum" class="form-control" style="width: 30%;float: left">
-						<option value="0">--请选则--</option>
+						<option value="0">--{{ trans('buy.please_choose') }}--</option>
 
 					</select>
 					<select name="roomnum" id="roomnum" class="form-control" style="width: 30%;float: left">
-						<option value="0">--请选则--</option>
+						<option value="0">--{{ trans('buy.please_choose') }}--</option>
 					</select>
 				</div>
 				<br><br>
 
 				<div class="form-group none" id="buildnumss">
 					{{--<label>{{ trans('buy.pay_num')}}：</label>--}}
-					<label>楼号：</label>
+					<label>{{ trans('buy.buildnums') }}：</label>
 					<input type="text" class="form-control" readonly
 					       {{--onkeyup="value=value.replace(/[^\d.]/g,'')"--}}
 					       name="buildnums" placeholder="请输入缴费金额" id="buildnums"
@@ -115,7 +115,7 @@
 				</div>
 				<div class="form-group none" id="unitnumss">
 					{{--<label>{{ trans('buy.pay_num')}}：</label>--}}
-					<label>单元号：</label>
+					<label>{{ trans('buy.unitnums') }}：</label>
 					<input type="text" class="form-control" readonly
 					       {{--onkeyup="value=value.replace(/[^\d.]/g,'')"--}}
 					       name="unitnums" placeholder="请输入缴费金额" id="unitnums"
@@ -123,7 +123,7 @@
 				</div>
 				<div class="form-group none" id="roomnumss">
 					{{--<label>{{ trans('buy.pay_num')}}：</label>--}}
-					<label>房号：</label>
+					<label>{{ trans('buy.roomnums') }}：</label>
 					<input type="text" class="form-control" readonly
 					       {{--onkeyup="value=value.replace(/[^\d.]/g,'')"--}}
 					       name="roomnums" placeholder="请输入缴费金额" id="roomnums"
@@ -131,7 +131,7 @@
 				</div>
 				<div class="form-group none" id="build_area">
 					{{--<label>{{ trans('buy.pay_num')}}：</label>--}}
-					<label>建筑面积：</label>
+					<label>{{ trans('buy.build_areas') }}：</label>
 					<input type="text" class="form-control" readonly
 					       {{--onkeyup="value=value.replace(/[^\d.]/g,'')"--}}
 					       name="build_areas" placeholder="请输入缴费金额" id="build_areas"
@@ -139,7 +139,7 @@
 				</div>
 				<div class="form-group none" id="price">
 					{{--<label>{{ trans('buy.pay_num')}}：</label>--}}
-					<label>单价：</label>
+					<label>{{ trans('buy.prices') }}：</label>
 					<input type="text" class="form-control" readonly
 					       {{--onkeyup="value=value.replace(/[^\d.]/g,'')"--}}
 					       name="prices" placeholder="请输入缴费金额" id="prices"
@@ -147,7 +147,7 @@
 				</div>
 				<div class="form-group none" id="total">
 					{{--<label>{{ trans('buy.pay_num')}}：</label>--}}
-					<label>总价：</label>
+					<label>{{ trans('buy.totals') }}：</label>
 					<input type="text" class="form-control" readonly
 					       {{--onkeyup="value=value.replace(/[^\d.]/g,'')"--}}
 					       name="totals" placeholder="请输入缴费金额" id="totals"
@@ -155,7 +155,7 @@
 				</div>
 				<div class="form-group none" id="discount">
 					{{--<label>{{ trans('buy.pay_num')}}：</label>--}}
-					<label>折扣：</label>
+					<label>{{ trans('buy.discounts') }}：</label>
 					<input type="text" class="form-control" readonly
 					       {{--onkeyup="value=value.replace(/[^\d.]/g,'')"--}}
 					       name="discounts" placeholder="请输入缴费金额" id="discounts"
@@ -164,11 +164,11 @@
 				<input type="hidden" value="0" id="fanggmun">
 				<div class="form-group">
 					{{--<label>{{ trans('buy.pay_num')}}：</label>--}}
-					<label>房屋共有人：</label><br>
+					<label>{{ trans('buy.fangwug') }}：</label><br>
 					<div id="fangwug">
 					</div>
 					<br>
-					<button class="btn btn-dropbox" id="store_fg">添加</button>
+					<button class="btn btn-dropbox" id="store_fg">{{ trans('buy.store_fg') }}</button>
 				</div>
 				{{--<div class="form-group">--}}
 				{{--<label>{{ trans('buy.lock_time')}}：</label>--}}
@@ -185,31 +185,31 @@
 				<div class="form-group">
 					<label>{{ trans('buy.pay_type') }}：</label>
 					<select name="pay_type" id="pay_type" class="form-control">
-						<option value="">--请选则--</option>
-						<option value="0">一次性付款</option>
-						<option value="1">按揭付款</option>
+						<option value="">--{{ trans('buy.please_choose') }}--</option>
+						<option value="0">{{ trans('buy.all_payment') }}</option>
+						<option value="1">{{ trans('buy.mortgage') }}</option>
 					</select>
 				</div>
 
 				<div id="total_price" class="form-group none" >
-					<label>总金额：</label>
+					<label>{{ trans('buy.total_prices') }}：</label>
 					<input type="text" class="form-control"
 					       {{--onkeyup="value=value.replace(/[^\d.]/g,'')"--}}
 					       name="total_price" placeholder="请输入缴费金额" id="total_prices"
 					       maxlength="12">
 				</div>
 				<div id="month_pay" class="form-group none" >
-					<label>月供：</label>
+					<label>{{ trans('buy.month_pays') }}：</label>
 					<input type="text" class="form-control"
 					       onkeyup="value=value.replace(/[^\d.]/g,'')"
 					       name="total_price" placeholder="请输入缴费金额" id="month_pays"
 					       maxlength="12">
-					<label>年限：</label>
+					<label>{{ trans('buy.total_prices') }}：</label>
 					<input type="text" class="form-control"
 					       onkeyup="value=value.replace(/[^\d.]/g,'')"
 					       name="loan_term" placeholder="请输入缴费金额" id="loan_term"
 					       maxlength="12">
-					<label>总金额：</label>
+					<label>{{ trans('buy.total_pricess') }}：</label>
 					<input type="text" class="form-control"
 					       onkeyup="value=value.replace(/[^\d.]/g,'')"
 					       name="total_price" placeholder="请输入缴费金额" id="total_pricess"
@@ -450,7 +450,7 @@
 			var fangzi_g = $( '#totals' ).val();
 			var zhekou = $( '#discounts' ).val();
 			if ( fangzi_g == '' || zhekou == '' ) {
-				layer.msg( '请先选择房源' , { time : 1236 } );
+				layer.msg( '{{ trans('buy.total_pricess_text') }}' , { time : 1236 } );
 				return false;
 			}
 			else {
@@ -462,7 +462,7 @@
 			var fangzi_g = $( '#totals' ).val();
 			var zhekou = $( '#discounts' ).val();
 			if ( fangzi_g == '' || zhekou == '' ) {
-				layer.msg( '请先选择房源' , { time : 1236 } );
+				layer.msg( '{{ trans('buy.total_pricess_text') }}' , { time : 1236 } );
 				return false;
 			}
 			else {
@@ -488,18 +488,18 @@
 		var iphones = $( '#iphones' ).val();     //客户手机号
 		var shens = $( '#shens' ).val();    // 身份证号
 		if ( names == '' || iphones == '' || shens == '' ) {
-			layer.msg( '用户信息不全' , { time : 1563 } );
+			layer.msg( '{{ trans('buy.username_text') }}' , { time : 1563 } );
 			return false;
 		}
 
 		if ( !mobile_pattern.test( iphones ) ) {
-			layer.msg( '用户手机号不合法' , { time : 1456 } );
+			layer.msg( '{{ trans('buy.username_iphones_text') }}' , { time : 1456 } );
 			$( '#store1' ).attr( 'disabled' , false );
 			return false;
 		}
 
 		if ( !idcard_pattern.test( shens ) ) {
-			layer.msg( '用户身份信息不合法' , { time : 1456 } );
+			layer.msg( '{{ trans('buy.username_shens_text') }}' , { time : 1456 } );
 			$( '#store1' ).attr( 'disabled' , false );
 			return false;
 		}
@@ -507,7 +507,7 @@
 		//房子id
 		var roomnum = $( '#roomnum' ).val();     //房子id
 		if ( roomnum == '' ) {
-			layer.msg( '请选择房源' , { time : 1563 } );
+			layer.msg( '{{ trans('buy.total_pricess_text') }}' , { time : 1563 } );
 			return false;
 		}
 		//房屋共有人
@@ -526,13 +526,13 @@
 				var cust_id = cust_ids;            //客户id
 				var zzz = Number( ig ) + 1;
 				if ( !mobile_pattern.test( mobile ) ) {
-					layer.msg( '第' + zzz + '手机号不合法' , { time : 1456 } );
+					layer.msg( '第' + zzz + '{{ trans('buy.username_iphones_text') }}' , { time : 1456 } );
 					$( '#store1' ).attr( 'disabled' , false );
 					fanggmunren = [];
 					return false;
 				}
 				if ( !idcard_pattern.test( idcard ) ) {
-					layer.msg( '第' + zzz + '身份信息不合法' , { time : 1546 } );
+					layer.msg( '第' + zzz + '{{ trans('buy.username_shens_text') }}' , { time : 1546 } );
 					$( "#store1" ).attr( 'disabled' , false );
 					fanggmunren = [];
 					return false;
@@ -540,7 +540,7 @@
 				if ( relation == '' || realname == '' || sex == '' || birthday == ''
 					|| idcard == '' || mobile == '' || cust_id == ''
 				) {
-					layer.msg( '第' + zzz + '条信息不全' , { time : 1546 } );
+					layer.msg( '第' + zzz + '{{ trans('buy.username_text') }}' , { time : 1546 } );
 					$( "#store1" ).attr( 'disabled' , false );
 					fanggmunren = [];
 					return false;
@@ -563,7 +563,7 @@
 		//付款方案
 		var pay_type = $( '#pay_type' ).val();
 		if ( pay_type == '' ) {
-			layer.msg( '请选择付款方案' , { time : 1563 } );
+			layer.msg( '{{ trans('buy.pay_type_text') }}' , { time : 1563 } );
 			return false;
 		}
 		else if ( pay_type == 1 ) {
@@ -575,7 +575,7 @@
 			var month_pays = $( '#month_pays' ).val();    // 月供
 			console.log(total_prices,loan_term,month_pays);
 			if(total_prices == '' || loan_term == '' || month_pays == ''){
-					layer.msg('请填写总金额,年限，月供',{time:1236});
+					layer.msg('{{ trans('buy.all_type_text') }}',{time:1236});
 					return false;
 			}
 		}
@@ -586,7 +586,7 @@
 			var loan_term = '';        //年限
 			var month_pays = '';    // 月供
 			if(total_prices == ''){
-				layer.msg('请填写总金额',{time:1236});
+				layer.msg('{{ trans('buy.total_prices_text') }}',{time:1236});
 				return false;
 			}
 

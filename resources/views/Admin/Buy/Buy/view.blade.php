@@ -19,25 +19,25 @@
 	</style>
 </head>
 <body>
-<div><span>客户姓名：</span>{{$buy -> realname}}</div>
-<div><span>客户手机号：</span>{{$buy -> mobile}}</div>
-<div><span>客户身份证号：</span>{{$buy -> idcard}}</div>
-<div><span>楼号：</span>{{$buy -> buildnums}}</div>
-<div><span>单元号：</span>{{$buy -> unitnums}}</div>
-<div><span>房号：</span>{{$buy -> roomnums}}</div>
-<div><span>楼层：</span>{{$buy -> floor}}</div>
-<div><span>认购编号：</span>{{$buy -> buy_number}}</div>
+<div><span>{{ trans('buy.names') }}：</span>{{$buy -> realname}}</div>
+<div><span>{{ trans('buy.iphones') }}：</span>{{$buy -> mobile}}</div>
+<div><span>{{ trans('buy.shens') }}：</span>{{$buy -> idcard}}</div>
+<div><span>{{ trans('buy.buildnums') }}：</span>{{$buy -> buildnums}}</div>
+<div><span>{{ trans('buy.unitnums') }}：</span>{{$buy -> unitnums}}</div>
+<div><span>{{ trans('buy.roomnums') }}：</span>{{$buy -> roomnums}}</div>
+<div><span>{{ trans('buy.floor') }}：</span>{{$buy -> floor}}</div>
+<div><span>{{ trans('buy.buy_number') }}：</span>{{$buy -> buy_number}}</div>
 
-<div><span>付款方式：</span>@if($buy -> pay_type == 1) 按揭付款 @else 一次付款 @endif</div>
-<div><span>缴纳定金：</span>{{$buy -> pay_num}}</div>
-<div><span>总金额：</span>{{$buy-> total_price}}</div>
-<div><span>月供：</span>@if($buy -> month_pay == '') 暂无月供 @else {{$buy -> month_pay}} @endif</div>
-<div><span>年限：</span>@if($buy -> loan_term == '') 暂无年限 @else {{$buy -> loan_term}} @endif</div>
-<div><span>职业顾问备注：</span>{{$buy-> remarks}}</div>
-<div>房子共有人：</div>
+<div><span>{{ trans('buy.pay_type') }}：</span>@if($buy -> pay_type == 1) 按揭付款 @else 一次付款 @endif</div>
+<div><span>{{ trans('buy.pay_numl') }}：</span>{{$buy -> pay_num}}</div>
+<div><span>{{ trans('buy.total_pricess') }}：</span>{{$buy-> total_price}}</div>
+<div><span>{{ trans('buy.month_pays') }}：</span>@if($buy -> month_pay == '') 暂无月供 @else {{$buy -> month_pay}} @endif</div>
+<div><span>{{ trans('buy.loan_term') }}：</span>@if($buy -> loan_term == '') 暂无年限 @else {{$buy -> loan_term}} @endif</div>
+<div><span>{{ trans('buy.zyremarks') }}：</span>{{$buy-> remarks}}</div>
+<div>{{ trans('buy.fangwug') }}：</div>
 <div>
 	 @foreach($buy-> coownerinfo as $k => $v)
-		<span>关系：@if($v -> relation == 0) 配偶
+		<span>{{ trans('buy.relation') }}：@if($v -> relation == 0) 配偶
 						@elseif($v -> relation == 1)
 							 儿子
 						@elseif($v -> relation == 2)
@@ -50,12 +50,12 @@
 						亲戚
 			@endif
 		</span>
-		 <span>姓名：{{$v -> realname}}</span>
-		 <span>性别：@if($v -> sex == 0)先生@else 女士 @endif</span>
-		 <span>生日：{{date('Y-m-d',$v -> birthday)}}</span>
-		 <span>身份证号：{{$v -> idcard}}</span>
-		 <span>手机号：{{$v -> mobile}}</span>
-		 <span>添加时间：{{date('Y-m-d',$v -> created_at)}}</span>
+		 <span>{{ trans('buy.name') }}：{{$v -> realname}}</span>
+		 <span>{{ trans('buy.name') }}：@if($v -> sex == 0)先生@else 女士 @endif</span>
+		 <span>{{ trans('buy.birthday') }}：{{date('Y-m-d',$v -> birthday)}}</span>
+		 <span>{{ trans('buy.shens') }}：{{$v -> idcard}}</span>
+		 <span>{{ trans('buy.iphones') }}：{{$v -> mobile}}</span>
+		 <span>{{ trans('buy.created_att') }}：{{date('Y-m-d',$v -> created_at)}}</span>
 	@endforeach
 </div>
 </body>

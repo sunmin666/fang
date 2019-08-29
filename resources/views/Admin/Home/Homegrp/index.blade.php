@@ -132,16 +132,16 @@
 								          @foreach($v['fang'] as $k7 => $v7)
 														@if($a == $v7['floor'])
 															@if($v7['status'] == 0)
-																<button onclick="update({{$v7['homeid']}})"
+																<button class="btn btn-success btn-sm" onclick="update({{$v7['homeid']}})"
 																        style="margin-left: 20px;background-color: green;border: none;padding: 5px">{{$v7['roomnums']}}</button>
 															@elseif($v7['status'] == 1)
-																<button onclick="update({{$v7['homeid']}})"
+																<button class="btn btn-warning btn-sm" onclick="update({{$v7['homeid']}})"
 																        style="margin-left: 20px;background-color: yellow;border: none;padding: 5px">{{$v7['roomnums']}}</button>
 															@elseif($v7['status'] == 2)
-																<button onclick="update({{$v7['homeid']}})"
+																<button class="btn btn-info btn-sm" onclick="update({{$v7['homeid']}})"
 																        style="margin-left: 20px;background-color: blue;border: none;padding: 5px">{{$v7['roomnums']}}</button>
 															@elseif($v7['status'] == 3)
-																<button onclick="update({{$v7['homeid']}})"
+																<button class="btn btn-danger btn-sm" onclick="update({{$v7['homeid']}})"
 																        style="margin-left: 20px;background-color: red;border: none;padding: 5px">{{$v7['roomnums']}}</button>
 															@endif
 														@endif
@@ -156,17 +156,17 @@
 								          @foreach($v['fang'] as $k7 => $v7)
 													@if($floor == $v7['floor'])
 														@if($v7['status'] == 0)
-															<button onclick="update({{$v7['homeid']}})"
-															        style="margin-left: 20px;background-color: green;border: none;padding: 5px">{{$v7['roomnums']}}</button>
+															<button class="btn btn-success btn-sm" onclick="update({{$v7['homeid']}})"
+																	style="margin-left: 20px;background-color: green;border: none;padding: 5px">{{$v7['roomnums']}}</button>
 														@elseif($v7['status'] == 1)
-															<button onclick="update({{$v7['homeid']}})"
-															        style="margin-left: 20px;background-color: yellow;border: none;padding: 5px">{{$v7['roomnums']}}</button>
+															<button class="btn btn-warning btn-sm" onclick="update({{$v7['homeid']}})"
+																	style="margin-left: 20px;background-color: yellow;border: none;padding: 5px">{{$v7['roomnums']}}</button>
 														@elseif($v7['status'] == 2)
-															<button onclick="update({{$v7['homeid']}})"
-															        style="margin-left: 20px;background-color: blue;border: none;padding: 5px">{{$v7['roomnums']}}</button>
+															<button class="btn btn-info btn-sm" onclick="update({{$v7['homeid']}})"
+																	style="margin-left: 20px;background-color: blue;border: none;padding: 5px">{{$v7['roomnums']}}</button>
 														@elseif($v7['status'] == 3)
-															<button onclick="update({{$v7['homeid']}})"
-															        style="margin-left: 20px;background-color: red;border: none;padding: 5px">{{$v7['roomnums']}}</button>
+															<button class="btn btn-danger btn-sm" onclick="update({{$v7['homeid']}})"
+																	style="margin-left: 20px;background-color: red;border: none;padding: 5px">{{$v7['roomnums']}}</button>
 														@endif
 													@endif
 												@endforeach
@@ -191,17 +191,17 @@
 								          @foreach($v['fang'] as $k7 => $v7)
 													@if($a == $v7['floor'])
 														@if($v7['status'] == 0)
-															<button onclick="update({{$v7['homeid']}})"
-															        style="margin-left: 20px;background-color: green;border: none;padding: 5px">{{$v7['roomnums']}}</button>
+															<button class="btn btn-success btn-sm" onclick="update({{$v7['homeid']}})"
+																	style="margin-left: 20px;background-color: green;border: none;padding: 5px">{{$v7['roomnums']}}</button>
 														@elseif($v7['status'] == 1)
-															<button onclick="update({{$v7['homeid']}})"
-															        style="margin-left: 20px;background-color: yellow;border: none;padding: 5px">{{$v7['roomnums']}}</button>
+															<button class="btn btn-warning btn-sm" onclick="update({{$v7['homeid']}})"
+																	style="margin-left: 20px;background-color: yellow;border: none;padding: 5px">{{$v7['roomnums']}}</button>
 														@elseif($v7['status'] == 2)
-															<button onclick="update({{$v7['homeid']}})"
-															        style="margin-left: 20px;background-color: blue;border: none;padding: 5px">{{$v7['roomnums']}}</button>
+															<button class="btn btn-info btn-sm" onclick="update({{$v7['homeid']}})"
+																	style="margin-left: 20px;background-color: blue;border: none;padding: 5px">{{$v7['roomnums']}}</button>
 														@elseif($v7['status'] == 3)
-															<button onclick="update({{$v7['homeid']}})"
-															        style="margin-left: 20px;background-color: red;border: none;padding: 5px">{{$v7['roomnums']}}</button>
+															<button class="btn btn-danger btn-sm" onclick="update({{$v7['homeid']}})"
+																	style="margin-left: 20px;background-color: red;border: none;padding: 5px">{{$v7['roomnums']}}</button>
 														@endif
 													@endif
 												@endforeach
@@ -215,17 +215,17 @@
 								          @foreach($v['fang'] as $k7 => $v7)
 												@if($floor == $v7['floor'])
 													@if($v7['status'] == 0)
-														<button onclick="update({{$v7['homeid']}})"
-														        style="margin-left: 20px;background-color: green;border: none;padding: 5px">{{$v7['roomnums']}}</button>
+														<button class="btn btn-success btn-sm" onclick="update({{$v7['homeid']}})"
+																style="margin-left: 20px;background-color: green;border: none;padding: 5px">{{$v7['roomnums']}}</button>
 													@elseif($v7['status'] == 1)
-														<button onclick="update({{$v7['homeid']}})"
-														        style="margin-left: 20px;background-color: yellow;border: none;padding: 5px">{{$v7['roomnums']}}</button>
+														<button class="btn btn-warning btn-sm" onclick="update({{$v7['homeid']}})"
+																style="margin-left: 20px;background-color: yellow;border: none;padding: 5px">{{$v7['roomnums']}}</button>
 													@elseif($v7['status'] == 2)
-														<button onclick="update({{$v7['homeid']}})"
-														        style="margin-left: 20px;background-color: blue;border: none;padding: 5px">{{$v7['roomnums']}}</button>
+														<button class="btn btn-info btn-sm" onclick="update({{$v7['homeid']}})"
+																style="margin-left: 20px;background-color: blue;border: none;padding: 5px">{{$v7['roomnums']}}</button>
 													@elseif($v7['status'] == 3)
-														<button onclick="update({{$v7['homeid']}})"
-														        style="margin-left: 20px;background-color: red;border: none;padding: 5px">{{$v7['roomnums']}}</button>
+														<button class="btn btn-danger btn-sm" onclick="update({{$v7['homeid']}})"
+																style="margin-left: 20px;background-color: red;border: none;padding: 5px">{{$v7['roomnums']}}</button>
 													@endif
 												@endif
 											@endforeach

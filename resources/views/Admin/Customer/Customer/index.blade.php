@@ -105,6 +105,15 @@
 								<button type="button" value="{{$value -> cust_id}}" onclick="customer({{$value -> cust_id}})"
 										class="btn btn-warning btn-xs btn_edit" id="btn_customero"><i
 											class="fa fa-edit"></i> {{trans('memberinfo.customer')}}</button>
+								<button type="button" value="{{$value -> cust_id}}" onclick="buyinfo({{$value -> cust_id}})"
+										class="btn btn-warning btn-xs btn_edit" id="btn_customero"><i
+											class="fa fa-edit"></i> {{trans('memberinfo.buyinfo')}}</button>
+								<button type="button" value="{{$value -> cust_id}}" onclick="payment({{$value -> cust_id}})"
+										class="btn btn-warning btn-xs btn_edit" id="btn_customero"><i
+											class="fa fa-edit"></i> {{trans('payloginfo.payment')}}</button>
+								<button type="button" value="{{$value -> cust_id}}" onclick="purchase({{$value -> cust_id}})"
+										class="btn btn-warning btn-xs btn_edit" id="btn_customero"><i
+											class="fa fa-edit"></i> {{trans('customer.purchase_plan')}}</button>
 							</td>
 						</tr>
 					@endforeach
@@ -229,7 +238,7 @@
 			} );
 		} );
 
-		//共有人
+		//添加共有人
 		function customer( cust_id ) {
 			layer.open( {
 				type : 2 ,
@@ -241,6 +250,42 @@
 				shadeClose : false ,
 				shade : 0.5 ,
 				content : ["{{URL('coownerinfo/get_coowner')}}" + "/" + cust_id] ,
+				success : function ( layero , index ) {
+					$( ':focus' ).blur();
+				}
+			} );
+		}
+
+		//添加缴费
+		function payment( cust_id ) {
+			layer.open( {
+				type : 2 ,
+				title : '{{ trans('memberinfo.news_edits') }}' ,
+				moveType : 0 ,
+				skin : 'layui-layer-demo' , //加上边框
+				closeBtn : 1 ,
+				area : ['50%' , '60%'] , //宽高
+				shadeClose : false ,
+				shade : 0.5 ,
+				content : ["{{URL('payloginfo/get_coowner')}}" + "/" + cust_id] ,
+				success : function ( layero , index ) {
+					$( ':focus' ).blur();
+				}
+			} );
+		}
+
+		//添加方案purchase
+		function purchase( cust_id ) {
+			layer.open( {
+				type : 2 ,
+				title : '{{ trans('customer.purchase_plan') }}' ,
+				moveType : 0 ,
+				skin : 'layui-layer-demo' , //加上边框
+				closeBtn : 1 ,
+				area : ['50%' , '70%'] , //宽高
+				shadeClose : false ,
+				shade : 0.5 ,
+				content : ["{{URL('purchase/get_coowner')}}" + "/" + cust_id] ,
 				success : function ( layero , index ) {
 					$( ':focus' ).blur();
 				}

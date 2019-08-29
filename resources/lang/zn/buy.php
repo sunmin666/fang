@@ -28,4 +28,75 @@
 
 			'status'      => '状态',
 
+			'names'		=> '用户姓名',
+
+			'iphones'	=>'手机号',
+
+			'shens'		=>'身份证号',
+
+			'buildnums'	=>'楼号',
+
+			'unitnums'	=>'单元号',
+
+			'roomnums'	=>'房号',
+
+			'build_areas'	=>'建筑面积',
+
+			'prices'	=> '单价',
+
+			'totals'	=>'总价',
+
+			'discounts'	=>'折扣',
+
+			'fangwug'	=> '房屋共有人',
+
+			'store_fg'	=> '添加',
+
+			'total_prices'	=> '总金额',
+
+			'month_pays'	=>'月供',
+
+			'total_pricess'	=> '总金额',
+
+			'manager_verify_status'	=>'财务审核',
+
+			'manager_verify_remarks' => '财务备注',
+
+			'huan'	=> '换房',
+
+			'floor'	=>'楼层',
+
+			'pay_numl'	=> '缴费定金',
+
+			'zyremarks'	=>'职业顾问备注',
+
+			'relation'	=>'关系',
+
+			'name' =>'姓名',
+
+			'sex'	=>'性别',
+
+			'birthday' => '生日',
+
+			'created_att'	=>'添加时间',
+
+			'total_pricess_text' =>'请选择房源',
+
+			'username_text'	=> '信息不全',
+
+			'username_iphones_text'=>'手机号不合法',
+
+			'username_shens_text' => '身份证不合法',
+
+			'pay_type_text'	=>'请选择付款方案',
+
+			'all_type_text'	=>'请填写总金额,年限，月供',
+
+			'total_prices_text'	=>'请填写总金额',
+
+			'please_choose' =>'请选择',
+
+			'all_payment'	=>'一次性付款',
+
+			'mortgage'	=>'按揭付款',
 	];

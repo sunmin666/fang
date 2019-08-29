@@ -106,18 +106,18 @@
 									@if($value -> manager_verify_status == '')
 										<button type="button" value="{{$value -> buyid}}" onclick="huan({{$value -> buyid}},{{$value -> homeid}})"
 										        class="btn btn-warning btn-xs btn_edit" id="btn_edit"><i
-												class="fa fa-edit"></i> 换房</button>
+												class="fa fa-edit"></i> {{ trans('buy.huan') }}</button>
 									@endif
 								@if($value -> manager_verify_status == '')
 									<button type="button" value="{{$value -> buyid}}" onclick="review({{$value -> buyid}},{{$value -> homeid}})"
 									        class="btn btn-warning btn-xs btn_edit" id="btn_edit"><i
-											class="fa fa-edit"></i> 经理审核</button>
+											class="fa fa-edit"></i> {{ trans('buy.review') }}</button>
 								@endif
 								@if($value -> finance_verify_status == '')
 								@if($value -> manager_verify_status == 1)
 										<button type="button" value="{{$value -> buyid}}" onclick="cwview({{$value -> buyid}},{{$value -> homeid}})"
 										        class="btn btn-warning btn-xs btn_edit" id="btn_edit"><i
-												class="fa fa-edit"></i> 财务审核</button>
+												class="fa fa-edit"></i> {{ trans('buy.manager_verify_status') }}</button>
 								@endif
 								@endif
 								@endif
