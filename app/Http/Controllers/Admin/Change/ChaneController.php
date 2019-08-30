@@ -13,9 +13,9 @@ class ChaneController extends SessionController
 
 
 
+
 			$data['data'] = Change::get_d_buy_home($buyid);
 			$data['home'] = Change::get_home_d($homeid);
-
 
 
 
