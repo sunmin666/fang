@@ -124,8 +124,6 @@
 													class="fa fa-edit"></i> {{trans('memberinfo.tuifang')}}</button>
 									@endif
 								@endif
-
-
 									@if($value -> sig_status == 1)
 									<button type="button" value="{{$value -> cust_id}}" onclick="change_home({{$value -> buyid}},{{$value -> homeid}})"
 									        class="btn btn-warning btn-xs btn_edit" id="btn_customero"><i
@@ -134,10 +132,7 @@
 									<button type="button" value="{{$value -> cust_id}}" onclick="signinfo({{$value -> buyid}})"
 									        class="btn btn-warning btn-xs btn_edit" id="btn_customero"><i
 											class="fa fa-edit"></i> {{trans('memberinfo.change_cust')}}</button>
-
 									@endif
-
-
 								<button type="button" value="{{$value -> buyid}}" onclick="view({{$value -> buyid}})"
 								        class="btn btn-warning btn-xs btn_edit" id="btn_edit"><i
 										class="fa fa-edit"></i> {{trans('memberinfo.news_view')}}</button>
