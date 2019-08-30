@@ -604,11 +604,17 @@
 		//财务审核
 		Route::get('signinfo/cwview/{sigid}/{buyid}/{homeid}','Admin\Signinfo\SigninfoController@cwview');
 
+
+		//更名管理
+		Route::get('changecust/{perid}','Admin\Changecust\ChangecustController@index');
 		//更名添加页面
 		Route::get('changecust/get_cust/{buyid}/{homeid}','Admin\Changecust\ChangecustController@get_cust');
 		//更名添加数据
 		Route::post('changecust/store','Admin\Changecust\ChangecustController@store');
-
+		//更名修改页面
+		Route::get('changecust/edit/{chan_id}','Admin\Changecust\ChangecustController@edit');
+		//更名更新数据
+		Route::post('changecust/destroy','Admin\Changecust\ChangecustController@destroy');
 
 		//换房页面
 		Route::get('chang/home/{buyid}/{homeid}','Admin\Change\ChaneController@create');

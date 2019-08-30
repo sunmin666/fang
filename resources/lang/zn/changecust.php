@@ -20,4 +20,12 @@ return [
 
     'text_content2' => '您填写的备注信息不合法',
 
+    'buildnums' => '楼号',
+
+    'unitnums' => '单元',
+
+    'roomnums' => '房号',
+
+    'operating' =>'操作',
+
 ];

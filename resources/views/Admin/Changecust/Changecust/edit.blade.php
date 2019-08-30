@@ -12,18 +12,18 @@
                 <div class="form-group">
                     {{--客户姓名--}}
                     <label>{{ trans('changecust.cust_id') }}：</label>
-                        <input type="text" class="form-control" name="realname"
-                               onkeyup="value=value.replace(/[\d]/g,'') "
-                               value="{{$name -> realname}}"
-                               maxlength="15" readonly="readonly">
-                        <input type="hidden" value="{{$name -> cust_id}}" id="cust_id">
+                    <input type="text" class="form-control" name="realname"
+                           onkeyup="value=value.replace(/[\d]/g,'') "
+                           value="{{$changecust -> name}}"
+                           maxlength="15" readonly="readonly">
+                    <input type="hidden" value="{{$changecust -> cust_id}}" id="cust_id">
                 </div>
                 <div class="form-group">
                     {{--老客户手机号--}}
                     <label>{{ trans('changecust.mobile') }}：</label>
                     <input type="text" class="form-control" name="mobile"
                            onkeyup="value=value.replace(/[\d]/g,'') "
-                           value="{{$name -> mobile}}"
+                           value="{{$changecust -> mobile}}"
                            maxlength="15" readonly="readonly">
                 </div>
                 <div class="form-group">
@@ -31,26 +31,26 @@
                     <label>{{ trans('changecust.idcard') }}：</label>
                     <input type="text" class="form-control" name="mobile"
                            onkeyup="value=value.replace(/[\d]/g,'') "
-                           value="{{$name -> idcard}}"
+                           value="{{$changecust -> idcard}}"
                            maxlength="15" readonly="readonly">
                 </div>
                 {{--新客户--}}
                 <div class="form-group">
                     <label>{{ trans('changecust.new_cust') }}：</label>
-                    <select name="new_cust" id="new_cust" class="form-control">
+                    <select name="new_cust" id="new_cust" class="form-control" disabled="disabled">
                         <option value=""> 请选择</option>
                         @foreach($newname as $k=>$v)
-                            <option value="{{$v ->cust_id}}">{{$v -> realname}}</option>
+                            <option value="{{$v ->cust_id}}" @if($changecust->new_cust == $v ->cust_id)selected @endif>{{$v -> realname}}</option>
                         @endforeach
                     </select>
                 </div>
                 {{--认购信息id--}}
                 <div class="form-group">
-                    <input type="hidden" value="{{$buyid}}" id="buyid">
+                    <input type="hidden" value="{{$changecust -> buyid}}" id="buyid">
                 </div>
                 {{--房子id--}}
                 <div class="form-group">
-                    <input type="hidden" value="{{$home -> homeid}}" id="homeid">
+                    <input type="hidden" value="{{$changecust -> old_homeid}}" id="homeid">
                 </div>
                 {{--楼号--}}
                 <div class="form-group none" id="buildnumss">
@@ -59,7 +59,7 @@
                     <input type="text" class="form-control" readonly="readonly"
                            {{--onkeyup="value=value.replace(/[^\d.]/g,'')"--}}
                            name="buildnums" placeholder="请输入缴费金额" id="buildnums"
-                           value="{{$home ->buildnums }}"
+                           value="{{$changecust ->buildnums }}"
                            maxlength="12">
                 </div>
                 {{--单元--}}
@@ -69,7 +69,7 @@
                     <input type="text" class="form-control" readonly="readonly"
                            {{--onkeyup="value=value.replace(/[^\d.]/g,'')"--}}
                            name="unitnums" placeholder="请输入缴费金额" id="unitnums"
-                           value="{{$home ->unitnums }}"
+                           value="{{$changecust ->unitnums }}"
                            maxlength="12">
                 </div>
                 {{--房号--}}
@@ -79,7 +79,7 @@
                     <input type="text" class="form-control" readonly="readonly"
                            {{--onkeyup="value=value.replace(/[^\d.]/g,'')"--}}
                            name="roomnums" placeholder="请输入缴费金额" id="roomnums"
-                           value="{{$home ->roomnums }}"
+                           value="{{$changecust ->roomnums }}"
                            maxlength="12">
                 </div>
                 {{--更名备注--}}
@@ -87,7 +87,7 @@
                 <div class="form-group">
                     <label>{{ trans('changecust.remarks') }}：</label>
 					<textarea name="remarks" id="remarks"
-                              cols="30" rows="5" class="form-control" placeholder="{{trans('trackinfo.text4')}}" style="resize:none"></textarea>
+                              cols="30" rows="5" class="form-control" placeholder="{{trans('trackinfo.text4')}}" style="resize:none">{{$changecust -> remarks}}</textarea>
                 </div>
             </form>
         </div>
@@ -117,6 +117,7 @@
         var remarks = $( '#remarks' ).val();                //来访内容
         var buyid = $( '#buyid' ).val();
         var type =1;
+       // alert(buyid);
         var regEn = {{config('myconfig.config.regEn')}};
         var regCn = {{config('myconfig.config.regCn')}};
 
@@ -140,9 +141,10 @@
 
 
         $.ajax( {
-            url : "{{URL('changecust/store')}}" ,
+            url : "{{URL('changecust/destroy')}}" ,
             type : 'post' ,
             data : {
+                chan_id : '{{$changecust -> chan_id}}',
                 cust_id : cust_id ,         //客户姓名
                 new_cust : new_cust ,         //新客户
                 old_homeid : homeid ,        //房子id
@@ -153,13 +155,13 @@
             } ,
             success : function ( data ) {
                 console.log( data );
-                if ( data.code == {{config('myconfig.changecust.changecust_store_error_code')}}) {
+                if ( data.code == {{config('myconfig.changecust.changecust_destroy_error_code')}}) {
                     layer.msg( data.msg , { time : 2151 } );
                     $( "#store1" ).attr( 'disabled' , false );
                     return false;
                 }
 
-                if ( data.code == {{config('myconfig.changecust.changecust_store_success_code')}}) {
+                if ( data.code == {{config('myconfig.changecust.changecust_destroy_success_code')}}) {
                     layer.msg( data.msg , { time : 2000 } , function () {
                         window.parent.location.reload();
                     } );

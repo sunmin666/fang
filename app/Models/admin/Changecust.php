@@ -37,4 +37,42 @@ class Changecust extends Model
     {
         return DB::table('changeinfo') ->insert($data);
     }
+
+    //查询所有
+    public static function get_all_changecust($page)
+    {
+        return DB::table('changeinfo')
+            ->select('changeinfo.*','customera.realname as name','customerb.realname as newname','homeinfo.buildnum','homeinfo.unitnum','homeinfo.roomnum','fieldinfob.name as buildnums' , 'fieldinfou.name as unitnums' , 'fieldinfor.name as roomnums')
+            ->leftJoin( 'customer as customera' , 'changeinfo.cust_id' , '=' , 'customera.cust_id' )
+            ->leftJoin( 'customer as customerb' , 'changeinfo.new_cust' , '=' , 'customerb.cust_id' )
+            ->leftJoin('homeinfo','homeinfo.homeid','=','changeinfo.old_homeid')
+            ->leftJoin( 'fieldinfo as fieldinfob' , 'homeinfo.buildnum' , '=' , 'fieldinfob.field_id' )
+            ->leftJoin( 'fieldinfo as fieldinfou' , 'homeinfo.unitnum' , '=' , 'fieldinfou.field_id' )
+            ->leftJoin( 'fieldinfo as fieldinfor' , 'homeinfo.roomnum' , '=' , 'fieldinfor.field_id' )
+            ->where('changeinfo.type','=',1)
+            ->paginate($page);
+    }
+
+    //修改查询单条
+    public static function edit_d_show($chan_id)
+    {
+        return DB::table('changeinfo')
+            ->select('changeinfo.*','customera.realname as name','customerb.realname as newname','homeinfo.buildnum','homeinfo.unitnum','homeinfo.roomnum','fieldinfob.name as buildnums' , 'fieldinfou.name as unitnums' , 'fieldinfor.name as roomnums','customer.mobile','customer.idcard')
+            ->leftJoin( 'customer as customera' , 'changeinfo.cust_id' , '=' , 'customera.cust_id' )
+            ->leftJoin( 'customer as customerb' , 'changeinfo.new_cust' , '=' , 'customerb.cust_id' )
+            ->leftJoin('homeinfo','homeinfo.homeid','=','changeinfo.old_homeid')
+            ->leftJoin( 'fieldinfo as fieldinfob' , 'homeinfo.buildnum' , '=' , 'fieldinfob.field_id' )
+            ->leftJoin( 'fieldinfo as fieldinfou' , 'homeinfo.unitnum' , '=' , 'fieldinfou.field_id' )
+            ->leftJoin( 'fieldinfo as fieldinfor' , 'homeinfo.roomnum' , '=' , 'fieldinfor.field_id' )
+            -> leftJoin('customer','changeinfo.cust_id','=','customer.cust_id')
+            ->where('changeinfo.chan_id','=',$chan_id)
+            ->first();
+
+    }
+
+    //更新数据
+    public static function destroy_changecust($chan_id,$data)
+    {
+        return DB::table('changeinfo') -> where('changeinfo.chan_id','=',$chan_id)->update($data);
+    }
 }
