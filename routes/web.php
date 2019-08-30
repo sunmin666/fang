@@ -605,9 +605,12 @@
 		Route::get('signinfo/cwview/{sigid}/{buyid}/{homeid}','Admin\Signinfo\SigninfoController@cwview');
 
 
+		//换房信息展示页面
+		Route::get('changeh/{perid}','Admin\Change\ChaneController@index');
 		//换房页面
 		Route::get('chang/home/{buyid}/{homeid}','Admin\Change\ChaneController@create');
-
+		//换房新增
+		Route::post('change_home/store','Admin\Change\ChaneController@store');
 
 
 	});

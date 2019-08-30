@@ -31,7 +31,7 @@ class BuyController extends SessionController
 			$data['page_note'] = trans( 'index.page_note' );
 			$page = config('myconfig.config.page_num');
 			$data['buy'] = Buy::get_all_buy($page);
-//			dd($data['buy']);
+			//			dd($data['buy']);
 			$data['ids'] = $perid;
 			return view('Admin.Buy.Buy.index') -> with($data);
 		}

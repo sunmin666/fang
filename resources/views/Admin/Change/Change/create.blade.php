@@ -109,6 +109,7 @@
 					       name="roomnums"  id="roomnums"
 					       maxlength="12">
 				</div>
+
 				<div class="form-group none" id="build_area">
 					{{--<label>{{ trans('buy.pay_num')}}：</label>--}}
 					<label>{{ trans('buy.build_areas') }}：</label>
@@ -176,7 +177,6 @@
 			var cc = '<option value="">--{{ trans('buy.please_choice') }}--</option>';
 			$( '#roomnum' ).html( cc );
 			$( '#unitnum' ).html( cc );
-
 			return false;
 		}
 
@@ -284,122 +284,17 @@
 	$( '#store1' ).click( function () {
 
 		// $( "#store1" ).attr( 'disabled' , true );
-		//客户信息
-		var mobile_pattern = {{config('myconfig.config.mobile_pattern')}};   //手机号正则匹配
-		var idcard_pattern = {{config('myconfig.config.idcard_pattern')}};           //身份证正则表达式
 
-		var cust_ids = $( '#cust_id' ).val();   //客户id
-		var names = $( '#names' ).val();         //客户姓名
-		var iphones = $( '#iphones' ).val();     //客户手机号
-		var shens = $( '#shens' ).val();    // 身份证号
-		if ( names == '' || iphones == '' || shens == '' ) {
-			layer.msg( '{{ trans('buy.username_text') }}' , { time : 1563 } );
-			return false;
-		}
-
-		if ( !mobile_pattern.test( iphones ) ) {
-			layer.msg( '{{ trans('buy.username_iphones_text') }}' , { time : 1456 } );
-			$( '#store1' ).attr( 'disabled' , false );
-			return false;
-		}
-
-		if ( !idcard_pattern.test( shens ) ) {
-			layer.msg( '{{ trans('buy.username_shens_text') }}' , { time : 1456 } );
-			$( '#store1' ).attr( 'disabled' , false );
-			return false;
-		}
-
-		//房子id
 		var roomnum = $( '#roomnum' ).val();     //房子id
 		if ( roomnum == '' ) {
 			layer.msg( '{{ trans('buy.total_pricess_text') }}' , { time : 1563 } );
 			return false;
 		}
-		//房屋共有人
 
-		var fanggmun = $( '#fanggmun' ).val();     //房屋共有人信息个数
-		if ( fanggmun != 0 ) {
-			var fanggmunren = [];
-			for ( var ig = 0 ; ig < fanggmun ; ig++ ) {
-				var res = {};
-				var relation = $( '#relation' + ig ).val();   //关系
-				var realname = $( '#realname' + ig ).val();     //姓名
-				var sex = $( '#sex' + ig ).val();         //性别
-				var birthday = $( '#birthday' + ig ).val();  //生日
-				var idcard = $( '#idcard' + ig ).val();        //证件号码
-				var mobile = $( '#mobile' + ig ).val();       //手机号码
-				var cust_id = cust_ids;            //客户id
-				var zzz = Number( ig ) + 1;
-				if ( !mobile_pattern.test( mobile ) ) {
-					layer.msg( '第' + zzz + '{{ trans('buy.username_iphones_text') }}' , { time : 1456 } );
-					$( '#store1' ).attr( 'disabled' , false );
-					fanggmunren = [];
-					return false;
-				}
-				if ( !idcard_pattern.test( idcard ) ) {
-					layer.msg( '第' + zzz + '{{ trans('buy.username_shens_text') }}' , { time : 1546 } );
-					$( "#store1" ).attr( 'disabled' , false );
-					fanggmunren = [];
-					return false;
-				}
-				if ( relation == '' || realname == '' || sex == '' || birthday == ''
-					|| idcard == '' || mobile == '' || cust_id == ''
-				) {
-					layer.msg( '第' + zzz + '{{ trans('buy.username_text') }}' , { time : 1546 } );
-					$( "#store1" ).attr( 'disabled' , false );
-					fanggmunren = [];
-					return false;
-				}
-				else {
-					res['relation'] = relation;
-					res['realname'] = realname;
-					res['sex'] = sex;
-					res['birthday'] = birthday;
-					res['idcard'] = idcard;
-					res['mobile'] = mobile;
-					res['cust_id'] = cust_id;
-					fanggmunren.push( res );
-				}
-			}
-		}
-
-		//获取缴纳定金
-		var pay_num = $( '#pay_num' ).val();
-		//付款方案
-		var pay_type = $( '#pay_type' ).val();
-		if ( pay_type == '' ) {
-			layer.msg( '{{ trans('buy.pay_type_text') }}' , { time : 1563 } );
-			return false;
-		}
-		else if ( pay_type == 1 ) {
-
-			// alert(123);
-
-			var total_prices = $( '#total_pricess' ).val();   //总金额
-			var loan_term = $( '#loan_term' ).val();        //年限
-			var month_pays = $( '#month_pays' ).val();    // 月供
-			console.log(total_prices,loan_term,month_pays);
-			if(total_prices == '' || loan_term == '' || month_pays == ''){
-				layer.msg('{{ trans('buy.all_type_text') }}',{time:1236});
-				return false;
-			}
-		}
-		else if ( pay_type == 0 ) {
-
-			// alert(465);
-			var total_prices = $( '#total_prices' ).val();   //总金额
-			var loan_term = '';        //年限
-			var month_pays = '';    // 月供
-			if(total_prices == ''){
-				layer.msg('{{ trans('buy.total_prices_text') }}',{time:1236});
-				return false;
-			}
-
-		}
 		//获取职业顾问备注
 		var remarks = $( '#remarks' ).val();
 
-		if ( pay_num == '' || total_prices == '' || remarks == '' ) {
+		if ( remarks == '' ) {
 			layer.msg( '{{trans('company.text_content1')}}' , { time : 1235 } );
 			$( "#store1" ).attr( 'disabled' , false );
 			return false;
@@ -418,52 +313,39 @@
 			$( "#store1" ).attr( 'disabled' , false );
 			return false;
 		}
-
+		//1：更名 2：换房
+		var type = 2;
 
 		$.ajax( {
-			url : "{{URL('buyinfoss/store')}}" ,
+			url : "{{URL('change_home/store')}}" ,
 			type : 'post' ,
 			data : {
-				cust_id : cust_ids ,         //用户id
-				names : names ,                 //用户姓名
-				iphones : iphones ,          //手机号
-				shens : shens ,                //身份证号
-				roomnum : roomnum ,              //房子id
-				fanggmunren : fanggmunren ,         //房屋共有人
-				loan_term:loan_term,
-				month_pay:month_pays,
-				pay_num : pay_num ,                        //缴纳定金
-				pay_type : pay_type ,                    //付款方式
-				total_prices : total_prices ,          //总金额
-				remarks : remarks ,                    // 职业顾问备注
+				cust_id : '{{$cust -> cust_id}}' ,         //用户id
+				old_homeid : '{{$cust -> homeid}}' ,                 //老房源id
+				new_homeid : roomnum ,          //新房源
+				remarks : remarks ,                //换房或更新备注
+				buyid: '{{$cust -> buyid}}',
+				type: type,
 				_token : "{{csrf_token()}}"
 			} ,
 			success : function ( data ) {
 				console.log( data );
-
-				if ( data.code == {{config('myconfig.buy.buy_store_success_code')}}) {
+				if ( data.code == {{config('myconfig.changeh.store_change_success_code')}}) {
 					layer.msg( data.msg , { time : 2000 } , function () {
 						window.parent.location.reload();
 					} );
 				}
 
-				if ( data.code == {{config('myconfig.buy.buy_store_error_code')}}) {
+				if ( data.code == {{config('myconfig.changeh.store_change_error_code')}}) {
 					layer.msg( data.msg , { time : 2000 } );
 					$( "#store1" ).attr( 'disabled' , false );
 				}
 
-				if ( data.code == {{config('myconfig.buy.homeinfo_status_code')}}) {
+				if ( data.code == {{config('myconfig.changeh.remarks_code')}}) {
 					layer.msg( data.msg , { time : 2000 } );
 					$( "#store1" ).attr( 'disabled' , false );
 				}
-				if ( data.code == {{config('myconfig.buy.remarks_code')}}) {
-					layer.msg( data.msg , { time : 2000 } );
-					$( "#store1" ).attr( 'disabled' , false );
-				}
-				if ( data.code == {{config('myconfig.buy.shen_code')}}) {
-					layer.msg( data.msg , { time : 2000 } );
-					$( "#store1" ).attr( 'disabled' , false );
-				}
+
 			}
 		} )
 	} )

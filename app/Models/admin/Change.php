@@ -33,4 +33,32 @@ class Change extends Model
 		return DB::table( 'fieldinfo' )->where( 'parent_field_id' , '=' , 1 )
 						 ->get();
 	}
+
+
+	//新增到数据库
+	public static function store_changinfo($data){
+    	return DB::table('changeinfo') -> insert($data);
+	}
+
+	//查询所有换房信息
+	public static function get_all_change($page){
+    	return DB::table('changeinfo')
+				->select('changeinfo.*',
+					'customer.realname','customer.mobile', 'customer.idcard',
+					'old_homeinfo.buildnum as old_buildnum','old_homeinfo.unitnum as old_unitnum','old_homeinfo.roomnum as old_roomnum',
+					'new_homeinfo.buildnum as new_buildnum','new_homeinfo.unitnum as new_unitnum','new_homeinfo.roomnum as new_roomnum',
+					'fieldinfob_old.name as buildnum_old','fieldinfou_old.name as unitnum_old','fieldinfor_old.name as roomnum_old',
+					'fieldinfob_new.name as buildnum_new','fieldinfou_new.name as unitnum_new','fieldinfor_new.name as roomnum_new')
+				->leftJoin('customer','changeinfo.cust_id','=','customer.cust_id')
+				->leftJoin('homeinfo as old_homeinfo','changeinfo.old_homeid','=','old_homeinfo.homeid')
+				->leftJoin('homeinfo as new_homeinfo','changeinfo.new_homeid','=','new_homeinfo.homeid')
+				->leftJoin( 'fieldinfo as fieldinfob_old' , 'old_homeinfo.buildnum' , '=' , 'fieldinfob_old.field_id' )
+				->leftJoin( 'fieldinfo as fieldinfou_old' , 'old_homeinfo.unitnum' , '=' , 'fieldinfou_old.field_id' )
+				->leftJoin( 'fieldinfo as fieldinfor_old' , 'old_homeinfo.roomnum' , '=' , 'fieldinfor_old.field_id' )
+				->leftJoin( 'fieldinfo as fieldinfob_new' , 'new_homeinfo.buildnum' , '=' , 'fieldinfob_new.field_id' )
+				->leftJoin( 'fieldinfo as fieldinfou_new' , 'new_homeinfo.unitnum' , '=' , 'fieldinfou_new.field_id' )
+				->leftJoin( 'fieldinfo as fieldinfor_new' , 'new_homeinfo.roomnum' , '=' , 'fieldinfor_new.field_id' )
+				->where('changeinfo.type','=',2)
+				->paginate($page);
+	}
 }
