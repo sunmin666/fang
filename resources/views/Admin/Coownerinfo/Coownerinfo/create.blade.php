@@ -14,7 +14,7 @@
                     <label>{{ trans('coownerinfo.cust_id') }}：</label>
                     @foreach($name as $k => $v)
                     <input type="text" class="form-control" name="name"
-                           placeholder="请输客户姓名" id="name"
+                           id="name"
                            onkeyup="value=value.replace(/[\d]/g,'') "
                            value="{{$v->realname}}"
                            maxlength="15" readonly="readonly">
@@ -26,7 +26,7 @@
                     {{--共有人姓名--}}
                     <label>{{ trans('coownerinfo.realname') }}：</label>
                     <input type="text" class="form-control" name="realname"
-                           placeholder="请输客户姓名" id="realname"
+                           placeholder="{{ trans('coownerinfo.please_realname') }}" id="realname"
                            onkeyup="value=value.replace(/[\d]/g,'') "
                            value=""
                            maxlength="15">
@@ -36,7 +36,7 @@
                     {{--共有人手机号--}}
                     <label>{{ trans('coownerinfo.mobile') }}：</label>
                     <input type="text" class="form-control" name="mobile"
-                           placeholder="请输共有人手机号" id="mobile"
+                           placeholder="{{ trans('coownerinfo.please_iphone') }}" id="mobile"
                            onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"
                            value=""
                            maxlength="11">
@@ -46,7 +46,7 @@
                     {{--共有人身份证号--}}
                     <label>{{ trans('coownerinfo.idcard') }}：</label>
                     <input type="text" class="form-control" name="idcard"
-                           placeholder="请输共有人身份证号码" id="idcard"
+                           placeholder="{{ trans('coownerinfo.please_idcard') }}" id="idcard"
                            onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"
                            value=""
                            maxlength="18">
@@ -56,7 +56,7 @@
                     <label>{{ trans('coownerinfo.birthday') }}：</label>
                     {{--共有人生日--}}
                     <input type="text" class="layui-input form-control"
-                           name="birthday" value="" placeholder="生日" autocomplete="off" id="birthday"
+                           name="birthday" value="" placeholder="{{ trans('coownerinfo.please_birthday') }}" autocomplete="off" id="birthday"
                     >
 
                 </div>
@@ -65,8 +65,8 @@
                     {{--共有人性别--}}
                     <label>{{ trans('coownerinfo.sex') }}：</label>
                     <select name="sex" id="sex" class="form-control">s
-                        <option value="1" >女士</option>
-                        <option value="0" >男士</option>
+                        <option value="1" >{{ trans('coownerinfo.maam') }}</option>
+                        <option value="0" >{{ trans('coownerinfo.man') }}</option>
                     </select>
                 </div>
 
@@ -74,12 +74,12 @@
                     {{--共有人与客户之间的关系--}}
                     <label>{{ trans('coownerinfo.relation') }}：</label>
                     <select name="relation" id="relation" class="form-control">s
-                        <option value="0">配偶</option>
-                        <option value="1">儿子</option>
-                        <option value="2">女儿</option>
-                        <option value="3">父亲</option>
-                        <option value="4">母亲</option>
-                        <option value="5">亲戚 </option>
+                        <option value="0">{{ trans('coownerinfo.spouse') }}</option>
+                        <option value="1">{{ trans('coownerinfo.son') }}</option>
+                        <option value="2">{{ trans('coownerinfo.daughter') }}</option>
+                        <option value="3">{{ trans('coownerinfo.father') }}</option>
+                        <option value="4">{{ trans('coownerinfo.mather') }}</option>
+                        <option value="5">{{ trans('coownerinfo.relative') }} </option>
                     </select>
                 </div>
 
@@ -137,13 +137,13 @@
         }
 
         if ( !mobile_pattern.test( mobile ) ) {
-            layer.msg( '用户手机号不合法' , { time : 1456 } );
+            layer.msg( '{{trans('coownerinfo.username_iphones_text')}}' , { time : 1456 } );
             $( '#store1' ).attr( 'disabled' , false );
             return false;
         }
 
         if ( !idcard_pattern.test( idcard ) ) {
-            layer.msg( '用户身份信息不合法' , { time : 1546 } );
+            layer.msg( '{{trans('coownerinfo.username_shens_text')}}' , { time : 1546 } );
             $( '#store1' ).attr( 'disabled' , false );
             return false;
         }

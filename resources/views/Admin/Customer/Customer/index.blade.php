@@ -68,10 +68,10 @@
 							           value="{{$value->cust_id}}"
 								></td>
 							<td>{{ $value -> realname}}</td>
-							<td>@if($value -> sex == 1) 男 @elseif($value -> sex == 2) 女 @endif</td>
+							<td>@if($value -> sex == 1) {{ trans('customer.male') }} @elseif($value -> sex == 2) {{ trans('customer.female') }} @endif</td>
 							<td>{{$value -> mobile}}</td>
-							<td>@if($value-> email == '') 该客户暂未留下邮箱 @else {{$value -> email}} @endif</td>
-							<td>@if($value -> comp_id == 1) 西安开米@endif</td>
+							<td>@if($value-> email == '') {{ trans('customer.no_email') }} @else {{$value -> email}} @endif</td>
+							<td>@if($value -> comp_id == 1) {{ trans('customer.open_rice') }}@endif</td>
 							<td>{{$value-> pro_cname}}</td>
 							<td>@foreach($hous_id as $k => $v)
 									@if($v -> hous_id == $value -> hous_id) {{$v -> name}}  @endif
@@ -91,9 +91,9 @@
 										class="fa fa-trash"></i>
 									@if($status == 2 && $id == 1)
 										@if($value -> is_show == 1)
-										隐藏
+											{{ trans('customer.hidden') }}
 										@else
-											显示
+											{{ trans('customer.show') }}
 										@endif
 									@else
 										{{trans('memberinfo.news_delete')}}

@@ -19,17 +19,17 @@
     </style>
 </head>
 <body>
-<div><span>客户姓名：</span>{{$coowner -> name}}</div>
-<div><span>共有人姓名：</span>{{$coowner -> realname}}</div>
-<div><span>共有人手机号：</span>{{$coowner -> mobile}}</div>
-<div><span>共有人身份证号：</span>{{$coowner -> idcard}}</div>
-<div><span>共有人性别：</span>@if($coowner -> sex==0)女士@else男士@endif</div>
-<div><span>共有人生日：</span>{{date('Y-m-d',$coowner -> birthday)}}</div>
-<div><span>关系：</span>@if($coowner -> relation==0)配偶@elseif($coowner -> relation==1)儿子
-                                @elseif($coowner -> relation==2)女儿@elseif($coowner -> relation==3)父亲
-                                @elseif($coowner -> relation==4)母亲@elseif($coowner -> relation==5)亲戚
+<div><span>{{ trans('coownerinfo.cust_id') }}：</span>{{$coowner -> name}}</div>
+<div><span>{{ trans('coownerinfo.realname') }}：</span>{{$coowner -> realname}}</div>
+<div><span>{{ trans('coownerinfo.mobile') }}：</span>{{$coowner -> mobile}}</div>
+<div><span>{{ trans('coownerinfo.idcard') }}：</span>{{$coowner -> idcard}}</div>
+<div><span>{{ trans('coownerinfo.sex') }}：</span>@if($coowner -> sex==0){{ trans('coownerinfo.maam') }}@else{{ trans('coownerinfo.man') }}@endif</div>
+<div><span>{{ trans('coownerinfo.birthday') }}：</span>{{date('Y-m-d',$coowner -> birthday)}}</div>
+<div><span>{{ trans('coownerinfo.relation') }}：</span>@if($coowner -> relation==0){{ trans('coownerinfo.spouse') }}@elseif($coowner -> relation==1){{ trans('coownerinfo.son') }}
+                                @elseif($coowner -> relation==2){{ trans('coownerinfo.daughter') }}@elseif($coowner -> relation==3){{ trans('coownerinfo.father') }}
+                                @elseif($coowner -> relation==4){{ trans('coownerinfo.mather') }}@elseif($coowner -> relation==5){{ trans('coownerinfo.relative') }}
                                 @endif</div>
-<div><span>创建时间：</span>{{date('Y-m-d H:i:s',$coowner -> created_at)}}</div>
-<div><span>信息更新时间：</span>@if($coowner -> updated_at == '')暂无更新时间@else{{date('Y-m-d H:i:s',$coowner -> updated_at)}}@endif</div>
+<div><span>{{ trans('coownerinfo.created_at') }}：</span>{{date('Y-m-d H:i:s',$coowner -> created_at)}}</div>
+<div><span>{{ trans('coownerinfo.updated_at') }}：</span>@if($coowner -> updated_at == ''){{ trans('coownerinfo.no_update_ime') }}@else{{date('Y-m-d H:i:s',$coowner -> updated_at)}}@endif</div>
 </body>
 </html>

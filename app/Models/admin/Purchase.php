@@ -32,8 +32,12 @@ class Purchase extends Model
     public static function get_d_trackinfo($planid)
     {
         return DB::table('purchase_plan')
-            -> select('purchase_plan.*','customer.realname')
+            -> select('purchase_plan.*','customer.realname','homeinfo.buildnum','homeinfo.unitnum','homeinfo.roomnum','homeinfo.total','homeinfo.discount','fieldinfob.name as buildnums','fieldinfou.name as unitnums','fieldinfor.name as roomnums')
             -> leftJoin('customer','purchase_plan.cust_id','=','customer.cust_id')
+            -> leftJoin('homeinfo','purchase_plan.homeid','=','homeinfo.homeid')
+            -> leftJoin('fieldinfo as fieldinfob','homeinfo.buildnum','=','fieldinfob.field_id')
+            -> leftJoin('fieldinfo as fieldinfou','homeinfo.unitnum','=','fieldinfou.field_id')
+            -> leftJoin('fieldinfo as fieldinfor','homeinfo.roomnum','=','fieldinfor.field_id')
             -> where('purchase_plan.planid','=',$planid)
             -> first();
     }
@@ -55,4 +59,12 @@ class Purchase extends Model
     {
         return DB::table('purchase_plan') ->whereIn('planid',$all_id) ->delete();
     }
+
+    //查询所有楼号
+    public static function fieid()
+    {
+        return DB::table( 'fieldinfo' )->where( 'parent_field_id' , '=' , 1 )
+            ->get();
+    }
+
 }

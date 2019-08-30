@@ -62,11 +62,11 @@
                                        value="{{$v->planid}}"
                                 ></td>
                             <td>{{$v -> realname}}</td>
-                            <td>@if($v -> type == 0)一次性付款@else按揭付款@endif</td>
-                            <td>@if($v -> type==1)按揭支付@else{{$v->once_total}}@endif</td>
-                            <td>@if($v -> type == 0)一次性付款@else{{ $v -> years}}@endif</td>
-                            <td>@if($v -> type == 0)一次性付款@else{{ $v -> month_price}}@endif</td>
-                            <td>@if($v -> type == 0)一次性付款@else{{ $v -> month_total}}@endif</td>
+                            <td>@if($v -> type == 0){{ trans('purchase.one_all') }}@else{{ trans('purchase.mortgage') }}@endif</td>
+                            <td>@if($v -> type==1){{ trans('purchase.mortgage') }}@else{{$v->once_total}}@endif</td>
+                            <td>@if($v -> type == 0){{ trans('purchase.one_all') }}@else{{ $v -> years}}@endif</td>
+                            <td>@if($v -> type == 0){{ trans('purchase.one_all') }}@else{{ $v -> month_price}}@endif</td>
+                            <td>@if($v -> type == 0){{ trans('purchase.one_all') }}@else{{ $v -> month_total}}@endif</td>
                             <td>{{date('Y-m-d H:i:s',$v -> created_at)}}</td>
                             <td>
                                 <button type="button" value="{{$v->planid}}" onclick="view({{$v->planid}})"
@@ -258,7 +258,7 @@
                 moveType : 0 ,
                 skin : 'layui-layer-demo' , //加上边框
                 closeBtn : 1 ,
-                area : ['50%' , '50%'] , //宽高
+                area : ['50%' , '60%'] , //宽高
                 shadeClose : false ,
                 shade : 0.5 ,
                 content : ["{{URL('purchase/view')}}" + "/" + planid] ,

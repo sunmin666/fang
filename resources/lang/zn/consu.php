@@ -55,4 +55,39 @@
 
 		'enjoy_null'    => '请输入折扣信息',
 
+		'please_mobile' =>'请输入手机号',
+
+		'please_password'=>'请输入密码',
+
+		'confirmation'=>'确认密码',
+
+		'please_name'=>'请输入名称',
+
+		'male'=>'男',
+
+		'female' =>'女',
+
+		'please_email' =>'请填写邮箱',
+
+		'please_idcrad' =>'请填写身份证',
+
+		'please_choice' => '请选择',
+
+		'pc_login' => '只在pc登录',
+
+		'ipad_login' => '只在ipad登录',
+
+		'man' => '男士',
+
+		'maam' => '女士',
+
+		'no_discount'=>'没有折扣',
+
+		'no_update_ime' =>'暂无更新时间',
+
+		 'number_iphone' =>'成员账号（手机号）',
+
+		'consultant_discount' =>'只有置业顾问有折扣',
+
+		'please_page_detail2' =>'请输入折扣信息',
 	];

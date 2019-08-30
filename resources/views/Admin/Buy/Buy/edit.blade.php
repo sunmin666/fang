@@ -56,7 +56,7 @@
 					<input type="text" class="form-control" readonly
 					       {{--onkeyup="value=value.replace(/[^\d.]/g,'')"--}}
 						       value="{{$buy -> buildnums}}"
-					       name="buildnums" placeholder="请输入缴费金额" id="buildnums"
+					       name="buildnums"  id="buildnums"
 					       maxlength="12">
 				</div>
 				<div class="form-group">
@@ -65,7 +65,7 @@
 					<input type="text" class="form-control" readonly
 					       value="{{$buy -> unitnums}}"
 					       {{--onkeyup="value=value.replace(/[^\d.]/g,'')"--}}
-					       name="unitnums" placeholder="请输入缴费金额" id="unitnums"
+					       name="unitnums"  id="unitnums"
 					       maxlength="12">
 				</div>
 				<div class="form-group" >
@@ -74,7 +74,7 @@
 					<input type="text" class="form-control" readonly
 					       value="{{$buy -> roomnums}}"
 					       {{--onkeyup="value=value.replace(/[^\d.]/g,'')"--}}
-					       name="roomnums" placeholder="请输入缴费金额" id="roomnums"
+					       name="roomnums"  id="roomnums"
 					       maxlength="12">
 				</div>
 				<div class="form-group" >
@@ -83,7 +83,7 @@
 					<input type="text" class="form-control" readonly
 					       value="{{$buy -> total}}"
 					       {{--onkeyup="value=value.replace(/[^\d.]/g,'')"--}}
-					       name="roomnums" placeholder="请输入缴费金额" id="roomnums"
+					       name="roomnums"  id="roomnums"
 					       maxlength="12">
 				</div>
 				<div class="form-group" >
@@ -92,13 +92,13 @@
 					<input type="text" class="form-control" readonly
 					       value="{{$buy -> discount}}"
 					       {{--onkeyup="value=value.replace(/[^\d.]/g,'')"--}}
-					       name="roomnums" placeholder="请输入缴费金额" id="roomnums"
+					       name="roomnums"  id="roomnums"
 					       maxlength="12">
 				</div>
 
 				<div class="form-group">
 				<label>{{ trans('buy.lock_time')}}：</label>
-				<input type="text" class="layui-input" id="lock_time" placeholder="请选择时间如果不选择默认为一小时">
+				<input type="text" class="layui-input" id="lock_time" placeholder="{{ trans('buy.lock_timee')}}">
 				</div>
 
 				<div class="form-group">
@@ -106,7 +106,7 @@
 					<input type="text" class="form-control"
 					       onkeyup="value=value.replace(/[^\d.]/g,'')"
 					       value="{{$buy -> pay_num}}"
-					       name="pay_num" placeholder="请输入缴费金额" id="pay_num"
+					       name="pay_num" placeholder="{{ trans('buy.please_many')}}" id="pay_num"
 					       maxlength="12">
 				</div>
 
@@ -124,7 +124,7 @@
 					<input type="text" class="form-control"
 					       {{--onkeyup="value=value.replace(/[^\d.]/g,'')"--}}
 					       @if($buy -> pay_type == 0) value="{{$buy -> total_price}}" @endif
-					       name="total_price" placeholder="请输入缴费金额" id="total_prices"
+					       name="total_price" placeholder="{{ trans('buy.please_many')}}" id="total_prices"
 					       maxlength="12">
 				</div>
 
@@ -133,19 +133,19 @@
 					<input type="text" class="form-control"
 					       {{--onkeyup="value=value.replace(/[^\d.]/g,'')"--}}
 					       @if($buy -> pay_type == 1) value="{{$buy -> loan_term}}" @endif
-					       name="loan_term" placeholder="请输入缴费金额" id="loan_term"
+					       name="loan_term" placeholder="{{ trans('buy.please_many')}}" id="loan_term"
 					       maxlength="12">
 					<label>{{ trans('buy.loan_term') }}：</label>
 					<input type="text" class="form-control"
 					       {{--onkeyup="value=value.replace(/[^\d.]/g,'')"--}}
 					       @if($buy -> pay_type == 1) value="{{$buy -> month_pay}}" @endif
-					       name="month_pay" placeholder="请输入缴费金额" id="month_pays"
+					       name="month_pay" placeholder="{{ trans('buy.please_many')}}" id="month_pays"
 					       maxlength="12">
-					<label>总金额：</label>
+					<label>{ trans('buy.total_prices')}}：</label>
 					<input type="text" class="form-control"
 					       {{--onkeyup="value=value.replace(/[^\d.]/g,'')"--}}
 					       @if($buy -> pay_type == 1) value="{{$buy -> total_price}}" @endif
-					       name="total_price" placeholder="请输入缴费金额" id="total_pricess"
+					       name="total_price" placeholder="{{ trans('buy.please_many')}}" id="total_pricess"
 					       maxlength="12">
 				</div>
 

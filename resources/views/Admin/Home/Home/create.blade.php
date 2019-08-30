@@ -13,7 +13,7 @@
 				<div class="form-group">
 					<label>{{ trans('home.buildnum') }}：</label>
 					<select name="buildnum" id="buildnum" class="form-control">
-						<option value="">--请选择--</option>
+						<option value="">--{{ trans('home.please_choice') }}--</option>
 						@foreach($buildnum as $k => $v)
 						<option value="{{$v -> field_id}}">{{$v ->name }}</option>
 						@endforeach
@@ -23,21 +23,21 @@
 				<div class="form-group">
 					<label>{{ trans('home.unitnum') }}：</label>
 					<select name="unitnum" id="unitnum" class="form-control">
-						<option value="">--请选择--</option>
+						<option value="">--{{ trans('home.please_choice') }}--</option>
 					</select>
 				</div>
 				{{--房号--}}
 				<div class="form-group">
 					<label>{{ trans('home.roomnum') }}：</label>
 					<select name="roomnum" id="roomnum" class="form-control">
-						<option value="">--请选择--</option>
+						<option value="">--{{ trans('home.please_choice') }}--</option>
 					</select>
 				</div>
 					{{--楼层--}}
 				<div class="form-group">
 					<label>{{ trans('home.floor') }}：</label>
 					<input type="text" class="form-control" name="floor"
-					       placeholder="请输入楼层" id="floor"
+					       placeholder="{{ trans('home.please_floor') }}" id="floor"
 					       onkeyup="value=value.replace(/[^\d.]/g,'')"
 					       maxlength="15">
 				</div>
@@ -47,7 +47,7 @@
 					<label>{{ trans('home.build_area')}}：</label>
 					<input type="text" class="form-control"
 					       onkeyup="value=value.replace(/[^\d.]/g,'')"
-					       name="build_area" placeholder='请输入建筑面积' id="build_area"
+					       name="build_area" placeholder='{{ trans('home.please_build_area') }}' id="build_area"
 					       maxlength="11">
 				</div>
 				{{--户型图--}}
@@ -55,7 +55,7 @@
 					<label>{{ trans('home.house_img') }}：</label>
 					<div class="zzz">
 						<button type="button" class="btn" id="test1">
-							<i class="layui-icon">&#xe67c;</i>上传图片
+							<i class="layui-icon">&#xe67c;</i>{{ trans('home.file_pic') }}
 						</button>
 						<input type="hidden" value="" id="n_img" name="n_img">
 						<div id="img" style="margin-top: 10px;border: 1px solid #ccc;width: 50px">
@@ -69,32 +69,32 @@
 				<div class="form-group">
 					<label>{{ trans('home.house_str') }}：</label>
 					<input type="text" class="form-control" name="house_str"
-					       placeholder="请输入户型结构" id="house_str" maxlength="12">
+					       placeholder="{{ trans('home.please_house_str') }}" id="house_str" maxlength="12">
 				</div>
 				{{--房子单价--}}
 				<div class="form-group">
 					<label>{{ trans('home.price') }}：</label>
 					<input type="text" class="form-control" name="price"
 					       onkeyup="value=value.replace(/[^\d.]/g,'')"
-					       placeholder="请输入房子单价" id="price" maxlength="12">
+					       placeholder="{{ trans('home.please_price') }}" id="price" maxlength="12">
 				</div>
 				{{--折扣--}}
 				<div class="form-group">
 					<label>{{ trans('home.discount') }}：</label>
 					<input type="text" class="form-control" name="discount"
 					       onkeyup="value=value.replace(/[^\d.]/g,'')"
-					       placeholder="请输入折扣" id="discount"
+					       placeholder="{{ trans('home.please_discount') }}" id="discount"
 					       maxlength="50">
 				</div>
 				{{--房子状态--}}
 				<div class="form-group">
 					<label>{{ trans('home.status') }}：</label>
 					<select name="status" id="status" class="form-control">
-						<option value="">--请选择--</option>
-						<option value="0" class=" btn-success btn-sm">认购前</option>
-						<option value="1" class="btn-warning btn-sm" >预定房源申请中</option>
-						<option value="2" class="btn-info btn-sm" >已认购</option>
-						<option value="3" class="btn-danger btn-sm" >已签约</option>
+						<option value="">--{{ trans('home.please_choice') }}--</option>
+						<option value="0" class=" btn-success btn-sm">{{ trans('home.subscription') }}</option>
+						<option value="1" class="btn-warning btn-sm" >{{ trans('home.reserved_application') }}</option>
+						<option value="2" class="btn-info btn-sm" >{{ trans('home.subscribed') }}</option>
+						<option value="3" class="btn-danger btn-sm" >{{ trans('home.signed') }}</option>
 					</select>
 				</div>
 
@@ -102,7 +102,7 @@
 				<div class="form-group">
 					<label>{{ trans('home.buyid') }}：</label>
 					<input type="text" class="form-control" name="buyid"
-					       placeholder="请输入认购编号" id="buyid"
+					       placeholder="{{ trans('home.please_buyid') }}" id="buyid"
 					       onkeyup="value=value.replace(/[\W]/g,'')"
 					       maxlength="50">
 				</div>
@@ -111,7 +111,7 @@
 				<div class="form-group">
 					<label>{{ trans('home.remarks') }}：</label>
 					<textarea name="remarks" id="remarks"
-					          cols="30" rows="5" class="form-control" placeholder="请输入备注"></textarea>
+					          cols="30" rows="5" class="form-control" placeholder="{{ trans('home.please_remarks') }}"></textarea>
 				</div>
 
 				{{ csrf_field()}}

@@ -76,14 +76,14 @@
 								></td>
 							<td>{{ $value -> mobile}}</td>
 							<td>{{$value -> name}}</td>
-							<td>@if($value -> sex == 1) 先生 @else 女士 @endif</td>
+							<td>@if($value -> sex == 1) {{ trans('consu.man') }} @else {{ trans('consu.maam') }} @endif</td>
 							<td>{{$value -> email}}</td>
 							<td>{{$value-> role_name}}</td>
 							<td>{{$value-> perm_name}}</td>
-							<td>@if($value-> enjoys == '') 没有折扣@else {{$value-> enjoys}}@endif</td>
+							<td>@if($value-> enjoys == '') {{ trans('consu.no_discount') }}@else {{$value-> enjoys}}@endif</td>
 							<td>@if($value -> login_count == '') 0 @else {{$value -> login_count}} @endif</td>
 							<td>{{date('Y-m-d H:i',$value -> created_at)}}</td>
-							<td>@if($value -> updated_at == '')暂无更新时间@else{{date('Y-m-d H:i',$value -> updated_at)}}@endif</td>
+							<td>@if($value -> updated_at == ''){{ trans('consu.no_update_ime') }}@else{{date('Y-m-d H:i',$value -> updated_at)}}@endif</td>
 
 							<td>
 								<button type="button" value="{{$value -> hous_id}}"

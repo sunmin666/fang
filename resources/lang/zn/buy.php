@@ -137,4 +137,14 @@
 			'sir' => '先生',
 
 			'maam'=> '女士',
+
+			'please_uaername' => '请选择客户',
+
+			'please_homeid'	=>'请选择房源',
+
+			'please_many'	=>'请输入缴费金额',
+
+			'please_choice'	=>'请选择',
+
+			'lock_timee' => '请选择时间如果不选择默认为一小时',
 	];

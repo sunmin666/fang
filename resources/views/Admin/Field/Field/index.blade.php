@@ -55,9 +55,9 @@
 	<script src="{{URL::asset('assetss/layui/layui.js')}}"></script>
 	<script type="text/html" id="oper-col">
 		<a class=" btn btn-warning btn-xs btn_edit" lay-event="edit"><i
-				class="fa fa-edit"></i>&nbsp;修改</a>
+				class="fa fa-edit"></i>&nbsp;{{ trans('field.edit') }}</a>
 		<a class="btn btn-warning btn-xs btn_edit" lay-event="del"><i
-				class="fa fa-trash"></i>&nbsp;删除</a>
+				class="fa fa-trash"></i>&nbsp;{{ trans('field.delete') }}</a>
 	</script>
 	<script type="text/javascript">
 		//複選框樣式
@@ -161,11 +161,11 @@
 					page: true,
 					cols: [[
 						{type: 'numbers'},
-						{field: 'name', title: '名称'},
-						{field: 'names', title: '父类'},
-						{field: 'created_at', title: '录入时间'},
-						{field: 'updated_at', title: '更新时间'},
-						{templet: '#oper-col', title: '操作'}
+						{field: 'name', title: '{{ trans('field.name') }}'},
+						{field: 'names', title: '{{ trans('field.parent_field_id') }}'},
+						{field: 'created_at', title: '{{ trans('field.created_at') }}'},
+						{field: 'updated_at', title: '{{ trans('field.updated_at') }}'},
+						{templet: '#oper-col', title: '{{ trans('field.operating') }}'}
 					]],
 					done: function () {
 						layer.closeAll('loading');
@@ -194,7 +194,7 @@
 				var field_id = data.id;
 				if (layEvent === 'del') {
 					if(field_id == 1 || field_id == 6 || field_id == 17){
-						layer.msg('对不起父类信息，不能删除',{time:1230});
+						layer.msg('{{ trans('field.parent_field_id_text') }}',{time:1230});
 					}else{
 						d(field_id);
 					}

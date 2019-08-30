@@ -9,7 +9,7 @@ return [
 
     'page_detail' => '企业文化管理',
 
-    'page_title' => '标题',
+    'page_title' => '企业文化标题',
 
     'class_id' => '企业文化分类',
 
@@ -24,4 +24,12 @@ return [
     'text_content1' => '您填写的信息不完整，不能提交',
 
     'text_content2'   => '标题信息不合法',
+
+    'please_choice' => '请选择',
+
+    'please_title' => '请输入标题',
+
+    'file_pic' => '上传图片',
+
+    'no_update_ime' =>'暂无更新时间',
 ];

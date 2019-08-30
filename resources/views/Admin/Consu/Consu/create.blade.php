@@ -13,28 +13,28 @@
 					{{--职业顾问手机号--}}
 					<label>{{ trans('consu.mobile') }}：</label>
 					<input type="text" class="form-control" name="mobile"
-					       placeholder="请输入手机号" id="mobile" onkeyup="value=value.replace(/[^\d.]/g,'')"
+					       placeholder="{{ trans('consu.please_mobile') }}" id="mobile" onkeyup="value=value.replace(/[^\d.]/g,'')"
 					       maxlength="11">
 				</div>
 				{{--职业顾问密码--}}
 				<div class="form-group">
 					<label>{{ trans('consu.password') }}：</label>
 					<input type="password" class="form-control"
-					       maxlength="10" placeholder="请输入密码"
+					       maxlength="10" placeholder="{{ trans('consu.please_password') }}"
 					       name="password" id="password">
 				</div>
 				{{--职业顾问确认密码--}}
 				<div class="form-group">
 					<label>{{ trans('consu.password_confirmation')}}：</label>
 					<input type="password" class="form-control"
-					       name="password_confirmation" placeholder='确认密码' id="password_confirmation"
+					       name="password_confirmation" placeholder='{{ trans('consu.confirmation') }}' id="password_confirmation"
 					       maxlength="18">
 				</div>
 				{{--职业顾问登录确认密码--}}
 				<div class="form-group">
 					<label>{{ trans('consu.name') }}：</label>
 					<input type="text" class="form-control" name="name" onkeyup="value=value.replace(/[\d]/g,'') "
-					       placeholder="请输入名称"
+					       placeholder="{{ trans('consu.please_name') }}"
 					       onkeyup="value=value.replace(/[^\w\.\/]/ig,'')"
 					       id="name"
 					       maxlength="6">
@@ -43,15 +43,15 @@
 				<div class="form-group">
 					<label>{{ trans('consu.sex') }}：</label>
 					<div class="zzz">
-						<input type="radio" name="sex" value="1" id="sex" class="i-checks">&nbsp;男 &nbsp;&nbsp;
-						<input type="radio" name="sex" value="2" id="sex" class="i-checks">&nbsp;女
+						<input type="radio" name="sex" value="1" id="sex" class="i-checks">&nbsp;{{ trans('consu.male') }} &nbsp;&nbsp;
+						<input type="radio" name="sex" value="2" id="sex" class="i-checks">&nbsp;{{ trans('consu.female') }}
 					</div>
 				</div>
 				{{--邮箱--}}
 				<div class="form-group">
 					<label>{{ trans('consu.email') }}：</label>
 					<input type="text" class="form-control" name="email"
-					       placeholder="请填写邮箱" id="email"
+					       placeholder="{{ trans('consu.please_email') }}" id="email"
 					       maxlength="20">
 				</div>
 
@@ -61,13 +61,13 @@
 					<label>{{ trans('consu.idcrad') }}：</label>
 					<input type="text" class="form-control" name="idcrad"
 					       onkeyup="value=value.replace(/[^\w\.\/]/ig,'')"
-					       placeholder="请填写身份证号" id="idcrad" maxlength="18">
+					       placeholder="{{ trans('consu.please_idcrad') }}" id="idcrad" maxlength="18">
 				</div>
 				{{--职业顾折扣--}}
 				<div class="form-group">
 					<label>{{ trans('consu.enjoy') }}：</label>
 					<select name="enjoy" id="enjoy" class="form-control">
-						<option value="0">--请选择--</option>
+						<option value="0">--{{ trans('consu.please_choice') }}--</option>Choice
 						@foreach($enjoy as $k => $v)
 							<option value="{{$v -> enjoy_id }}"> {{$v -> enjoy}} </option>
 						@endforeach
@@ -79,8 +79,8 @@
 				<div class="form-group">
 					<label>{{ trans('consu.is_ipad') }}：</label>
 					<select name="is_ipad" id="is_ipad" class="form-control">
-						<option value="1"> 只在pc登录 </option>
-						<option value="2"> 只在ipad登录 </option>
+						<option value="1"> {{ trans('consu.pc_login') }} </option>
+						<option value="2"> {{ trans('consu.ipad_login') }} </option>
 					</select>
 				</div>
 
@@ -88,7 +88,7 @@
 				<div class="form-group">
 					<label>{{ trans('consu.proj_id') }}：</label>
 					<select name="proj_id" id="proj_id" class="form-control">
-						<option value=""> 请选择 </option>
+						<option value=""> {{ trans('consu.please_choice') }} </option>
 						@foreach($poje as $k => $v)
 							<option value="{{$v -> project_id}}">{{$v ->pro_cname }}</option>
 						@endforeach
@@ -97,7 +97,7 @@
 				<div class="form-group">
 					<label>{{ trans('consu.role') }}：</label>
 					<select name="role_id" id="role_id" class="form-control">
-						<option value=""> 请选择 </option>
+						<option value=""> {{ trans('consu.please_choice') }} </option>
 						@foreach($role as $k => $v)
 							<option value="{{$v -> role_id}}">{{$v ->role_name }}</option>
 						@endforeach
@@ -106,7 +106,7 @@
 				<div class="form-group">
 					<label>{{ trans('consu.permin') }}：</label>
 					<select name="perm_id" id="perm_id" class="form-control">
-						<option value=""> 请选择 </option>
+						<option value=""> {{ trans('consu.please_choice') }} </option>
 						@foreach($permin as $k => $v)
 							<option value="{{$v -> perm_id}}">{{$v ->perm_name }}</option>
 						@endforeach

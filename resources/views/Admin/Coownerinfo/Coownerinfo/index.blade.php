@@ -69,15 +69,15 @@
                             <td>{{$v -> realname}}</td>
                             <td>{{$v -> mobile}}</td>
                             <td>{{$v -> idcard}}</td>
-                            <td>@if($v -> sex==0)女士@else男士@endif</td>
+                            <td>@if($v -> sex==0){{ trans('coownerinfo.man') }}@else{{ trans('coownerinfo.maam') }}@endif</td>
                             <td>{{date('Y-m-d',$v -> birthday)}}</td>
-                            <td>@if($v -> relation==0)配偶@elseif($v -> relation==1)儿子
-                                @elseif($v -> relation==2)女儿@elseif($v -> relation==3)父亲
-                                @elseif($v -> relation==4)母亲@elseif($v -> relation==5)亲戚
+                            <td>@if($v -> relation==0){{ trans('coownerinfo.spouse') }}@elseif($v -> relation==1){{ trans('coownerinfo.son') }}
+                                @elseif($v -> relation==2){{ trans('coownerinfo.daughter') }}@elseif($v -> relation==3){{ trans('coownerinfo.father') }}
+                                @elseif($v -> relation==4){{ trans('coownerinfo.mather') }}@elseif($v -> relation==5){{ trans('coownerinfo.relative') }}
                                 @endif
                             </td>
                             <td>{{date('Y-m-d H:i:s',$v -> created_at)}}</td>
-                            <td>@if($v -> updated_at == '')暂无更新时间@else{{date('Y-m-d H:i:s',$v -> updated_at)}}@endif</td>
+                            <td>@if($v -> updated_at == ''){{ trans('coownerinfo.no_update_ime') }}@else{{date('Y-m-d H:i:s',$v -> updated_at)}}@endif</td>
                             <td>
                                 <button type="button" value="{{$v->coow_id}}" onclick="view({{$v->coow_id}})"
                                         class="btn btn-warning btn-xs btn_edit" id="btn_edit"><i

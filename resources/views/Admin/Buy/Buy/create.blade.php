@@ -21,7 +21,7 @@
 				<div class="form-group">
 					<label>{{ trans('buy.cust_id') }}：</label>
 					<select name="cust_id" id="cust_id" class="form-control">
-						<option value="">--请选择客户--</option>
+						<option value="">--{{ trans('buy.please_uaername') }}--</option>
 						@foreach($customer as $k =>$v)
 							<option value="{{$v -> cust_id}}">{{$v -> realname}}</option>
 						@endforeach
@@ -90,7 +90,7 @@
 				<div class="form-group">
 					<label>{{ trans('buy.homeid') }}：</label><br>
 					<select name="buildnum" id="buildnum" class="form-control" style="width: 30%;float: left">
-						<option value="">--请选房源--</option>
+						<option value="">--{{ trans('buy.please_homeid') }}--</option>
 						@foreach($home as $kq =>$vq)
 							<option value="{{$vq -> field_id}}">{{$vq -> name}}</option>
 						@endforeach
@@ -110,7 +110,7 @@
 					<label>{{ trans('buy.buildnums') }}：</label>
 					<input type="text" class="form-control" readonly
 					       {{--onkeyup="value=value.replace(/[^\d.]/g,'')"--}}
-					       name="buildnums" placeholder="请输入缴费金额" id="buildnums"
+					       name="buildnums"  id="buildnums"
 					       maxlength="12">
 				</div>
 				<div class="form-group none" id="unitnumss">
@@ -118,7 +118,7 @@
 					<label>{{ trans('buy.unitnums') }}：</label>
 					<input type="text" class="form-control" readonly
 					       {{--onkeyup="value=value.replace(/[^\d.]/g,'')"--}}
-					       name="unitnums" placeholder="请输入缴费金额" id="unitnums"
+					       name="unitnums"  id="unitnums"
 					       maxlength="12">
 				</div>
 				<div class="form-group none" id="roomnumss">
@@ -126,7 +126,7 @@
 					<label>{{ trans('buy.roomnums') }}：</label>
 					<input type="text" class="form-control" readonly
 					       {{--onkeyup="value=value.replace(/[^\d.]/g,'')"--}}
-					       name="roomnums" placeholder="请输入缴费金额" id="roomnums"
+					       name="roomnums"  id="roomnums"
 					       maxlength="12">
 				</div>
 				<div class="form-group none" id="build_area">
@@ -134,7 +134,7 @@
 					<label>{{ trans('buy.build_areas') }}：</label>
 					<input type="text" class="form-control" readonly
 					       {{--onkeyup="value=value.replace(/[^\d.]/g,'')"--}}
-					       name="build_areas" placeholder="请输入缴费金额" id="build_areas"
+					       name="build_areas"  id="build_areas"
 					       maxlength="12">
 				</div>
 				<div class="form-group none" id="price">
@@ -142,7 +142,7 @@
 					<label>{{ trans('buy.prices') }}：</label>
 					<input type="text" class="form-control" readonly
 					       {{--onkeyup="value=value.replace(/[^\d.]/g,'')"--}}
-					       name="prices" placeholder="请输入缴费金额" id="prices"
+					       name="prices"  id="prices"
 					       maxlength="12">
 				</div>
 				<div class="form-group none" id="total">
@@ -150,7 +150,7 @@
 					<label>{{ trans('buy.totals') }}：</label>
 					<input type="text" class="form-control" readonly
 					       {{--onkeyup="value=value.replace(/[^\d.]/g,'')"--}}
-					       name="totals" placeholder="请输入缴费金额" id="totals"
+					       name="totals" placeholder="{{ trans('buy.please_many') }}" id="totals"
 					       maxlength="12">
 				</div>
 				<div class="form-group none" id="discount">
@@ -158,7 +158,7 @@
 					<label>{{ trans('buy.discounts') }}：</label>
 					<input type="text" class="form-control" readonly
 					       {{--onkeyup="value=value.replace(/[^\d.]/g,'')"--}}
-					       name="discounts" placeholder="请输入缴费金额" id="discounts"
+					       name="discounts"  id="discounts"
 					       maxlength="12">
 				</div>
 				<input type="hidden" value="0" id="fanggmun">
@@ -178,7 +178,7 @@
 					<label>{{ trans('buy.pay_num')}}：</label>
 					<input type="text" class="form-control"
 					       onkeyup="value=value.replace(/[^\d.]/g,'')"
-					       name="pay_num" placeholder="请输入缴费金额" id="pay_num"
+					       name="pay_num" placeholder="{{ trans('buy.please_many') }}" id="pay_num"
 					       maxlength="12">
 				</div>
 
@@ -195,24 +195,24 @@
 					<label>{{ trans('buy.total_prices') }}：</label>
 					<input type="text" class="form-control"
 					       {{--onkeyup="value=value.replace(/[^\d.]/g,'')"--}}
-					       name="total_price" placeholder="请输入缴费金额" id="total_prices"
+					       name="total_price" placeholder="{{ trans('buy.please_many') }}" id="total_prices"
 					       maxlength="12">
 				</div>
 				<div id="month_pay" class="form-group none" >
 					<label>{{ trans('buy.month_pays') }}：</label>
 					<input type="text" class="form-control"
 					       onkeyup="value=value.replace(/[^\d.]/g,'')"
-					       name="total_price" placeholder="请输入缴费金额" id="month_pays"
+					       name="total_price" placeholder="{{ trans('buy.please_many') }}" id="month_pays"
 					       maxlength="12">
 					<label>{{ trans('buy.total_prices') }}：</label>
 					<input type="text" class="form-control"
 					       onkeyup="value=value.replace(/[^\d.]/g,'')"
-					       name="loan_term" placeholder="请输入缴费金额" id="loan_term"
+					       name="loan_term" placeholder="{{ trans('buy.please_many') }}" id="loan_term"
 					       maxlength="12">
 					<label>{{ trans('buy.total_pricess') }}：</label>
 					<input type="text" class="form-control"
 					       onkeyup="value=value.replace(/[^\d.]/g,'')"
-					       name="total_price" placeholder="请输入缴费金额" id="total_pricess"
+					       name="total_price" placeholder="{{ trans('buy.please_many') }}" id="total_pricess"
 					       maxlength="12">
 				</div>
 
@@ -291,7 +291,7 @@
 			$( '#price' ).addClass( 'none' );
 			$( '#total' ).addClass( 'none' );
 			$( '#discount' ).addClass( 'none' );
-			var cc = '<option value="">--请选则--</option>';
+			var cc = '<option value="">--{{ trans('buy.please_choice') }}--</option>';
 			$( '#roomnum' ).html( cc );
 			$( '#unitnum' ).html( cc );
 
@@ -311,7 +311,7 @@
 				for ( var ig = 0 ; ig < data.length ; ig++ ) {
 					str += "<option value='" + data[ig]['field_id'] + "'> " + data[ig]['name'] + " </option>"
 				}
-				var cc = '<option value="">--请选则--</option>';
+				var cc = '<option value="">--{{ trans('buy.please_choice') }}--</option>';
 
 				$( '#unitnum' ).html( cc + str );
 				$( '#roomnum' ).html( cc );
@@ -351,7 +351,7 @@
 				for ( var ig = 0 ; ig < data.length ; ig++ ) {
 					str += "<option value='" + data[ig]['homeid'] + "'> " + data[ig]['roomnums'] + " </option>"
 				}
-				var aa = '<option value="">--请选则--</option>';
+				var aa = '<option value="">--{{ trans('buy.please_choice') }}--</option>';
 				$( '#roomnum' ).html( aa + str );
 				$( '#buildnumss' ).addClass( 'none' );
 				$( '#unitnumss' ).addClass( 'none' );
@@ -397,33 +397,33 @@
 		var mun = $( '#fanggmun' ).val();
 		var str = '<div style="display:inline-block" >\n' +
 			'\t\t\t\t\t\t\t<select name="relation" id="relation' + mun + '" class="form-control" style="width: 15%;float: left">\n' +
-			'\t\t\t\t\t\t\t\t<option value="0">配偶</option>\n' +
-			'\t\t\t\t\t\t\t\t<option value="1">儿子</option>\n' +
-			'\t\t\t\t\t\t\t\t<option value="2">女儿</option>\n' +
-			'\t\t\t\t\t\t\t\t<option value="3">父亲</option>\n' +
-			'\t\t\t\t\t\t\t\t<option value="4">母亲</option>\n' +
-			'\t\t\t\t\t\t\t\t<option value="5">亲戚</option>\n' +
+			'\t\t\t\t\t\t\t\t<option value="0">{{ trans('buy.spouse') }}</option>\n' +
+			'\t\t\t\t\t\t\t\t<option value="1">{{ trans('buy.son') }}</option>\n' +
+			'\t\t\t\t\t\t\t\t<option value="2">{{ trans('buy.daughter') }}</option>\n' +
+			'\t\t\t\t\t\t\t\t<option value="3">{{ trans('buy.father') }}</option>\n' +
+			'\t\t\t\t\t\t\t\t<option value="4">{{ trans('buy.mather') }}</option>\n' +
+			'\t\t\t\t\t\t\t\t<option value="5">{{ trans('buy.relative') }}</option>\n' +
 			'\t\t\t\t\t\t\t</select>\n' +
 			'\t\t\t\t\t\t\t<input type="text" class="form-control" style="width: 15%;float: left"\n' +
 			'\t\t\t\t\t\t\t       {{--onkeyup="value=value.replace(/[^\\d.]/g,\'\')"--}}\n' +
-			'\t\t\t\t\t\t\t       name="realname" placeholder="姓名" id="realname' + mun + '"\n' +
+			'\t\t\t\t\t\t\t       name="realname" placeholder="{{ trans('buy.name') }}" id="realname' + mun + '"\n' +
 			'\t\t\t\t\t\t\t       maxlength="12">\n' +
 			'\t\t\t\t\t\t\t<select name="sex" id="sex' + mun + '" class="form-control" style="width: 15%;float: left">\n' +
-			'\t\t\t\t\t\t\t\t<option value="0">先生</option>\n' +
-			'\t\t\t\t\t\t\t\t<option value="1">女士</option>\n' +
+			'\t\t\t\t\t\t\t\t<option value="0">{{ trans('buy.sir') }}</option>\n' +
+			'\t\t\t\t\t\t\t\t<option value="1">{{ trans('buy.maam') }}</option>\n' +
 			'\t\t\t\t\t\t\t</select>\n' +
 			'\t\t\t\t\t\t\t<input type="text" class="layui-input form-control" style="width: 15%;float: left;height:34px"\n' +
 			'\t\t\t\t\t\t\t       {{--onkeyup="value=value.replace(/[^\\d.]/g,\'\')"--}}\n' +
-			'\t\t\t\t\t\t\t       name="birthday" placeholder="生日" autocomplete="off" id="birthday' + mun + '"\n' +
+			'\t\t\t\t\t\t\t       name="birthday" placeholder="{{ trans('buy.birthday') }}" autocomplete="off" id="birthday' + mun + '"\n' +
 			'\t\t\t\t\t\t\t       >\n' +
 
 			'\t\t\t\t\t\t\t<input type="text" class="form-control" style="width: 15%;float: left"\n' +
 			'\t\t\t\t\t\t\t       {{--onkeyup="value=value.replace(/[^\\d.]/g,\'\')"--}}\n' +
-			'\t\t\t\t\t\t\t       name="idcard" placeholder="证件号码" id="idcard' + mun + '"\n' +
+			'\t\t\t\t\t\t\t       name="idcard" placeholder="{{ trans('buy.shens') }}" id="idcard' + mun + '"\n' +
 			'\t\t\t\t\t\t\t       maxlength="18">\n' +
 			'\t\t\t\t\t\t\t<input type="text" class="form-control" style="width: 15%;float: left"\n' +
 			'\t\t\t\t\t\t\t       {{--onkeyup="value=value.replace(/[^\\d.]/g,\'\')"--}}\n' +
-			'\t\t\t\t\t\t\t       name="mobile" placeholder="手机号" value="" id="mobile' + mun + '"\n' +
+			'\t\t\t\t\t\t\t       name="mobile" placeholder="{{ trans('buy.iphones') }}" value="" id="mobile' + mun + '"\n' +
 			'\t\t\t\t\t\t\t       maxlength="11">\n' +
 			'\t\t\t\t\t\t</div>';
 		$( '#fangwug' ).append( str );

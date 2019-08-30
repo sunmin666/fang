@@ -60,4 +60,35 @@
 
 		'purchase_plan' =>'方案',
 
+		'username_realname'=>'请输入客户姓名',
+
+		'male'=>'男',
+
+		'female' =>'女',
+
+		'please_mobile' =>'请输入客户手机号',
+
+		'please_telphone' => '请输入其他手机号',
+
+		'please_weixin' =>'请输入微信号',
+
+		'please_qq' =>'请输入QQ号',
+
+		'please_email' =>'请输入邮箱',
+
+		'please_idcrad' => '请输入身份证号',
+
+		'please_choice' => '请选择',
+
+		'open_rice'=>'西安开米',
+
+		'please_proj_id'=>'请选择项目',
+
+		'please_address' => '请输入联系地址',
+
+		'no_email' => '该客户暂未留下邮箱',
+
+		'hidden' => '隐藏',
+
+		'show' => '显示',
 	];

@@ -13,7 +13,7 @@
 					{{--客户真实姓名--}}
 					<label>{{ trans('customer.realname') }}：</label>
 					<input type="text" class="form-control" name="realname"
-					       placeholder="请输客户姓名" id="realname"
+					       placeholder="{{ trans('customer.username_realname') }}" id="realname"
 					       onkeyup="value=value.replace(/[\d]/g,'') "
 					       maxlength="15">
 				</div>
@@ -21,8 +21,8 @@
 				<div class="form-group">
 					<label>{{ trans('customer.sex') }}：</label>
 					<div class="zzz">
-						<input type="radio" name="sex" value="1" id="sex" class="i-checks">&nbsp;男 &nbsp;&nbsp;
-						<input type="radio" name="sex" value="2" id="sex" class="i-checks">&nbsp;女
+						<input type="radio" name="sex" value="1" id="sex" class="i-checks">&nbsp;{{ trans('customer.male') }} &nbsp;&nbsp;
+						<input type="radio" name="sex" value="2" id="sex" class="i-checks">&nbsp;{{ trans('customer.female') }}
 					</div>
 				</div>
 				{{--客户手机号--}}
@@ -30,14 +30,14 @@
 					<label>{{ trans('customer.mobile')}}：</label>
 					<input type="text" class="form-control"
 					       onkeyup="value=value.replace(/[^\d.]/g,'')"
-					       name="mobile" placeholder='请输入客户手机号' id="mobile"
+					       name="mobile" placeholder='{{ trans('customer.please_mobile')}}' id="mobile"
 					       maxlength="11">
 				</div>
 				{{--客户其他手机号--}}
 				<div class="form-group">
 					<label>{{ trans('customer.telphone') }}：</label>
 					<input type="text" class="form-control" name="telphone"
-					       placeholder="请输入其他手机号"
+					       placeholder="{{ trans('customer.please_telphone')}}"
 					       onkeyup="value=value.replace(/[^\d.]/g,'')"
 					       id="telphone"
 					       maxlength="11">
@@ -47,20 +47,20 @@
 					<label>{{ trans('customer.weixin') }}：</label>
 					<input type="text" class="form-control" name="weixin"
 					       onkeyup="value=value.replace(/[^\w\.\/]/ig,'')"
-					       placeholder="请输入微信号" id="weixin" maxlength="12">
+					       placeholder="{{ trans('customer.please_weixin')}}" id="weixin" maxlength="12">
 				</div>
 				{{--qq--}}
 				<div class="form-group">
 					<label>{{ trans('customer.qq') }}：</label>
 					<input type="text" class="form-control" name="qq"
 					       onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"
-					       placeholder="请输入扣扣号" id="qq" maxlength="12">
+					       placeholder="{{ trans('customer.please_qq')}}" id="qq" maxlength="12">
 				</div>
 				{{--邮箱--}}
 				<div class="form-group">
 					<label>{{ trans('customer.email') }}：</label>
 					<input type="text" class="form-control" name="email"
-					       placeholder="请输入邮箱" id="email"
+					       placeholder="{{ trans('customer.please_email')}}" id="email"
 					       maxlength="50">
 				</div>
 				{{--身份证号--}}
@@ -68,15 +68,15 @@
 					<label>{{ trans('customer.idcrad') }}：</label>
 					<input type="text" class="form-control" name="idcrad"
 					       onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"
-					       placeholder="请填写身份证号" id="idcrad" maxlength="18">
+					       placeholder="{{ trans('customer.please_idcrad') }}" id="idcrad" maxlength="18">
 				</div>
 
 
 				<div class="form-group">
 					<label>{{ trans('customer.comp_id') }}：</label>
 					<select name="comp_id" id="comp_id" class="form-control">
-						<option value="">--请选择--</option>
-						<option value="1">西安开米</option>
+						<option value="">--{{ trans('customer.please_choice') }}--</option>
+						<option value="1">{{ trans('customer.open_rice') }}</option>
 					</select>
 				</div>
 
@@ -84,7 +84,7 @@
 				<div class="form-group">
 					<label>{{ trans('customer.proj_id') }}：</label>
 					<select name="proj_id" id="proj_id" class="form-control">
-						<option value="">请选择项目</option>
+						<option value="">{{ trans('customer.please_proj_id') }}</option>
 						@foreach($project as $k => $v)
 						<option value="{{$v -> project_id}}">{{$v -> pro_cname}}</option>
 						@endforeach
@@ -95,7 +95,7 @@
 				<div class="form-group">
 					<label>{{ trans('customer.cognition') }}：</label>
 					<select name="cognition" id="cognition" class="form-control">
-						<option value="">--请选择--</option>
+						<option value="">--{{ trans('customer.please_choice') }}--</option>
 						@foreach($cognition as $k => $v)
 							<option value="{{$v -> field_id}}">{{$v -> name}}</option>
 						@endforeach
@@ -106,7 +106,7 @@
 				<div class="form-group">
 					<label>{{ trans('customer.family_str') }}：</label>
 					<select name="family_str" id="family_str" class="form-control">
-						<option value="">--请选择--</option>
+						<option value="">--{{ trans('customer.please_choice') }}--</option>
 						@foreach($family_str as $k => $v)
 							<option value="{{$v -> field_id}}">{{$v -> name}}</option>
 						@endforeach
@@ -117,7 +117,7 @@
 				<div class="form-group">
 					<label>{{ trans('customer.work_type') }}：</label>
 					<select name="work_type" id="work_type" class="form-control">
-						<option value="">--请选择--</option>
+						<option value="">--{{ trans('customer.please_choice') }}--</option>
 						@foreach($work_type as $k => $v)
 							<option value="{{$v -> field_id}}">{{$v -> name}}</option>
 						@endforeach
@@ -128,7 +128,7 @@
 				<div class="form-group">
 					<label>{{ trans('customer.address') }}：</label>
 					<input type="text" class="form-control" name="address"
-						   placeholder="请输入联系地址"
+						   placeholder="{{ trans('customer.please_address') }}"
 						   id="address"
 						   maxlength="25">
 				</div>
@@ -137,7 +137,7 @@
 				<div class="form-group">
 					<label>{{ trans('customer.intention_area') }}：</label>
 					<select name="intention_area" id="intention_area" class="form-control">
-						<option value="">--请选择--</option>
+						<option value="">--{{ trans('customer.please_choice') }}--</option>
 						@foreach($intention_area as $k => $v)
 							<option value="{{$v -> field_id}}">{{$v -> name}}</option>
 						@endforeach
@@ -148,7 +148,7 @@
 				<div class="form-group">
 					<label>{{ trans('customer.floor_like') }}：</label>
 					<select name="floor_like" id="floor_like" class="form-control">
-						<option value="">--请选择--</option>
+						<option value="">--{{ trans('customer.please_choice') }}--</option>
 						@foreach($floor_like as $k => $v)
 							<option value="{{$v -> field_id}}">{{$v -> name}}</option>
 						@endforeach
@@ -159,7 +159,7 @@
 				<div class="form-group">
 					<label>{{ trans('customer.furniture_need') }}：</label>
 					<select name="furniture_need" id="furniture_need" class="form-control">
-						<option value="">--请选择--</option>
+						<option value="">--{{ trans('customer.please_choice') }}--</option>
 						@foreach($furniture_need as $k => $v)
 							<option value="{{$v -> field_id}}">{{$v -> name}}</option>
 						@endforeach
@@ -170,7 +170,7 @@
 				<div class="form-group">
 					<label>{{ trans('customer.house_num') }}：</label>
 					<select name="house_num" id="house_num" class="form-control">
-						<option value="">--请选择--</option>
+						<option value="">--{{ trans('customer.please_choice') }}--</option>
 						@foreach($house_num as $k => $v)
 							<option value="{{$v -> field_id}}">{{$v -> name}}</option>
 						@endforeach
@@ -181,7 +181,7 @@
 				<div class="form-group">
 					<label>{{ trans('customer.first_contact') }}：</label>
 					<select name="first_contact" id="first_contact" class="form-control">
-						<option value="">--请选择--</option>
+						<option value="">--{{ trans('customer.please_choice') }}--</option>
 						@foreach($first_contact as $k => $v)
 							<option value="{{$v -> field_id}}">{{$v -> name}}</option>
 						@endforeach
@@ -192,7 +192,7 @@
 				<div class="form-group">
 					<label>{{ trans('customer.status_id') }}：</label>
 					<select name="status_id" id="status_id" class="form-control">
-						<option value="">--请选择--</option>
+						<option value="">--{{ trans('customer.please_choice') }}--</option>
 						@foreach($status_id as $k => $v)
 							<option value="{{$v -> field_id}}">{{$v -> name}}</option>
 						@endforeach
@@ -203,7 +203,7 @@
 				<div class="form-group">
 					<label>{{ trans('customer.hous_id') }}：</label>
 					<select name="hous_id" id="hous_id" class="form-control">
-						<option value="">--请选择--</option>
+						<option value="">--{{ trans('customer.please_choice') }}--</option>
 						@foreach($hous_id as $k => $v)
 							<option value="{{$v -> hous_id}}">{{$v -> name}}</option>
 						@endforeach

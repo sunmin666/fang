@@ -30,10 +30,10 @@
     </style>
 </head>
 <body>
-<div><span>企业文化标题：</span>{{$info -> title}}</div>
-<div><span>企业文化分类:  </span>{{$info -> name }}
+<div><span>{{ trans('cultrue.page_title') }}：</span>{{$info -> title}}</div>
+<div><span>{{ trans('cultrue.class_id') }}:  </span>{{$info -> name }}
 </div>
-<div><span>企业文化图片：</span>
+<div><span>{{ trans('cultrue.imgpath') }}：</span>
     @foreach($info -> imgpath as $k => $v)
         <img src="{{URL::asset('uploads')}}/{{$v}}" id="{{$k}}"  onclick="img({{$k}})" alt="" width="60px" height="60px">
     @endforeach
@@ -45,8 +45,8 @@
   </div>
 
 </div>
-<div><span>企业文化添加时间：</span>{{date('Y-m-d H:i:s',$info -> created_at)}}</div>
-<div><span>企业文化修改时间：</span> @if($info -> updated_at == '') 暂无更新时间 @else {{date('Y-m-d H:i:s',$info -> updated_at)}} @endif</div>
+<div><span>{{ trans('cultrue.created_at') }}：</span>{{date('Y-m-d H:i:s',$info -> created_at)}}</div>
+<div><span>{{ trans('cultrue.updated_at') }}：</span> @if($info -> updated_at == '') {{ trans('cultrue.no_update_ime') }} @else {{date('Y-m-d H:i:s',$info -> updated_at)}} @endif</div>
 </body>
 @include('Public.weekly_js')
 <script>

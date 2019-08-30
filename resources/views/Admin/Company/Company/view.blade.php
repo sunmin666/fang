@@ -24,7 +24,7 @@
 		<div><span>{{ trans('company.corporation') }}：</span>{{$company -> corporation}}</div>
 		<div><span>{{ trans('company.corp_idcard') }}：</span>{{$company -> corp_idcard}}</div>
 		<div><span>{{ trans('company.corp_mobile') }}：</span>{{$company -> corp_mobile}}</div>
-		<div><span>{{ trans('company.license') }}：</span><a href="{{$company-> license}}" target="_blank">点击查看</a></div>
+		<div><span>{{ trans('company.license') }}：</span><a href="{{$company-> license}}" target="_blank">{{ trans('company.click_show') }}</a></div>
 		<div><span>{{ trans('company.credit_code') }}：</span>{{$company -> credit_code}}</div>
 		<div><span>{{ trans('company.address') }}：</span>{{$company -> address}}</div>
 		<div><span>{{ trans('company.telphone') }}：</span>{{$company -> telphone}}</div>

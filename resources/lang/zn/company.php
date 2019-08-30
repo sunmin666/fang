@@ -74,4 +74,42 @@
 		'normal'	=>'正常',
 
 		'prohibit'	=>'禁用',
+
+		'please_comp_cname'	=> '请填写公司中文名称',
+
+		'please_comp_ename' => '请输入公司英文名称',
+
+		'please_corporation' => '请填写公司法人代表',
+
+		'please_corp_idcard' => '请填写法人身份证号',
+
+		'please_corp_mobile' => '请填写法人手机号',
+
+		'please_credit_code' =>'请填写企业社会信用码',
+
+		'please_address' =>'请输入注册地址',
+
+		'please_telphone' => '请输入公司座机',
+
+		'please_scope' =>'请输入公司经营范围',
+
+		'please_reg_capital' => '请填写注资本(单位：万)',
+
+		'please_cont_mobile' => '请填写使用iHOUSER联系人手机号',
+
+		'please_contacts' => '请输入使用iHOUSER联系人',
+
+		'upload_success' => '上传成功',
+
+		'upload_fail'	=>'上传失败',
+
+		'please_cont_idcard'=>'请填写使用iHOUSER联系人身份证号码',
+
+		'please_created_date'=>'公司成立日期',
+
+		'please_business_date'=>'期限开始时间',
+
+		'please_expire_date' => '期限结束时间',
+
+		'click_show' =>'点击查看',
 	];

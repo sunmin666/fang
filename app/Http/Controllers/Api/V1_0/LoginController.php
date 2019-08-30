@@ -20,6 +20,13 @@
 			$password = $api->input( 'mima' );
 
 
+			if($iphone == ''  || $password == ''){
+				return response()->json( [
+					'code' => '0' ,
+					'msg'  => '参数不全',
+				] );
+			}
+
 			$username = login::get_d_hous( $iphone );
 
 			if (!$username) {
@@ -41,4 +48,5 @@
 				] );
 			}
 		}
+
 	}
