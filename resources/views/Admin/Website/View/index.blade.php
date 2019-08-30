@@ -41,7 +41,7 @@
 				作者：{{$view ->n_admin_at}}
 			</div>
 			<div id="content">
-				<?php echo $view -> content?>
+<!--				--><?php //echo $view -> content?>
 			</div>
 		</div>
 </body>

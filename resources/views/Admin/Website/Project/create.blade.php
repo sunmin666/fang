@@ -41,7 +41,7 @@
 					<label>{{ trans('pro.n_img') }}：</label> <br>
 					<div class="zzz">
 						<button type="button" class="btn" id="test1">
-							<i class="layui-icon">&#xe67c;</i>上传图片
+							<i class="layui-icon">&#xe67c;</i>{{trans('pro.upload_image')}}
 						</button>
 						<input type="hidden" value="" id="n_img" name="n_img">
 						<div id="img">
@@ -95,7 +95,7 @@
 				success : function ( data ) {
 					console.log( data );
 					if ( data == 2 ) {
-						alert( '上传失败' );
+						alert( '{{trans('pro.uerror')}}' );
 					}
 					else {
 						$( '#summernote' ).summernote( 'insertImage' , data , function ( $image ) {
@@ -124,10 +124,10 @@
 					// $( '#imgs' ).attr( 'src' , res.data.src );
 					$( '#imgs' ).attr( 'src' , "{{URL::asset("")}}" + res.data.src );
 					$( '#n_img' ).val( res.data.src );
-					layer.msg( '上傳成功' , { time : 1000 } )
+					layer.msg( '{{trans('pro.usuccess')}}' , { time : 1000 } )
 				}
 				else {
-					layer.msg( '上傳失敗' , { time : 1000 } )
+					layer.msg( '{{trans('pro.uerror')}}' , { time : 1000 } )
 				}
 			}
 			, error : function () {
@@ -156,7 +156,7 @@
 		}
 
 		if( content == '<p><br></p>'){
-			layer.msg('新闻内容不能为空',{time:1234});
+			layer.msg('{{trans('pro.not_null')}}',{time:1234});
 			$( "#store1" ).attr( 'disabled' , false );
 			return false;
 		}

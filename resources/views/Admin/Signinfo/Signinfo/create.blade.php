@@ -57,7 +57,7 @@
 					<input type="text" class="form-control" readonly
 					       onkeyup="value=value.replace(/[^\d.]/g,'')"
 					       value="{{$buy_info -> buildnums}}"
-					       name="buildnums" placeholder="请输入缴费金额" id="buildnums"
+					       name="buildnums" id="buildnums"
 					       maxlength="12">
 				</div>
 				<div class="form-group " >
@@ -66,7 +66,7 @@
 					<input type="text" class="form-control" readonly
 					       value="{{$buy_info -> unitnums}}"
 					       onkeyup="value=value.replace(/[^\d.]/g,'')"
-					       name="unitnums" placeholder="请输入缴费金额" id="unitnums"
+					       name="unitnums"  id="unitnums"
 					       maxlength="12">
 				</div>
 				<div class="form-group " >
@@ -75,7 +75,7 @@
 					<input type="text" class="form-control" readonly
 					       value="{{$buy_info -> roomnums}}"
 					       onkeyup="value=value.replace(/[^\d.]/g,'')"
-					       name="roomnums" placeholder="请输入缴费金额" id="roomnums"
+					       name="roomnums"  id="roomnums"
 					       maxlength="12">
 				</div>
 				<div class="form-group " >
@@ -84,7 +84,7 @@
 					<input type="text" class="form-control" readonly
 					       value="{{$buy_info -> build_area}}"
 					       onkeyup="value=value.replace(/[^\d.]/g,'')"
-					       name="build_areas" placeholder="请输入缴费金额" id="build_areas"
+					       name="build_areas"  id="build_areas"
 					       maxlength="12">
 				</div>
 				<div class="form-group " >
@@ -94,7 +94,7 @@
 
 					       value="{{$buy_info -> price}}"
 					       onkeyup="value=value.replace(/[^\d.]/g,'')"
-					       name="prices" placeholder="请输入缴费金额" id="prices"
+					       name="prices"  id="prices"
 					       maxlength="12">
 				</div>
 				<div class="form-group ">
@@ -103,7 +103,7 @@
 					<input type="text" class="form-control" readonly
 					       value="{{$buy_info -> total}}"
 					       onkeyup="value=value.replace(/[^\d.]/g,'')"
-					       name="totals" placeholder="请输入缴费金额" id="totals"
+					       name="totals"  id="totals"
 					       maxlength="12">
 				</div>
 				<div class="form-group">
@@ -112,7 +112,7 @@
 					<input type="text" class="form-control" readonly
 					       value="{{$buy_info -> pay_num}}"
 					       onkeyup="value=value.replace(/[^\d.]/g,'')"
-					       name="discounts" placeholder="请输入缴费金额" id="discounts"
+					       name="discounts"  id="discounts"
 					       maxlength="12">
 				</div>
 				<input type="hidden" value="0" id="fanggmun">

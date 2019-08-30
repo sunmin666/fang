@@ -46,7 +46,7 @@
 				<input type="hidden" value="0" id="counter">
 				<div class="add_img">
 					<button type="button" class="btn" id="sahngchaun">
-						<i class="layui-icon">&#xe67c;</i>上传图片
+						<i class="layui-icon">&#xe67c;</i>{{trans('pro.upload_image')}}
 					</button>
 				</div>
 				{{ csrf_field()}}

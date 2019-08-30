@@ -17,4 +17,11 @@
 		'operating'    => '操作',
 
 		'name_n_title'   => '标题不合法',
+
+
+		'upload_image' => '上传图片',
+		'usuccess'   => '上传成功',
+		'uerror'     => '上传失败',
+
+		'not_null'  => '新闻内容不能为空',
 	];

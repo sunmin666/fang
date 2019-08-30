@@ -41,7 +41,7 @@
 					<label>{{ trans('pro.n_img') }}：</label> <br>
 					<div class="zzz">
 						<button type="button" class="btn" id="test1">
-							<i class="layui-icon">&#xe67c;</i>上传图片
+							<i class="layui-icon">&#xe67c;</i>{{trans('pro.upload_image')}}
 						</button>
 						<input type="hidden" value="" id="n_img" name="n_img">
 						<div id="img">

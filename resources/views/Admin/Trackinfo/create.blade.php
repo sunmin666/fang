@@ -14,7 +14,6 @@
                     <label>{{ trans('trackinfo.cust_id') }}：</label>
                     @foreach($name as $k=>$v)
                     <input type="text" class="form-control" name="realname"
-                           placeholder="请输客户姓名" id="realname"
                            onkeyup="value=value.replace(/[\d]/g,'') "
                            value=" {{$v->realname}}"
                            maxlength="15" readonly="readonly">
@@ -25,7 +24,7 @@
                 <div class="form-group">
                     <label>{{ trans('trackinfo.hous_id') }}：</label>
                     <select name="comp_id" id="hous_id" class="form-control">
-                        <option value=""> 请选择</option>
+                        <option value=""> {{trans('trackinfo.text')}}</option>
                         @foreach($adviser as $kk=>$vv)
                         <option value="{{$vv->hous_id}}">{{$vv->name}}</option>
                         @endforeach
@@ -35,9 +34,9 @@
                 <div class="form-group">
                 <label>{{ trans('trackinfo.track_type') }}：</label>
                 <select name="comp_id" id="track_type" class="form-control">
-                <option value=""> 请选择</option>
-                <option value="1">来访</option>
-                <option value="0">跟踪</option>
+                <option value=""> {{trans('trackinfo.text')}}</option>
+                <option value="1">{{trans('trackinfo.text2')}}</option>
+                <option value="0">{{trans('trackinfo.text3')}}</option>
                 </select>
                 </div>
 
@@ -45,7 +44,7 @@
                 <div class="form-group">
                     <label>{{ trans('trackinfo.content') }}：</label>
 					<textarea name="content" id="content"
-                              cols="30" rows="5" class="form-control" placeholder="请输入备注"></textarea>
+                              cols="30" rows="5" class="form-control" placeholder="{{trans('trackinfo.text4')}}"></textarea>
                 </div>
             </form>
         </div>

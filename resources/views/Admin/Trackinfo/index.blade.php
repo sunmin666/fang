@@ -61,7 +61,7 @@
                                 ></td>
                             <td>{{$v -> realname}}</td>
                             <td>{{ $v -> name}}</td>
-                            <td>@if($v -> track_type==1)职业顾问主动联系@else客户主动来访@endif</td>
+                            <td>@if($v -> track_type==1){{trans('trackinfo.text5')}}@else{{trans('trackinfo.text6')}}@endif</td>
                             <td>{{ $v -> content}}</td>
                             <td>{{date('Y-m-d H:i',$v -> track_time)}}</td>
                             <td>{{date('Y-m-d H:i',$v -> created_at)}}</td>

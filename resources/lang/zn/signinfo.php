@@ -10,7 +10,7 @@
 		'page_detail'  => '签约管理',
 
 
-		'cust_id'    => '客户信息',
+		'cust_id'    => '客户姓名',
 
 		'cust_sex'   => '客户性别',
 

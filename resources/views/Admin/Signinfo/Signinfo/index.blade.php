@@ -99,7 +99,7 @@
 									@endif
 								@endif
 
-								<button type="button" value="{{$value -> signid}}" onclick="view({{$value -> signid}})"
+									<button type="button" value="{{$value -> signid}}" onclick="view({{$value -> signid}})"
 								        class="btn btn-warning btn-xs btn_edit" id="btn_view"><i
 										class="fa fa-edit"></i> {{trans('memberinfo.news_view')}}</button>
 								<button type="button" value="{{$value -> signid}}" onclick="edit({{$value -> signid}})"
