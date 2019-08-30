@@ -147,4 +147,9 @@
 			'please_choice'	=>'请选择',
 
 			'lock_timee' => '请选择时间如果不选择默认为一小时',
+
+
+
+			'old_homeid'  => '老房源信息',
+			'remarkss'    => '换房时的备注',
 	];

@@ -9,16 +9,16 @@ use App\Models\admin\Change;
 class ChaneController extends SessionController
 {
     public function create($buyid,$homeid){
-    	//查询客户信息以及老房子数据
-
-
-
-			$data['data'] = Change::get_d_buy_home($buyid);
+			//查询客户认购的信息
+			$data['cust'] = Change::get_d_buy_home($buyid);
+			//查询所购买的房源信息
 			$data['home'] = Change::get_home_d($homeid);
-
-
-
-
-			print_r($data);
+			//查询所有的楼号信息
+			$data['buildnum'] = Change::get_all_buildnum();
+//			dd($data);
+			return view('Admin.Change.Change.create') -> with($data);
 		}
+
+
+
 }

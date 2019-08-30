@@ -15,7 +15,7 @@ class Change extends Model
 							 -> where('buyinfo.buyid','=',$buyid) -> first();
 		}
 
-		//查询房子信息
+		//查询客户所购买的房子信息
 	public static function get_home_d($homeid){
     	return DB::table('homeinfo')
 				->select( 'homeinfo.*' , 'fieldinfob.name as buildnums' , 'fieldinfou.name as unitnums' , 'fieldinfor.name as roomnums' )
@@ -27,4 +27,10 @@ class Change extends Model
 	}
 
 
+	//查询所有的楼号信息
+
+	public static function get_all_buildnum(){
+		return DB::table( 'fieldinfo' )->where( 'parent_field_id' , '=' , 1 )
+						 ->get();
+	}
 }
