@@ -101,33 +101,43 @@
 
 							<td>
 								@if($value -> status != 3 && $value -> status != 4)
-
-									{{--@if($value -> manager_verify_status == '')--}}
-										{{--<button type="button" value="{{$value -> buyid}}" onclick="huan({{$value -> buyid}},{{$value -> homeid}})"--}}
-										        {{--class="btn btn-warning btn-xs btn_edit" id="btn_edit"><i--}}
-												{{--class="fa fa-edit"></i> {{ trans('buy.huan') }}</button>--}}
-									{{--@endif--}}
-
-								@if($value -> manager_verify_status == '')
-									<button type="button" value="{{$value -> buyid}}" onclick="review({{$value -> buyid}},{{$value -> homeid}})"
-									        class="btn btn-warning btn-xs btn_edit" id="btn_edit"><i
-											class="fa fa-edit"></i> {{ trans('buy.review') }}</button>
-								@endif
-								@if($value -> finance_verify_status == '')
-								@if($value -> manager_verify_status == 1)
-										<button type="button" value="{{$value -> buyid}}" onclick="cwview({{$value -> buyid}},{{$value -> homeid}})"
+									@if($value -> manager_verify_status == '')
+										<button type="button" value="{{$value -> buyid}}" onclick="review({{$value -> buyid}},{{$value -> homeid}})"
 										        class="btn btn-warning btn-xs btn_edit" id="btn_edit"><i
-												class="fa fa-edit"></i> {{ trans('buy.manager_verify_status') }}</button>
+												class="fa fa-edit"></i> {{ trans('buy.review') }}</button>
+									@endif
+									@if($value -> finance_verify_status == '')
+									@if($value -> manager_verify_status == 1)
+											<button type="button" value="{{$value -> buyid}}" onclick="cwview({{$value -> buyid}},{{$value -> homeid}})"
+											        class="btn btn-warning btn-xs btn_edit" id="btn_edit"><i
+													class="fa fa-edit"></i> {{ trans('buy.manager_verify_status') }}</button>
+									@endif
+									@endif
+									@endif
+									@if($value -> finance_verify_status == 1)
+										@if($value -> sig_status == 1)
+											<button type="button" value="{{$value -> cust_id}}" onclick="signinfo({{$value -> buyid}})"
+											        class="btn btn-warning btn-xs btn_edit" id="btn_customero"><i
+													class="fa fa-edit"></i> {{trans('memberinfo.signinfo')}}</button>
+											<button type="button" value="{{$value -> cust_id}}" onclick="signinfo({{$value -> buyid}})"
+											        class="btn btn-warning btn-xs btn_edit" id="btn_customero"><i
+													class="fa fa-edit"></i> {{trans('memberinfo.tuifang')}}</button>
+									@endif
 								@endif
-								@endif
-								@endif
-								@if($value -> finance_verify_status == 1)
+
+
 									@if($value -> sig_status == 1)
-										<button type="button" value="{{$value -> cust_id}}" onclick="signinfo({{$value -> buyid}})"
-										        class="btn btn-warning btn-xs btn_edit" id="btn_customero"><i
-												class="fa fa-edit"></i> {{trans('memberinfo.signinfo')}}</button>
-								@endif
-								@endif
+									<button type="button" value="{{$value -> cust_id}}" onclick="change_home({{$value -> buyid}},{{$value -> homeid}})"
+									        class="btn btn-warning btn-xs btn_edit" id="btn_customero"><i
+											class="fa fa-edit"></i> {{trans('memberinfo.change_home')}}</button>
+
+									<button type="button" value="{{$value -> cust_id}}" onclick="signinfo({{$value -> buyid}})"
+									        class="btn btn-warning btn-xs btn_edit" id="btn_customero"><i
+											class="fa fa-edit"></i> {{trans('memberinfo.change_cust')}}</button>
+
+									@endif
+
+
 								<button type="button" value="{{$value -> buyid}}" onclick="view({{$value -> buyid}})"
 								        class="btn btn-warning btn-xs btn_edit" id="btn_edit"><i
 										class="fa fa-edit"></i> {{trans('memberinfo.news_view')}}</button>
@@ -412,5 +422,27 @@
 				}
 			} );
 		}
+
+
+
+		function change_home(buyid,homeid){
+			layer.open( {
+				type : 2 ,
+				title : '{{ trans('memberinfo.trackinfo') }}' ,
+				moveType : 0 ,
+				skin : 'layui-layer-demo' , //加上边框
+				closeBtn : 1 ,
+				area : ['50%' , '70%'] , //宽高
+				shadeClose : false ,
+				shade : 0.5 ,
+				content : ["{{URL('chang/home')}}" + "/" + buyid + "/" + homeid] ,
+				success : function ( layero , index ) {
+					$( ':focus' ).blur();
+				}
+			} );
+		}
+
+
+
 	</script>
 @endpush

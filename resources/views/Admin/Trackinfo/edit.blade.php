@@ -13,7 +13,6 @@
                     {{--客户姓名--}}
                     <label>{{ trans('trackinfo.cust_id') }}：</label>
                         <input type="text" class="form-control" name="realname"
-                               placeholder="请输客户姓名" id="realname"
                                onkeyup="value=value.replace(/[\d]/g,'') "
                                value=" {{$single->realname}}"
                                maxlength="15" readonly="readonly">
@@ -34,8 +33,8 @@
                     <label>{{ trans('trackinfo.track_type') }}：</label>
                     <select name="comp_id" id="track_type" class="form-control">s
                         {{--<option>@if($single -> track_type==1)跟踪@else来访@endif</option>--}}
-                        <option value="1" @if($single -> track_type==1) selected @endif>跟踪</option>
-                        <option value="0" @if($single -> track_type==0) selected @endif>来访</option>
+                        <option value="1" @if($single -> track_type==1) selected @endif>{{trans('trackinfo.text2')}}</option>
+                        <option value="0" @if($single -> track_type==0) selected @endif>{{trans('trackinfo.text3')}}</option>
                     </select>
                 </div>
 
@@ -43,7 +42,7 @@
                 <div class="form-group">
                     <label>{{ trans('trackinfo.content') }}：</label>
 					<textarea name="content" id="content"
-                              cols="30" rows="5" class="form-control" placeholder="请输入备注">{{$single -> content}}</textarea>
+                              cols="30" rows="5" class="form-control">{{$single -> content}}</textarea>
                 </div>
             </form>
         </div>

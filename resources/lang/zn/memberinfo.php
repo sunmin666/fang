@@ -95,4 +95,11 @@
 			'buyinfo'           => '认购',
 
 			'signinfo'          => '签约',
+
+
+			'change_home'        => '换房',
+
+			'tuifang'           => '退房',
+
+			'change_cust'       => '更名',
 	];

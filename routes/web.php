@@ -603,6 +603,13 @@
 		Route::get('signinfo/review/{sigid}/{buyid}','Admin\Signinfo\SigninfoController@review');
 		//财务审核
 		Route::get('signinfo/cwview/{sigid}/{buyid}/{homeid}','Admin\Signinfo\SigninfoController@cwview');
+
+
+		//换房页面
+		Route::get('chang/home/{buyid}/{homeid}','Admin\Change\ChaneController@create');
+
+
+
 	});
 
 
