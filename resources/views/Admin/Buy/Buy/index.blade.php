@@ -126,7 +126,7 @@
 									        class="btn btn-warning btn-xs btn_edit" id="btn_customero"><i
 											class="fa fa-edit"></i> {{trans('memberinfo.change_home')}}</button>
 
-									<button type="button" value="{{$value -> cust_id}}" onclick="signinfo({{$value -> buyid}})"
+									<button type="button" value="{{$value -> cust_id}}" onclick="change_cust({{$value -> buyid}},{{$value -> homeid}})"
 									        class="btn btn-warning btn-xs btn_edit" id="btn_customero"><i
 											class="fa fa-edit"></i> {{trans('memberinfo.change_cust')}}</button>
 										<button type="button" value="{{$value -> cust_id}}" onclick="signinfo({{$value -> buyid}})"
@@ -437,6 +437,23 @@
 			} );
 		}
 
+		//更名
+		function change_cust(buyid,homeid){
+			layer.open( {
+				type : 2 ,
+				title : '{{ trans('memberinfo.trackinfo') }}' ,
+				moveType : 0 ,
+				skin : 'layui-layer-demo' , //加上边框
+				closeBtn : 1 ,
+				area : ['50%' , '70%'] , //宽高
+				shadeClose : false ,
+				shade : 0.5 ,
+				content : ["{{URL('changecust/get_cust')}}" + "/" + buyid + "/" + homeid] ,
+				success : function ( layero , index ) {
+					$( ':focus' ).blur();
+				}
+			} );
+		}
 
 
 	</script>
