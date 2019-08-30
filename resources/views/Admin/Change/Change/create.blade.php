@@ -17,67 +17,31 @@
 			{{ csrf_field() }}
 			<form role="form" action="#" method="post" name="reg_memberinfo" id="reg_memberinfo">
 
-			@if($status == 2)
-				<div class="form-group">
-					<label>{{ trans('buy.cust_id') }}：</label>
-					<select name="cust_id" id="cust_id" class="form-control">
-						<option value="">--{{ trans('buy.please_uaername') }}--</option>
-						@foreach($customer as $k =>$v)
-							<option value="{{$v -> cust_id}}">{{$v -> realname}}</option>
-						@endforeach
-					</select>
-				</div>
-				<div class="form-group none" id="name">
-					{{--<label>{{ trans('buy.pay_num')}}：</label>--}}
-					<label>{{ trans('buy.names') }}：</label>
-					<input type="text" class="form-control"
-					       {{--onkeyup="value=value.replace(/[^\d.]/g,'')"--}}
-					       name="name" placeholder="" id="names"
-					       maxlength="12">
-				</div>
-				<div class="form-group none" id="iphone">
-					{{--<label>{{ trans('buy.pay_num')}}：</label>--}}
-					<label>{{ trans('buy.iphones') }}：</label>
-					<input type="text" class="form-control"
-					       {{--onkeyup="value=value.replace(/[^\d.]/g,'')"--}}
-					       name="iphone" placeholder="" id="iphones"
-					       maxlength="12">
-				</div>
-				<div class="form-group none" id="shen">
-					{{--<label>{{ trans('buy.pay_num')}}：</label>--}}
-					<label>{{ trans('buy.shens') }}：</label>
-					<input type="text" class="form-control"
-					       {{--onkeyup="value=value.replace(/[^\d.]/g,'')"--}}
-					       name="idcard" placeholder="" id="shens"
-					       maxlength="18">
-				</div>
-			@else
-					<input type="hidden" id="cust_id" value="{{$customer -> cust_id}}">
+					<input type="hidden" id="cust_id" value="{{$cust -> cust_id}}">
 					<div class="form-group">
 						{{--<label>{{ trans('buy.pay_num')}}：</label>--}}
 						<label>{{ trans('buy.names') }}：</label>
-						<input type="text" class="form-control"
-						       value="{{$customer -> realname}}"
+						<input type="text" class="form-control" readonly
+						       value="{{$cust -> realname}}"
 						       name="name" placeholder="" id="names"
 						       maxlength="12">
 					</div>
 					<div class="form-group">
 						{{--<label>{{ trans('buy.pay_num')}}：</label>--}}
 						<label>{{ trans('buy.iphones') }}：</label>
-						<input type="text" class="form-control"
-						       value="{{$customer -> mobile}}"
+						<input type="text" class="form-control" readonly
+						       value="{{$cust -> mobile}}"
 						       name="iphone" placeholder="" id="iphones"
 						       maxlength="12">
 					</div>
 					<div class="form-group" >
 						{{--<label>{{ trans('buy.pay_num')}}：</label>--}}
 						<label>{{ trans('buy.shens') }}：</label>
-						<input type="text" class="form-control"
-						       value="{{$customer -> idcard}}"
+						<input type="text" class="form-control" readonly
+						       value="{{$cust -> idcard}}"
 						       name="idcard" placeholder="" id="shens"
 						       maxlength="18">
 					</div>
-			@endif
 				{{--<div class="form-group none" id="dizhi">--}}
 				{{--<label>{{ trans('buy.pay_num')}}：</label>--}}
 				{{--<label>地址：</label>--}}
@@ -86,12 +50,28 @@
 				{{--name="dizhi" placeholder="请输入缴费金额" id="dizhis"--}}
 				{{--maxlength="12">--}}
 				{{--</div>--}}
+				<div class="form-group" >
+					<label>{{ trans('buy.old_homeid') }}：</label>
+					<input type="text" class="form-control" readonly
+					       value="{{$home -> buildnums}}"
+					       name="idcard" placeholder=""
+					       maxlength="18">
+					<input type="text" class="form-control" readonly
+					       value="{{$home -> unitnums}}"
+					       name="idcard" placeholder=""
+					       maxlength="18">
+					<input type="text" class="form-control" readonly
+					       value="{{$home -> roomnums}}"
+					       name="idcard" placeholder=""
+					       maxlength="18">
+				</div>
+
 
 				<div class="form-group">
 					<label>{{ trans('buy.homeid') }}：</label><br>
 					<select name="buildnum" id="buildnum" class="form-control" style="width: 30%;float: left">
 						<option value="">--{{ trans('buy.please_homeid') }}--</option>
-						@foreach($home as $kq =>$vq)
+						@foreach($buildnum as $kq =>$vq)
 							<option value="{{$vq -> field_id}}">{{$vq -> name}}</option>
 						@endforeach
 					</select>
@@ -161,63 +141,8 @@
 					       name="discounts"  id="discounts"
 					       maxlength="12">
 				</div>
-				<input type="hidden" value="0" id="fanggmun">
 				<div class="form-group">
-					{{--<label>{{ trans('buy.pay_num')}}：</label>--}}
-					<label>{{ trans('buy.fangwug') }}：</label><br>
-					<div id="fangwug">
-					</div>
-					<br>
-					<button class="btn btn-dropbox" id="store_fg">{{ trans('buy.store_fg') }}</button>
-				</div>
-				{{--<div class="form-group">--}}
-				{{--<label>{{ trans('buy.lock_time')}}：</label>--}}
-				{{--<input type="text" class="layui-input" id="lock_time" placeholder="请选择时间如果不选择默认为一小时">--}}
-				{{--</div>--}}
-				<div class="form-group">
-					<label>{{ trans('buy.pay_num')}}：</label>
-					<input type="text" class="form-control"
-					       onkeyup="value=value.replace(/[^\d.]/g,'')"
-					       name="pay_num" placeholder="{{ trans('buy.please_many') }}" id="pay_num"
-					       maxlength="12">
-				</div>
-
-				<div class="form-group">
-					<label>{{ trans('buy.pay_type') }}：</label>
-					<select name="pay_type" id="pay_type" class="form-control">
-						<option value="">--{{ trans('buy.please_choose') }}--</option>
-						<option value="0">{{ trans('buy.all_payment') }}</option>
-						<option value="1">{{ trans('buy.mortgage') }}</option>
-					</select>
-				</div>
-
-				<div id="total_price" class="form-group none" >
-					<label>{{ trans('buy.total_prices') }}：</label>
-					<input type="text" class="form-control"
-					       {{--onkeyup="value=value.replace(/[^\d.]/g,'')"--}}
-					       name="total_price" placeholder="{{ trans('buy.please_many') }}" id="total_prices"
-					       maxlength="12">
-				</div>
-				<div id="month_pay" class="form-group none" >
-					<label>{{ trans('buy.month_pays') }}：</label>
-					<input type="text" class="form-control"
-					       onkeyup="value=value.replace(/[^\d.]/g,'')"
-					       name="total_price" placeholder="{{ trans('buy.please_many') }}" id="month_pays"
-					       maxlength="12">
-					<label>{{ trans('buy.total_prices') }}：</label>
-					<input type="text" class="form-control"
-					       onkeyup="value=value.replace(/[^\d.]/g,'')"
-					       name="loan_term" placeholder="{{ trans('buy.please_many') }}" id="loan_term"
-					       maxlength="12">
-					<label>{{ trans('buy.total_pricess') }}：</label>
-					<input type="text" class="form-control"
-					       onkeyup="value=value.replace(/[^\d.]/g,'')"
-					       name="total_price" placeholder="{{ trans('buy.please_many') }}" id="total_pricess"
-					       maxlength="12">
-				</div>
-
-				<div class="form-group">
-					<label>{{ trans('buy.remarks') }}：</label>
+					<label>{{ trans('buy.remarkss') }}：</label>
 					<textarea name="remarks" id="remarks" class="form-control" cols="30" rows="5" style="resize:none"></textarea>
 				</div>
 				{{ csrf_field()}}
@@ -235,50 +160,7 @@
 	$( ".i-checks" ).iCheck( {
 		checkboxClass : "{{config('myconfig.config.checkbox_skin')}}" ,
 	} );
-	//日期时间选择器
-	layui.use( 'laydate' , function () {
-		var laydate = layui.laydate;
-		laydate.render( {
-			elem : '#lock_time'
-			, type : 'datetime'
-			, min : minTime()
-		} );
-	} );
-	//不让选择以前的时间
-	function minTime() {
-		var now = new Date();
-		return now.getFullYear() + "-" + ( now.getMonth() + 1 ) + "-" + now.getDate() + " " + ( now.getHours() + 1 ) + ":" + now.getMinutes() + ":" + now.getSeconds();
-	}
-	//根据用户id查询用户信息
-	$( '#cust_id' ).change( function () {
-		var cust_id = $( this ).val();
 
-		if ( cust_id == '' ) {
-			$( '#name' ).addClass( 'none' );
-			$( '#iphone' ).addClass( 'none' );
-			$( '#shen' ).addClass( 'none' );
-			return false;
-		}
-
-		$.ajax( {
-			url : "{{URL('customer/change')}}" ,
-			type : "post" ,
-			data : {
-				cust_id : cust_id ,
-				_token : "{{csrf_token()}}"
-			} ,
-			success : function ( data ) {
-				console.log( data );
-				$( '#name' ).removeClass( 'none' );
-				$( '#iphone' ).removeClass( 'none' );
-				$( '#shen' ).removeClass( 'none' );
-				// $('#dizhi').removeClass('none');
-				$( '#names' ).val( data[0]['realname'] );
-				$( '#iphones' ).val( data[0]['mobile'] );
-				$( '#shens' ).val( data[0]['idcard'] );
-			}
-		} )
-	} );
 	//下拉框联动 楼号联动单元号
 	$( "#buildnum" ).change( function () {
 		var field_id = $( this ).val();
@@ -393,84 +275,7 @@
 		} )
 	} );
 	//添加新增房屋共有人
-	$( '#store_fg' ).click( function () {
-		var mun = $( '#fanggmun' ).val();
-		var str = '<div style="display:inline-block" >\n' +
-			'\t\t\t\t\t\t\t<select name="relation" id="relation' + mun + '" class="form-control" style="width: 15%;float: left">\n' +
-			'\t\t\t\t\t\t\t\t<option value="0">{{ trans('buy.spouse') }}</option>\n' +
-			'\t\t\t\t\t\t\t\t<option value="1">{{ trans('buy.son') }}</option>\n' +
-			'\t\t\t\t\t\t\t\t<option value="2">{{ trans('buy.daughter') }}</option>\n' +
-			'\t\t\t\t\t\t\t\t<option value="3">{{ trans('buy.father') }}</option>\n' +
-			'\t\t\t\t\t\t\t\t<option value="4">{{ trans('buy.mather') }}</option>\n' +
-			'\t\t\t\t\t\t\t\t<option value="5">{{ trans('buy.relative') }}</option>\n' +
-			'\t\t\t\t\t\t\t</select>\n' +
-			'\t\t\t\t\t\t\t<input type="text" class="form-control" style="width: 15%;float: left"\n' +
-			'\t\t\t\t\t\t\t       {{--onkeyup="value=value.replace(/[^\\d.]/g,\'\')"--}}\n' +
-			'\t\t\t\t\t\t\t       name="realname" placeholder="{{ trans('buy.name') }}" id="realname' + mun + '"\n' +
-			'\t\t\t\t\t\t\t       maxlength="12">\n' +
-			'\t\t\t\t\t\t\t<select name="sex" id="sex' + mun + '" class="form-control" style="width: 15%;float: left">\n' +
-			'\t\t\t\t\t\t\t\t<option value="0">{{ trans('buy.sir') }}</option>\n' +
-			'\t\t\t\t\t\t\t\t<option value="1">{{ trans('buy.maam') }}</option>\n' +
-			'\t\t\t\t\t\t\t</select>\n' +
-			'\t\t\t\t\t\t\t<input type="text" class="layui-input form-control" style="width: 15%;float: left;height:34px"\n' +
-			'\t\t\t\t\t\t\t       {{--onkeyup="value=value.replace(/[^\\d.]/g,\'\')"--}}\n' +
-			'\t\t\t\t\t\t\t       name="birthday" placeholder="{{ trans('buy.birthday') }}" autocomplete="off" id="birthday' + mun + '"\n' +
-			'\t\t\t\t\t\t\t       >\n' +
 
-			'\t\t\t\t\t\t\t<input type="text" class="form-control" style="width: 15%;float: left"\n' +
-			'\t\t\t\t\t\t\t       {{--onkeyup="value=value.replace(/[^\\d.]/g,\'\')"--}}\n' +
-			'\t\t\t\t\t\t\t       name="idcard" placeholder="{{ trans('buy.shens') }}" id="idcard' + mun + '"\n' +
-			'\t\t\t\t\t\t\t       maxlength="18">\n' +
-			'\t\t\t\t\t\t\t<input type="text" class="form-control" style="width: 15%;float: left"\n' +
-			'\t\t\t\t\t\t\t       {{--onkeyup="value=value.replace(/[^\\d.]/g,\'\')"--}}\n' +
-			'\t\t\t\t\t\t\t       name="mobile" placeholder="{{ trans('buy.iphones') }}" value="" id="mobile' + mun + '"\n' +
-			'\t\t\t\t\t\t\t       maxlength="11">\n' +
-			'\t\t\t\t\t\t</div>';
-		$( '#fangwug' ).append( str );
-		var counter = Number( mun ) + 1;
-		$( '#fanggmun' ).val( counter );
-		time_xz( counter );
-		return false;
-	} );
-	//循环除开日期选择器
-	function time_xz( counter ) {
-		for ( $i = 0 ; $i <= counter ; $i++ ) {
-			layui.use( 'laydate' , function () {
-				var laydate = layui.laydate;
-				laydate.render( {
-					elem : '#birthday' + $i ,
-				} );
-			} );
-		}
-	}
-	//选择哪种缴费方式
-	$( '#pay_type' ).change( function () {
-		var cc = $( this ).val();
-		if ( cc == 0 ) {
-			var fangzi_g = $( '#totals' ).val();
-			var zhekou = $( '#discounts' ).val();
-			if ( fangzi_g == '' || zhekou == '' ) {
-				layer.msg( '{{ trans('buy.total_pricess_text') }}' , { time : 1236 } );
-				return false;
-			}
-			else {
-				$( '#total_price' ).removeClass( 'none' );
-				$( '#month_pay' ).addClass( 'none' );
-			}
-		}
-		else {
-			var fangzi_g = $( '#totals' ).val();
-			var zhekou = $( '#discounts' ).val();
-			if ( fangzi_g == '' || zhekou == '' ) {
-				layer.msg( '{{ trans('buy.total_pricess_text') }}' , { time : 1236 } );
-				return false;
-			}
-			else {
-				$( '#month_pay' ).removeClass( 'none' );
-				$( '#total_price' ).addClass( 'none' );
-			}
-		}
-	} );
 </script>
 <script>
 
@@ -575,8 +380,8 @@
 			var month_pays = $( '#month_pays' ).val();    // 月供
 			console.log(total_prices,loan_term,month_pays);
 			if(total_prices == '' || loan_term == '' || month_pays == ''){
-					layer.msg('{{ trans('buy.all_type_text') }}',{time:1236});
-					return false;
+				layer.msg('{{ trans('buy.all_type_text') }}',{time:1236});
+				return false;
 			}
 		}
 		else if ( pay_type == 0 ) {

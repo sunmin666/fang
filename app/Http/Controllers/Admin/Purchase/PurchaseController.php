@@ -27,6 +27,9 @@ class PurchaseController extends SessionController
     //方案添加页面展示
     public function show_cowner($cust_id)
     {
+        $data['home'] = Purchase::fieid(); //查询所有楼号
+//        $data['unitnum'] = Purchase::unitnum(); //查询楼号对应所有单元
+
         $data['name'] = Purchase::get_customer($cust_id);
         return view('Admin/Purchase/Purchase/create') ->with($data);
     }
@@ -34,6 +37,7 @@ class PurchaseController extends SessionController
     //添加方案信息
     public function store(Request $query)
     {
+        $data['homeid'] =$query ->input('homeid');
         $data['cust_id'] = $query -> input('cust_id');
         $data['type'] = $query -> input('type');
         $data['once_total'] = $query -> input('once_total');
@@ -59,6 +63,7 @@ class PurchaseController extends SessionController
     public function edit($planid)
     {
         $data['purchase']=Purchase::get_d_trackinfo($planid);
+        //dd($data['purchase']);
         return view('Admin/Purchase/Purchase/edit')->with($data);
     }
 

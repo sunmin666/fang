@@ -33,31 +33,31 @@
 				<div class="form-group">
 					{{--公司中文名称1--}}
 					<label>{{ trans('company.comp_cname') }}：</label>
-					<input type="text" class="form-control" name="comp_cname" placeholder="请填写公司中文名称" id="comp_cname"
+					<input type="text" class="form-control" name="comp_cname" placeholder="{{ trans('company.please_comp_cname') }}" id="comp_cname"
 					       maxlength="50">
 				</div>
 				{{--公司英文名称1--}}
 				<div class="form-group">
 					<label>{{ trans('company.comp_ename') }}：</label>
-					<input type="text" class="form-control" maxlength="100" placeholder="请填写公司英文名称"
+					<input type="text" class="form-control" maxlength="100" placeholder="{{ trans('company.please_comp_ename') }}"
 					       name="comp_ename" id="comp_ename">
 				</div>
 				{{--公司法人代表1--}}
 				<div class="form-group">
 					<label>{{ trans('company.corporation')}}：</label>
-					<input type="text" class="form-control" name="corporation" placeholder="请填写法人代表" id="corporation"
+					<input type="text" class="form-control" name="corporation" placeholder="{{ trans('company.please_corporation') }}" id="corporation"
 					       maxlength="12">
 				</div>
 				{{--公司身份证号1--}}
 				<div class="form-group">
 					<label>{{ trans('company.corp_idcard') }}：</label>
-					<input type="text" oninput = "value=value.replace(/[^\d]/g,'')" class="form-control" name="corp_idcard" placeholder="请填写法人身份证号" id="corp_idcard"
+					<input type="text" oninput = "value=value.replace(/[^\d]/g,'')" class="form-control" name="corp_idcard" placeholder="{{ trans('company.please_corp_idcard') }}" id="corp_idcard"
 					       maxlength="18">
 				</div>
 				{{--法人手机号1--}}
 				<div class="form-group">
 					<label>{{ trans('company.corp_mobile') }}：</label>
-					<input type="text" class="form-control" oninput = "value=value.replace(/[^\d]/g,'')" name="corp_mobile" placeholder="请填写法人手机号" id="corp_mobile"
+					<input type="text" class="form-control" oninput = "value=value.replace(/[^\d]/g,'')" name="corp_mobile" placeholder="{{ trans('company.please_corp_mobile') }}" id="corp_mobile"
 					       maxlength="11">
 				</div>
 				{{--营业执照1--}}
@@ -65,7 +65,7 @@
 					<label>{{ trans('company.license') }}：</label>
 					<div class="zzz">
 						<button type="button" class="btn" id="test1">
-							<i class="layui-icon">&#xe67c;</i>上传图片
+							<i class="layui-icon">&#xe67c;</i>{{ trans('company.file_pic') }}
 						</button>
 						<input type="hidden" value="" id="license" name="license">
 						<div id="img">
@@ -76,77 +76,77 @@
 				{{--企业社会信用码1--}}
 				<div class="form-group">
 					<label>{{ trans('company.credit_code') }}：</label>
-					<input type="text" class="form-control" name="credit_code" onkeyup="value=value.replace(/[^\w\.\/]/ig,'')" placeholder="请填写企业社会信用码" id="credit_code"
+					<input type="text" class="form-control" name="credit_code" onkeyup="value=value.replace(/[^\w\.\/]/ig,'')" placeholder="{{ trans('company.please_credit_code') }}" id="credit_code"
 					       maxlength="18">
 				</div>
 				{{--注册地址1--}}
 				<div class="form-group">
 					<label>{{ trans('company.address') }}：</label>
-					<input type="text" class="form-control" name="address" placeholder="请输入注册地址" id="address" maxlength="100">
+					<input type="text" class="form-control" name="address" placeholder="{{ trans('company.please_address') }}" id="address" maxlength="100">
 				</div>
 				{{--公司电话座机1--}}
 				<div class="form-group">
 					<label>{{ trans('company.telphone') }}：</label>
-					<input type="text" class="form-control" name="telphone" placeholder="请输入公司座机" id="telphone" maxlength="12">
+					<input type="text" class="form-control" name="telphone" placeholder="{{ trans('company.please_telphone') }}" id="telphone" maxlength="12">
 				</div>
 				{{--公司/企业类型1--}}
 				<div class="form-group">
 					<label>{{ trans('company.comp_type') }}：</label>
 					<select name="comp_type" id="comp_type" class="form-control">
-						<option value="0">请选择公司/企业类型</option>
-						<option value="1">个人独资</option>
-						<option value="2">合伙企业</option>
-						<option value="3">有限责任公司</option>
-						<option value="4">股份制公司</option>
-						<option value="5">集团公司</option>
-						<option value="6">一人制公司</option>
+						<option value="0">{{ trans('company.type') }}</option>
+						<option value="1">{{ trans('company.proprietorship') }}</option>
+						<option value="2">{{ trans('company.partnership') }}</option>
+						<option value="3">{{ trans('company.finite') }}</option>
+						<option value="4">{{ trans('company.shares') }}</option>
+						<option value="5">{{ trans('company.group') }}</option>
+						<option value="6">{{ trans('company.one_person') }}</option>
 					</select>
 					{{--<input type="text" class="form-control" name="comp_type"  id="comp_type" maxlength="10">--}}
 				</div>
 				{{--公司营业范围1--}}
 				<div class="form-group">
 					<label>{{ trans('company.scope') }}：</label>
-					<input type="text" class="form-control" name="scope" placeholder="请输入公司经营范围" id="scope" maxlength="100">
+					<input type="text" class="form-control" name="scope" placeholder="{{ trans('company.please_scope') }}" id="scope" maxlength="100">
 				</div>
 				{{--注册资本1--}}
 				<div class="form-group">
 					<label>{{ trans('company.reg_capital') }}：</label>
-					<input type="text" class="form-control" onkeyup="value=value.replace(/[^\d.]/g,'')" name="reg_capital" placeholder="请填写注资本(单位：万)" id="reg_capital"
+					<input type="text" class="form-control" onkeyup="value=value.replace(/[^\d.]/g,'')" name="reg_capital" placeholder="{{ trans('company.please_reg_capital') }}" id="reg_capital"
 					       maxlength="20">
 				</div>
 				{{--使用iHOUSER联系人1--}}
 				<div class="form-group">
 					<label>{{ trans('company.contacts') }}：</label>
-					<input type="text" class="form-control" name="contacts" placeholder="请输入使用iHOUSER联系人" id="contacts"
+					<input type="text" class="form-control" name="contacts" placeholder="{{ trans('company.please_contacts') }}" id="contacts"
 					       maxlength="12">
 				</div>
 				{{--使用iHOUSER系统联系人手机号1--}}
 				<div class="form-group">
 					<label>{{ trans('company.cont_mobile') }}：</label>
-					<input type="text" oninput = "value=value.replace(/[^\d]/g,'')" class="form-control" name="cont_mobile" placeholder="请填写使用iHOUSER联系人手机号" id="cont_mobile"
+					<input type="text" oninput = "value=value.replace(/[^\d]/g,'')" class="form-control" name="cont_mobile" placeholder="{{ trans('company.please_cont_mobile') }}" id="cont_mobile"
 					       maxlength="11">
 				</div>
 				{{--使用iHOUSER系统联系人身份证号1--}}
 				<div class="form-group">
 					<label>{{ trans('company.cont_idcard') }}：</label>
-					<input type="text" oninput = "value=value.replace(/[^\d]/g,'')" class="form-control" name="cont_idcard" placeholder="请填写使用iHOUSER联系人身份证号码" id="cont_idcard"
+					<input type="text" oninput = "value=value.replace(/[^\d]/g,'')" class="form-control" name="cont_idcard" placeholder="{{ trans('company.please_created_date') }}" id="cont_idcard"
 					       maxlength="18">
 				</div>
 				{{--公司成立日期1--}}
 				<div class="form-group">
 					<label>{{ trans('company.created_date') }}：</label>
-					<input type="text" class="layui-input" autocomplete="off" id="created_date" placeholder="公司成立日期">
+					<input type="text" class="layui-input" autocomplete="off" id="created_date" placeholder="{{ trans('company.please_business_date') }}">
 				</div>
 				{{--公司营业期限开始1--}}
 				<div class="form-group">
 					<label>{{ trans('company.business_date') }}：</label>
-					<input type="text" class="layui-input" autocomplete="off" id="business_date" placeholder="期限开始时间">
+					<input type="text" class="layui-input" autocomplete="off" id="business_date" placeholder="{{ trans('company.please_business_date') }}">
 
 				</div>
 				{{--公司营业期限结束--}}
 				<div class="form-group">
 					<label>{{ trans('company.expire_date') }}：</label>
-					<input type="text" class="layui-input" autocomplete="off" id="expire_date" placeholder="期限结束时间">
+					<input type="text" class="layui-input" autocomplete="off" id="expire_date" placeholder="{{ trans('company.please_expire_date') }}">
 				</div>
 
 				{{ csrf_field()}}
@@ -193,10 +193,10 @@
 				if ( res.code == 1 ) {
 					$( '#imgs' ).attr( 'src' , res.data.src );
 					$( '#license' ).val( res.data.src );
-					layer.msg( '上傳成功' , { time : 1000 } )
+					layer.msg( '{{ trans('company.upload_success') }}' , { time : 1000 } )
 				}
 				else {
-					layer.msg( '上傳失敗' , { time : 1000 } )
+					layer.msg( '{{ trans('company.upload_fail') }}' , { time : 1000 } )
 				}
 			}
 			, error : function () {

@@ -42,4 +42,30 @@
 
 		'home_find'         => '查找',
 
+		'please_choice' => '请选择',
+
+		'please_floor' =>'请输入楼层',
+
+		'please_build_area' => '请输入建筑面积',
+
+		'file_pic' => '上传图片',
+
+		'please_house_str' => '请输入户型机构',
+
+		'please_price'	=>'请输入房子单价',
+
+		'please_discount' =>'请输入折扣',
+
+		'subscription' =>'认购前',
+
+		'reserved_application' => '预定房源申请中',
+
+		'subscribed' => '已认购',
+
+		'signed' => '已签约',
+
+		'please_buyid' => '请输入认购编号',
+
+		'please_remarks' => '请输入备注',
+
 	];

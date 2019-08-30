@@ -99,4 +99,57 @@
 			'all_payment'	=>'一次性付款',
 
 			'mortgage'	=>'按揭付款',
+
+			'review_no' => '经理未审核',
+
+			'review_wtg'=>'经理审核未通过',
+
+			'finance'=>'经理审核通过财务未审核',
+
+			'finance_wtg' => '财务审核未通过',
+
+			'finance_tg' => '财务审核通过',
+
+			'subscription_time'	=>'认购时间已到',
+
+			'username_change'	=>'客户已换',
+
+			'adopt'	=>'通过',
+
+			'adopt_no'	=>'未通过',
+
+			'month_pay_no'=>'暂无月供',
+
+			'loan_term_no'=>'暂无年限',
+
+			'spouse' => '配偶',
+
+			'son' => '儿子',
+
+			'daughter' => '女儿',
+
+			'father' => '父亲',
+
+			'mather' => '母亲',
+
+			'relative' => '亲戚',
+
+			'sir' => '先生',
+
+			'maam'=> '女士',
+
+			'please_uaername' => '请选择客户',
+
+			'please_homeid'	=>'请选择房源',
+
+			'please_many'	=>'请输入缴费金额',
+
+			'please_choice'	=>'请选择',
+
+			'lock_timee' => '请选择时间如果不选择默认为一小时',
+
+
+
+			'old_homeid'  => '老房源信息',
+			'remarkss'    => '换房时的备注',
 	];

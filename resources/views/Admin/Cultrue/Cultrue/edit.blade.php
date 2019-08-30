@@ -16,7 +16,7 @@
                 <div class="form-group">
                     <label>{{ trans('cultrue.class_id') }}：</label>
                     <select name="parent_field_id" id="parent_field_id" class="form-control">
-                        <option value=""> 请选择 </option>
+                        <option value=""> {{ trans('cultrue.please_choice') }} </option>
                         @foreach($name as $k => $v)
                             <option value="{{$v -> field_id}}" @if($v -> field_id == $cultrue -> class_id) selected @endif>{{$v ->name }}</option>
                         @endforeach
@@ -26,7 +26,7 @@
                 <div class="form-group">
                     <label>{{ trans('cultrue.page_title') }}：</label>
                     <input type="text" class="form-control" name="title"
-                           placeholder="请输入标题" id="title" value="{{$cultrue -> title}}"
+                           placeholder="{{ trans('cultrue.please_title') }}" id="title" value="{{$cultrue -> title}}"
                            maxlength="20">
                 </div>
                 {{--企业文化图片--}}
@@ -37,7 +37,7 @@
                         {{--<input type="hidden" value="0" id="counter">--}}
                         <div class="add_img">
                             <button type="button" class="btn" id="sahngchaun">
-                                <i class="layui-icon">&#xe67c;</i>上传图片
+                                <i class="layui-icon">&#xe67c;</i>{{ trans('cultrue.file_pic') }}
                             </button>
                         </div>
                     </div>

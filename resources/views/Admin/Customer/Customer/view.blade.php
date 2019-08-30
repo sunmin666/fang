@@ -20,74 +20,74 @@
 	</style>
 </head>
 <body>
-<div><span>客户姓名：</span>{{$omer -> realname}}</div>
-<div><span>客户性别：</span>
+<div><span>{{ trans('customer.realname') }}：</span>{{$omer -> realname}}</div>
+<div><span>{{ trans('customer.sex') }}：</span>
 	@if($omer -> sex == 1)
-		男
+		{{ trans('customer.male') }}
 	@elseif($omer ->sex == 2)
-		女
+		{{ trans('customer.female') }}
 	@endif</div>
-<div><span>客户手机号：</span>{{$omer -> mobile}}</div>
-<div><span>客户别的手机号：</span>{{$omer -> telphone}}</div>
-<div><span>客户微信：</span>{{$omer -> weixin}}</div>
-<div><span>客户扣扣：</span>{{$omer -> qq}}</div>
-<div><span>客户邮箱：</span>{{$omer -> email}}</div>
-<div><span>客户身份证信息：</span>{{$omer -> idcard}}</div>
-<div><span>客户所属公司：</span>西安开米</div>
-<div><span>客户所属项目：</span>
+<div><span>{{ trans('customer.mobile') }}：</span>{{$omer -> mobile}}</div>
+<div><span>{{ trans('customer.telphone') }}：</span>{{$omer -> telphone}}</div>
+<div><span>{{ trans('customer.weixin') }}：</span>{{$omer -> weixin}}</div>
+<div><span>{{ trans('customer.qq') }}：</span>{{$omer -> qq}}</div>
+<div><span>{{ trans('customer.email') }}：</span>{{$omer -> email}}</div>
+<div><span>{{ trans('customer.idcrad') }}：</span>{{$omer -> idcard}}</div>
+<div><span>{{ trans('customer.comp_id') }}：</span>{{ trans('customer.open_rice') }}</div>
+<div><span>{{ trans('customer.proj_id') }}：</span>
 	@foreach($project as $k => $v)
 		 @if($v -> project_id == $omer -> proj_id)  {{$v -> pro_cname}}  @endif
 	@endforeach
 </div>
-<div><span>客户录入时间：</span>{{date('Y-m-d',$omer -> created_at)}}</div>
+<div><span>{{ trans('customer.created_at') }}：</span>{{date('Y-m-d',$omer -> created_at)}}</div>
 
-<div><span>客户认知渠道：</span>
+<div><span>{{ trans('customer.cognition') }}：</span>
 	@foreach($cognition as $k => $v)
 		@if($v -> field_id == $omer -> cognition) {{$v -> name}}  @endif
 	@endforeach
 </div>
-<div><span>家庭结构：</span>
+<div><span>{{ trans('customer.family_str') }}：</span>
 	@foreach($family_str as $k => $v)
 		@if($v -> field_id == $omer -> family_str) {{$v -> name}}  @endif
 	@endforeach
 </div>
-<div><span>工作类型：</span>
+<div><span>{{ trans('customer.work_type') }}：</span>
 	@foreach($work_type as $k => $v)
 		@if($v -> field_id == $omer -> work_type) {{$v -> name}}  @endif
 	@endforeach
 </div>
-<div><span>联系地址：</span>{{$omer -> address}}</div>
-<div><span>意向面积：</span>
+<div><span>{{ trans('customer.address') }}：</span>{{$omer -> address}}</div>
+<div><span>{{ trans('customer.intention_area') }}：</span>
 	@foreach($intention_area as $k => $v)
 		@if($v -> field_id == $omer -> intention_area) {{$v -> name}}  @endif
 	@endforeach
 </div>
-<div><span>楼层偏好：</span>
+<div><span>{{ trans('customer.floor_like') }}：</span>
 	@foreach($floor_like as $k => $v)
 		@if($v -> field_id == $omer -> floor_like) {{$v -> name}}  @endif
 	@endforeach
 </div>
-<div><span>家具需求：</span>
+<div><span>{{ trans('customer.furniture_need') }}：</span>
 	@foreach($furniture_need as $k => $v)
 		@if($v -> field_id == $omer -> furniture_need) {{$v -> name}}  @endif
 	@endforeach
 </div>
-<div><span>置业此数：</span>
+<div><span>{{ trans('customer.house_num') }}：</span>
 	@foreach($house_num as $k => $v)
 		@if($v -> field_id == $omer -> house_num) {{$v -> name}}  @endif
 	@endforeach
 </div>
-<div><span>首次接触方式：</span>
+<div><span>{{ trans('customer.first_contact') }}：</span>
 	@foreach($first_contact as $k => $v)
 		@if($v -> field_id == $omer -> first_contact) {{$v -> name}}  @endif
 	@endforeach
 </div>
-<div><span>客户状态：</span>
+<div><span>{{ trans('customer.status_id') }}：</span>
 	@foreach($status_id as $k => $v)
 		@if($v -> field_id == $omer -> status_id) {{$v -> name}}  @endif
 	@endforeach
 </div>
-<div><span>职业顾问：</span>
+<div><span>{{ trans('customer.hous_id') }}：</span>
 	@foreach($hous_id as $k => $v)
 		@if($v -> hous_id == $omer -> hous_id) {{$v -> name}}  @endif
 	@endforeach

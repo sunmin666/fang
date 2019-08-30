@@ -63,7 +63,7 @@
 							<td>{{$value -> enjoy}}</td>
 
 							<td>{{date('Y-m-d H:i',$value -> created_at)}}</td>
-							<td>@if($value -> updated_ar == '')暂无更新时间@else{{date('Y-m-d H:i',$value -> updated_at)}}@endif</td>
+							<td>@if($value -> updated_ar == ''){{ trans('consu.no_update_ime') }}@else{{date('Y-m-d H:i',$value -> updated_at)}}@endif</td>
 
 							<td>
 

@@ -13,7 +13,7 @@
 					{{--职业顾问手机号--}}
 					<label>{{ trans('consu.page_detail2') }}：</label>
 					<input type="text" class="form-control" name="enjoy"
-					       placeholder="请输入折扣信息" id="enjoy" onkeyup="if(isNaN(value))execCommand('undo')"
+					       placeholder="{{ trans('consu.please_page_detail2') }}" id="enjoy" onkeyup="if(isNaN(value))execCommand('undo')"
 					       value="{{$enjoy -> enjoy}}"
 					       maxlength="11">
 				</div>

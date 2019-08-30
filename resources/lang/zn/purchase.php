@@ -33,4 +33,21 @@ return [
     'page_detail'   => '计划方案管理',
 
     'operating' =>'操作',
+
+    'homeid' => '请先选择房源',
+
+    'buildnums' => '楼号',
+
+    'unitnums' => '单元号',
+
+    'roomnums' => '房号',
+
+    'total' =>'总价',
+
+    'discount' => '折扣',
+
+    'one_all' =>'一次性',
+
+    'mortgage' => '按揭付款',
+
 ];

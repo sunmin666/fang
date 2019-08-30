@@ -13,7 +13,7 @@
 					{{--客户真实姓名--}}
 					<label>{{ trans('customer.realname') }}：</label>
 					<input type="text" class="form-control" name="realname"
-					       placeholder="请输客户姓名" id="realname"
+					       placeholder="{{ trans('customer.username_realname') }}" id="realname"
 					       value="{{$omer -> realname}}"
 					       onkeyup="value=value.replace(/[\d]/g,'') "
 					       maxlength="15">
@@ -22,8 +22,8 @@
 				<div class="form-group">
 					<label>{{ trans('customer.sex') }}：</label>
 					<div class="zzz">
-						<input type="radio" @if($omer ->sex == 1) checked @endif name="sex" value="1" id="sex" class="i-checks">&nbsp;男 &nbsp;&nbsp;
-						<input type="radio" @if($omer ->sex == 2) checked @endif name="sex" value="2" id="sex" class="i-checks">&nbsp;女
+						<input type="radio" @if($omer ->sex == 1) checked @endif name="sex" value="1" id="sex" class="i-checks">&nbsp;{{ trans('customer.male') }} &nbsp;&nbsp;
+						<input type="radio" @if($omer ->sex == 2) checked @endif name="sex" value="2" id="sex" class="i-checks">&nbsp;{{ trans('customer.female') }}
 					</div>
 				</div>
 				{{--客户手机号--}}
@@ -31,7 +31,7 @@
 					<label>{{ trans('customer.mobile')}}：</label>
 					<input type="text" class="form-control"
 					       onkeyup="value=value.replace(/[^\d.]/g,'')"
-					       name="mobile" placeholder='请输入客户手机号' id="mobile"
+					       name="mobile" placeholder='{{ trans('customer.please_mobile')}}' id="mobile"
 					       value="{{$omer -> mobile}}"
 					       maxlength="11">
 				</div>
@@ -39,7 +39,7 @@
 				<div class="form-group">
 					<label>{{ trans('customer.telphone') }}：</label>
 					<input type="text" class="form-control" name="telphone"
-					       placeholder="请输入其他手机号"
+					       placeholder="{{ trans('customer.please_telphone')}}"
 					       onkeyup="value=value.replace(/[^\d.]/g,'')"
 					       value="{{$omer -> telphone}}"
 					       id="telphone"
@@ -51,7 +51,7 @@
 					<input type="text" class="form-control" name="weixin"
 					       onkeyup="value=value.replace(/[^\w\.\/]/ig,'')"
 					       value="{{$omer -> weixin}}"
-					       placeholder="请输入微信号" id="weixin" maxlength="12">
+					       placeholder="{{ trans('customer.please_weixin')}}" id="weixin" maxlength="12">
 				</div>
 				{{--qq--}}
 				<div class="form-group">
@@ -59,13 +59,13 @@
 					<input type="text" class="form-control" name="qq"
 					       onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"
 					       value="{{$omer -> qq}}"
-					       placeholder="请输入扣扣号" id="qq" maxlength="12">
+					       placeholder="{{ trans('customer.please_qq')}}" id="qq" maxlength="12">
 				</div>
 				{{--邮箱--}}
 				<div class="form-group">
 					<label>{{ trans('customer.email') }}：</label>
 					<input type="text" class="form-control" name="email"
-					       placeholder="请输入邮箱" id="email"
+					       placeholder="{{ trans('customer.please_email')}}" id="email"
 					       value="{{$omer -> email}}"
 					       maxlength="50">
 				</div>
@@ -75,7 +75,7 @@
 					<input type="text" class="form-control" name="idcrad"
 					       onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"
 					       value="{{$omer -> idcard}}"
-					       placeholder="请填写身份证号" id="idcrad" maxlength="18">
+					       placeholder="{{ trans('customer.please_idcrad') }}" id="idcrad" maxlength="18">
 				</div>
 
 				<input type="hidden" value="{{$omer -> cust_id}}" id="cust_id">
@@ -84,7 +84,7 @@
 				<div class="form-group">
 					<label>{{ trans('customer.comp_id') }}：</label>
 					<select name="comp_id" id="comp_id" class="form-control">
-						<option value="1" selected>西安开米</option>
+						<option value="1" selected>{{ trans('customer.open_rice') }}</option>
 
 					</select>
 				</div>
@@ -93,7 +93,7 @@
 				<div class="form-group">
 					<label>{{ trans('customer.proj_id') }}：</label>
 					<select name="proj_id" id="proj_id" class="form-control">
-						<option value="">请选择项目</option>
+						<option value="">{{ trans('customer.please_proj_id') }}</option>
 						@foreach($project as $k => $v)
 						<option value="{{$v -> project_id}}" @if($v -> project_id == $omer -> proj_id) selected @endif>{{$v -> pro_cname}}</option>
 						@endforeach
@@ -115,7 +115,7 @@
 				<div class="form-group">
 					<label>{{ trans('customer.family_str') }}：</label>
 					<select name="family_str" id="family_str" class="form-control">
-						<option value="">--请选择--</option>
+						<option value="">--{{ trans('customer.please_choice') }}--</option>
 						@foreach($family_str as $k => $v)
 							<option value="{{$v -> field_id}}" @if($omer -> family_str==$v-> field_id) selected @endif>{{$v -> name}}</option>
 						@endforeach
@@ -126,7 +126,7 @@
 				<div class="form-group">
 					<label>{{ trans('customer.work_type') }}：</label>
 					<select name="work_type" id="work_type" class="form-control">
-						<option value="">--请选择--</option>
+						<option value="">--{{ trans('customer.please_choice') }}--</option>
 						@foreach($work_type as $k => $v)
 							<option value="{{$v -> field_id}}" @if($omer -> work_type==$v-> field_id) selected @endif>{{$v -> name}}</option>
 						@endforeach
@@ -137,7 +137,7 @@
 				<div class="form-group">
 					<label>{{ trans('customer.address') }}：</label>
 					<input type="text" class="form-control" name="address"
-						   placeholder="请输入联系地址"
+						   placeholder="{{ trans('customer.please_address') }}"
 						   id="address" value="{{$omer -> address}}"
 						   maxlength="25">
 				</div>
@@ -146,7 +146,7 @@
 				<div class="form-group">
 					<label>{{ trans('customer.intention_area') }}：</label>
 					<select name="intention_area" id="intention_area" class="form-control">
-						<option value="">--请选择--</option>
+						<option value="">--{{ trans('customer.please_choice') }}--</option>
 						@foreach($intention_area as $k => $v)
 							<option value="{{$v -> field_id}}" @if($omer -> intention_area==$v-> field_id) selected @endif>{{$v -> name}}</option>
 						@endforeach
@@ -157,7 +157,7 @@
 				<div class="form-group">
 					<label>{{ trans('customer.floor_like') }}：</label>
 					<select name="floor_like" id="floor_like" class="form-control">
-						<option value="">--请选择--</option>
+						<option value="">--{{ trans('customer.please_choice') }}--</option>
 						@foreach($floor_like as $k => $v)
 							<option value="{{$v -> field_id}}" @if($omer -> floor_like==$v-> field_id) selected @endif>{{$v -> name}}</option>
 						@endforeach
@@ -168,7 +168,7 @@
 				<div class="form-group">
 					<label>{{ trans('customer.furniture_need') }}：</label>
 					<select name="furniture_need" id="furniture_need" class="form-control">
-						<option value="">--请选择--</option>
+						<option value="">--{{ trans('customer.please_choice') }}--</option>
 						@foreach($furniture_need as $k => $v)
 							<option value="{{$v -> field_id}}" @if($omer -> furniture_need==$v-> field_id) selected @endif>{{$v -> name}}</option>
 						@endforeach
@@ -179,7 +179,7 @@
 				<div class="form-group">
 					<label>{{ trans('customer.house_num') }}：</label>
 					<select name="house_num" id="house_num" class="form-control">
-						<option value="">--请选择--</option>
+						<option value="">--{{ trans('customer.please_choice') }}--</option>
 						@foreach($house_num as $k => $v)
 							<option value="{{$v -> field_id}}" @if($omer -> house_num==$v-> field_id) selected @endif>{{$v -> name}}</option>
 						@endforeach
@@ -190,7 +190,7 @@
 				<div class="form-group">
 					<label>{{ trans('customer.first_contact') }}：</label>
 					<select name="first_contact" id="first_contact" class="form-control">
-						<option value="">--请选择--</option>
+						<option value="">--{{ trans('customer.please_choice') }}--</option>
 						@foreach($first_contact as $k => $v)
 							<option value="{{$v -> field_id}}" @if($omer -> first_contact==$v-> field_id) selected @endif>{{$v -> name}}</option>
 						@endforeach
@@ -201,7 +201,7 @@
 				<div class="form-group">
 					<label>{{ trans('customer.status_id') }}：</label>
 					<select name="status_id" id="status_id" class="form-control">
-						<option value="">--请选择--</option>
+						<option value="">--{{ trans('customer.please_choice') }}--</option>
 						@foreach($status_id as $k => $v)
 							<option value="{{$v -> field_id}}" @if($omer -> status_id==$v-> field_id) selected @endif>{{$v -> name}}</option>
 						@endforeach
@@ -212,7 +212,7 @@
 				<div class="form-group">
 					<label>{{ trans('customer.hous_id') }}：</label>
 					<select name="hous_id" id="hous_id" class="form-control">
-						<option value="">--请选择--</option>
+						<option value="">--{{ trans('customer.please_choice') }}--</option>
 						@foreach($hous_id as $k => $v)
 							<option value="{{$v -> hous_id}}" @if($omer -> hous_id==$v-> hous_id) selected @endif>{{$v -> name}}</option>
 						@endforeach

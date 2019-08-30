@@ -15,7 +15,7 @@
 				<div class="form-group">
 					{{--项目中文名称--}}
 					<label>{{ trans('field.name') }}：</label>
-					<input type="text" class="form-control" name="name" placeholder="请填写项目中文名称" id="name"
+					<input type="text" class="form-control" name="name" placeholder="{{ trans('field.please_name') }}" id="name"
 					       maxlength="50">
 				</div>
 				{{--项目英文名称--}}

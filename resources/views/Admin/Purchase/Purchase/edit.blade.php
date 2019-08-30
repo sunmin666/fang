@@ -25,14 +25,58 @@
                     <input type="hidden" value="{{$purchase -> cust_id}}" id="cust_id">
 
 
-
+                <div class="form-group" >
+                    {{--<label>{{ trans('buy.pay_num')}}：</label>--}}
+                    <label>{{ trans('buy.buildnums') }}：</label>
+                    <input type="text" class="form-control" readonly
+                           {{--onkeyup="value=value.replace(/[^\d.]/g,'')"--}}
+                           value="{{$purchase -> buildnums}}"
+                           name="buildnums" placeholder="请输入缴费金额" id="buildnums"
+                           maxlength="12">
+                </div>
+                <div class="form-group">
+                    {{--<label>{{ trans('buy.pay_num')}}：</label>--}}
+                    <label>{{ trans('buy.unitnums') }}：</label>
+                    <input type="text" class="form-control" readonly
+                           value="{{$purchase -> unitnums}}"
+                           {{--onkeyup="value=value.replace(/[^\d.]/g,'')"--}}
+                           name="unitnums" placeholder="请输入缴费金额" id="unitnums"
+                           maxlength="12">
+                </div>
+                <div class="form-group" >
+                    {{--<label>{{ trans('buy.pay_num')}}：</label>--}}
+                    <label>{{ trans('buy.roomnums') }}：</label>
+                    <input type="text" class="form-control" readonly
+                           value="{{$purchase -> roomnums}}"
+                           {{--onkeyup="value=value.replace(/[^\d.]/g,'')"--}}
+                           name="roomnums" placeholder="请输入缴费金额" id="roomnums"
+                           maxlength="12">
+                </div>
+                <div class="form-group" >
+                    {{--<label>{{ trans('buy.pay_num')}}：</label>--}}
+                    <label>{{ trans('buy.totals') }}：</label>
+                    <input type="text" class="form-control" readonly
+                           value="{{$purchase -> total}}"
+                           {{--onkeyup="value=value.replace(/[^\d.]/g,'')"--}}
+                           name="roomnums" placeholder="请输入缴费金额" id="roomnums"
+                           maxlength="12">
+                </div>
+                <div class="form-group" >
+                    {{--<label>{{ trans('buy.pay_num')}}：</label>--}}
+                    <label>{{ trans('buy.discounts') }}：</label>
+                    <input type="text" class="form-control" readonly
+                           value="{{$purchase -> discount}}"
+                           {{--onkeyup="value=value.replace(/[^\d.]/g,'')"--}}
+                           name="roomnums" placeholder="请输入缴费金额" id="roomnums"
+                           maxlength="12">
+                </div>
 
                 <div class="form-group">
                     <label>{{ trans('purchase.type') }}：</label>
                     <select name="pay_type" id="pay_type" class="form-control">
                         <option value="">--请选择--</option>
-                        <option value="0" @if($purchase ->type == 0) selected @endif >一次性付款</option>
-                        <option value="1" @if($purchase -> type == 1) selected @endif>按揭付款</option>
+                        <option value="0" @if($purchase ->type == 0) selected @endif >{{ trans('purchase.one_all') }}</option>
+                        <option value="1" @if($purchase -> type == 1) selected @endif>{{ trans('purchase.mortgage') }}</option>
                     </select>
                 </div>
                 {{--@if($purchase ->type == 0)--}}

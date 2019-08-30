@@ -64,8 +64,6 @@
                             <td>{{$value -> title}}</td>
                             <td>{{ $value -> name}}</td>
                             <td>{{date('Y-m-d H:i',$value -> created_at)}}</td>
-                            {{--<td>@if($value -> updated_at == '')暂无更新时间@else{{date('Y-m-d H:i',$value -> updated_at)}}@endif</td>--}}
-                            {{--<td><a href="{{URL::asset($value-> imgpath)}}" target="_blank"><img src="{{URL::asset($value-> imgpath)}}" style="width: 50px;height: 50px" alt=""></a></td>--}}
                             <td>
                                 <button type="button" value="{{$value -> cult_id}}" onclick="view({{$value -> cult_id}})"
                                         class="btn btn-warning btn-xs btn_edit" id="btn_edit"><i

@@ -12,9 +12,9 @@
 				<div class="form-group">
 					<label>{{ trans('buy.manager_verify_status') }}：</label>
 					<select name="manager_verify_status" id="manager_verify_status" class="form-control">
-						<option value="">--请选则--</option>
-						<option value="1">通过</option>
-						<option value="0">不通过</option>
+						<option value="">--{{ trans('buy.please_choice') }}--</option>
+						<option value="1">{{ trans('buy.adopt') }}</option>
+						<option value="0">{{ trans('buy.adopt_no') }}</option>
 
 					</select>
 				</div>

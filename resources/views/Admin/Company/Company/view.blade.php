@@ -24,23 +24,23 @@
 		<div><span>{{ trans('company.corporation') }}：</span>{{$company -> corporation}}</div>
 		<div><span>{{ trans('company.corp_idcard') }}：</span>{{$company -> corp_idcard}}</div>
 		<div><span>{{ trans('company.corp_mobile') }}：</span>{{$company -> corp_mobile}}</div>
-		<div><span>{{ trans('company.license') }}：</span><a href="{{$company-> license}}" target="_blank">点击查看</a></div>
+		<div><span>{{ trans('company.license') }}：</span><a href="{{$company-> license}}" target="_blank">{{ trans('company.click_show') }}</a></div>
 		<div><span>{{ trans('company.credit_code') }}：</span>{{$company -> credit_code}}</div>
 		<div><span>{{ trans('company.address') }}：</span>{{$company -> address}}</div>
 		<div><span>{{ trans('company.telphone') }}：</span>{{$company -> telphone}}</div>
 		<div><span>{{ trans('company.comp_type') }}：</span>
 			@if($company -> comp_type == 1)
-				个人独资
+				{{ trans('company.proprietorship') }}
 			@elseif($company -> comp_type == 2)
-				合伙企业
+				{{ trans('company.partnership') }}
 			@elseif($company -> comp_type == 3)
-				有限责任公司
+				{{ trans('company.finite') }}
 			@elseif($company -> comp_type == 4)
-				股份制公司
+				{{ trans('company.shares') }}
 			@elseif($company -> comp_type == 5)
-				集团公司
+				{{ trans('company.group') }}
 			@elseif($company -> comp_type == 6)
-				一人制公司
+				{{ trans('company.one_person') }}
 			@endif
 		</div>
 		<div><span>{{ trans('company.reg_capital') }}：</span>{{$company -> reg_capital}}万</div>
