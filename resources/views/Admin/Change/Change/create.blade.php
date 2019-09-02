@@ -330,6 +330,7 @@
 			} ,
 			success : function ( data ) {
 				console.log( data );
+
 				if ( data.code == {{config('myconfig.changeh.store_change_success_code')}}) {
 					layer.msg( data.msg , { time : 2000 } , function () {
 						window.parent.location.reload();

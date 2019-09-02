@@ -78,27 +78,28 @@
 							<td>{{$value-> unitnum_new}}</td>
 							<td>{{$value-> roomnum_new}}</td>
 							<td>
-								@if($value -> status == null)
-									经理未审核
-								@elseif($value -> status == 0)
+
+								@if($value -> status === 0)
 									经理审核未通过
-								@elseif($value -> status == 1)
+								@elseif($value -> status === 1)
 									经理审核通过
+								@else
+									经理未审核
 								@endif
 							</td>
 							<td>
-								@if($value -> verifytime == null)
+								@if($value -> verifytime === null)
 									经理未审核
 									@else
 									{{date('Y-m-d',$value -> verifytime)}}
 								@endif
 							</td>
 							<td>
-								@if($value -> status == null)
+								@if($value -> finance_status === null)
 									财务未审核
-								@elseif($value -> status == 0)
+								@elseif($value -> finance_status === 0)
 									财务审核未通过
-								@elseif($value -> status == 1)
+								@elseif($value -> finance_status === 1)
 									财务审核通过
 								@endif
 							</td>
@@ -111,14 +112,26 @@
 							</td>
 							<td>{{date('Y-m-d H:i',$value -> created_at)}}</td>
 							<td>
-								<button type="button" value="{{$value -> buyid}}" onclick="view({{$value -> buyid}})"
+
+								@if($value -> status === null)
+								<button type="button" value="{{$value -> chan_id}}" onclick="review({{$value -> chan_id}},{{$value -> new_homeid}})"
+								        class="btn btn-warning btn-xs btn_edit" id="btn_edit"><i
+										class="fa fa-edit"></i> {{ trans('buy.review') }}</button>
+								@endif
+								@if($value -> status == 1)
+									@if($value -> finance_status === null)
+								<button type="button" value="{{$value -> chan_id}}" onclick="cwview({{$value -> chan_id}},{{$value -> old_homeid}},{{$value -> new_homeid}})"
+								        class="btn btn-warning btn-xs btn_edit" id="btn_edit"><i
+										class="fa fa-edit"></i> {{ trans('buy.manager_verify_status') }}</button>
+										@endif
+								@endif
+								<button type="button" value="{{$value -> chan_id}}" onclick="view({{$value -> chan_id}})"
 								        class="btn btn-warning btn-xs btn_edit" id="btn_edit"><i
 										class="fa fa-edit"></i> {{trans('memberinfo.news_view')}}</button>
-
-								<button type="button" value="{{$value -> buyid}}" onclick="edit({{$value -> buyid}})"
+								<button type="button" value="{{$value -> chan_id}}" onclick="edit({{$value -> chan_id}})"
 								        class="btn btn-warning btn-xs btn_edit" id="btn_edit"><i
 										class="fa fa-edit"></i> {{trans('memberinfo.news_edits')}}</button>
-								<button type="button" value="{{$value -> buyid}}" onclick="d({{$value -> buyid}})"
+								<button type="button" value="{{$value -> chan_id}}" onclick="d({{$value -> chan_id}})"
 								        class="btn btn-warning btn-xs btn_delete"><i
 										class="fa fa-trash"></i> {{trans('memberinfo.news_delete')}} </button>
 							</td>
@@ -127,14 +140,13 @@
 					</tbody>
 				</table>
 			</div>
-			<!-- /.table-responsive -->
 		</div>
-		<!-- /.box-body -->
+
 		<div class="box-footer clearfix">
 			<a href="javascript:void(0)" class="btn btn-danger btn-xs pull-left select_all"><i
 					class="fa fa-trash"></i>{{ trans('memberinfo.select_all_delete') }}</a>
-			{{--<div class=" pull-right">{{$buy -> links()}}</div>--}}
-			{{--<input type="hidden" value="{{$buy -> count()}}" id="page_count">--}}
+			<div class=" pull-right">{{$change -> links()}}</div>
+			<input type="hidden" value="{{$change -> count()}}" id="page_count">
 		</div>
 	</div>
 @endsection
@@ -192,25 +204,29 @@
 				btn : ["{{trans('permission.confirm')}}" , "{{trans('permission.cancel')}}"]
 			} , function () {
 				$.ajax( {
-					url : '{{URL('buyinfoss/destroy_all')}}' ,
+					url : '{{URL('change_home/destroy_all')}}' ,
 					type : 'post' ,
 					data : {
-						'buyid' : vote ,
+						'chan_id' : vote ,
 						'_token' : "{{csrf_token()}}"
 					} ,
 					success : function ( data ) {
 						console.log( data );
-						if ( data.code == {{config('myconfig.buy.buy_delete_success_code')}} ) {
+						if(data.code == null){
+							window.location.href = '{{URL('permi')}}'
+						}
+
+						if ( data.code == {{config('myconfig.changeh.delete_success_change_code')}} ) {
 							layer.msg( data.msg , { time : 2000 } , function () {
 								if ( page_count == vote.length ) {
-									location.href = "{{URL('buyinfo/38')}}";
+									location.href = "{{URL('changeh/38')}}";
 								}
 								else {
 									window.location.reload();
 								}
 							} );
 						}
-						else if ( data.code == {{config('myconfig.buy.buy_delete_error_code')}} ) {
+						else if ( data.code == {{config('myconfig.changeh.delete_error_change_code')}} ) {
 							layer.msg( data.msg , { time : 2000 } );
 						}
 					} ,
@@ -227,40 +243,25 @@
 		} );
 
 
-		//添加
-		$( '#news_day' ).click( function () {
-			layer.open( {
-				type : 2 ,
-				title : '{{ trans('memberinfo.news_add') }}' ,
-				moveType : 0 ,
-				skin : 'layui-layer-demo' , //加上边框
-				closeBtn : 1 ,
-				area : ['50%' , '90%'] , //宽高
-				shadeClose : false ,
-				shade : 0.5 ,
-				content : ["{{URL('buyinfoss/create')}}"] ,
-				success : function ( layero , index ) {
-					$( ':focus' ).blur();
-				}
-			} );
-		} );
-
 		//删除信息
-		function d( buyid ) {
+		function d( chan_id ) {
 			var page_count = $( '#page_count' ).val();
 			layer.confirm( "{{trans('memberinfo.is_delete_info')}}" , {
 				btn : ["{{trans('memberinfo.confirm')}}" , "{{trans('memberinfo.cancel')}}"] //按钮
 			} , function () {
-				$.post( "{{URL('buyinfoss/destroy')}}" , { 'buyid' : buyid , '_token' : "{{csrf_token()}}" } ,
+				$.post( "{{URL('chang_home/destroy')}}" , { 'chan_id' : chan_id , '_token' : "{{csrf_token()}}" } ,
 					function ( data ) {
 						console.log( data );
-						if ( data.code == {{config('myconfig.buy.buy_delete_error_code')}} ) {
+						if(data.code == null){
+							window.location.href = '{{URL('permi')}}'
+						}
+						if ( data.code == {{config('myconfig.changeh.delete_error_change_code')}} ) {
 							layer.msg( data.msg , { time : 2000 } );
 						}
-						if ( data.code == {{config('myconfig.buy.buy_delete_success_code')}} ) {
+						if ( data.code == {{config('myconfig.changeh.delete_success_change_code')}} ) {
 							layer.msg( data.msg , { time : 1000 } , function () {
 								if ( page_count == 1 ) {
-									location.href = "{{URL('buyinfo/38')}}";
+									location.href = "{{URL('changeh/38')}}";
 								}
 								else {
 									window.location.reload();
@@ -307,7 +308,7 @@
 		}
 
 		//修改用户信息
-		function edit( buyid ) {
+		function edit( chan_id ) {
 			layer.open( {
 				type : 2 ,
 				title : '{{ trans('memberinfo.news_edits') }}' ,
@@ -317,7 +318,7 @@
 				area : ['50%' , '70%'] , //宽高
 				shadeClose : false ,
 				shade : 0.5 ,
-				content : ["{{URL('buyinfoss/edit')}}" + "/" + buyid] ,
+				content : ["{{URL('chang_home/edit')}}" + "/" + chan_id] ,
 				success : function ( layero , index ) {
 					$( ':focus' ).blur();
 				}
@@ -325,7 +326,9 @@
 		}
 
 		//查看详情
-		function view( buyid ) {
+		function view( chan_id ) {
+			// alert(chan_id);
+			// return false;
 			layer.open( {
 				type : 2 ,
 				title : '{{ trans('memberinfo.news_view') }}' ,
@@ -335,7 +338,7 @@
 				area : ['50%' , '70%'] , //宽高
 				shadeClose : false ,
 				shade : 0.5 ,
-				content : ["{{URL('buyinfoss/view')}}" + "/" + buyid] ,
+				content : ["{{URL('chang_home/view')}}" + "/" + chan_id] ,
 				success : function ( layero , index ) {
 					$( ':focus' ).blur();
 				}
@@ -343,7 +346,7 @@
 		}
 
 		//经理审核
-		function review(buyid,homeid){
+		function review(chan_id,new_homeid){
 			layer.open( {
 				type : 2 ,
 				title : '{{ trans('memberinfo.news_view') }}' ,
@@ -353,7 +356,7 @@
 				area : ['50%' , '70%'] , //宽高
 				shadeClose : false ,
 				shade : 0.5 ,
-				content : ["{{URL('buyinfoss/review')}}" + "/" + buyid + "/"+ homeid] ,
+				content : ["{{URL('change_home/review')}}" + "/" + chan_id + "/"+ new_homeid ] ,
 				success : function ( layero , index ) {
 					$( ':focus' ).blur();
 				}
@@ -361,7 +364,7 @@
 		}
 
 		//财务审核
-		function cwview(buyid,homeid){
+		function cwview(chan_id,old_homeid,new_homeid){
 			layer.open( {
 				type : 2 ,
 				title : '{{ trans('memberinfo.news_view') }}' ,
@@ -371,48 +374,12 @@
 				area : ['50%' , '70%'] , //宽高
 				shadeClose : false ,
 				shade : 0.5 ,
-				content : ["{{URL('buyinfoss/cwview')}}" + "/" + buyid + "/"+ homeid] ,
+				content : ["{{URL('change_home/cwview')}}" + "/" + chan_id + "/"+ old_homeid + "/" + new_homeid] ,
 				success : function ( layero , index ) {
 					$( ':focus' ).blur();
 				}
 			} );
 		}
 
-		//办理签约
-		function signinfo(buyid){
-			layer.open( {
-				type : 2 ,
-				title : '{{ trans('memberinfo.trackinfo') }}' ,
-				moveType : 0 ,
-				skin : 'layui-layer-demo' , //加上边框
-				closeBtn : 1 ,
-				area : ['50%' , '70%'] , //宽高
-				shadeClose : false ,
-				shade : 0.5 ,
-				content : ["{{URL('buyinfo/signinfo')}}" + "/" + buyid] ,
-				success : function ( layero , index ) {
-					$( ':focus' ).blur();
-				}
-			} );
-		}
-
-
-
-		function change_home(buyid,homeid){
-			layer.open( {
-				type : 2 ,
-				title : '{{ trans('memberinfo.trackinfo') }}' ,
-				moveType : 0 ,
-				skin : 'layui-layer-demo' , //加上边框
-				closeBtn : 1 ,
-				area : ['50%' , '70%'] , //宽高
-				shadeClose : false ,
-				shade : 0.5 ,
-				content : ["{{URL('chang/home')}}" + "/" + buyid + "/" + homeid] ,
-				success : function ( layero , index ) {
-					$( ':focus' ).blur();
-				}
-			} );
-		}
 	</script>
 @endpush

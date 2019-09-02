@@ -11,6 +11,7 @@
 
 	class ChaneController extends SessionController {
 
+		//换房展示页面
 		public function index($perid){
 			$data = $this -> session();
 			$data['per_menu'] = $this -> get_per();
@@ -43,6 +44,7 @@
 			return view( 'Admin.Change.Change.create' )->with( $data );
 		}
 
+		//换房新增信息
 		public function store( Request $query )
 		{
 			$validator = Validator::make($query -> all(),[
@@ -57,8 +59,8 @@
 			}
 
 			$data['cust_id'] = $query -> input('cust_id');
-			$data['old_homeid'] = $query -> input('old_homeid');
-			$data['new_homeid'] = $query -> input('new_homeid');
+			$data['old_homeid'] = $query -> input('old_homeid');   //老房源id
+			$data['new_homeid'] = $home_id = $query -> input('new_homeid');   //新房源id
 			$data['remarks'] = $query -> input('remarks');
 			$data['buyid'] = $query -> input('buyid');
 			$data['type'] = $query -> input('type');
@@ -67,9 +69,12 @@
 			$change = Change::store_changinfo($data);
 
 			if($change){
+				//更改新房源状态信息
+				$a = Change::update_home($home_id);
 				return [
 					'code'    => config('myconfig.changeh.store_change_success_code'),
-					'msg'    => config('myconfig.changeh.store_change_success_msg')
+					'msg'    => config('myconfig.changeh.store_change_success_msg'),
+					'sss' => $a
 				];
 			}else{
 				return [
@@ -77,7 +82,168 @@
 					'msg'   => config('myconfig.changeh.store_change_error_msg')
 				];
 			}
+		}
+
+		//查看详情
+		public function view($chan_id){
+			$data['chang_home'] = Change::get_d_changeinfo($chan_id);
+//			dd($data);
+			return view('Admin.change.change.view') -> with($data);
+		}
+
+		//修改信息详情
+		public function edit($chan_id){
+			$data['chang_home'] = Change::get_d_changeinfo($chan_id);
+//			dd($data);
+			return view('Admin.change.change.edit') -> with($data);
+		}
+
+
+
+		//更新换房信息
+		public function update(Request $query){
+			$chan_id = $query -> input('chan_id');
+			$data['remarks'] = $query -> input('remarks');
+
+			$update = Change::update_changeinfo($chan_id,$data);
+
+			if($update){
+				return [
+					'code'    => config('myconfig.changeh.update_success_change_code'),
+					'msg'     => config('myconfig.changeh.update_success_change_msg')
+				];
+			}else{
+				return [
+					'code'    => config('myconfig.changeh.update_error_change_code'),
+					'msg'     => config('myconfig.changeh.update_error_change_msg')
+				];
+			}
+		}
+
+		//删除信息
+		public function destroy(Request $query){
+			$chan_id = (int)$query -> input('chan_id');
+
+			$delete = Change::delete_d_change($chan_id);
+
+			if($delete){
+				return [
+					'code'    => config('myconfig.changeh.delete_success_change_code'),
+					'msg'     => config('myconfig.changeh.delete_success_change_msg')
+				];
+			}else{
+				return [
+					'code'    => config('myconfig.changeh.delete_error_change_code'),
+					'msg'     => config('myconfig.changeh.delete_error_change_msg')
+				];
+			}
 
 		}
+
+		//多选删除
+		public function destroy_all(Request $query){
+			$chan_id = $query -> input('chan_id');
+
+			$delete = Change::delete_all_changeingo($chan_id);
+
+			if($delete){
+				return [
+					'code'    => config('myconfig.changeh.delete_success_change_code'),
+					'msg'     => config('myconfig.changeh.delete_success_change_msg')
+				];
+			}else{
+				return [
+					'code'    => config('myconfig.changeh.delete_error_change_code'),
+					'msg'     => config('myconfig.changeh.delete_error_change_msg')
+				];
+			}
+
+		}
+
+
+		//经理审核页面
+		public function review($chan_id,$new_homeid){
+			$data['chan_id'] = $chan_id;
+			$data['new_homeid'] = $new_homeid;
+			return view('Admin.Change.Change.review') -> with($data);
+
+		}
+
+		//经理审核
+		public function update_review(Request $query){
+			$chan_id = $query -> input('chan_id');
+			$data['status'] = $status = $query -> input('status');
+			$data['verify_remarks'] = $query -> input('verify_remarks');
+			$data['verifytime'] = time();
+
+			$update_re = Change::update_re_change($chan_id,$data);
+
+			if($update_re){
+					if($status == 0){
+						$new_homeid = $query ->input('new_homeid');
+						Change::update_homeinfo($new_homeid);
+						return [
+							'code'          => config('myconfig.buy.buy_review_successe_code'),
+							'msg'           => config('myconfig.buy.buy_review_successe_msg'),
+						];
+					}else{
+						return [
+							'code'          => config('myconfig.buy.buy_review_success_code'),
+							'msg'           => config('myconfig.buy.buy_review_success_msg'),
+						];
+					}
+			}else{
+				return [
+					'code'          => config('myconfig.buy.buy_review_error_code'),
+					'msg'           => config('myconfig.buy.buy_review_error_msg'),
+				];
+			}
+
+		}
+
+
+		//财务审核
+		public function cwview($chan_id,$old_homeid,$new_homeid){
+			$data['chan_id'] = $chan_id;
+			$data['old_homeid'] = $old_homeid;
+			$data['new_homeid'] = $new_homeid;
+			return view('Admin.Change.Change.cwview') -> with($data);
+		}
+
+//财务审核
+		public function update_cwview(Request $query){
+			$chan_id = $query -> input('chan_id');
+			$data['finance_status'] = $status = $query -> input('finance_status');
+			$data['finance_remarks'] = $query -> input('finance_remarks');
+			$data['finance_time'] = time();
+
+			$update_cw = Change::update_re_change($chan_id,$data);
+
+			if($update_cw){
+				if($status == 0){
+					$new_homeid = $query ->input('new_homeid');
+					Change::update_homeinfo($new_homeid);
+					return [
+						'code'          => config('myconfig.buy.buy_cwview_successe_code'),
+						'msg'           => config('myconfig.buy.buy_cwview_successe_msg'),
+					];
+				}else{
+					$old_homeid = $query -> input('old_homeid');   //老房子
+					Change::update_homeinfo($old_homeid);
+					return [
+						'code'          => config('myconfig.buy.buy_cwview_success_code'),
+						'msg'           => config('myconfig.buy.buy_cwview_success_msg'),
+					];
+				}
+			}else{
+				return [
+					'code'          => config('myconfig.buy.buy_cwview_error_code'),
+					'msg'           => config('myconfig.buy.buy_cwview_error_msg'),
+				];
+			}
+
+		}
+
+
 
 	}
