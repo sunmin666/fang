@@ -22,7 +22,7 @@ class ChangecustController extends SessionController
         $page = config('myconfig.config.page_num');
         $data['ids'] = $perid;
         $data['changecust'] = Changecust::get_all_changecust($page);
-
+        //dd($data['changecust']);
         //dd($data['changecust']);
         return view('Admin/Changecust/Changecust/index')->with($data);
     }
@@ -60,13 +60,13 @@ class ChangecustController extends SessionController
         $store = Changecust::store_changecust($data);
         if($store){
             return [
-                'code'   => config('myconfig.changecust.changecust_destroy_success_code'),
-                'msg'    => config('myconfig.changecust.changecust_destroy_success_msg')
+                'code'   => config('myconfig.changecust.changecust_store_success_code'),
+                'msg'    => config('myconfig.changecust.changecust_store_success_msg')
             ];
         }else{
             return [
-                'code'   => config('myconfig.changecust.changecust_destroy_error_code'),
-                'msg'    => config('myconfig.changecust.changecust_destroy_error_msg')
+                'code'   => config('myconfig.changecust.changecust_store_error_code'),
+                'msg'    => config('myconfig.changecust.changecust_store_error_msg')
             ];
         }
     }
@@ -75,6 +75,7 @@ class ChangecustController extends SessionController
     public function edit($chan_id)
     {
         $data['changecust'] = Changecust::edit_d_show($chan_id);
+        //dd($data['changecust']);
         $data['newname'] = Changecust::get_all_name();
         //dd($data['changecust'] );
         return view('Admin/Changecust/Changecust/edit')->with($data);
@@ -115,4 +116,97 @@ class ChangecustController extends SessionController
             ];
         }
     }
+
+    //详情
+    public function view($chan_id)
+    {
+        $data['changecust'] = Changecust::edit_d_show($chan_id);
+        $data['newname'] = Changecust::get_all_name();
+        return view('Admin/Changecust/Changecust/view')->with($data);
+    }
+
+    //删除单条
+    public function del(Request $query)
+    {
+        $chan_id = $query ->input('chan_id');
+        $del= Changecust::del_d_delete($chan_id);
+        if($del){
+            return [
+                'code'   => config('myconfig.changecust.changecust_del_success_code'),
+                'msg'    => config('myconfig.changecust.changecust_del_success_msg')
+            ];
+        }else{
+            return [
+                'code'   => config('myconfig.changecust.changecust_del_error_code'),
+                'msg'    => config('myconfig.changecust.changecust_del_error_msg')
+            ];
+        }
+    }
+
+    //全选删除
+    public function destroy_all(Request $query)
+    {
+        $all_id = $query -> input('all_id');
+        $delete = Changecust::del_all_delete($all_id);
+        if($delete){
+            return [
+                'code'   => config('myconfig.changecust.changecust_del_success_code'),
+                'msg'    => config('myconfig.changecust.changecust_del_success_msg')
+            ];
+        }else{
+            return [
+                'code'   => config('myconfig.changecust.changecust_del_error_code'),
+                'msg'    => config('myconfig.changecust.changecust_del_error_msg')
+            ];
+        }
+    }
+
+    //经理审核页面
+    public function review($chan_id,$new_cust,$buyid)
+    {
+        $data['chan_id'] = $chan_id;
+        $data['new_cust'] = $new_cust;
+        $data['buyid'] = $buyid;
+        return view('Admin/Changecust/Changecust/review')->with($data);
+    }
+
+    //经理审核
+    public function update_review(Request $query)
+    {
+        $validator = Validator::make($query -> all(),[
+            'remarks'  => 'min:5|max:255',
+        ]);
+
+        if($validator -> errors() -> get('verify_remarks')){
+            return [
+                'code'          => config('myconfig.changecust.remarks_code'),
+                'msg'          => config('myconfig.changecust.remarks_msg'),
+            ];
+        }
+        $chan_id = $query ->input('chan_id');
+        $data['status'] = $query -> input('status');
+        $data['verify_remarks'] = $query -> input('verify_remarks');
+        $data['verifytime'] = time();
+        $review = Changecust::update_review($chan_id,$data);
+        if($review){
+           if($data['status'] == 1){
+               //更改用户名
+               Changecust::update_buyinfo_name($query ->input('buyid'),$query ->input('new_cust'));
+               return [
+                   'code'          => config('myconfig.changecust.changecust_review_success_code'),
+                   'msg'           => config('myconfig.changecust.changecust_review_success_msg'),
+               ];
+           }else{
+               return [
+                   'code'          => config('myconfig.changecust.changecust_review_successe_code'),
+                   'msg'           => config('myconfig.changecust.changecust_review_successe_msg'),
+               ];
+           }
+        }else{
+            return [
+                'code'   => config('myconfig.changecust.changecust_review_error_code'),
+                'msg'    => config('myconfig.changecust.changecust_review_error_msg')
+            ];
+        }
+   }
 }

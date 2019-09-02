@@ -38,6 +38,10 @@
 
                         {{--客户姓名--}}
                         <th>{{ trans('payloginfo.cust_id') }}</th>
+                        {{--认购编号--}}
+                        <th>{{ trans('payloginfo.subscription_num') }}</th>
+                        {{--类型--}}
+                        <th>{{ trans('payloginfo.type') }}</th>
                         {{--缴费金额--}}
                         <th>{{ trans('payloginfo.money') }}</th>
                         {{--缴费备注--}}
@@ -56,11 +60,22 @@
                                        value="{{$v->payl_id}}"
                                 ></td>
                             <td>{{ $v -> realname}}</td>
+                            <td>{{ $v -> subscription_num}}</td>
+                            <td>@if($v-> type == 1)
+                                    定金
+                                @elseif($v-> type == 2)
+                                    一次性付款
+                                @else
+                                    按揭支付
+                                @endif
+                            </td>
                             <td>{{ $v -> money}}</td>
+
+
                             <td>{{ $v -> remarks}}</td>
                             <td>{{date('Y-m-d H:i',$v -> created_at)}}</td>
                             <td>
-                                <button type="button" value="{{$v->payl_id}}" onclick="view({{$v->payl_id}})"
+                                <button type="button" value="{{$v->payl_id}}" onclick="view({{$v->payl_id}},{{$v->subscription_num}})"
                                         class="btn btn-warning btn-xs btn_edit" id="btn_edit"><i
                                             class="fa fa-edit"></i> {{trans('memberinfo.news_view')}}</button>
                                 <button type="button" value="{{$v->payl_id}}" onclick="edit({{$v->payl_id}})"
@@ -242,17 +257,17 @@
         }
 
         //查看详情
-        function view( payl_id ) {
+        function view( payl_id,subscription_num ) {
             layer.open( {
                 type : 2 ,
                 title : '{{ trans('memberinfo.news_view') }}' ,
                 moveType : 0 ,
                 skin : 'layui-layer-demo' , //加上边框
                 closeBtn : 1 ,
-                area : ['50%' , '40%'] , //宽高
+                area : ['50%' , '60%'] , //宽高
                 shadeClose : false ,
                 shade : 0.5 ,
-                content : ["{{URL('payloginfo/view')}}" + "/" + payl_id] ,
+                content : ["{{URL('payloginfo/view')}}" + "/" + payl_id +"/" +subscription_num] ,
                 success : function ( layero , index ) {
                     $( ':focus' ).blur();
                 }

@@ -233,6 +233,7 @@ class HomeController extends SessionController
 	//修改页面展示状态
 	public function update_s($homeid){
 		$data['home'] = Home::view_d_home($homeid);
+		//dd($data['home']);
 		return view('Admin/Home/Homegrp/update') -> with($data);
 	}
 

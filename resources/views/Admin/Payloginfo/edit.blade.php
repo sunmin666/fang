@@ -18,9 +18,27 @@
                                placeholder="请输客户姓名" id="realname"
                                onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'') "
                                value="{{$payedit->realname}}"
-                               maxlength="15" readonly="readonly">
+                               maxlength="15" disabled="disabled">
                         <input type="hidden" value="{{$payedit -> cust_id}}" id="cust_id">
 
+                </div>
+                <div class="form-group">
+                    {{--认购编号--}}
+                    <label>{{ trans('payloginfo.subscription_num') }}：</label>
+
+                    <input type="text" class="form-control" name="realname"
+                           id="subscription_num"
+                           onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'') "
+                           value="{{$payedit->subscription_num}}"
+                           maxlength="15" disabled="disabled" >
+                </div>
+                <div class="form-group">
+                    <label>{{ trans('payloginfo.type') }}：</label>
+                    <select name="pay_type" id="pay_type" class="form-control" disabled="disabled">
+                        <option value="1" @if($payedit ->type == 1) selected @endif >定金</option>
+                        <option value="2" @if($payedit -> type == 2) selected @endif>一次性付款</option>
+                        <option value="3" @if($payedit -> type == 3) selected @endif>按揭付款</option>
+                    </select>
                 </div>
                 {{--缴费金额--}}
                 <div class="form-group">

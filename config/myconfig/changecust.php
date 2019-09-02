@@ -28,5 +28,13 @@ return [
     'remarks_code'      => '7',
     'remarks_msg'       => '备注信息不符合要求',
 
+    'changecust_review_success_code'   => '8',
+    'changecust_review_success_msg'    => '经理审核通过',
+
+    'changecust_review_successe_code'   => '10',
+    'changecust_review_successe_msg'   => '经理审核不通过',
+
+    'changecust_review_error_code'    => '9',
+    'changecust_review_error_msg'     => '审核失败',
 
 ];

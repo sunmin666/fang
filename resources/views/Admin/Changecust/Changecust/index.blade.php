@@ -52,6 +52,16 @@
                         <th>{{ trans('changecust.roomnums') }}</th>
                         {{--更名备注--}}
                         <th>{{ trans('changecust.remarks') }}</th>
+                        {{--销售经理审核状态--}}
+                        <th>{{ trans('changecust.mnager_status') }}</th>
+                        {{--销售经理审核时间--}}
+                        <th>{{ trans('changecust.mnager_status_time') }}</th>
+                        {{--销售经理审核备注--}}
+                        <th>{{ trans('changecust.adopt_verify_remarks') }}</th>
+                        {{--财务审核状态--}}
+                        {{--<th>{{ trans('changecust.audit_status') }}</th>--}}
+                        {{--财务时间--}}
+                        {{--<th>{{ trans('changecust.audit_status_time') }}</th>--}}
                         {{--操作--}}
                         <th>{{ trans('changecust.operating') }}</th>
                     </tr>
@@ -69,8 +79,33 @@
                             <td>{{ $v -> unitnums}}</td>
                             <td>{{$v -> roomnums}}</td>
                             <td>{{$v -> remarks}}</td>
-                            <td>{{date('Y-m-d H:i',$v -> created_at)}}</td>
+                            <td>@if($v->status == '')
+                                    未审核
+                                @elseif($v->status == 1)
+                                    审核已通过
+                                @else
+                                    审核未通过
+                                @endif
+                            </td>
+                            <td>@if($v->verifytime == '')
+                                    未审核
+                               @else
+                                    {{date('Y-m-d H:i:s',$v -> verifytime)}}
+                                @endif
+                            </td>
+                            <td>@if($v->verify_remarks == '')
+                                    未审核
+                                @else
+                                    {{$v -> verify_remarks}}
+                                @endif
+                            </td>
                             <td>
+                                {{--经理审核按钮--}}
+                                @if($v->status == '')
+                                <button type="button" value="{{$v->chan_id}}" onclick="mnager({{$v->chan_id}},{{$v -> new_cust}},{{$v -> buyid}})"
+                                        class="btn btn-warning btn-xs btn_edit" id="btn_edit"><i
+                                            class="fa fa-edit"></i> {{trans('changecust.mnager')}}</button>
+                                @endif
                                 <button type="button" value="{{$v->chan_id}}" onclick="view({{$v->chan_id}})"
                                         class="btn btn-warning btn-xs btn_edit" id="btn_edit"><i
                                             class="fa fa-edit"></i> {{trans('memberinfo.news_view')}}</button>
@@ -80,6 +115,7 @@
                                 <button type="button" value="{{$v->chan_id}}" onclick="d({{$v->chan_id}})"
                                         class="btn btn-warning btn-xs btn_delete"><i
                                             class="fa fa-trash"></i> {{trans('memberinfo.news_delete')}} </button>
+
                             </td>
                         </tr>
                     @endforeach
@@ -151,7 +187,7 @@
                 btn : ["{{trans('permission.confirm')}}" , "{{trans('permission.cancel')}}"]
             } , function () {
                 $.ajax( {
-                    url : '{{URL('trackinfo/destroy_all')}}' ,
+                    url : '{{URL('changecust/destroy_all')}}' ,
                     type : 'post' ,
                     data : {
                         'all_id' : vote,
@@ -159,17 +195,17 @@
                     } ,
                     success : function ( data ) {
                         console.log( data );
-                        if ( data.code == {{config('myconfig.trackinfo.trackinfo_del_success_code')}} ) {
+                        if ( data.code == {{config('myconfig.changecust.changecust_del_success_code')}} ) {
                             layer.msg( data.msg , { time : 2000 } , function () {
                                 if ( page_count == vote.length ) {
-                                    location.href = "{{URL('trackinfo/37')}}";
+                                    location.href = "{{URL('changecust/48')}}";
                                 }
                                 else {
                                     window.location.reload();
                                 }
                             } );
                         }
-                        else if ( data.code == {{config('myconfig.trackinfo.trackinfo_del_error_code')}} ) {
+                        else if ( data.code == {{config('myconfig.changecust.changecust_del_error_code')}} ) {
                             layer.msg( data.msg , { time : 2000 } );
                         }
                     } ,
@@ -205,21 +241,21 @@
         {{--}--}}
 
         //删除信息
-        function d( trackid ) {
+        function d( chan_id ) {
             var page_count = $( '#page_count' ).val();
             layer.confirm( "{{trans('memberinfo.is_delete_info')}}" , {
                 btn : ["{{trans('memberinfo.confirm')}}" , "{{trans('memberinfo.cancel')}}"] //按钮
             } , function () {
-                $.post( "{{URL('trackinfo/del')}}" , { 'trackid' : trackid , '_token' : "{{csrf_token()}}" } ,
+                $.post( "{{URL('changecust/del')}}" , { 'chan_id' : chan_id , '_token' : "{{csrf_token()}}" } ,
                         function ( data ) {
                             console.log( data );
-                            if ( data.code == {{config('myconfig.trackinfo.trackinfo_del_error_code')}} ) {
+                            if ( data.code == {{config('myconfig.changecust.changecust_del_error_code')}} ) {
                                 layer.msg( data.msg , { time : 2000 } );
                             }
-                            if ( data.code == {{config('myconfig.trackinfo.trackinfo_del_success_code')}} ) {
+                            if ( data.code == {{config('myconfig.changecust.changecust_del_success_code')}} ) {
                                 layer.msg( data.msg , { time : 1000 } , function () {
                                     if ( page_count == 1 ) {
-                                        location.href = "{{URL('trackinfo/37')}}";
+                                        location.href = "{{URL('changecust/48')}}";
                                     }
                                     else {
                                         window.location.reload();
@@ -253,7 +289,7 @@
         }
 
         //查看详情
-        function view( trackid ) {
+        function view( chan_id ) {
             layer.open( {
                 type : 2 ,
                 title : '{{ trans('memberinfo.news_view') }}' ,
@@ -263,12 +299,29 @@
                 area : ['50%' , '70%'] , //宽高
                 shadeClose : false ,
                 shade : 0.5 ,
-                content : ["{{URL('trackinfo/view')}}" + "/" + trackid] ,
+                content : ["{{URL('changecust/view')}}" + "/" + chan_id] ,
                 success : function ( layero , index ) {
                     $( ':focus' ).blur();
                 }
             } );
         }
 
+        //经理审核
+        function mnager(chan_id,new_cust,buyid){
+            layer.open( {
+                type : 2 ,
+                title : '{{ trans('memberinfo.news_view') }}' ,
+                moveType : 0 ,
+                skin : 'layui-layer-demo' , //加上边框
+                closeBtn : 1 ,
+                area : ['50%' , '70%'] , //宽高
+                shadeClose : false ,
+                shade : 0.5 ,
+                content : ["{{URL('changecust/review')}}" + "/" + chan_id + "/" + new_cust + "/" + buyid] ,
+                success : function ( layero , index ) {
+                    $( ':focus' ).blur();
+                }
+            } );
+        }
     </script>
     @endpush

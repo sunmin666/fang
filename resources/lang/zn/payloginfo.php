@@ -29,4 +29,8 @@ return [
     'page_detail'   =>'缴费记录管理',
 
     'operating'     =>'操作',
+
+    'subscription_num' => '认购编号',
+
+    'type' => '类型',
 ];

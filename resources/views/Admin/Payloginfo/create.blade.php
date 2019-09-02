@@ -21,6 +21,27 @@
                         <input type="hidden" value="{{$v -> cust_id}}" id="cust_id">
                     @endforeach
                 </div>
+                {{--认购编号--}}
+                <div class="form-group">
+                    <label>{{ trans('payloginfo.subscription_num') }}：</label>
+                    <select name="subscription_num" id="subscription_num" class="form-control">
+                        <option value="">--请选择--</option>
+                        @foreach($subscription_num as $kk => $vv)
+                            <option value="{{$vv -> buy_number}}">{{$vv -> buy_number}}</option>
+                        @endforeach
+                    </select>
+                </div>
+
+                {{--类型--}}
+                <div class="form-group">
+                    <label>{{ trans('payloginfo.type') }}：</label>
+                    <select name="type" id="type" class="form-control">
+                            <option value="">--请选择--</option>
+                            <option value="1">定金</option>
+                            <option value="2">一次性付款</option>
+                            <option value="3">按揭付款</option>
+                    </select>
+                </div>
                 {{--缴费金额--}}
                 <div class="form-group">
                     <label>{{ trans('payloginfo.money') }}：</label>
@@ -60,11 +81,14 @@
         var cust_id = $( '#cust_id' ).val();        //客户姓名
         var money = $( '#money' ).val();        //缴费金额
         var remarks = $( '#remarks' ).val();      //缴费备注
+        var subscription_num = $('#subscription_num').val();
+        var type = $('#type').val();
 
         var regEn = {{config('myconfig.config.regEn')}};
         var regCn = {{config('myconfig.config.regCn')}};
 
-        if ( cust_id == '' || money == '' || remarks == ''
+        if ( cust_id == '' || money == '' || remarks == '' || subscription_num =='' ||
+            type ==''
         ) {
             layer.msg( '{{trans('payloginfo.text_content1')}}' , { time : 1235 } );
             $( "#store1" ).attr( 'disabled' , false );
@@ -91,6 +115,8 @@
                 cust_id : cust_id ,         //客户姓名
                 money : money ,         //缴费金额
                 remarks : remarks ,        //缴费备注
+                subscription_num : subscription_num, //认购编号
+                type : type,    //类型
                 _token : "{{csrf_token()}}"             //post提交token验证
             } ,
             success : function ( data ) {

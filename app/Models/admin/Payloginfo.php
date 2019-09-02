@@ -54,4 +54,29 @@ class Payloginfo extends Model
     {
         return DB::table('payloginfo') ->whereIn('payl_id',$payl_id) ->delete();
     }
+
+    //查询每个用户下房子的编号
+    public static function get_buyinfo($cust_id)
+    {
+        return DB::table('buyinfo') -> where('cust_id','=',$cust_id)->get();
+    }
+
+
+    //查找房源id
+    public static function get_home($buy_number){
+        return DB::table('buyinfo') -> select('homeid') -> where('buy_number','=',$buy_number) -> first();
+    }
+
+
+    //查看房源信息详情
+    public static function get_d_homrinfo($homeid){
+        return DB::table('homeinfo')
+            ->select( 'homeinfo.*' , 'fieldinfob.name as buildnums' , 'fieldinfou.name as unitnums' , 'fieldinfor.name as roomnums' )
+            ->leftJoin( 'fieldinfo as fieldinfob' , 'homeinfo.buildnum' , '=' , 'fieldinfob.field_id' )
+            ->leftJoin( 'fieldinfo as fieldinfou' , 'homeinfo.unitnum' , '=' , 'fieldinfou.field_id' )
+            ->leftJoin( 'fieldinfo as fieldinfor' , 'homeinfo.roomnum' , '=' , 'fieldinfor.field_id' )
+            ->where('homeinfo.homeid','=',$homeid)
+            ->first();
+    }
+
 }

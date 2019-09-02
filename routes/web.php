@@ -536,7 +536,7 @@
 		//缴费记录更新数据
 		Route::post('payloginfo/destroy','Admin\Payloginfo\PayloginfoController@destroy');
 		//查看详情
-		Route::get('payloginfo/view/{payl_id}','Admin\Payloginfo\PayloginfoController@view');
+		Route::get('payloginfo/view/{payl_id}/{subscription_num}','Admin\Payloginfo\PayloginfoController@view');
 		//缴费记录删除单条
 		Route::post('payloginfo/del','Admin\Payloginfo\PayloginfoController@del');
 		//缴费记录删除多条
@@ -627,9 +627,16 @@
 		Route::get('changecust/edit/{chan_id}','Admin\Changecust\ChangecustController@edit');
 		//更名更新数据
 		Route::post('changecust/destroy','Admin\Changecust\ChangecustController@destroy');
-
-
-
+		//更名详情
+		Route::get('changecust/view/{chan_id}','Admin\Changecust\ChangecustController@view');
+		//删除单条
+		Route::post('changecust/del','Admin\Changecust\ChangecustController@del');
+		//更名全选删除
+		Route::post('changecust/destroy_all','Admin\Changecust\ChangecustController@destroy_all');
+		//经理审核页面
+		Route::get('changecust/review/{chan_id}/{new_cust}/{buyid}','Admin\Changecust\ChangecustController@review');
+		//经理审核
+		Route::post('changecust/update_review','Admin\Changecust\ChangecustController@update_review');
 
 
 	});

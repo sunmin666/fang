@@ -75,4 +75,29 @@ class Changecust extends Model
     {
         return DB::table('changeinfo') -> where('changeinfo.chan_id','=',$chan_id)->update($data);
     }
+
+    //删除单条
+    public static function del_d_delete($chan_id)
+    {
+        return DB::table('changeinfo') -> where('changeinfo.chan_id','=',$chan_id)->delete();
+    }
+
+    //全选删除
+    public static function del_all_delete($all_id)
+    {
+        return DB::table('changeinfo') -> whereIn('changeinfo.chan_id',$all_id) -> delete();
+    }
+
+    //经理审核
+    public static function update_review($chan_id,$data)
+    {
+        return DB::table('changeinfo') -> where('chan_id','=',$chan_id) -> update($data);
+    }
+
+//    //通过审核修改用户
+    public static function update_buyinfo_name($buyid,$new_cust)
+    {
+        return DB::table('buyinfo')-> where('buyid','=',$buyid) -> update(array('cust_id'=>$new_cust));
+
+    }
 }

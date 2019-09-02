@@ -30,6 +30,7 @@ class PayloginfoController extends SessionController
     public function show_cowner($cust_id)
     {
         $data['name'] = Payloginfo::get_customer($cust_id);
+        $data['subscription_num'] = Payloginfo::get_buyinfo($cust_id);
         return view('Admin/Payloginfo/create') ->with($data);
     }
 
@@ -49,6 +50,8 @@ class PayloginfoController extends SessionController
         $data['cust_id'] = $query -> input('cust_id');
         $data['money']  = $query -> input('money');
         $data['remarks']  = $query -> input('remarks');
+        $data['subscription_num']  = $query -> input('subscription_num');
+        $data['type']  = $query -> input('type');
         $data['created_at'] = time();
         $pay=Payloginfo::store_pay($data);
         if($pay){
@@ -103,9 +106,15 @@ class PayloginfoController extends SessionController
     }
 
     //缴费记录详情
-    public function view($payl_id)
+    public function view($payl_id,$subscription_num)
     {
         $data['payedit'] = Payloginfo::get_d_pay($payl_id);
+
+        $homeid = Payloginfo::get_home($subscription_num);
+
+        $data['home'] = Payloginfo::get_d_homrinfo($homeid -> homeid);
+
+        //dd($data['home']);
         return view('Admin/Payloginfo/view') ->with($data);
     }
 
