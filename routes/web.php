@@ -178,6 +178,17 @@
 		//签约财务审核
 		Route::post('signinfo/update_cwview','Admin\Signinfo\SigninfoController@update_cwview');
 
+
+		//换房信息
+		//换房新增
+		Route::post('change_home/store','Admin\Change\ChaneController@store');
+		//换房修改页面
+		Route::post('change_home/update','Admin\Change\ChaneController@update');
+		//换房经理审核
+		Route::post('change_home/update_review','Admin\Change\ChaneController@update_review');
+		//换房时财务审核
+		Route::post('change_home/update_cwview','Admin\Change\ChaneController@update_cwview');
+
 	});
 
 
@@ -611,9 +622,19 @@
 
 		//换房页面
 		Route::get('chang/home/{buyid}/{homeid}','Admin\Change\ChaneController@create');
-		//换房新增
-		Route::post('change_home/store','Admin\Change\ChaneController@store');
 
+		//换房详情页面
+		Route::get('chang_home/view/{chan_id}','Admin\Change\ChaneController@view');
+		//换房页面修改信息
+		Route::get('chang_home/edit/{chan_id}','Admin\Change\ChaneController@edit');
+		//删除信息
+		Route::post('chang_home/destroy','Admin\Change\ChaneController@destroy');
+		//多选删除
+		Route::post('change_home/destroy_all','Admin\Change\ChaneController@destroy_all');
+		//经理审核页面
+		Route::get('change_home/review/{chan_id}/{new_homeid}','Admin\Change\ChaneController@review');
+		//换房时财务审核
+		Route::get('change_home/cwview/{chan_id}/{old_homeid}/{new_homeid}','Admin\Change\ChaneController@cwview');
 
 
 

@@ -227,7 +227,7 @@
 		var regCn = {{config('myconfig.config.regCn')}};
 
 		if ( buildnum == '' || unitnum == '' || roomnum == '' || floor == '' || build_area == ''
-			|| n_img == '' ||  house_str == '' || price == '' || discount == '' || status == '' || buyid == '' || remarks == ''
+			|| n_img == '' ||  house_str == '' || price == '' || discount == '' || status == '' ||  remarks == ''
 		) {
 			layer.msg( '{{trans('company.text_content1')}}' , { time : 1235 } );
 			$( "#store1" ).attr( 'disabled' , false );

@@ -122,6 +122,7 @@
 									@endif
 								@endif
 									@if($value -> sig_status == 1)
+									@if($value -> status != 4)
 									<button type="button" value="{{$value -> cust_id}}" onclick="change_home({{$value -> buyid}},{{$value -> homeid}})"
 									        class="btn btn-warning btn-xs btn_edit" id="btn_customero"><i
 											class="fa fa-edit"></i> {{trans('memberinfo.change_home')}}</button>
@@ -132,7 +133,7 @@
 										<button type="button" value="{{$value -> cust_id}}" onclick="signinfo({{$value -> buyid}})"
 										        class="btn btn-warning btn-xs btn_edit" id="btn_customero"><i
 												class="fa fa-edit"></i> {{trans('memberinfo.tuifang')}}</button>
-									@endif
+									@endif @endif
 								<button type="button" value="{{$value -> buyid}}" onclick="view({{$value -> buyid}})"
 								        class="btn btn-warning btn-xs btn_edit" id="btn_edit"><i
 										class="fa fa-edit"></i> {{trans('memberinfo.news_view')}}</button>
@@ -287,34 +288,6 @@
 								else {
 									window.location.reload();
 								}
-							} );
-						}
-						if ( data.code == {{config('myconfig.member.ch_get_character_code')}} ) {
-							layer.msg( data.msg , { time : 2000 } );
-						}
-					} );
-			} , function () {
-				layer.msg( "{{trans('memberinfo.delete_cancel')}}" , {
-					time : 1000 , //10秒鐘后自動關閉
-				} );
-			} );
-		}
-
-		//换房
-		function huan(buyid, homeid ) {
-			var page_count = $( '#page_count' ).val();
-			layer.confirm( "{{trans('memberinfo.is_delete_info')}}" , {
-				btn : ["{{trans('memberinfo.confirm')}}" , "{{trans('memberinfo.cancel')}}"] //按钮
-			} , function () {
-				$.post( "{{URL('buyinfoss/huan')}}" , { 'homeid' : homeid ,'buyid':buyid, '_token' : "{{csrf_token()}}" } ,
-					function ( data ) {
-						console.log( data );
-						if ( data.code == {{config('myconfig.buy.buy_huan_error_code')}} ) {
-							layer.msg( data.msg , { time : 2000 } );
-						}
-						if ( data.code == {{config('myconfig.buy.buy_huan_success_code')}} ) {
-							layer.msg( data.msg , { time : 1000 } , function () {
-									window.location.reload();
 							} );
 						}
 						if ( data.code == {{config('myconfig.member.ch_get_character_code')}} ) {
