@@ -78,7 +78,6 @@
 							<td>{{$value-> unitnum_new}}</td>
 							<td>{{$value-> roomnum_new}}</td>
 							<td>
-
 								@if($value -> status === 0)
 									经理审核未通过
 								@elseif($value -> status === 1)

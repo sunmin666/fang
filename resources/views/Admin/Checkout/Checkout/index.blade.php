@@ -40,116 +40,96 @@
 									class="glyphicon glyphicon-ok"></i>{{ trans('memberinfo.allAlection') }}</button>
 						</th>
 						{{--认购客户--}}
-						<th>{{ trans('buy.cust_id') }}</th>
+						<th>{{ trans('checkout.cust') }}</th>
 						{{--认购房源--}}
-						<th>{{ trans('buy.homeid') }}</th>
+						<th>{{ trans('checkout.mobile') }}</th>
 						{{--认购标号--}}
-						<th>{{ trans('buy.buy_number') }}</th>
+						<th>{{ trans('checkout.idcard') }}</th>
 						{{--认购定金--}}
-						<th>{{ trans('buy.pay_num') }}</th>
+						<th>{{ trans('checkout.buildnums') }}</th>
 						{{--付款方案--}}
-						<th>{{ trans('buy.pay_type') }}</th>
+						<th>{{ trans('checkout.unitnums') }}</th>
 						{{--月供--}}
-						<th>{{trans('buy.month_pay')}}</th>
+						<th>{{trans('checkout.roomnums')}}</th>
 						{{--年限--}}
-						<th>{{trans('buy.loan_term')}}</th>
+						<th>{{trans('checkout.re_status')}}</th>
 						{{--总金额--}}
-						<th>{{trans('buy.total_price')}}</th>
-						<th>{{trans('buy.status')}}</th>
+						<th>{{trans('checkout.re_time')}}</th>
+						<th>{{trans('checkout.cw_statue')}}</th>
 
-						<th>{{trans('buy.created_at')}}</th>
+						<th>{{trans('checkout.cw_time')}}</th>
+						<th>{{trans('checkout.create_at')}}</th>
 						{{--操作--}}
-						<th>{{ trans('buy.operating') }}</th>
+						<th>{{ trans('checkout.operating') }}</th>
 					</tr>
 					</thead>
 					<tbody>
-					@foreach($buy as $value)
+					@foreach($checkout as $value)
 						<tr>
 							<td><input type="checkbox" class="i-checks" id="groupCheckbox" name="groupCheckbox[]"
-							           value="{{$value->buyid}}"
+							           value="{{$value->chan_id}}"
 								></td>
 							<td>{{ $value -> realname}}</td>
-							<td>{{$value -> roomnums}}</td>
-							<td>{{$value -> buy_number}}</td>
-							<td>{{$value-> pay_num}}</td>
-							<td>@if($value -> pay_type == 1) {{ trans('buy.mortgage') }} @elseif($value -> pay_type == 0) {{ trans('buy.all_payment') }} @endif</td>
-							<td>@if($value -> month_pay == '') {{ trans('buy.all_payment') }} @else {{$value -> month_pay}} @endif</td>
-							<td>@if($value -> loan_term == '') {{ trans('buy.all_payment') }} @else {{$value -> loan_term}} @endif</td>
-							<td>{{$value-> total_price}}</td>
+							<td>{{$value -> mobile}}</td>
+							<td>{{$value -> idcard}}</td>
+							<td>{{$value-> buildnums}}</td>
+							<td>{{$value-> unitnums}}</td>
+							<td>{{$value-> roomnums}}</td>
 							<td>
-								@if($value -> status == 5)
-									客户已退房
+								@if($value -> status === 0)
+									经理审核未通过
+								@elseif($value -> status === 1)
+									经理审核通过
 								@else
-								@if($value-> status != 3 && $value-> status != 4 && $value-> status != 5)
-									@if($value -> manager_verify_status == '')
-									{{ trans('buy.review_no') }}
-									@elseif($value -> manager_verify_status == 0)
-										{{ trans('buy.review_wtg') }}
-									@else
-										@if($value -> finance_verify_status == '')
-											{{ trans('buy.finance') }}
-										@elseif($value -> finance_verify_status == 0)
-											{{ trans('buy.finance_wtg') }}
-										@else
-											{{ trans('buy.finance_tg') }}
-										@endif
-									@endif
-								@elseif($value-> status == 4)
-								{{ trans('buy.subscription_time') }}
-									@else
-									{{ trans('buy.username_change') }}
+									经理未审核
 								@endif
+							</td>
+							<td>
+								@if($value -> verifytime === null)
+									经理未审核
+								@else
+									{{date('Y-m-d',$value -> verifytime)}}
+								@endif
+							</td>
+							<td>
+								@if($value -> finance_status === null)
+									财务未审核
+								@elseif($value -> finance_status === 0)
+									财务审核未通过
+								@elseif($value -> finance_status === 1)
+									财务审核通过
+								@endif
+							</td>
+							<td>
+								@if($value -> finance_time === null)
+									财务未审核
+								@else
+									{{date('Y-m-d',$value -> finance_time)}}
 								@endif
 							</td>
 							<td>{{date('Y-m-d H:i',$value -> created_at)}}</td>
 
 							<td>
-
-								@if($value -> status == 5)
-								@else
-
-								@if($value -> status != 3 && $value -> status != 4)
-									@if($value -> manager_verify_status == '')
-										<button type="button" value="{{$value -> buyid}}" onclick="review({{$value -> buyid}},{{$value -> homeid}})"
+								@if($value -> status === null)
+									<button type="button" value="{{$value -> chan_id}}" onclick="review({{$value -> chan_id}})"
+									        class="btn btn-warning btn-xs btn_edit" id="btn_edit"><i
+											class="fa fa-edit"></i> {{ trans('buy.review') }}</button>
+								@endif
+								@if($value -> status == 1)
+									@if($value -> finance_status === null)
+										<button type="button" value="{{$value -> chan_id}}" onclick="cwview({{$value -> chan_id}},{{$value -> old_homeid}},{{$value -> buyid}})"
 										        class="btn btn-warning btn-xs btn_edit" id="btn_edit"><i
-												class="fa fa-edit"></i> {{ trans('buy.review') }}</button>
-									@endif
-									@if($value -> finance_verify_status == '')
-									@if($value -> manager_verify_status == 1)
-											<button type="button" value="{{$value -> buyid}}" onclick="cwview({{$value -> buyid}},{{$value -> homeid}})"
-											        class="btn btn-warning btn-xs btn_edit" id="btn_edit"><i
-													class="fa fa-edit"></i> {{ trans('buy.manager_verify_status') }}</button>
-									@endif
-									@endif
-									@endif
-									@if($value -> finance_verify_status == 1)
-										@if($value -> sig_status == 1)
-											<button type="button" value="{{$value -> buyid}}" onclick="signinfo({{$value -> buyid}})"
-											        class="btn btn-warning btn-xs btn_edit" id="btn_customero"><i
-													class="fa fa-edit"></i> {{trans('memberinfo.signinfo')}}</button>
+												class="fa fa-edit"></i> {{ trans('buy.manager_verify_status') }}</button>
 									@endif
 								@endif
-									@if($value -> sig_status == 1)
-									@if($value -> status != 4)
-									<button type="button" value="{{$value -> buyid}}" onclick="change_home({{$value -> buyid}},{{$value -> homeid}})"
-									        class="btn btn-warning btn-xs btn_edit" id="btn_customero"><i
-											class="fa fa-edit"></i> {{trans('memberinfo.change_home')}}</button>
-
-									<button type="button" value="{{$value -> buyid}}" onclick="change_cust({{$value -> buyid}},{{$value -> homeid}})"
-									        class="btn btn-warning btn-xs btn_edit" id="btn_customero"><i
-											class="fa fa-edit"></i> {{trans('memberinfo.change_cust')}}</button>
-										<button type="button" value="{{$value -> cust_id}}" onclick="checkout({{$value -> buyid}},{{$value -> homeid}},{{$value -> cust_id}},1)"
-										        class="btn btn-warning btn-xs btn_edit" id="btn_customero"><i
-												class="fa fa-edit"></i> {{trans('memberinfo.tuifang')}}</button>
-									@endif @endif @endif
-								<button type="button" value="{{$value -> buyid}}" onclick="view({{$value -> buyid}})"
+								<button type="button" value="{{$value -> chan_id}}" onclick="view({{$value -> chan_id}})"
 								        class="btn btn-warning btn-xs btn_edit" id="btn_edit"><i
 										class="fa fa-edit"></i> {{trans('memberinfo.news_view')}}</button>
 
-								<button type="button" value="{{$value -> buyid}}" onclick="edit({{$value -> buyid}})"
+								<button type="button" value="{{$value -> chan_id}}" onclick="edit({{$value -> chan_id}})"
 								        class="btn btn-warning btn-xs btn_edit" id="btn_edit"><i
 										class="fa fa-edit"></i> {{trans('memberinfo.news_edits')}}</button>
-								<button type="button" value="{{$value -> buyid}}" onclick="d({{$value -> buyid}})"
+								<button type="button" value="{{$value -> chan_id}}" onclick="d({{$value -> chan_id}})"
 								        class="btn btn-warning btn-xs btn_delete"><i
 										class="fa fa-trash"></i> {{trans('memberinfo.news_delete')}} </button>
 							</td>
@@ -164,8 +144,8 @@
 		<div class="box-footer clearfix">
 			<a href="javascript:void(0)" class="btn btn-danger btn-xs pull-left select_all"><i
 					class="fa fa-trash"></i>{{ trans('memberinfo.select_all_delete') }}</a>
-			<div class=" pull-right">{{$buy -> links()}}</div>
-			<input type="hidden" value="{{$buy -> count()}}" id="page_count">
+			{{--<div class=" pull-right">{{$buy -> links()}}</div>--}}
+			{{--<input type="hidden" value="{{$buy -> count()}}" id="page_count">--}}
 		</div>
 	</div>
 @endsection
@@ -222,11 +202,11 @@
 			layer.confirm( "{{trans('permission.is_delete_info')}}" , {
 				btn : ["{{trans('permission.confirm')}}" , "{{trans('permission.cancel')}}"]
 			} , function () {
-				$.ajax( {
-					url : '{{URL('buyinfoss/destroy_all')}}' ,
-					type : 'post' ,
+				$.ajax({
+					url : '{{URL('checkout/destroy_all')}}',
+					type : 'post',
 					data : {
-						'buyid' : vote ,
+						'chan_id' : vote ,
 						'_token' : "{{csrf_token()}}"
 					} ,
 					success : function ( data ) {
@@ -256,52 +236,35 @@
 				} );
 			} );
 		} );
-
-
-		//添加
-		$( '#news_day' ).click( function () {
-			layer.open( {
-				type : 2 ,
-				title : '{{ trans('memberinfo.news_add') }}' ,
-				moveType : 0 ,
-				skin : 'layui-layer-demo' , //加上边框
-				closeBtn : 1 ,
-				area : ['50%' , '90%'] , //宽高
-				shadeClose : false ,
-				shade : 0.5 ,
-				content : ["{{URL('buyinfoss/create')}}"] ,
-				success : function ( layero , index ) {
-					$( ':focus' ).blur();
-				}
-			} );
-		} );
-
 		//删除信息
-		function d( buyid ) {
+		function d( chan_id ) {
 			var page_count = $( '#page_count' ).val();
 			layer.confirm( "{{trans('memberinfo.is_delete_info')}}" , {
 				btn : ["{{trans('memberinfo.confirm')}}" , "{{trans('memberinfo.cancel')}}"] //按钮
 			} , function () {
-				$.post( "{{URL('buyinfoss/destroy')}}" , { 'buyid' : buyid , '_token' : "{{csrf_token()}}" } ,
+				$.post( "{{URL('checkout/destroy')}}" , { 'chan_id' : chan_id , '_token' : "{{csrf_token()}}" } ,
 					function ( data ) {
 						console.log( data );
-						if ( data.code == {{config('myconfig.buy.buy_delete_error_code')}} ) {
+						if(data.code == null){
+							window.location.href = '{{URL('permi')}}'
+						}
+						if ( data.code == {{config('myconfig.checkout.delete_error_chang_code')}} ) {
 							layer.msg( data.msg , { time : 2000 } );
 						}
-						if ( data.code == {{config('myconfig.buy.buy_delete_success_code')}} ) {
+						if ( data.code == {{config('myconfig.checkout.delete_success_chang_code')}} ) {
 							layer.msg( data.msg , { time : 1000 } , function () {
-								if ( page_count == 1 ) {
-									location.href = "{{URL('buyinfo/38')}}";
+								if ( page_count == 1 ){
+									location.href = "{{URL('checkout/38')}}";
 								}
 								else {
 									window.location.reload();
 								}
-							} );
+							});
 						}
 						if ( data.code == {{config('myconfig.member.ch_get_character_code')}} ) {
 							layer.msg( data.msg , { time : 2000 } );
 						}
-					} );
+					});
 			} , function () {
 				layer.msg( "{{trans('memberinfo.delete_cancel')}}" , {
 					time : 1000 , //10秒鐘后自動關閉
@@ -310,7 +273,7 @@
 		}
 
 		//修改用户信息
-		function edit( buyid ) {
+		function edit( chan_id ) {
 			layer.open( {
 				type : 2 ,
 				title : '{{ trans('memberinfo.news_edits') }}' ,
@@ -320,7 +283,7 @@
 				area : ['50%' , '70%'] , //宽高
 				shadeClose : false ,
 				shade : 0.5 ,
-				content : ["{{URL('buyinfoss/edit')}}" + "/" + buyid] ,
+				content : ["{{URL('checkout/edit')}}" + "/" + chan_id] ,
 				success : function ( layero , index ) {
 					$( ':focus' ).blur();
 				}
@@ -328,7 +291,7 @@
 		}
 
 		//查看详情
-		function view( buyid ) {
+		function view( chan_id ) {
 			layer.open( {
 				type : 2 ,
 				title : '{{ trans('memberinfo.news_view') }}' ,
@@ -338,7 +301,7 @@
 				area : ['50%' , '70%'] , //宽高
 				shadeClose : false ,
 				shade : 0.5 ,
-				content : ["{{URL('buyinfoss/view')}}" + "/" + buyid] ,
+				content : ["{{URL('checkout/view')}}" + "/" + chan_id] ,
 				success : function ( layero , index ) {
 					$( ':focus' ).blur();
 				}
@@ -346,7 +309,7 @@
 		}
 
 		//经理审核
-		function review(buyid,homeid){
+		function review(chan_id){
 			layer.open( {
 				type : 2 ,
 				title : '{{ trans('memberinfo.news_view') }}' ,
@@ -356,7 +319,7 @@
 				area : ['50%' , '70%'] , //宽高
 				shadeClose : false ,
 				shade : 0.5 ,
-				content : ["{{URL('buyinfoss/review')}}" + "/" + buyid + "/"+ homeid] ,
+				content : ["{{URL('checkout/review')}}" + "/" + chan_id] ,
 				success : function ( layero , index ) {
 					$( ':focus' ).blur();
 				}
@@ -364,7 +327,7 @@
 		}
 
 		//财务审核
-		function cwview(buyid,homeid){
+		function cwview(chan_id,old_homeid,buyid){
 			layer.open( {
 				type : 2 ,
 				title : '{{ trans('memberinfo.news_view') }}' ,
@@ -374,85 +337,11 @@
 				area : ['50%' , '70%'] , //宽高
 				shadeClose : false ,
 				shade : 0.5 ,
-				content : ["{{URL('buyinfoss/cwview')}}" + "/" + buyid + "/"+ homeid] ,
-				success : function ( layero , index ) {
+				content : ["{{URL('checkout/cwview')}}" + "/" + chan_id + "/"+ old_homeid + "/" + buyid] ,
+				success : function ( layero , index ){
 					$( ':focus' ).blur();
 				}
-			} );
-		}
-
-		//办理签约
-		function signinfo(buyid){
-			layer.open( {
-				type : 2 ,
-				title : '{{ trans('memberinfo.trackinfo') }}' ,
-				moveType : 0 ,
-				skin : 'layui-layer-demo' , //加上边框
-				closeBtn : 1 ,
-				area : ['50%' , '70%'] , //宽高
-				shadeClose : false ,
-				shade : 0.5 ,
-				content : ["{{URL('buyinfo/signinfo')}}" + "/" + buyid] ,
-				success : function ( layero , index ) {
-					$( ':focus' ).blur();
-				}
-			} );
-		}
-
-
-//换房
-		function change_home(buyid,homeid){
-			layer.open( {
-				type : 2 ,
-				title : '{{ trans('memberinfo.trackinfo') }}' ,
-				moveType : 0 ,
-				skin : 'layui-layer-demo' , //加上边框
-				closeBtn : 1 ,
-				area : ['50%' , '70%'] , //宽高
-				shadeClose : false ,
-				shade : 0.5 ,
-				content : ["{{URL('chang/home')}}" + "/" + buyid + "/" + homeid] ,
-				success : function ( layero , index ) {
-					$( ':focus' ).blur();
-				}
-			} );
-		}
-
-		//更名
-		function change_cust(buyid,homeid){
-			layer.open( {
-				type : 2 ,
-				title : '{{ trans('memberinfo.trackinfo') }}' ,
-				moveType : 0 ,
-				skin : 'layui-layer-demo' , //加上边框
-				closeBtn : 1 ,
-				area : ['50%' , '70%'] , //宽高
-				shadeClose : false ,
-				shade : 0.5 ,
-				content : ["{{URL('changecust/get_cust')}}" + "/" + buyid + "/" + homeid] ,
-				success : function ( layero , index ) {
-					$( ':focus' ).blur();
-				}
-			} );
-		}
-
-
-		//退房
-		function checkout(buyid,homeid,cust_id,status){
-			layer.open( {
-				type : 2 ,
-				title : '{{ trans('memberinfo.trackinfo') }}' ,
-				moveType : 0 ,
-				skin : 'layui-layer-demo' , //加上边框
-				closeBtn : 1 ,
-				area : ['50%' , '70%'] , //宽高
-				shadeClose : false ,
-				shade : 0.5 ,
-				content : ["{{URL('checkout/create')}}" + "/" + buyid + "/" + homeid +"/" + cust_id + "/" + status] ,
-				success : function ( layero , index ) {
-					$( ':focus' ).blur();
-				}
-			} );
+			});
 		}
 
 

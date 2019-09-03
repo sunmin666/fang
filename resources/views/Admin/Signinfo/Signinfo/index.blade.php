@@ -61,6 +61,7 @@
 						<th>{{trans('signinfo.finance_verifytime')}}</th>
 						{{--总金额--}}
 						<th>{{trans('signinfo.finance_status')}}</th>
+						<th>{{trans('signinfo.status')}}</th>
 
 						<th>{{ trans('signinfo.operating') }}</th>
 					</tr>
@@ -82,11 +83,14 @@
 							<td>@if($value -> sign_status == 0 || $value -> sign_status == '') 未通过 @else 以通过 @endif</td>
 							<td>{{date('Y-m-d H:i',$value -> finance_verifytime)}}</td>
 							<td>@if($value -> finance_status == 0 || $value -> finance_status == '') 未通过 @else 以通过 @endif</td>
+							<td>@if($value -> status === null)
+										正常
+									@else
+										客户已退房
+								@endif
+							</td>
 							<td>
-
 								@if($value -> sign_type == 0 )
-
-
 									@if( $value -> sign_status == '' && $value -> sign_verifytime =='')
 										<button type="button" value="{{$value -> signid}}" onclick="review({{$value -> signid}},{{$value -> buyid}})"
 										        class="btn btn-warning btn-xs btn_edit" id="btn_review"><i
@@ -98,6 +102,9 @@
 													class="fa fa-edit"></i> {{trans('signinfo.cwview')}}</button>
 									@endif
 								@endif
+									<button type="button" value="{{$value -> cust_id}}" onclick="checkout({{$value -> signid}},{{$value -> homeid}},{{$value -> cust_id}},2)"
+									        class="btn btn-warning btn-xs btn_edit" id="btn_customero"><i
+											class="fa fa-edit"></i> {{trans('memberinfo.tuifang')}}</button>
 
 									<button type="button" value="{{$value -> signid}}" onclick="view({{$value -> signid}})"
 								        class="btn btn-warning btn-xs btn_edit" id="btn_view"><i
@@ -337,22 +344,24 @@
 			} );
 		}
 
-		//办理签约
-		function signinfo( buyid ) {
+		function checkout(buyid,homeid,cust_id,status){
 			layer.open( {
 				type : 2 ,
-				title : '{{ trans('memberinfo.trackinfo') }}' ,
+				title : '{{ trans('memberinfo.trackinfo') }}',
 				moveType : 0 ,
 				skin : 'layui-layer-demo' , //加上边框
 				closeBtn : 1 ,
 				area : ['50%' , '70%'] , //宽高
 				shadeClose : false ,
 				shade : 0.5 ,
-				content : ["{{URL('buyinfo/signinfo')}}" + "/" + buyid] ,
+				content : ["{{URL('checkout/create')}}" + "/" + buyid + "/" + homeid +"/" + cust_id + "/" + status] ,
 				success : function ( layero , index ) {
 					$( ':focus' ).blur();
 				}
 			} );
 		}
+
+
+
 	</script>
 @endpush
