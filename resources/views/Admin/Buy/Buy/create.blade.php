@@ -194,7 +194,7 @@
 				<div id="total_price" class="form-group none" >
 					<label>{{ trans('buy.total_prices') }}：</label>
 					<input type="text" class="form-control"
-					       {{--onkeyup="value=value.replace(/[^\d.]/g,'')"--}}
+					       onkeyup="value=value.replace(/[^\d.]/g,'')"
 					       name="total_price" placeholder="{{ trans('buy.please_many') }}" id="total_prices"
 					       maxlength="12">
 				</div>

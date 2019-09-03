@@ -50,6 +50,8 @@
 						{{--认购标号--}}
 						<th>{{ trans('signinfo.pay_num') }}</th>
 						<th>{{ trans('signinfo.sig_status') }}</th>
+						{{--延迟时间--}}
+						<th>{{ trans('signinfo.delay_time') }}</th>
 						{{--认购定金--}}
 
 						<th>{{ trans('signinfo.created_at') }}</th>
@@ -77,11 +79,48 @@
 							<td>{{$value -> mobile}}</td>
 							<td>{{$value-> buy_number}}</td>
 							<td>@if($value -> sign_type == 0) 立即签约 @else 延迟签约 @endif</td>
+							<td>@if($value -> sign_type == 0)
+									立即签约
+								@else
+									{{date('Y-m-d H:i',$value -> delay_time)}}
+								@endif
+							</td>
 							<td>{{date('Y-m-d H:i',$value -> sign_applytime)}}</td>
-							<td>{{date('Y-m-d H:i',$value -> sign_verifytime)}}</td>
-							<td>@if($value -> sign_status == 0 || $value -> sign_status == '') 未通过 @else 以通过 @endif</td>
-							<td>{{date('Y-m-d H:i',$value -> finance_verifytime)}}</td>
-							<td>@if($value -> finance_status == 0 || $value -> finance_status == '') 未通过 @else 以通过 @endif</td>
+							<td>@if($value ->sign_verifytime == '')
+									未审核
+								@else
+									{{date('Y-m-d H:i',$value -> sign_verifytime)}}
+								@endif
+							</td>
+							<td>
+								@if($value -> sign_status == '0')
+									未通过
+								@elseif($value -> sign_status == '')
+									未审核
+								@else
+									已通过
+								@endif
+							</td>
+							<td>@if($value -> sign_type == 1)
+									延迟签约
+								@elseif($value -> finance_verifytime=='')
+									未审核
+								@else
+									{{date('Y-m-d H:i',$value -> finance_verifytime)}}
+								@endif
+							</td>
+							<td>@if($value -> sign_type == 1)
+									延迟签约
+								@elseif($value -> sign_type == 0)
+									@if($value -> finance_status == '')
+										未审核
+							     	@elseif($value -> finance_status == 0 )
+										未通过
+									@else
+										以通过
+									@endif
+								@endif
+							</td>
 							<td>
 
 								@if($value -> sign_type == 0 )
@@ -98,7 +137,13 @@
 													class="fa fa-edit"></i> {{trans('signinfo.cwview')}}</button>
 									@endif
 								@endif
-
+									@if($value -> sign_type == 1 )
+										@if( $value -> sign_status == '' && $value -> sign_verifytime =='')
+											<button type="button" value="{{$value -> signid}}" onclick="review({{$value -> signid}},{{$value -> buyid}})"
+													class="btn btn-warning btn-xs btn_edit" id="btn_review"><i
+														class="fa fa-edit"></i> {{trans('signinfo.review')}}</button>
+										@endif
+									@endif
 									<button type="button" value="{{$value -> signid}}" onclick="view({{$value -> signid}})"
 								        class="btn btn-warning btn-xs btn_edit" id="btn_view"><i
 										class="fa fa-edit"></i> {{trans('memberinfo.news_view')}}</button>

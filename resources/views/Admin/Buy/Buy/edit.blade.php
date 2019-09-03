@@ -122,7 +122,7 @@
 				<div id="total_price" class="form-group @if($buy -> pay_type != 0) none @endif ">
 					<label>{{ trans('buy.total_prices') }}：</label>
 					<input type="text" class="form-control"
-					       {{--onkeyup="value=value.replace(/[^\d.]/g,'')"--}}
+					       onkeyup="value=value.replace(/[^\d.]/g,'')"
 					       @if($buy -> pay_type == 0) value="{{$buy -> total_price}}" @endif
 					       name="total_price" placeholder="{{ trans('buy.please_many')}}" id="total_prices"
 					       maxlength="12">

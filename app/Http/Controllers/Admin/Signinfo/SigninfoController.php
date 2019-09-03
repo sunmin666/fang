@@ -49,6 +49,7 @@ class SigninfoController extends SessionController
 		$data['buyid'] = $buy = $query -> input('buyid');//认购信息id
 		$data['sign_type']  = $query -> input('sign_type');//客户选择的签约类型
 		$data['sign_remarks'] =$query -> input('sign_remarks');//签约职业顾问备注
+		$data['delay_time'] = strtotime($query -> input('delay_time')); //延迟签约具体时间
 		$data['sign_applytime'] = time();
 		$data['created_at']    = time();
 		$info = Signinfo::store_sig($data);
@@ -97,6 +98,7 @@ class SigninfoController extends SessionController
 		}
 		$sigid = $query -> input('sigid');
 		$data['sign_type'] = $query -> input('sign_type');
+		$data['delay_time'] = strtotime($query -> input('delay_time')); //延迟签约具体时间
 		$data['sign_remarks'] = $query -> input('sign_remarks');
 		$update = Signinfo::update_sig($sigid,$data);
 		if($update){

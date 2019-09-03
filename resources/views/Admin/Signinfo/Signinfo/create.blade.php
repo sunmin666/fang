@@ -199,7 +199,11 @@
 						<option value="1">延迟签约</option>
 					</select>
 				</div>
-
+				{{--延迟签约时间--}}
+				<div class="form-group" id="lock_time_y">
+					<label>{{ trans('signinfo.delay_time') }}：</label>
+					<input type="text"  class="layui-input" autocomplete="off" id="lock_time" placeholder="请输入延迟时间">
+				</div>
 				<div class="form-group">
 					<label>{{ trans('buy.remarks') }}：</label>
 					<textarea name="sign_remarks" id="sign_remarks" class="form-control" cols="30" rows="5" style="resize:none"></textarea>
@@ -219,20 +223,31 @@
 	$( ".i-checks" ).iCheck( {
 		checkboxClass : "{{config('myconfig.config.checkbox_skin')}}" ,
 	} );
-	{{--//日期时间选择器--}}
-	{{--layui.use( 'laydate' , function () {--}}
-		{{--var laydate = layui.laydate;--}}
-		{{--laydate.render( {--}}
-			{{--elem : '#lock_time'--}}
-			{{--, type : 'datetime'--}}
-			{{--, min : minTime()--}}
-		{{--} );--}}
-	{{--} );--}}
-	{{--//不让选择以前的时间--}}
-	{{--function minTime() {--}}
-		{{--var now = new Date();--}}
-		{{--return now.getFullYear() + "-" + ( now.getMonth() + 1 ) + "-" + now.getDate() + " " + ( now.getHours() + 1 ) + ":" + now.getMinutes() + ":" + now.getSeconds();--}}
-	{{--}--}}
+	//日期时间选择器
+	layui.use( 'laydate' , function () {
+		var laydate = layui.laydate;
+		laydate.render( {
+			elem : '#lock_time'
+			,trigger: 'click'
+			, type : 'datetime'
+			, min : minTime()
+		} );
+	} );
+	//不让选择以前的时间
+	function minTime() {
+		var now = new Date();
+		return now.getFullYear() + "-" + ( now.getMonth() + 1 ) + "-" + now.getDate() + " " + ( now.getHours() + 1 ) + ":" + now.getMinutes() + ":" + now.getSeconds();
+	}
+
+	//根据签约类型出现延迟具体时间
+	$("#sign_type").change(function(){
+		var sign_type = $('#sign_type').val();
+		if(sign_type == 1){
+			$("#lock_time_y").show();
+		}else{
+			$("#lock_time_y").hide();
+		}
+	});
 	{{--//根据用户id查询用户信息--}}
 	{{--$( '#cust_id' ).change( function () {--}}
 		{{--var cust_id = $( this ).val();--}}
@@ -467,15 +482,21 @@
 
 		//签约类型
 		var sign_type = $('#sign_type').val();
+		//延迟签约时间
+		var lock_time = $('#lock_time').val();
 		//签约获延迟签约备注
 		var sign_remarks = $('#sign_remarks').val();
 
-
-		if(sign_type == '' || sign_remarks == ''){
-			layer.msg("{{trans('signinfo.Incomplete_information')}}",{time:1456});
+		if(sign_type == 1 && lock_time==''){
+			layer.msg("{{trans('signinfo.lock_time')}}",{time:1456});
 			return false;
 		}
 
+
+		if(sign_type == '' || sign_remarks == '' ){
+			layer.msg("{{trans('signinfo.Incomplete_information')}}",{time:1456});
+			return false;
+		}
 
 		var regEn = {{config('myconfig.config.regEn')}};       //中文验证
 		var regCn = {{config('myconfig.config.regCn')}};   //英文验证
@@ -500,6 +521,7 @@
 				cust_id : '{{$buy_info -> cust_id}}' ,
 				homeid : '{{$buy_info -> homeid}}' ,
 				sign_type : sign_type ,
+				delay_time : lock_time ,
 				sign_remarks : sign_remarks ,
 				_token : "{{csrf_token()}}"
 			} ,

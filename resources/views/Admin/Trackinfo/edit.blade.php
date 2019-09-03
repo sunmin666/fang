@@ -42,7 +42,7 @@
                 <div class="form-group">
                     <label>{{ trans('trackinfo.content') }}：</label>
 					<textarea name="content" id="content"
-                              cols="30" rows="5" class="form-control">{{$single -> content}}</textarea>
+                              cols="30" rows="5" style=" resize: none;" class="form-control">{{$single -> content}}</textarea>
                 </div>
             </form>
         </div>

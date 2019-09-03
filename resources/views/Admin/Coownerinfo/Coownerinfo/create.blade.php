@@ -99,8 +99,16 @@
         var laydate = layui.laydate;
         laydate.render( {
             elem :'#birthday',
+            trigger: 'click',
+            max : minTime()
         } );
     } );
+
+    //不让选择以后的时间
+    function minTime() {
+        var now = new Date();
+        return now.getFullYear() + "-" + ( now.getMonth() + 1 ) + "-" + now.getDate() + " " + ( now.getHours() + 1 ) + ":" + now.getMinutes() + ":" + now.getSeconds();
+    }
 
     //复选框样式
     $( ".i-checks" ).iCheck( {

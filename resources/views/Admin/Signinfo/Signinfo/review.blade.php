@@ -43,6 +43,7 @@
 		var manager_verify_status = $('#manager_verify_status').val();
 
 		var manager_verify_remarks = $('#manager_verify_remarks').val();
+		//alert(manager_verify_remarks);
 
 		if(manager_verify_status == '' || manager_verify_remarks == ''){
 			layer.msg('信息不全',{time:1236});

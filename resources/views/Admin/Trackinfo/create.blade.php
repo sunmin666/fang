@@ -44,7 +44,7 @@
                 <div class="form-group">
                     <label>{{ trans('trackinfo.content') }}：</label>
 					<textarea name="content" id="content"
-                              cols="30" rows="5" class="form-control" placeholder="{{trans('trackinfo.text4')}}"></textarea>
+                              cols="30" rows="5" class="form-control" style=" resize: none;" placeholder="{{trans('trackinfo.text4')}}" ></textarea>
                 </div>
             </form>
         </div>

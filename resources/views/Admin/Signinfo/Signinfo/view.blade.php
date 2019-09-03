@@ -32,24 +32,62 @@
 <div><span>认购协议编号：</span>{{$sig -> buy_number}}</div>
 
 <div><span>经理审核时间：</span>
-	{{date('Y-m-d H:i',$sig -> sign_verifytime)}}
+	@if($sig ->sign_verifytime == '')
+		未审核
+	@else
+		{{date('Y-m-d H:i',$sig -> sign_verifytime)}}
+	@endif
 </div>
 <div><span>经理审核状态：</span>
-	@if($sig -> sign_status == 0 || $sig -> sign_status == '') 未通过 @else 以通过 @endif
+	@if($sig -> sign_status == '0')
+		未通过
+	@elseif($sig -> sign_status == '')
+		未审核
+	@else
+		已通过
+	@endif
 </div>
 <div><span>经理审核备注：</span>
+	@if($sig -> verify_remarks == '')
+		未审核
+	@else
 	{{$sig -> verify_remarks}}
+	@endif
 </div>
 
 
-<div><span>经理审核时间：</span>
-	{{date('Y-m-d H:i',$sig -> finance_verifytime)}}
+<div><span>财务审核时间：</span>
+	@if($sig -> sign_type == 1)
+		延迟签约
+	@elseif($sig -> finance_verifytime=='')
+		未审核
+	@else
+		{{date('Y-m-d H:i',$sig -> finance_verifytime)}}
+	@endif
 </div>
-<div><span>经理审核状态：</span>
-	@if($sig -> finance_status == 0 || $sig -> finance_status == '') 未通过 @else 以通过 @endif
+<div><span>财务审核状态：</span>
+	@if($sig -> sign_type == 1)
+		延迟签约
+	@elseif($sig -> sign_type == 0)
+		@if($sig -> finance_status == '')
+			未审核
+		@elseif($sig -> finance_status == 0 )
+			未通过
+		@else
+			以通过
+		@endif
+	@endif
 </div>
-<div><span>经理审核备注：</span>
-	{{$sig -> finance_remarks}}
+<div><span>财务审核备注：</span>
+	@if($sig -> sign_type == 1)
+		延迟签约
+	@elseif($sig -> sign_type == 0)
+		@if($sig -> finance_remarks == '')
+			未审核
+		@else
+			{{$sig -> finance_remarks}}
+		@endif
+	@endif
 </div>
 
 </body>

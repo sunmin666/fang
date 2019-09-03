@@ -17,7 +17,7 @@
                                placeholder="请输客户姓名" id="realname"
                                onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'') "
                                value="{{$v->realname}}"
-                               maxlength="15" readonly="readonly">
+                               maxlength="15" disabled="disabled">
                         <input type="hidden" value="{{$v -> cust_id}}" id="cust_id">
                     @endforeach
                 </div>

@@ -33,7 +33,7 @@
 		'review_sigs_success_msg'    => '经理审核未通过',
 
 		'review_sig_success_code' => 9,
-		'review_sig_success_msg'  => '经理审核通过，等待财务审核',
+		'review_sig_success_msg'  => '经理审核通过',
 
 		'review_sig_error_code'    => 10,
 		'review_sig_error_msg'     => '审核失败',
