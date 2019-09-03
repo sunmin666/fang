@@ -77,7 +77,10 @@
 							<td>@if($value -> loan_term == '') {{ trans('buy.all_payment') }} @else {{$value -> loan_term}} @endif</td>
 							<td>{{$value-> total_price}}</td>
 							<td>
-								@if($value-> status != 3 && $value-> status != 4)
+								@if($value -> status == 5)
+									客户已退房
+								@else
+								@if($value-> status != 3 && $value-> status != 4 && $value-> status != 5)
 									@if($value -> manager_verify_status == '')
 									{{ trans('buy.review_no') }}
 									@elseif($value -> manager_verify_status == 0)
@@ -96,10 +99,15 @@
 									@else
 									{{ trans('buy.username_change') }}
 								@endif
+								@endif
 							</td>
 							<td>{{date('Y-m-d H:i',$value -> created_at)}}</td>
 
 							<td>
+
+								@if($value -> status == 5)
+								@else
+
 								@if($value -> status != 3 && $value -> status != 4)
 									@if($value -> manager_verify_status == '')
 										<button type="button" value="{{$value -> buyid}}" onclick="review({{$value -> buyid}},{{$value -> homeid}})"
@@ -116,24 +124,24 @@
 									@endif
 									@if($value -> finance_verify_status == 1)
 										@if($value -> sig_status == 1)
-											<button type="button" value="{{$value -> cust_id}}" onclick="signinfo({{$value -> buyid}})"
+											<button type="button" value="{{$value -> buyid}}" onclick="signinfo({{$value -> buyid}})"
 											        class="btn btn-warning btn-xs btn_edit" id="btn_customero"><i
 													class="fa fa-edit"></i> {{trans('memberinfo.signinfo')}}</button>
 									@endif
 								@endif
 									@if($value -> sig_status == 1)
 									@if($value -> status != 4)
-									<button type="button" value="{{$value -> cust_id}}" onclick="change_home({{$value -> buyid}},{{$value -> homeid}})"
+									<button type="button" value="{{$value -> buyid}}" onclick="change_home({{$value -> buyid}},{{$value -> homeid}})"
 									        class="btn btn-warning btn-xs btn_edit" id="btn_customero"><i
 											class="fa fa-edit"></i> {{trans('memberinfo.change_home')}}</button>
 
-									<button type="button" value="{{$value -> cust_id}}" onclick="change_cust({{$value -> buyid}},{{$value -> homeid}})"
+									<button type="button" value="{{$value -> buyid}}" onclick="change_cust({{$value -> buyid}},{{$value -> homeid}})"
 									        class="btn btn-warning btn-xs btn_edit" id="btn_customero"><i
 											class="fa fa-edit"></i> {{trans('memberinfo.change_cust')}}</button>
-										<button type="button" value="{{$value -> cust_id}}" onclick="signinfo({{$value -> buyid}})"
+										<button type="button" value="{{$value -> cust_id}}" onclick="checkout({{$value -> buyid}},{{$value -> homeid}},{{$value -> cust_id}},1)"
 										        class="btn btn-warning btn-xs btn_edit" id="btn_customero"><i
 												class="fa fa-edit"></i> {{trans('memberinfo.tuifang')}}</button>
-									@endif @endif
+									@endif @endif @endif
 								<button type="button" value="{{$value -> buyid}}" onclick="view({{$value -> buyid}})"
 								        class="btn btn-warning btn-xs btn_edit" id="btn_edit"><i
 										class="fa fa-edit"></i> {{trans('memberinfo.news_view')}}</button>
@@ -392,7 +400,7 @@
 		}
 
 
-
+//换房
 		function change_home(buyid,homeid){
 			layer.open( {
 				type : 2 ,
@@ -422,6 +430,25 @@
 				shadeClose : false ,
 				shade : 0.5 ,
 				content : ["{{URL('changecust/get_cust')}}" + "/" + buyid + "/" + homeid] ,
+				success : function ( layero , index ) {
+					$( ':focus' ).blur();
+				}
+			} );
+		}
+
+
+		//退房
+		function checkout(buyid,homeid,cust_id,status){
+			layer.open( {
+				type : 2 ,
+				title : '{{ trans('memberinfo.trackinfo') }}' ,
+				moveType : 0 ,
+				skin : 'layui-layer-demo' , //加上边框
+				closeBtn : 1 ,
+				area : ['50%' , '70%'] , //宽高
+				shadeClose : false ,
+				shade : 0.5 ,
+				content : ["{{URL('checkout/create')}}" + "/" + buyid + "/" + homeid +"/" + cust_id + "/" + status] ,
 				success : function ( layero , index ) {
 					$( ':focus' ).blur();
 				}

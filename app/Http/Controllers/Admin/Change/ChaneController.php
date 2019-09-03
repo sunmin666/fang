@@ -70,11 +70,10 @@
 
 			if($change){
 				//更改新房源状态信息
-				$a = Change::update_home($home_id);
+				Change::update_home($home_id);
 				return [
 					'code'    => config('myconfig.changeh.store_change_success_code'),
 					'msg'    => config('myconfig.changeh.store_change_success_msg'),
-					'sss' => $a
 				];
 			}else{
 				return [
@@ -216,9 +215,7 @@
 			$data['finance_status'] = $status = $query -> input('finance_status');
 			$data['finance_remarks'] = $query -> input('finance_remarks');
 			$data['finance_time'] = time();
-
 			$update_cw = Change::update_re_change($chan_id,$data);
-
 			if($update_cw){
 				if($status == 0){
 					$new_homeid = $query ->input('new_homeid');

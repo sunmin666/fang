@@ -189,6 +189,17 @@
 		//换房时财务审核
 		Route::post('change_home/update_cwview','Admin\Change\ChaneController@update_cwview');
 
+
+		//退房信息添加
+		Route::post('checkout/store','Admin\Checkout\CheckoutController@store');
+		//退房信息修改
+		Route::post('checkout/update','Admin\Checkout\CheckoutController@update');
+		//退房经理审核
+		Route::post('checkout/update_review','Admin\Checkout\CheckoutController@update_review');
+		//退房财务审核
+		Route::post('checkout/update_cwview','Admin\Checkout\CheckoutController@update_cwview');
+
+
 	});
 
 
@@ -658,6 +669,24 @@
 		Route::get('changecust/review/{chan_id}/{new_cust}/{buyid}','Admin\Changecust\ChangecustController@review');
 		//经理审核
 		Route::post('changecust/update_review','Admin\Changecust\ChangecustController@update_review');
+
+
+		//退房信息展示页面
+		Route::get('checkout/{perid}','Admin\Checkout\CheckoutController@index');
+		//退房信息新增
+		Route::get('checkout/create/{buyid}/{homeid}/{cust_id}/{status}','Admin\Checkout\CheckoutController@create');
+		//退房信息修改
+		Route::get('checkout/edit/{chan_id}','Admin\Checkout\CheckoutController@edit');
+		//查看信息
+		Route::get('checkout/view/{chan_id}','Admin\Checkout\CheckoutController@view');
+		//删除
+		Route::post('checkout/destroy','Admin\Checkout\CheckoutController@destroy');
+		//退房多选删除
+		Route::post('checkout/destroy_all','Admin\Checkout\CheckoutController@destroy_all');
+		//经理审核
+		Route::get('checkout/review/{chan_id}','Admin\Checkout\CheckoutController@review');
+		//财务审核
+		Route::get('checkout/cwview/{chan_id}/{old_homeid}/{buyid}','Admin\Checkout\CheckoutController@cwview');
 
 
 	});

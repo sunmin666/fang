@@ -21,7 +21,7 @@ class HomeController extends SessionController
 			$data['page_note'] = trans( 'index.page_note' );
 			$page = config('myconfig.config.page_num');
 			$data['home'] = Home::get_all_homeinfo($page);
-//			dd($data);
+//			dd($data['home']);
 			$data['ids'] = $perid;
 			return view('Admin.Home.Home.index') -> with($data);
 		}
@@ -91,7 +91,7 @@ class HomeController extends SessionController
 			$data['unitnum'] = Home::get_unitnum($field_id);         //查询楼号下所对应的单元号
 			$firldid = $data['home'] -> unitnum;
       $data['roomnum'] = Home::get_roomnum($firldid);             //查询单元号下所对应的房号
-
+//dd($data['home']);
 			return view('Admin.Home.Home.edit') -> with($data);
 
 		}
