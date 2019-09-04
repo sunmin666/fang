@@ -127,12 +127,38 @@
 		}
 
 
+
 		//经理不同意更改房源信息
 		public static function update_homeinfo($new_homeid){
 			return DB::table('homeinfo') -> where('homeid','=',$new_homeid) -> update(
-				array('status' => 0)
+				array('status' => 0,'buyid'=> '')
 			);
 		}
 
+
+
+
+
+		//查询buyid
+		public static function get_d_buyid($chan_id){
+			return DB::table('changeinfo') -> select('buyid') -> where('chan_id','=',$chan_id)
+				-> first();
+		}
+
+
+		//更改buy表里的房源信息
+		public static function get_d_buy_homeid($buyid,$homeid){
+			return DB::table('buyinfo') -> where('buyid','=',$buyid) -> update(
+				array('homeid'=> $homeid)
+			);
+		}
+
+
+		//更新房源表里的buyid信息
+		public static function get_new_homeid_buyid($homeid,$buyid){
+			return DB::table('homeinfo') -> where('homeid','=',$homeid) -> update(
+				array('buyid'=> $buyid)
+			);
+		}
 
 	}

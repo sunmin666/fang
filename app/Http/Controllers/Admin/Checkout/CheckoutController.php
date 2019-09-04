@@ -216,7 +216,6 @@ class CheckoutController extends SessionController
 		$data['finance_time'] = time();
 
 		$updatecw = Checkout::update_cwview($chan_id,$data);
-
 		if($updatecw){
 			if($status == 0){
 				return [
@@ -224,11 +223,7 @@ class CheckoutController extends SessionController
 					'msg'           => config('myconfig.buy.buy_cwview_successe_msg'),
 				];
 			}else{
-
 				$home = $query -> input('old_homeid');
-
-
-
 				$buyid = $query -> input('buyid');
 				$statuss = substr($buyid,1,1);
 				$buy = substr($buyid,0,1);

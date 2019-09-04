@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 class Signinfo extends Model
 {
 
+
 	//查询办理签约所需要的信息
     public static function get_buy_cust($buyid){
     	$data = DB::table('buyinfo')
