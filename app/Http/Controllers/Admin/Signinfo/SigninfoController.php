@@ -52,7 +52,11 @@ class SigninfoController extends SessionController
 		$data['delay_time'] = strtotime($query -> input('delay_time')); //延迟签约具体时间
 		$data['sign_applytime'] = time();
 		$data['created_at']    = time();
+
+//		print_r($data);die;
+
 		$info = Signinfo::store_sig($data);
+
 		if($info){
 //			$buy_id = $query -> input('buyid');
 			$data1['sig_status'] =  2;   //签约申请成功

@@ -206,12 +206,17 @@
 			$data['chan_id'] = $chan_id;
 			$data['old_homeid'] = $old_homeid;
 			$data['new_homeid'] = $new_homeid;
+//			dd($data);
 			return view('Admin.Change.Change.cwview') -> with($data);
 		}
 
 //财务审核
 		public function update_cwview(Request $query){
 			$chan_id = $query -> input('chan_id');
+			//查询buyid 更改buyid房源信息
+
+			$buyid = Change::get_d_buyid($chan_id);
+
 			$data['finance_status'] = $status = $query -> input('finance_status');
 			$data['finance_remarks'] = $query -> input('finance_remarks');
 			$data['finance_time'] = time();
@@ -225,8 +230,12 @@
 						'msg'           => config('myconfig.buy.buy_cwview_successe_msg'),
 					];
 				}else{
+					$new_homeid = $query ->input('new_homeid');   //新房子id
 					$old_homeid = $query -> input('old_homeid');   //老房子
+
 					Change::update_homeinfo($old_homeid);
+					Change::get_new_homeid_buyid($new_homeid,$buyid-> buyid);
+					Change::get_d_buy_homeid($buyid-> buyid,$new_homeid);
 					return [
 						'code'          => config('myconfig.buy.buy_cwview_success_code'),
 						'msg'           => config('myconfig.buy.buy_cwview_success_msg'),

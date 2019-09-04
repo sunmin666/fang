@@ -709,6 +709,13 @@
 		Route::get('checkout/cwview/{chan_id}/{old_homeid}/{buyid}','Admin\Checkout\CheckoutController@cwview');
 
 
+
+
+		//销售统计路由管理
+		//客户类型统计
+		Route::get('types/{perid}','Admin\Sales\TypesController@index');
+		//销售金额统计
+		Route::get('amount/{perid}','Admin\Sales\TypesController@amount');
 	});
 
 

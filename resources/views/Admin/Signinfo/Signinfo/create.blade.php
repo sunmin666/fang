@@ -479,40 +479,32 @@
 
 		// $( "#store1" ).attr( 'disabled' , true );
 		//获取签约信息或延迟签约
-
 		//签约类型
 		var sign_type = $('#sign_type').val();
 		//延迟签约时间
 		var lock_time = $('#lock_time').val();
 		//签约获延迟签约备注
 		var sign_remarks = $('#sign_remarks').val();
-
 		if(sign_type == 1 && lock_time==''){
 			layer.msg("{{trans('signinfo.lock_time')}}",{time:1456});
 			return false;
 		}
-
-
 		if(sign_type == '' || sign_remarks == '' ){
 			layer.msg("{{trans('signinfo.Incomplete_information')}}",{time:1456});
 			return false;
 		}
-
 		var regEn = {{config('myconfig.config.regEn')}};       //中文验证
 		var regCn = {{config('myconfig.config.regCn')}};   //英文验证
-
 		if ( regEn.test( sign_remarks ) ) {
 			layer.msg( '{{trans('signinfo.text_content2')}}' , { time : 1235 } );
 			$( "#store1" ).attr( 'disabled' , false );
 			return false;
 		}
-
 		if ( regCn.test( sign_remarks ) ) {
 			layer.msg( '{{trans('signinfo.text_content2')}}' , { time : 1235 } );
 			$( "#store1" ).attr( 'disabled' , false );
 			return false;
 		}
-
 		$.ajax( {
 			url : "{{URL('signinfo/store')}}" ,
 			type : 'post' ,
@@ -527,7 +519,6 @@
 			} ,
 			success : function ( data ) {
 				console.log( data );
-
 				if ( data.code == {{config('myconfig.signinfo.sign_store_success_code')}}) {
 					layer.msg( data.msg , { time : 2000 } , function () {
 						window.parent.location.reload();
