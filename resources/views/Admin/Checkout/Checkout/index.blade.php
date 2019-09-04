@@ -211,7 +211,7 @@
 					} ,
 					success : function ( data ) {
 						console.log( data );
-						if ( data.code == {{config('myconfig.buy.buy_delete_success_code')}} ) {
+						if ( data.code == {{config('myconfig.checkout.delete_success_chang_code')}} ) {
 							layer.msg( data.msg , { time : 2000 } , function () {
 								if ( page_count == vote.length ) {
 									location.href = "{{URL('buyinfo/38')}}";
@@ -221,7 +221,7 @@
 								}
 							} );
 						}
-						else if ( data.code == {{config('myconfig.buy.buy_delete_error_code')}} ) {
+						else if ( data.code == {{config('myconfig.checkout.delete_error_chang_code')}} ) {
 							layer.msg( data.msg , { time : 2000 } );
 						}
 					} ,

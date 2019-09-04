@@ -627,6 +627,26 @@
 		Route::get('signinfo/cwview/{sigid}/{buyid}/{homeid}','Admin\Signinfo\SigninfoController@cwview');
 
 
+		//延迟签约管理
+		//延迟签约展示
+		Route::get('delaysig/{perid}','Admin\Signinfo\SigninfoController@index_delay');
+		//签约页面
+		Route::get('delaysig/signinfo/{sigid}','Admin\Signinfo\SigninfoController@get_buy_custt');
+		//添加签约
+		Route::post('delaysig/store','Admin\Signinfo\SigninfoController@delay_store');
+		//修改延迟签约
+		Route::get('delaysig/edit/{signid}','Admin\Signinfo\SigninfoController@delay_edit');
+		//更新延迟签约信息
+		Route::post('delaysig/destroy','Admin\Signinfo\SigninfoController@delay_destroy');
+		//延迟签约详情
+		Route::get('delaysig/view/{signid}','Admin\Signinfo\SigninfoController@delay_view');
+		//延迟签约删除单条
+		Route::post('delaysig/del','Admin\Signinfo\SigninfoController@del');
+		//延迟签约全选删除
+		Route::post('delaysig/destroy_all','Admin\Signinfo\SigninfoController@delay_destroy_all');
+
+
+
 
 		//换房信息展示页面
 		Route::get('changeh/{perid}','Admin\Change\ChaneController@index');

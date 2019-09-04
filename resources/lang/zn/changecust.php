@@ -50,4 +50,6 @@ return [
 
     'adopt_verify_remarks' => '经理审核备注',
 
+    'page_name' => '签约管理',
+
 ];

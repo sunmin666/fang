@@ -98,6 +98,9 @@
 								@endif
 							</td>
 							<td>
+
+								@if($value -> status != 2)
+
 								@if($value -> sign_type == 0 )
 									@if( $value -> sign_status == '' && $value -> sign_verifytime =='')
 										<button type="button" value="{{$value -> signid}}" onclick="review({{$value -> signid}},{{$value -> buyid}})"
@@ -105,17 +108,18 @@
 												class="fa fa-edit"></i> {{trans('signinfo.review')}}</button>
 									@endif
 									@if($value -> sign_status == 1 && $value -> finance_verifytime == '')
-											<button type="button" value="{{$value -> signid}}" onclick="cwview({{$value -> signid}},{{$value -> buyid}},{{$value -> homeid}})"
-											        class="btn btn-warning btn-xs btn_edit" id="btn_cwview"><i
-													class="fa fa-edit"></i> {{trans('signinfo.cwview')}}</button>
+									<button type="button" value="{{$value -> signid}}" onclick="cwview({{$value -> signid}},{{$value -> buyid}},{{$value -> homeid}})"
+											    class="btn btn-warning btn-xs btn_edit" id="btn_cwview"><i
+												class="fa fa-edit"></i> {{trans('signinfo.cwview')}}</button>
 									@endif
 								@endif
-									<button type="button" value="{{$value -> cust_id}}" onclick="checkout({{$value -> signid}},{{$value -> homeid}},{{$value -> cust_id}},2)"
-									        class="btn btn-warning btn-xs btn_edit" id="btn_customero"><i
-											class="fa fa-edit"></i> {{trans('memberinfo.tuifang')}}</button>
-									<button type="button" value="{{$value -> signid}}" onclick="view({{$value -> signid}})"
-								        class="btn btn-warning btn-xs btn_edit" id="btn_view"><i
-										class="fa fa-edit"></i> {{trans('memberinfo.news_view')}}</button>
+								<button type="button" value="{{$value -> cust_id}}" onclick="checkout({{$value -> signid}},{{$value -> homeid}},{{$value -> cust_id}},2)"
+										class="btn btn-warning btn-xs btn_edit" id="btn_customero"><i
+										class="fa fa-edit"></i> {{trans('memberinfo.tuifang')}}</button>
+								@endif
+								<button type="button" value="{{$value -> signid}}" onclick="view({{$value -> signid}})"
+									class="btn btn-warning btn-xs btn_edit" id="btn_view"><i
+									class="fa fa-edit"></i> {{trans('memberinfo.news_view')}}</button>
 								<button type="button" value="{{$value -> signid}}" onclick="edit({{$value -> signid}})"
 								        class="btn btn-warning btn-xs btn_edit" id="btn_edit"><i
 										class="fa fa-edit"></i> {{trans('memberinfo.news_edits')}}</button>
@@ -319,7 +323,7 @@
 		function review( sigid , buyid ) {
 			layer.open( {
 				type : 2 ,
-				title : '{{ trans('memberinfo.news_view') }}' ,
+				title : '{{ trans('signinfo.review') }}' ,
 				moveType : 0 ,
 				skin : 'layui-layer-demo' , //加上边框
 				closeBtn : 1 ,
@@ -337,7 +341,7 @@
 		function cwview(sigid , buyid , homeid ) {
 			layer.open( {
 				type : 2 ,
-				title : '{{ trans('memberinfo.news_view') }}' ,
+				title : '{{ trans('signinfo.cwview') }}' ,
 				moveType : 0 ,
 				skin : 'layui-layer-demo' , //加上边框
 				closeBtn : 1 ,
@@ -354,7 +358,7 @@
 		function checkout(buyid,homeid,cust_id,status){
 			layer.open( {
 				type : 2 ,
-				title : '{{ trans('memberinfo.trackinfo') }}',
+				title : '{{ trans('signinfo.checkout') }}',
 				moveType : 0 ,
 				skin : 'layui-layer-demo' , //加上边框
 				closeBtn : 1 ,

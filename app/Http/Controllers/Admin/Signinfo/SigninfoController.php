@@ -231,4 +231,159 @@ class SigninfoController extends SessionController
 
 	}
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+	//延迟签约管理
+	//展示延迟签约
+	public function index_delay($perid){
+		$data = $this -> session();
+		$data['per_menu'] = $this -> get_per();
+		$data['page_name'] = trans( 'signinfo.page_name' );
+		$data['page_detail'] = trans( 'signinfo.page_detail' );
+		$data['page_tips'] = trans( 'index.page_tips' );
+		$data['page_note'] = trans( 'index.page_note' );
+		$page = config('myconfig.config.page_num');
+		$data['sig'] = Signinfo::get_all_delay($page);
+//		dd($data['sig']);
+		$data['ids'] = $perid;
+		return view('Admin.Delaysig.Delaysig.index') -> with($data);
+	}
+
+	//签约页面
+	public function get_buy_custt($sigid){
+		$buy = Signinfo::get_dan_sig($sigid);
+
+		$data['buy_info'] = Signinfo::get_buy_cust($buy -> buyid);
+		$data['signid'] = $sigid;
+		return view('Admin.Delaysig.Delaysig.create') -> with($data);
+	}
+
+	//添加签约
+	public function delay_store(Request $query)
+	{
+		$validator = Validator::make($query-> all(),[
+			'sign_remarks' => 'min:5|max:10',
+		]);
+		if($validator -> errors() -> get('sign_remarks')){
+			return [
+				'code'         => config('myconfig.signinfo.sign_remarks_code'),
+				'msg'          => config('myconfig.signinfo.sign_remarks_msg')
+			];
+		}
+		$data['cust_id'] = $query -> input('cust_id');//客户id
+		$data['homeid']  = $query -> input('homeid'); //房源id
+		$data['buyid'] = $buy = $query -> input('buyid');//认购信息id
+		$data['sign_type']  = $query -> input('sign_type');//客户选择的签约类型
+		$data['sign_remarks'] =$query -> input('sign_remarks');//签约职业顾问备注
+		$data['sign_applytime'] = time();
+		$data['created_at']    = time();
+		$info = Signinfo::store_sig($data);
+		if($info){
+//
+			$signid = $query -> input('signid');
+
+			Signinfo::update_j($signid);
+
+			return [
+				'code'         => config('myconfig.signinfo.sign_store_success_code'),
+				'msg'          => config('myconfig.signinfo.sign_store_success_msg')
+			];
+		}else{
+			return [
+				'code'         => config('myconfig.signinfo.sign_store_error_code'),
+				'msg'          => config('myconfig.signinfo.sign_store_error_msg')
+			];
+		}
+	}
+
+	//延迟签约修改页面
+	public function delay_edit($signid)
+	{
+		$data['sig'] = Signinfo::get_delay_sig($signid);
+		//dd($data['sig']);
+		return view('Admin.Delaysig.Delaysig.edit') ->with($data);
+	}
+
+	//延迟签约数据更新
+	public function delay_destroy(Request $query)
+	{
+		$signid = $query -> input('signid');
+		$validator = Validator::make($query-> all(),[
+			'sign_remarks' => 'min:5|max:10',
+		]);
+		if($validator -> errors() -> get('sign_remarks')){
+			return [
+				'code'         => config('myconfig.signinfo.sign_remarks_code'),
+				'msg'          => config('myconfig.signinfo.sign_remarks_msg')
+			];
+		}
+		$data['sign_remarks'] =$query -> input('sign_remarks');//签约职业顾问备注
+		$data['updated_at'] = time();
+		$delay_des = Signinfo::update_d_delay($signid,$data);
+		if($delay_des){
+			return [
+				'code'        => config('myconfig.signinfo.update_success_sig_code'),
+				'msg'         => config('myconfig.signinfo.update_success_sig_msg')
+			];
+		}else{
+			return [
+				'code'           => config('myconfig.signinfo.update_error_sig_code'),
+				'msg'            => config('myconfig.signinfo.update_error_sig_msg')
+			];
+		}
+	}
+
+	//延迟签约详情
+	public function delay_view($signid)
+	{
+		$data['sig'] = Signinfo::get_d_delay($signid);
+		return view('Admin.Delaysig.Delaysig.view') -> with($data);
+	}
+
+	//延迟签约删除单条
+	public function del(Request $query)
+	{
+		$signid = $query -> input('signid');
+		$del = Signinfo::delay_d_del($signid);
+		if($del){
+			return [
+				'code'    => config('myconfig.signinfo.delete_sig_success_code'),
+				'msg'     => config('myconfig.signinfo.delete_sig_success_msg')
+			];
+		}else{
+			return [
+				'code'         => config('myconfig.signinfo.delete_sig_error_code'),
+				'msg'           => config('myconfig.signinfo.delete_sig_error_msg')
+			];
+		}
+	}
+
+	//延迟签约全选删除
+	public function delay_destroy_all(Request $query)
+	{
+		$sigid = $query -> input('sigid');
+		$destroy_all = Signinfo::delay_all_del($sigid);
+		if($destroy_all){
+			return [
+				'code'    => config('myconfig.signinfo.delete_sig_success_code'),
+				'msg'     => config('myconfig.signinfo.delete_sig_success_msg')
+			];
+		}else{
+			return [
+				'code'         => config('myconfig.signinfo.delete_sig_error_code'),
+				'msg'           => config('myconfig.signinfo.delete_sig_error_msg')
+			];
+		}
+	}
 }

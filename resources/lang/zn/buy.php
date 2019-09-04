@@ -152,4 +152,16 @@
 
 			'old_homeid'  => '老房源信息',
 			'remarkss'    => '换房时的备注',
+
+			'checkout' =>'退房',
+
+			'change_cust' => '更名',
+
+			'change_home' => '换房',
+
+			'signinfo' => '签约',
+
+			'cwview' => '财务审核',
+
+
 	];

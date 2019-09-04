@@ -348,7 +348,7 @@
 		function review(chan_id,new_homeid){
 			layer.open( {
 				type : 2 ,
-				title : '{{ trans('memberinfo.news_view') }}' ,
+				title : '{{ trans('buy.review') }}' ,
 				moveType : 0 ,
 				skin : 'layui-layer-demo' , //加上边框
 				closeBtn : 1 ,
@@ -366,7 +366,7 @@
 		function cwview(chan_id,old_homeid,new_homeid){
 			layer.open( {
 				type : 2 ,
-				title : '{{ trans('memberinfo.news_view') }}' ,
+				title : '{{ trans('buy.cwview') }}' ,
 				moveType : 0 ,
 				skin : 'layui-layer-demo' , //加上边框
 				closeBtn : 1 ,

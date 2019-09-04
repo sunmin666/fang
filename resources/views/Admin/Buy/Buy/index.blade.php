@@ -349,7 +349,7 @@
 		function review(buyid,homeid){
 			layer.open( {
 				type : 2 ,
-				title : '{{ trans('memberinfo.news_view') }}' ,
+				title : '{{ trans('buy.review') }}' ,
 				moveType : 0 ,
 				skin : 'layui-layer-demo' , //加上边框
 				closeBtn : 1 ,
@@ -367,7 +367,7 @@
 		function cwview(buyid,homeid){
 			layer.open( {
 				type : 2 ,
-				title : '{{ trans('memberinfo.news_view') }}' ,
+				title : '{{ trans('buy.cwview') }}' ,
 				moveType : 0 ,
 				skin : 'layui-layer-demo' , //加上边框
 				closeBtn : 1 ,
@@ -385,7 +385,7 @@
 		function signinfo(buyid){
 			layer.open( {
 				type : 2 ,
-				title : '{{ trans('memberinfo.trackinfo') }}' ,
+				title : '{{ trans('buy.signinfo') }}' ,
 				moveType : 0 ,
 				skin : 'layui-layer-demo' , //加上边框
 				closeBtn : 1 ,
@@ -404,7 +404,7 @@
 		function change_home(buyid,homeid){
 			layer.open( {
 				type : 2 ,
-				title : '{{ trans('memberinfo.trackinfo') }}' ,
+				title : '{{ trans('buy.change_home') }}' ,
 				moveType : 0 ,
 				skin : 'layui-layer-demo' , //加上边框
 				closeBtn : 1 ,
@@ -422,7 +422,7 @@
 		function change_cust(buyid,homeid){
 			layer.open( {
 				type : 2 ,
-				title : '{{ trans('memberinfo.trackinfo') }}' ,
+				title : '{{ trans('buy.change_cust') }}' ,
 				moveType : 0 ,
 				skin : 'layui-layer-demo' , //加上边框
 				closeBtn : 1 ,
@@ -441,7 +441,7 @@
 		function checkout(buyid,homeid,cust_id,status){
 			layer.open( {
 				type : 2 ,
-				title : '{{ trans('memberinfo.trackinfo') }}' ,
+				title : '{{ trans('buy.checkout') }}' ,
 				moveType : 0 ,
 				skin : 'layui-layer-demo' , //加上边框
 				closeBtn : 1 ,

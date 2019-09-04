@@ -116,7 +116,7 @@ class Checkout extends Model
 	//更换房源信息
 	public static function update_home($home){
 		return DB::table('homeinfo') -> where('homeid','=',$home) -> update(
-			array('homeid' => 0)
+			array('status' => 0)
 		);
 	}
 
