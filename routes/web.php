@@ -716,6 +716,16 @@
 		Route::get('types/{perid}','Admin\Sales\TypesController@index');
 		//销售金额统计
 		Route::get('amount/{perid}','Admin\Sales\TypesController@amount');
+		//销售房源统计
+		Route::get('listing/{perid}','Admin\Sales\TypesController@listing');
+		//延迟统计
+		Route::get('delay/{perid}','Admin\Sales\TypesController@delay');
+		//签约统计
+		Route::get('statistics/{perid}','Admin\Sales\TypesController@statistics');
+		//退房统计
+		Route::get('theshy/{perid}','Admin\Sales\TypesController@theshy');
+
+
 	});
 
 
