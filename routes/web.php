@@ -716,6 +716,9 @@
 		Route::get('types/{perid}','Admin\Sales\TypesController@index');
 		//销售金额统计
 		Route::get('amount/{perid}','Admin\Sales\TypesController@amount');
+
+		//房源状态统计
+		Route::get('homestatus/{perid}','Admin\Homestatus\HomestatusController@index');
 	});
 
 

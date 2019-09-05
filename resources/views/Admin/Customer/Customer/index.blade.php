@@ -242,7 +242,7 @@
 		function customer( cust_id ) {
 			layer.open( {
 				type : 2 ,
-				title : '{{ trans('memberinfo.news_edits') }}' ,
+				title : '{{ trans('coownerinfo.page_name') }}' ,
 				moveType : 0 ,
 				skin : 'layui-layer-demo' , //加上边框
 				closeBtn : 1 ,
@@ -260,7 +260,7 @@
 		function payment( cust_id ) {
 			layer.open( {
 				type : 2 ,
-				title : '{{ trans('memberinfo.news_edits') }}' ,
+				title : '{{ trans('payloginfo.payment') }}' ,
 				moveType : 0 ,
 				skin : 'layui-layer-demo' , //加上边框
 				closeBtn : 1 ,
@@ -405,7 +405,7 @@
 		function buyinfo(cust_id){
 			layer.open( {
 				type : 2 ,
-				title : '{{ trans('memberinfo.trackinfo') }}' ,
+				title : '{{ trans('buy.buyinfo') }}' ,
 				moveType : 0 ,
 				skin : 'layui-layer-demo' , //加上边框
 				closeBtn : 1 ,

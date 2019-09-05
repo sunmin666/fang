@@ -45,6 +45,7 @@ class TypesController extends SessionController
 		$page = config('myconfig.config.page_num');
 		//查询所有职业顾问
 		$data['hous'] = Sales::get_all_hous();
+		//dd($data['hous']);
 		$data['houss'] = $hous = Input::get('hous');    //职业顾问
 		$data['stimes'] = $stime = Input::get('stime');   //开始时间
 		$data['etimes'] = $etime = Input::get('etime');    //结束时间

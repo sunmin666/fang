@@ -5,7 +5,7 @@
 	 * 邮箱：74367869@qq.com
 	 */
 	return [
-		'page_name'   => '认证签约',
+		'page_name'   => '认购签约',
 
 		'page_detail'  => '签约管理',
 
@@ -46,4 +46,7 @@
 
 		'checkout' => '退房',
 
+		'page_detaill'  => '延迟签约管理',
+
+		'text_content2' => '备注信息不合法',
 	];

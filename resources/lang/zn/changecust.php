@@ -52,4 +52,6 @@ return [
 
     'page_name' => '签约管理',
 
+    'page_detail' => '更名管理',
+
 ];

@@ -249,7 +249,7 @@
 		}
 		else if ( pay_type == 1 ) {
 
-			alert(123);
+			//alert(123);
 			var total_prices = $( '#total_pricess' ).val();   //总金额
 			var loan_term = $( '#loan_term' ).val();        //年限
 			var month_pays = $( '#month_pays' ).val();    // 月供
@@ -259,7 +259,7 @@
 			}
 		}
 		else if ( pay_type == 0 ) {
-			alert(456);
+			//alert(456);
 			var total_prices = $( '#total_prices' ).val();   //总金额
 			var loan_term = '';        //年限
 			var month_pays = '';    // 月供
