@@ -119,7 +119,7 @@
 									经理审核未通过
 								@endif
 							</td>
-							<td>@if($value -> status === null)
+							<td>@if($value -> status == 1)
 										正常
 									@else
 										客户已退房
@@ -140,13 +140,11 @@
 												class="fa fa-edit"></i> {{trans('signinfo.cwview')}}</button>
 									@endif
 								@endif
-
-
-								@if($value -> sign_type === 0 || $value -> sign_status === 0)
+								@if($value -> status == 2 )
 								@else
-									<button type="button" value="{{$value -> cust_id}}" onclick="checkout({{$value -> signid}},{{$value -> homeid}},{{$value -> cust_id}},2)"
-									        class="btn btn-warning btn-xs btn_edit" id="btn_customero"><i
-											class="fa fa-edit"></i> {{trans('memberinfo.tuifang')}}</button>
+										<button type="button" value="{{$value -> cust_id}}" onclick="checkout({{$value -> signid}},{{$value -> homeid}},{{$value -> cust_id}},2)"
+										        class="btn btn-warning btn-xs btn_edit" id="btn_customero"><i
+												class="fa fa-edit"></i> {{trans('memberinfo.tuifang')}}</button>
 									@endif
 								@endif
 									<button type="button" value="{{$value -> signid}}" onclick="view({{$value -> signid}})"

@@ -97,4 +97,72 @@
 							 ->count();
 		}
 
+
+
+
+
+		//查询所有职业顾问以及下面的客户
+		public static function get_all_housts($hous){
+			$data = DB::table('houserinfo')
+								-> where('is_ipad','=',2)
+								-> where(
+									function($query) use ($hous){
+										if($hous){
+											$query -> where('hous_id','=',$hous);
+										}
+									}
+								)
+								-> get()
+								-> map(function($value){
+				return (array)$value;
+			}) -> toArray();
+
+			foreach($data as $k => $v){
+				$data[$k]['cust'] = DB::table('customer') -> select('cust_id','realname') -> where('hous_id','=',$v['hous_id']) -> get()
+					-> map(function($value){
+						return (array)$value;
+					})-> toArray();
+			}
+			return $data;
+		}
+
+
+
+		//查询客户以签约并且财务审核通过的房子的总价
+		public static function get_signinfo($cust_id,$stime,$etime){
+			return DB::table('signinfo')
+				 -> select('signinfo.*','buyinfo.total_price')
+				-> leftJoin('buyinfo','signinfo.buyid','=','buyinfo.buyid')
+				-> where('signinfo.cust_id','=',$cust_id)
+				-> where('signinfo.sign_status','=',1)
+				-> where('signinfo.finance_status','=',1)
+				-> where('signinfo.status','=',1)
+				->where( function( $query ) use ( $stime ) {
+					if ( $stime ) {
+						$s = strtotime( $stime );
+						$query->where( 'signinfo.created_at' , '>' , $s );
+					}
+				} )
+				->where( function( $query ) use ( $etime ) {
+					if ( $etime ) {
+						$e = strtotime( $etime );
+						$query->where( 'signinfo.created_at' , '<' , $e );
+					}
+				} )
+				-> get() -> map(function($value){
+					return (array)$value;
+				}) -> toArray();
+		}
+
+
+
+
+
+
+
+
+
+
+
+
 	}

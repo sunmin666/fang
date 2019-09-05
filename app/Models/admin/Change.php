@@ -135,16 +135,11 @@
 			);
 		}
 
-
-
-
-
 		//查询buyid
 		public static function get_d_buyid($chan_id){
 			return DB::table('changeinfo') -> select('buyid') -> where('chan_id','=',$chan_id)
 				-> first();
 		}
-
 
 		//更改buy表里的房源信息
 		public static function get_d_buy_homeid($buyid,$homeid){

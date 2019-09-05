@@ -48,13 +48,76 @@ class TypesController extends SessionController
 		$data['houss'] = $hous = Input::get('hous');    //职业顾问
 		$data['stimes'] = $stime = Input::get('stime');   //开始时间
 		$data['etimes'] = $etime = Input::get('etime');    //结束时间
-
-//		$data['amount'] =
-
-
+		$ig = $this ->amount_jin($hous,$stime,$etime);
+		$sort_arr = [];
+		foreach ($ig as $key => $value) {
+			$sort_arr[] = $value['qian'];
+		}
+		array_multisort($sort_arr, SORT_DESC, $ig);
+		$data['amount'] = $ig;
+		$data['total'] =  array_sum($sort_arr);
+//		dd($data['amount']);
 		$data['ids'] = $perid;
 		return view('Admin.Sales.Amount.index') -> with($data);
 	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	//销售金额统计
+	public function amount_jin($hous,$stime,$etime){
+    	//查询出所有的职业顾问以及下面的用户
+		$houss = Sales::get_all_housts($hous);
+
+		foreach($houss as $k => $v){
+			$jinqian = array();
+			foreach($v['cust'] as $k1 => $v1){
+				$qian = Sales::get_signinfo($v1['cust_id'],$stime,$etime);
+				if( count($qian) != 0 ){
+					array_push($jinqian,$qian[0]['total_price']);
+				}
+				$houss[$k]['qian'] = array_sum($jinqian);
+			}
+		}
+		return $houss;
+	}
+
+
+
+
 
 
 

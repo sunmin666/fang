@@ -46,36 +46,29 @@
 				</button>
 			</form>
 		</div>
-		{{--<div class="total">总数：{{$total}}</div>--}}
+		<div class="total">总数：{{$total}}</div>
 		<div class="box-body">
 			<div class="table-responsive">
 				<table class="table no-margin">
 					<thead>
 					<tr>
-						{{--客户真实姓名--}}
-						<th>{{ trans('sales.realname') }}</th>
-						{{--客户性别--}}
-						<th>{{ trans('sales.sex') }}</th>
-						{{--客户手机号--}}
-						<th>{{ trans('sales.mobile') }}</th>
-						{{--客户的邮箱--}}
-						<th>{{ trans('sales.email') }}</th>
-						{{--所属醒目--}}
+						<th>{{trans('sales.sort')}}</th>
+						{{--职业顾问--}}
 						<th>{{trans('sales.hous_id')}}</th>
-						{{--客户录入时间--}}
-						<th>{{trans('sales.created_at')}}</th>
+						{{--职业顾问手机号--}}
+						<th>{{trans('sales.iphone')}}</th>
+						{{--金额--}}
+						<th>{{trans('sales.amount')}}</th>
 					</tr>
 					</thead>
 					<tbody>
-					{{--@foreach($customer as $value)--}}
-						{{--<tr>--}}
-							{{--<td>{{ $value -> realname}}</td>--}}
-							{{--<td>@if($value -> sex == 1) {{ trans('customer.male') }} @elseif($value -> sex == 2) {{ trans('customer.female') }} @endif</td>--}}
-							{{--<td>{{$value -> mobile}}</td>--}}
-							{{--<td>@if($value-> email == '') {{ trans('customer.no_email') }} @else {{$value -> email}} @endif</td>--}}
-							{{--<td>{{$value -> name}}</td>--}}
-							{{--<td>{{date('Y-m-d H:i',$value -> created_at)}}</td>--}}
-					{{--@endforeach--}}
+					@foreach($amount as $kay => $value)
+						<tr>
+							<td><?php echo $kay + 1 ?></td>
+							<td>{{ $value['name']}}</td>
+							<td>{{$value['mobile']}}</td>
+							<td>{{$value ['qian']}}</td>
+					@endforeach
 					</tbody>
 				</table>
 			</div>
