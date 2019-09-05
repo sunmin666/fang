@@ -722,6 +722,15 @@
 		Route::get('renameho/{perid}','Admin\Sales\TypesController@renameho');
 		//房源换房统计
 		Route::get('changehome/{perid}','Admin\Sales\TypesController@changehome');
+		//销售房源统计
+		Route::get('listing/{perid}','Admin\Sales\TypesController@listing');
+		//延迟统计
+		Route::get('delay/{perid}','Admin\Sales\TypesController@delay');
+		//签约统计
+		Route::get('statistics/{perid}','Admin\Sales\TypesController@statistics');
+		//退房统计
+		Route::get('theshy/{perid}','Admin\Sales\TypesController@theshy');
+
 	});
 
 

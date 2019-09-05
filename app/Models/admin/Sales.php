@@ -156,6 +156,7 @@
 		}
 
 
+
 	//查询所有职业顾问以及下面的客户
 	public static function get_all_subscr($hous)
 	{
@@ -172,61 +173,126 @@
 					-> map(function($value){
 						return (array)$value;
 					}) -> toArray();
-
-				foreach($data as $k => $v){
-					$data[$k]['cust'] = DB::table('customer') -> select('cust_id','realname') -> where('hous_id','=',$v['hous_id']) -> get()
-						-> map(function($value){
-							return (array)$value;
-						})-> toArray();
-				}
-				return $data;
+		foreach($data as $k => $v){
+			$data[$k]['cust'] = DB::table('customer') -> select('cust_id','realname') -> where('hous_id','=',$v['hous_id']) -> get()
+														-> map(function($value){
+															return (array)$value;
+														})-> toArray();
+		}
+		return $data;
 
 	}
+
+		//查询客户以签约并且财务通过审核的房子数量
+		public static function get_signinfol($cust_id,$stime,$etime){
+			return DB::table('signinfo')
+							 -> select('signinfo.*')
+							 -> leftJoin('buyinfo','signinfo.buyid','=','buyinfo.buyid')
+							 -> where('signinfo.cust_id','=',$cust_id)
+							 -> where('signinfo.sign_status','=',1)
+							 -> where('signinfo.finance_status','=',1)
+							 -> where('signinfo.status','=',1)
+							 ->where( function( $query ) use ( $stime ) {
+								 if ( $stime ) {
+									 $s = strtotime( $stime );
+									 $query->where( 'signinfo.created_at' , '>' , $s );
+								 }
+							 } )
+							 ->where( function( $query ) use ( $etime ) {
+								 if ( $etime ) {
+									 $e = strtotime( $etime );
+									 $query->where( 'signinfo.created_at' , '<' , $e );
+								 }
+							 } )
+							 -> get() -> count();
+		}
 
 	//查询客户已签约的房子
 	public static function get_subscr($cust_id,$stime,$etime)
 	{
-		return DB::table('buyinfo')
-			-> where('buyinfo.cust_id','=',$cust_id)
-			-> where('buyinfo.finance_verify_status','=','1')
-			-> where('buyinfo.finance_verify_status','=','1')
-			->where( function( $query ) use ( $stime ) {
-				if ( $stime ) {
-					$s = strtotime( $stime );
-					$query->where( 'buyinfo.created_at' , '>' , $s );
-				}
-			} )
-			->where( function( $query ) use ( $etime ) {
-				if ( $etime ) {
-					$e = strtotime( $etime );
-					$query->where( 'buyinfo.created_at' , '<' , $e );
-				}
-			} )
-			-> get() ->count();
-
+		return DB::table( 'buyinfo' )
+						 ->where( 'buyinfo.cust_id' , '=' , $cust_id )
+						 ->where( 'buyinfo.finance_verify_status' , '=' , '1' )
+						 ->where( 'buyinfo.finance_verify_status' , '=' , '1' )
+						 ->where( function( $query ) use ( $stime ) {
+							 if ( $stime ) {
+								 $s = strtotime( $stime );
+								 $query->where( 'buyinfo.created_at' , '>' , $s );
+							 }
+						 } )
+						 ->where( function( $query ) use ( $etime ) {
+							 if ( $etime ) {
+								 $e = strtotime( $etime );
+								 $query->where( 'buyinfo.created_at' , '<' , $e );
+							 }
+						 } )
+						 ->get()->count();
 	}
+		//查询延迟签约并且经理通过审核
+		public static function get_signinfod($cust_id,$stime,$etime){
+			return DB::table('signinfo')
+							-> where('cust_id','=',$cust_id)
+							-> where('sign_type','=',1)
+							-> where('sign_status','=',1)
+							->where( function( $query ) use ( $stime ) {
+								if ( $stime ) {
+									$s = strtotime( $stime );
+									$query->where( 'signinfo.created_at' , '>' , $s );
+								}
+							} )
+							->where( function( $query ) use ( $etime ) {
+								if ( $etime ) {
+									$e = strtotime( $etime );
+									$query->where( 'signinfo.created_at' , '<' , $e );
+								}
+							} )
+							-> get() -> count();
+		}
+
+
+
 
 		//查询客户已更名的房子
 		public static function get_rename($cust_id,$stime,$etime)
 		{
+			return DB::table( 'changeinfo' )
+							 ->where( 'changeinfo.cust_id' , '=' , $cust_id )
+							 ->where( 'changeinfo.status' , '=' , '1' )
+							 ->where( 'changeinfo.type' , '=' , '1' )
+							 ->where( function( $query ) use ( $stime ) {
+								 if ( $stime ) {
+									 $s = strtotime( $stime );
+									 $query->where( 'buyinfo.created_at' , '>' , $s );
+								 }
+							 } )
+							 ->where( function( $query ) use ( $etime ) {
+								 if ( $etime ) {
+									 $e = strtotime( $etime );
+									 $query->where( 'buyinfo.created_at' , '<' , $e );
+								 }
+							 } )
+							 ->get()->count();
+
+		}
+		//退房统计表
+		public static function get_theshy($cust_id,$stime,$etime){
 			return DB::table('changeinfo')
-				-> where('changeinfo.cust_id','=',$cust_id)
-				-> where('changeinfo.status','=','1')
-				-> where('changeinfo.type','=','1')
+				-> where('cust_id','=',$cust_id)
+				-> where('type','=',3)
+				-> where('finance_status','=' ,1)
 				->where( function( $query ) use ( $stime ) {
 					if ( $stime ) {
 						$s = strtotime( $stime );
-						$query->where( 'buyinfo.created_at' , '>' , $s );
+						$query->where( 'created_at' , '>' , $s );
 					}
 				} )
 				->where( function( $query ) use ( $etime ) {
 					if ( $etime ) {
 						$e = strtotime( $etime );
-						$query->where( 'buyinfo.created_at' , '<' , $e );
+						$query->where( 'created_at' , '<' , $e );
 					}
 				} )
-				-> get() ->count();
-
+				-> get() -> count();
 		}
 
 
@@ -251,7 +317,5 @@
 					}
 				} )
 				-> get() ->count();
-
 		}
-
 	}
