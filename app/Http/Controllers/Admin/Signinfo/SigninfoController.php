@@ -254,7 +254,7 @@ class SigninfoController extends SessionController
 		$data = $this -> session();
 		$data['per_menu'] = $this -> get_per();
 		$data['page_name'] = trans( 'signinfo.page_name' );
-		$data['page_detail'] = trans( 'signinfo.page_detail' );
+		$data['page_detail'] = trans( 'signinfo.page_detaill' );
 		$data['page_tips'] = trans( 'index.page_tips' );
 		$data['page_note'] = trans( 'index.page_note' );
 		$page = config('myconfig.config.page_num');

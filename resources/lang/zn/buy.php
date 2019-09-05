@@ -17,7 +17,7 @@
 			'text_content2'  => '备注信息不合法',
 			'month_pay'          => '月供',
 			'loan_term'         => '年限',
-			'total_price'      => '应缴哪总经额',
+			'total_price'      => '应缴总金额',
 			'operating'    => '操作',
 			'buy_number'     => '认购编号',
 
@@ -163,5 +163,5 @@
 
 			'cwview' => '财务审核',
 
-
+			'buyinfo' => '认购',
 	];

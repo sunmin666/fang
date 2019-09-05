@@ -16,7 +16,7 @@ class ChangecustController extends SessionController
         $data = $this -> session();
         $data['per_menu'] = $this -> get_per();
         $data['page_name'] = trans( 'changecust.page_name' );
-        $data['page_detail'] = trans( 'payloginfo.page_detail' );
+        $data['page_detail'] = trans( 'changecust.page_detail' );
         $data['page_tips'] = trans( 'index.page_tips' );
         $data['page_note'] = trans( 'index.page_note' );
         $page = config('myconfig.config.page_num');
