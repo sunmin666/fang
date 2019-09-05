@@ -118,6 +118,7 @@
 			}) -> toArray();
 
 			foreach($data as $k => $v){
+				$data[$k]['qian'] = '0';
 				$data[$k]['cust'] = DB::table('customer') -> select('cust_id','realname') -> where('hous_id','=',$v['hous_id']) -> get()
 					-> map(function($value){
 						return (array)$value;
@@ -155,14 +156,102 @@
 		}
 
 
+	//查询所有职业顾问以及下面的客户
+	public static function get_all_subscr($hous)
+	{
+		$data = DB::table('houserinfo')
+					-> where('is_ipad','=',2)
+					-> where(
+						function($query) use ($hous){
+							if($hous){
+								$query -> where('hous_id','=',$hous);
+							}
+						}
+					)
+					-> get()
+					-> map(function($value){
+						return (array)$value;
+					}) -> toArray();
+
+				foreach($data as $k => $v){
+					$data[$k]['cust'] = DB::table('customer') -> select('cust_id','realname') -> where('hous_id','=',$v['hous_id']) -> get()
+						-> map(function($value){
+							return (array)$value;
+						})-> toArray();
+				}
+				return $data;
+
+	}
+
+	//查询客户已签约的房子
+	public static function get_subscr($cust_id,$stime,$etime)
+	{
+		return DB::table('buyinfo')
+			-> where('buyinfo.cust_id','=',$cust_id)
+			-> where('buyinfo.finance_verify_status','=','1')
+			-> where('buyinfo.finance_verify_status','=','1')
+			->where( function( $query ) use ( $stime ) {
+				if ( $stime ) {
+					$s = strtotime( $stime );
+					$query->where( 'buyinfo.created_at' , '>' , $s );
+				}
+			} )
+			->where( function( $query ) use ( $etime ) {
+				if ( $etime ) {
+					$e = strtotime( $etime );
+					$query->where( 'buyinfo.created_at' , '<' , $e );
+				}
+			} )
+			-> get() ->count();
+
+	}
+
+		//查询客户已更名的房子
+		public static function get_rename($cust_id,$stime,$etime)
+		{
+			return DB::table('changeinfo')
+				-> where('changeinfo.cust_id','=',$cust_id)
+				-> where('changeinfo.status','=','1')
+				-> where('changeinfo.type','=','1')
+				->where( function( $query ) use ( $stime ) {
+					if ( $stime ) {
+						$s = strtotime( $stime );
+						$query->where( 'buyinfo.created_at' , '>' , $s );
+					}
+				} )
+				->where( function( $query ) use ( $etime ) {
+					if ( $etime ) {
+						$e = strtotime( $etime );
+						$query->where( 'buyinfo.created_at' , '<' , $e );
+					}
+				} )
+				-> get() ->count();
+
+		}
 
 
+		//查询客户已换房的房子
+		public static function get_changehome($cust_id,$stime,$etime)
+		{
+			return DB::table('changeinfo')
+				-> where('changeinfo.cust_id','=',$cust_id)
+				-> where('changeinfo.status','=','1')
+				-> where('changeinfo.finance_status','=','1')
+				-> where('changeinfo.type','=','2')
+				->where( function( $query ) use ( $stime ) {
+					if ( $stime ) {
+						$s = strtotime( $stime );
+						$query->where( 'buyinfo.created_at' , '>' , $s );
+					}
+				} )
+				->where( function( $query ) use ( $etime ) {
+					if ( $etime ) {
+						$e = strtotime( $etime );
+						$query->where( 'buyinfo.created_at' , '<' , $e );
+					}
+				} )
+				-> get() ->count();
 
-
-
-
-
-
-
+		}
 
 	}

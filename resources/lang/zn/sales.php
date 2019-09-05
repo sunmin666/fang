@@ -9,6 +9,8 @@
 		'page_detail'   => '客户类型统计',
 		'page_detaila'  => '销售金额统计',
 
+		'page_detailb' => '房源认购统计',
+
 		'type'   => '客户接触方式',
 		'search'   => '查找',
 		'cust'    => '职业顾问',
@@ -24,5 +26,13 @@
 
 		'sort'   => '排序',
 
+		'detailb_num' => '认购数量',
 
+		'page_detailc' => '更名统计',
+
+		'page_detaild' => '换房统计',
+
+		'rename_num' => '更名数量',
+
+		'changehome_num' => '换房数量',
 	];

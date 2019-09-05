@@ -716,9 +716,12 @@
 		Route::get('types/{perid}','Admin\Sales\TypesController@index');
 		//销售金额统计
 		Route::get('amount/{perid}','Admin\Sales\TypesController@amount');
-
-		//房源状态统计
-		Route::get('homestatus/{perid}','Admin\Homestatus\HomestatusController@index');
+		//房源签约统计
+		Route::get('subscr/{perid}','Admin\Sales\TypesController@subscr');
+		//房源更名统计
+		Route::get('renameho/{perid}','Admin\Sales\TypesController@renameho');
+		//房源换房统计
+		Route::get('changehome/{perid}','Admin\Sales\TypesController@changehome');
 	});
 
 

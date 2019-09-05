@@ -68,6 +68,7 @@
 							<td>{{ $value['name']}}</td>
 							<td>{{$value['mobile']}}</td>
 							<td>{{$value ['qian']}}</td>
+						</tr>
 					@endforeach
 					</tbody>
 				</table>
