@@ -33,9 +33,10 @@
 
 		'page_detailc' => '更名统计',
 
-//		'page_detaild' => '换房统计',
+
 
 		'rename_num' => '更名数量',
+
 
 		'listing'   => '房源数量',
 
@@ -44,6 +45,9 @@
 		'statistics'   => '签约统计',
 
 		'theshy'   => '退房统计',
+
+
+		'rng'   => '认购统计',
 
 
 		'changehome_num' => '换房数量',

@@ -119,7 +119,7 @@ class TypesController extends SessionController
 		$data = $this -> session();
 		$data['per_menu'] = $this -> get_per();
 		$data['page_name'] = trans( 'sales.page_name' );
-		$data['page_detail'] = trans( 'sales.page_detailb' );
+		$data['page_detail'] = trans( 'sales.rng' );
 		$data['page_tips'] = trans( 'index.page_tips' );
 		$data['page_note'] = trans( 'index.page_note' );
 		$page = config('myconfig.config.page_num');
@@ -161,7 +161,7 @@ class TypesController extends SessionController
 		$data['stime'] = $stime = Input::get('stime');  //接受开始时间
 		$data['etime'] = $etime = Input::get('etime');  //接受结束时间
 		$igg = $this ->amount_jiuinng($hous,$stime,$etime);
-		//dd($igg);
+//		dd($igg);
 		$sort_arr = [];
 		foreach ($igg as $key => $value) {
 			$sort_arr[] = $value ['num'];
@@ -186,7 +186,7 @@ class TypesController extends SessionController
 		$data['stime'] = $stime = Input::get('stime');  //接受开始时间
 		$data['etime'] = $etime = Input::get('etime');  //接受结束时间
 		$igg = $this ->amount_changehome($hous,$stime,$etime);
-		//dd($igg);
+//		dd($igg);
 		$sort_arr = [];
 		foreach ($igg as $key => $value) {
 			$sort_arr[] = $value ['num'];
@@ -195,7 +195,7 @@ class TypesController extends SessionController
 		//dd($sort_arr);
 		$data['amount'] = $igg;
 		//dd($data['amount']);
-		$data['total'] =  array_sum($sort_arr);		//更名总数量
+		$data['total'] =  array_sum($sort_arr);		//换房总数量
 		//dd($data['total']);
 		$data['ids'] = $perid;
 		return view('Admin.Sales.Changehome.index') -> with($data);
@@ -375,7 +375,7 @@ class TypesController extends SessionController
 //		return 111;
 		//查询出所有的职业顾问以及下面的用户
 		$rehous = Sales::get_all_subscr($hous);
-
+		//dd($rehous);
 		//dd($houss);
 		foreach ($rehous as $keyy => $valuee){
 			$num = array();
