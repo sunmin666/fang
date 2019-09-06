@@ -34,5 +34,7 @@
 
 		'rename_num' => '更名数量',
 
+		'rng'   => '认购统计',
+
 		'changehome_num' => '换房数量',
 	];

@@ -26,7 +26,7 @@
 
         </div>
         <div id="status_search">
-            <form action="{{URL('subscr/53')}}" method="get">
+            <form action="{{URL('renameho/53')}}" method="get">
                 <label>{{ trans('sales.cust') }}：</label>
                 <select name="hous"  class="status">
                     <option value="">全部</option>
