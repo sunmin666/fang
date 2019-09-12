@@ -20,12 +20,27 @@ class Purchase extends Model
     }
 
     //查询所有方案
-    public static function get_all_purchase($page)
+    public static function get_all_purchase($name,$iphone,$page)
     {
         return DB::table('purchase_plan')
             -> select('purchase_plan.*','customer.realname')
             -> leftJoin('customer','purchase_plan.cust_id','=','customer.cust_id')
-            -> paginate($page);
+
+					->where( function( $query ) use ( $name ) {
+						if ( $name ) {
+
+							$a = DB::table('customer')-> select('cust_id') -> where('realname','like','%'.$name.'%') -> get() -> map(function($value){return (array)$value;}) -> toArray();
+
+							$query->whereIn( 'purchase_plan.cust_id', $a );
+						}
+					} )
+					->where( function( $query ) use ( $iphone ) {
+						if ( $iphone ) {
+							$c = DB::table('customer')-> select('cust_id') -> where('mobile','like','%'.$iphone.'%') -> get() -> map(function($value){return (array)$value;}) -> toArray();
+							$query->whereIn( 'purchase_plan.cust_id' , $c );
+						}
+					} )
+						-> paginate($page);
     }
 
     //查询单条方案

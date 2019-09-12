@@ -36,11 +36,13 @@
 			$hous ,
 			$type ,
 			$stime ,
-			$etime
+			$etime,
+			$type_all
 		) {
 			return DB::table( 'customer' )
 							 ->select( 'customer.*' , 'houserinfo.name' )
 							 ->leftJoin( 'houserinfo' , 'customer.hous_id' , '=' , 'houserinfo.hous_id' )
+
 							 ->where( function( $query ) use ( $hous ) {
 								 if ( $hous ) {
 									 $query->where( 'customer.hous_id' , '=' , $hous );
@@ -60,16 +62,21 @@
 							 } )
 							 ->where( function( $query ) use ( $etime ) {
 								 if ( $etime ) {
-
 									 $e = strtotime( $etime );
 									 $query->where( 'customer.created_at' , '<' , $e );
 								 }
 							 } )
+
+							->where( function( $query ) use ( $type_all ) {
+								if ( $type_all ) {
+									$query->where( "customer.$type_all" , '!=' , null );
+								}
+							} )
 							 ->paginate( $page );
 		}
 
 		//客户数据统计总数
-		public static function get_total_cust( $hous , $type , $stime , $etime )
+		public static function get_total_cust( $hous , $type , $stime , $etime ,$type_all )
 		{
 			return DB::table( 'customer' )
 							 ->where( function( $query ) use ( $hous ) {
@@ -94,6 +101,11 @@
 									 $query->where( 'customer.created_at' , '<' , $e );
 								 }
 							 } )
+							->where( function( $query ) use ( $type_all ) {
+								if ( $type_all ) {
+									$query->where( "customer.$type_all" , '!=' , null );
+								}
+							} )
 							 ->count();
 		}
 
@@ -213,7 +225,8 @@
 		return DB::table( 'buyinfo' )
 						 ->where( 'buyinfo.cust_id' , '=' , $cust_id )
 						 ->where( 'buyinfo.finance_verify_status' , '=' , '1' )
-						 ->where( 'buyinfo.finance_verify_status' , '=' , '1' )
+						 ->where( 'buyinfo.status' , '!=' , '5' )
+							->where( 'buyinfo.status' , '!=' , '0' )
 						 ->where( function( $query ) use ( $stime ) {
 							 if ( $stime ) {
 								 $s = strtotime( $stime );

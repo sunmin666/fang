@@ -86,7 +86,7 @@ class Consu extends Model
 	 *
 	 * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator|\Illuminate\Database\Query\Builder
 	 */
-		public static function get_all_consu($page){
+		public static function get_all_consu($role,$name,$iphone,$page){
 
 				return DB::table('houserinfo')
 					-> select('houserinfo.*','projectinfo.pro_cname','user_relationinfo.posi_id','user_relationinfo.role_id','user_relationinfo.perm_id','user_roleinfo.role_name','user_positioninfo.posi_name','user_permissioninfo.perm_name','hous_enjoy.enjoy as enjoys')
@@ -97,6 +97,22 @@ class Consu extends Model
 					-> leftJoin('user_permissioninfo','user_relationinfo.perm_id','=','user_permissioninfo.perm_id')
 					-> leftJoin('projectinfo','houserinfo.proj_id','=','projectinfo.project_id')
 					-> leftJoin('hous_enjoy','houserinfo.enjoy','=','hous_enjoy.enjoy_id')
+					-> where(function($query) use ($role){
+						if($role){
+							 $a = DB::table('user_relationinfo')-> select('memberid') -> where('role_id','=',$role) -> get() -> map(function($value){ return (array)$value; }) -> toArray();
+							$query -> whereIn('hous_id',$a);
+						}
+					})
+					-> where(function($query) use ($name){
+						if($name){
+							$query -> where('name','like','%'.$name.'%');
+						}
+					})
+					-> where(function($query) use ($iphone){
+						if($iphone){
+							$query -> where('mobile','like','%'.$iphone.'%');
+						}
+					})
 					-> paginate($page);
 //
 		}

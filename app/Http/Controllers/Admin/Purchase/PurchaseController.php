@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Purchase;
 use Illuminate\Http\Request;
 use App\Models\admin\Purchase;
 use App\Http\Controllers\SessionController;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
 
 class PurchaseController extends SessionController
@@ -19,8 +20,14 @@ class PurchaseController extends SessionController
         $data['page_tips'] = trans( 'index.page_tips' );
         $data['page_note'] = trans( 'index.page_note' );
         $page = config('myconfig.config.page_num');
+        //接受参数
+				$data['name'] = $name = Input::get('name');
+				$data['iphone'] = $iphone = Input::get('iphone');
+
+
+
         $data['ids'] = $perid;
-        $data['purchase'] = Purchase::get_all_purchase($page);
+        $data['purchase'] = Purchase::get_all_purchase($name,$iphone,$page);
         return view('Admin/Purchase/Purchase/index')->with($data);
     }
 

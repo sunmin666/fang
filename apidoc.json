@@ -1,0 +1,7 @@
+{
+  "name": "房源管理api",
+  "version": "1.0.0",
+  "description": "接口",
+  "title": "房源信息api管理",
+  "url" : "http://192.168.1.13/fang/public/api/"
+}

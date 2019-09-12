@@ -17,12 +17,23 @@ class Cultrue extends Model
     }
 
     //企业文化查询所有数据
-    public static function get_all_cultrue($page)
+    public static function get_all_cultrue($class_id,$title,$page)
     {
         return DB::table('cultureinfo')
             -> select('cultureinfo.*','fieldinfo.name')
             -> leftJoin('fieldinfo','cultureinfo.class_id','=','fieldinfo.field_id')
-            ->paginate($page);
+					->where(function($query) use ($class_id){
+						if($class_id){
+							$query ->where('cultureinfo.class_id','=',$class_id);
+						}
+					})
+					->where(function($query) use ($title){
+						if($title){
+							$query ->where('cultureinfo.title','like','%'.$title.'%');
+						}
+					})
+
+						->paginate($page);
     }
 
     //企业文化数据修改查询单条数据

@@ -4,6 +4,18 @@
 	<link rel="stylesheet" href="{{URL::asset('bower_components/bootstrap-fileinput/css/fileinput.css')}}">
 	<link rel="stylesheet" href="{{URL::asset('css/weekly.css')}}">
 	<link rel="stylesheet" href="{{URL::asset('bower_components/layui/dist/css/layui.css')}}">
+	<style>
+		.status{
+			height: 30px;
+			border : 1px solid #DD4B39;
+			width: 200px;
+			padding-left: 10px;
+		}
+
+		.total{
+			padding-left: 20px;
+		}
+	</style>
 @endpush
 
 @section('content')
@@ -20,15 +32,22 @@
 			</div>
 
 		</div>
-		{{--<div id="status_search">--}}
-		{{--<form action="{{route('weekly.status')}}" method="post">--}}
-		{{--{{ csrf_field() }}--}}
-		{{--<input type="text" id="aaa" name="time" autocomplete="off" >--}}
-		{{--<button type='submit' id="search" class="btn btn-sm {{config('myconfig.config.button_skin')}}">--}}
-		{{--<i class="glyphicon glyphicon-search"></i>&nbsp;{{trans('weekly.weekly_find')}}--}}
-		{{--</button>--}}
-		{{--</form>--}}
-		{{--</div>--}}
+		<form action="{{URL('knowledge/32')}}" method="get">
+			<label>{{ trans('knowledge.cust') }}：</label>
+			<select name="class_id"  class="status">
+				<option value="">全部</option>
+				@foreach($Knowledge as $kay => $value)
+					<option value="{{$value -> field_id}}" @if($value -> field_id == $class_id) selected @endif> {{$value -> name}}</option>
+				@endforeach
+			</select>
+
+			<label>{{ trans('knowledge.title') }}：</label>
+			<input type="text" value="{{$title}}" autocomplete="off" name="title" class=" status" id="test1" style="display: inline-block;">
+
+			<button type='submit'  id="search" class="btn btn-sm {{config('myconfig.config.button_skin')}}">
+				<i class="glyphicon glyphicon-search"></i>&nbsp;{{trans('sales.search')}}
+			</button>
+		</form>
 
 		<div class="box-body">
 			<div class="table-responsive">
@@ -89,7 +108,7 @@
 		<div class="box-footer clearfix">
 			<a href="javascript:void(0)" class="btn btn-danger btn-xs pull-left select_all"><i
 					class="fa fa-trash"></i>{{ trans('memberinfo.select_all_delete') }}</a>
-			<div class=" pull-right">{{$k -> links()}}</div>
+			<div class=" pull-right">{{$k -> appends(['class_id'=>$class_id,'title' => $title]) -> links()}}</div>
 			<input type="hidden" value="{{$k -> count()}}" id="page_count">
 		</div>
 	</div>

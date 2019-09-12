@@ -20,7 +20,32 @@ class HomeController extends SessionController
 			$data['page_tips'] = trans( 'index.page_tips' );
 			$data['page_note'] = trans( 'index.page_note' );
 			$page = config('myconfig.config.page_num');
-			$data['home'] = Home::get_all_homeinfo($page);
+			//查询所有的楼号
+			$data['buildnum'] = Home::get_all_buildnum();
+			//接受信息
+			//接受楼号
+			$data['buildnums'] = $buildnums =  Input::get('buildnum');
+			//接受单元号
+			$data['unitnums'] = $unitnum = Input::get('unitnum');
+			//接受楼号
+			$data['roomnums'] = $roomnum =  Input::get('roomnum');
+			//接受状态
+			$data['statuss'] = $status = Input::get('status');
+			//接受楼层
+			$data['floors'] = $floor = Input::get('floor');
+			if($buildnums != ''){
+				$data['dan'] = Home::get_unitnum($buildnums);
+			}else{
+				$data['dan'] = '';
+			}
+
+			if($unitnum != ''){
+				$data['fang'] = Home::get_unitnum($unitnum);
+			}else{
+				$data['fang'] = '';
+			}
+
+			$data['home'] = Home::get_all_homeinfo($buildnums,$unitnum,$roomnum,$status,$floor,$page);
 //			dd($data['home']);
 			$data['ids'] = $perid;
 			return view('Admin.Home.Home.index') -> with($data);

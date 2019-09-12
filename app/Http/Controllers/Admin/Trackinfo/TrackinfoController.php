@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Admin\Trackinfo;
 use Illuminate\Http\Request;
 use App\Http\Controllers\SessionController;
 use App\Models\admin\Trackinfo;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
+use App\Models\admin\Customer;
 
 
 class TrackinfoController extends SessionController
@@ -21,8 +23,10 @@ class TrackinfoController extends SessionController
         $data['page_tips'] = trans( 'index.page_tips' );
         $data['page_note'] = trans( 'index.page_note' );
         $page = config('myconfig.config.page_num');
+			  $data['hous_id'] = Customer::get_hous_id_all();
+			  $data['hous_ids'] = $hous_id = Input::get('hous_id');
         $data['ids'] = $perid;
-        $data['trackinfo'] = Trackinfo::get_all_trackinfo($page);
+        $data['trackinfo'] = Trackinfo::get_all_trackinfo($hous_id,$page);
         return view('Admin/Trackinfo/index')->with($data);
     }
 
@@ -44,9 +48,6 @@ class TrackinfoController extends SessionController
         $data['content'] = $query -> input('content');  //来访内容
         $data['track_time'] = time();           //跟踪来访时间
         $data['created_at'] = time();           //跟踪来访创建时间
-
-
-
         $track = Trackinfo::store_track($data);
         //dd($track);
         if($track){

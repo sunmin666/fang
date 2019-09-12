@@ -39,7 +39,7 @@ class Changecust extends Model
     }
 
     //查询所有
-    public static function get_all_changecust($page)
+    public static function get_all_changecust($name,$iphone,$page)
     {
         return DB::table('changeinfo')
             ->select('changeinfo.*','customera.realname as name','customerb.realname as newname','homeinfo.buildnum','homeinfo.unitnum','homeinfo.roomnum','fieldinfob.name as buildnums' , 'fieldinfou.name as unitnums' , 'fieldinfor.name as roomnums')
@@ -50,7 +50,23 @@ class Changecust extends Model
             ->leftJoin( 'fieldinfo as fieldinfou' , 'homeinfo.unitnum' , '=' , 'fieldinfou.field_id' )
             ->leftJoin( 'fieldinfo as fieldinfor' , 'homeinfo.roomnum' , '=' , 'fieldinfor.field_id' )
             ->where('changeinfo.type','=',1)
-            ->paginate($page);
+
+						->where( function( $query ) use ( $name ) {
+							if ( $name ) {
+
+								$a = DB::table('customer')-> select('cust_id') -> where('realname','like','%'.$name.'%') -> get() -> map(function($value){return (array)$value;}) -> toArray();
+
+								$query->whereIn( 'changeinfo.cust_id', $a );
+							}
+						} )
+						->where( function( $query ) use ( $iphone ) {
+							if ( $iphone ) {
+								$c = DB::table('customer')-> select('cust_id') -> where('mobile','like','%'.$iphone.'%') -> get() -> map(function($value){return (array)$value;}) -> toArray();
+								$query->whereIn( 'changeinfo.cust_id' , $c );
+							}
+						} )
+
+						->paginate($page);
     }
 
     //修改查询单条

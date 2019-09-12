@@ -39,13 +39,27 @@ class Signinfo extends Model
 
 
     //展示签约信息
-    public static function get_all_sig($page)
+    public static function get_all_sig($name,$iphone,$page)
     {
         return DB::table('signinfo')
             ->select('signinfo.*', 'customer.realname', 'customer.sex', 'customer.mobile', 'buyinfo.buy_number')
             ->leftJoin('customer', 'customer.cust_id', '=', 'signinfo.cust_id')
             ->leftJoin('buyinfo', 'buyinfo.buyid', '=', 'signinfo.buyid')
             ->where('signinfo.sign_type', '=', '0')
+						->where( function( $query ) use ( $name ) {
+							if ( $name ) {
+
+								$a = DB::table('customer')-> select('cust_id') -> where('realname','like','%'.$name.'%') -> get() -> map(function($value){return (array)$value;}) -> toArray();
+
+								$query->whereIn( 'signinfo.cust_id', $a );
+							}
+						} )
+						->where( function( $query ) use ( $iphone ) {
+							if ( $iphone ) {
+								$c = DB::table('customer')-> select('cust_id') -> where('mobile','like','%'.$iphone.'%') -> get() -> map(function($value){return (array)$value;}) -> toArray();
+								$query->whereIn( 'signinfo.cust_id' , $c );
+							}
+						} )
             ->paginate($page);
     }
 
@@ -122,14 +136,28 @@ class Signinfo extends Model
 
 
     //延迟签约展示
-    public static function get_all_delay($page)
+    public static function get_all_delay($name,$iphone,$page)
     {
         return DB::table('signinfo')
             ->select('signinfo.*', 'customer.realname', 'customer.sex', 'customer.mobile', 'buyinfo.buy_number')
             ->leftJoin('customer', 'customer.cust_id', '=', 'signinfo.cust_id')
             ->leftJoin('buyinfo', 'buyinfo.buyid', '=', 'signinfo.buyid')
             ->where('signinfo.sign_type', '=', '1')
-            ->paginate($page);
+					->where( function( $query ) use ( $name ) {
+						if ( $name ) {
+
+							$a = DB::table('customer')-> select('cust_id') -> where('realname','like','%'.$name.'%') -> get() -> map(function($value){return (array)$value;}) -> toArray();
+
+							$query->whereIn( 'signinfo.cust_id', $a );
+						}
+					} )
+					->where( function( $query ) use ( $iphone ) {
+						if ( $iphone ) {
+							$c = DB::table('customer')-> select('cust_id') -> where('mobile','like','%'.$iphone.'%') -> get() -> map(function($value){return (array)$value;}) -> toArray();
+							$query->whereIn( 'signinfo.cust_id' , $c );
+						}
+					} )
+						->paginate($page);
     }
 
 

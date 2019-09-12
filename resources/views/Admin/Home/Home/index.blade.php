@@ -9,6 +9,16 @@
 			height: 50px;
 			line-height: 50px;
 		}
+		.status{
+			height: 30px;
+			border : 1px solid #DD4B39;
+			width: 200px;
+			padding-left: 10px;
+		}
+
+		.total{
+			padding-left: 20px;
+		}
 	</style>
 @endpush
 
@@ -28,15 +38,55 @@
 			</div>
 
 		</div>
-		{{--<div id="status_search">--}}
-		{{--<form action="{{route('weekly.status')}}" method="post">--}}
-		{{--{{ csrf_field() }}--}}
-		{{--<input type="text" id="aaa" name="time" autocomplete="off" >--}}
-		{{--<button type='submit' id="search" class="btn btn-sm {{config('myconfig.config.button_skin')}}">--}}
-		{{--<i class="glyphicon glyphicon-search"></i>&nbsp;{{trans('weekly.weekly_find')}}--}}
-		{{--</button>--}}
-		{{--</form>--}}
-		{{--</div>--}}
+		<form action="{{URL('homeinfo/30')}}" method="get">
+			<label>{{ trans('home.buildnum') }}：</label>
+			<select name="buildnum"  class="status" id="buildnum">
+				<option value="">全部</option>
+				@foreach($buildnum as $k => $v)
+					<option value="{{$v -> field_id}}" @if($v -> field_id == $buildnums) selected @endif>{{$v -> name}}</option>
+				@endforeach
+			</select>
+
+			<label>{{ trans('home.unitnum') }}：</label>
+			<select name="unitnum"  class="status" id="unitnum">
+				@if($dan === '')
+					<option value="">全部</option>
+				@else
+					<option value="">全部</option>
+					@foreach($dan as $k => $v)
+						<option value="{{$v -> field_id}}" @if($v -> field_id == $unitnums) selected @endif>{{$v -> name}}</option>
+					@endforeach
+				@endif
+			</select>
+
+			<label>{{ trans('home.roomnum') }}：</label>
+			<select name="roomnum"  class="status" id="roomnum">
+				@if($fang === '')
+					<option value="">全部</option>
+				@else
+					<option value="">全部</option>
+					@foreach($fang as $k => $v)
+						<option value="{{$v -> field_id}}" @if($v -> field_id == $roomnums) selected @endif>{{$v -> name}}</option>
+					@endforeach
+				@endif
+			</select>
+
+			<label>{{ trans('home.status') }}：</label>
+			<select name="status"  class="status">
+				<option value="">全部</option>
+				<option value="0" @if($statuss == 0) selected @endif>{{ trans('home.subscription') }}</option>
+				<option value="1" @if($statuss == 1) selected @endif>{{ trans('home.reserved_application') }}</option>
+				<option value="2" @if($statuss == 2) selected @endif>{{ trans('home.subscribed') }}</option>
+				<option value="3" @if($statuss == 3) selected @endif>{{ trans('home.signed') }}</option>
+			</select>
+
+			<label>{{ trans('home.floor') }}：</label>
+			<input type="text" value="{{$floors}}" autocomplete="off" name="floor" class=" status" id="test2" style="display: inline-block">
+
+			<button type='submit'  id="search" class="btn btn-sm {{config('myconfig.config.button_skin')}}">
+				<i class="glyphicon glyphicon-search"></i>&nbsp;{{trans('sales.search')}}
+			</button>
+		</form>
 
 		<div class="box-body">
 			<div class="table-responsive">
@@ -65,7 +115,6 @@
 						<th>{{ trans('home.discount') }}</th>
 						<th>{{ trans('home.status') }}</th>
 						<th>{{ trans('home.created_at') }}</th>
-						{{--<th>{{ trans('home.updated_at') }}</th>--}}
 						<th>{{ trans('home.operating') }}</th>
 					</tr>
 					</thead>
@@ -85,7 +134,6 @@
 							<td>{{$value -> discount}}折</td>
 							<td>
 								@if($value -> status == 0)
-
 									{{--btn btn-block btn-success btn-xs--}}
 									<span class=" btn-success btn-sm">认购前</span>
 								@elseif($value-> status == 1)
@@ -122,7 +170,7 @@
 		<div class="box-footer clearfix">
 			<a href="javascript:void(0)" class="btn btn-danger btn-xs pull-left select_all"><i
 					class="fa fa-trash"></i>{{ trans('memberinfo.select_all_delete') }}</a>
-			<div class=" pull-right">{{$home -> links()}}</div>
+			<div class=" pull-right">{{$home -> appends(['buildnum'=>$buildnums,'unitnum' => $unitnums,'roomnum' => $roomnums,'status' => $statuss,'floor' => $floors]) -> links()}}</div>
 			<input type="hidden" value="{{$home -> count()}}" id="page_count">
 		</div>
 	</div>
@@ -133,6 +181,53 @@
 	<script src="{{URL::asset('bower_components/bootstrap-fileinput/js/locales/zh.js')}}"></script>
 	<script src="{{URL::asset('bower_components/layui/dist/layui.js')}}"></script>
 	<script type="text/javascript">
+		//下拉框联动 楼号联动单元号
+		$( "#buildnum" ).change( function () {
+			var field_id = $( this ).val();
+			$.ajax( {
+				url : "{{URL('buildnum')}}" ,
+				type : "post" ,
+				data : {
+					field_id : field_id ,
+					_token : "{{csrf_token()}}"
+				} ,
+				success : function ( data ) {
+					console.log(data);
+					var str = "";
+					for ( var ig = 0 ; ig < data.length ; ig++ ) {
+						str += "<option value='" + data[ig]['field_id'] + "'> " + data[ig]['name'] + " </option>"
+					}
+					var cc = '<option value="">全部</option>';
+
+					$( '#unitnum' ).html( cc + str );
+					$( '#roomnum' ).html( cc );
+				}
+			} )
+		} );
+		//下拉联动 单元号联动房号
+		$( "#unitnum" ).change( function () {
+			var field_id = $( this ).val();
+			$.ajax( {
+				url : "{{URL('unitnum')}}" ,
+				type : "post" ,
+				data : {
+					field_id : field_id ,
+					_token : "{{csrf_token()}}"
+				} ,
+				success : function ( data ) {
+					console.log(data);
+					var str = "";
+					for ( var ig = 0 ; ig < data.length ; ig++ ) {
+						str += "<option value='" + data[ig]['field_id'] + "'> " + data[ig]['name'] + " </option>"
+					}
+					var aa = '<option value="">全部</option>';
+					$( '#roomnum' ).html( aa + str );
+				}
+			} )
+		} );
+
+
+
 
 		{{--$( document ).ready( function () {--}}
 		//複選框樣式

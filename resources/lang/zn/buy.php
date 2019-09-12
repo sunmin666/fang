@@ -112,7 +112,7 @@
 
 			'subscription_time'	=>'认购时间已到',
 
-			'username_change'	=>'客户已换',
+			'username_change'	=>'客户已换房',
 
 			'adopt'	=>'通过',
 

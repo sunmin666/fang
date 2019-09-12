@@ -30,13 +30,38 @@
 		}
 
 		//查询所有数据
-		public static function get_all_homeinfo( $page )
+		public static function get_all_homeinfo($buildnums,$unitnum,$roomnum,$status,$floor, $page )
 		{
 			return DB::table( 'homeinfo' )
 							 ->select( 'homeinfo.*' , 'fieldinfob.name as buildnums' , 'fieldinfou.name as unitnums' , 'fieldinfor.name as roomnums' )
 							 ->leftJoin( 'fieldinfo as fieldinfob' , 'homeinfo.buildnum' , '=' , 'fieldinfob.field_id' )
 							 ->leftJoin( 'fieldinfo as fieldinfou' , 'homeinfo.unitnum' , '=' , 'fieldinfou.field_id' )
 							 ->leftJoin( 'fieldinfo as fieldinfor' , 'homeinfo.roomnum' , '=' , 'fieldinfor.field_id' )
+							 -> where(function($query) use ($buildnums){
+							 	if($buildnums){
+									$query -> where('homeinfo.buildnum','=',$buildnums);
+								}
+							 })
+								-> where(function($query) use ($unitnum){
+									if($unitnum){
+										$query -> where('homeinfo.unitnum','=',$unitnum);
+									}
+								})
+								-> where(function($query) use ($roomnum){
+									if($roomnum){
+										$query -> where('homeinfo.roomnum','=',$roomnum);
+									}
+								})
+								-> where(function($query) use ($status){
+									if($status){
+										$query -> where('homeinfo.status','=',$status);
+									}
+								})
+								-> where(function($query) use ($floor){
+									if($floor){
+										$query -> where('homeinfo.floor','=',$floor);
+									}
+								})
 							 ->paginate( $page );
 		}
 

@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Session;
 use App\Models\admin\Knowledge;
 use Illuminate\Support\Facades\Validator;
 use Mews\Purifier\Facades\Purifier;
+use Illuminate\Support\Facades\Input;
 
 class KnowledgeController extends SessionController
 {
@@ -20,7 +21,11 @@ class KnowledgeController extends SessionController
 			$data['page_tips'] = trans( 'index.page_tips' );
 			$data['page_note'] = trans( 'index.page_note' );
 			$page = config('myconfig.config.page_num');
-			$data['k'] = Knowledge::get_all_k($page);
+			$data['Knowledge'] = Knowledge::get_type_field();
+			//接受参数
+			$data['class_id'] = $class_id = Input::get('class_id');
+			$data['title'] = $title = Input::get('title');
+			$data['k'] = Knowledge::get_all_k($class_id,$title,$page);
 			$data['ids'] = $perid;
 			return view('Admin.Knowledge.Knowledge.index') -> with($data);
 		}

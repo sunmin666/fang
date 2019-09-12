@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\SessionController;
 use App\Models\admin\Coownerinfo;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Input;
 
 class CoownerinfoController extends SessionController
 {
@@ -19,7 +20,12 @@ class CoownerinfoController extends SessionController
         $data['page_tips'] = trans( 'index.page_tips' );
         $data['page_note'] = trans( 'index.page_note' );
         $page = config('myconfig.config.page_num');
-        $data['coownerinfo'] = Coownerinfo::get_all_coowner($page);
+
+			$data['name'] = $name = Input::get('name');
+			$data['iphone'] = $iphone = Input::get('iphone');
+
+
+        $data['coownerinfo'] = Coownerinfo::get_all_coowner($name,$iphone,$page);
         //dd($data['coownerinfo']);
         $data['ids'] = $perid;
         return view('Admin/Coownerinfo/Coownerinfo/index')->with($data);

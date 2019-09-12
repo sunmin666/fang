@@ -4,6 +4,18 @@
 <link rel="stylesheet" href="{{URL::asset('bower_components/bootstrap-fileinput/css/fileinput.css')}}">
 <link rel="stylesheet" href="{{URL::asset('css/weekly.css')}}">
 <link rel="stylesheet" href="{{URL::asset('bower_components/layui/dist/css/layui.css')}}">
+        <style>
+            .status{
+                height: 30px;
+                border : 1px solid #DD4B39;
+                width: 200px;
+                padding-left: 10px;
+            }
+
+            .total{
+                padding-left: 20px;
+            }
+        </style>
 @endpush
 
 @section('content')
@@ -22,15 +34,17 @@
             </div>
 
         </div>
-        {{--<div id="status_search">--}}
-        {{--<form action="{{route('weekly.status')}}" method="post">--}}
-        {{--{{ csrf_field() }}--}}
-        {{--<input type="text" id="aaa" name="time" autocomplete="off" >--}}
-        {{--<button type='submit' id="search" class="btn btn-sm {{config('myconfig.config.button_skin')}}">--}}
-        {{--<i class="glyphicon glyphicon-search"></i>&nbsp;{{trans('weekly.weekly_find')}}--}}
-        {{--</button>--}}
-        {{--</form>--}}
-        {{--</div>--}}
+        <form action="{{URL('delaysig/38')}}" method="get">
+            <label>{{ trans('customer.name') }}：</label>
+            <input type="text" value="{{$name}}" autocomplete="off" name="name" class=" status" id="test1" style="display: inline-block;">
+
+            <label>{{ trans('customer.iphone') }}：</label>
+            <input type="text" value="{{$iphone}}" autocomplete="off" name="iphone" class=" status" id="test2" style="display: inline-block">
+
+            <button type='submit'  id="search" class="btn btn-sm {{config('myconfig.config.button_skin')}}">
+                <i class="glyphicon glyphicon-search"></i>&nbsp;{{trans('sales.search')}}
+            </button>
+        </form>
 
         <div class="box-body">
             <div class="table-responsive">
@@ -139,7 +153,7 @@
         <div class="box-footer clearfix">
             <a href="javascript:void(0)" class="btn btn-danger btn-xs pull-left select_all"><i
                         class="fa fa-trash"></i>{{ trans('memberinfo.select_all_delete') }}</a>
-            <div class=" pull-right">{{$sig -> links()}}</div>
+            <div class=" pull-right">{{$sig -> appends(['name' => $name,'iphone'=> $iphone]) ->links()}}</div>
             <input type="hidden" value="{{$sig -> count()}}" id="page_count">
         </div>
     </div>

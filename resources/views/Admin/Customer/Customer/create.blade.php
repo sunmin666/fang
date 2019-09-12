@@ -199,6 +199,79 @@
 					</select>
 				</div>
 
+				<div class="form-group">
+					<label>{{ trans('customer.ownership') }}：</label>
+					<select name="ownership" id="ownership" class="form-control">
+						<option value="">--{{ trans('customer.please_choice') }}--</option>
+						@foreach($ownership as $k => $v)
+							<option value="{{$v -> field_id}}">{{$v -> name}}</option>
+						@endforeach
+					</select>
+				</div>
+
+				<div class="form-group">
+					<label>{{ trans('customer.purpose') }}：</label>
+					<select name="purpose" id="purpose" class="form-control">
+						<option value="">--{{ trans('customer.please_choice') }}--</option>
+						@foreach($purpose as $k => $v)
+							<option value="{{$v -> field_id}}">{{$v -> name}}</option>
+						@endforeach
+					</select>
+				</div>
+
+				<div class="form-group">
+					<label>{{ trans('customer.area') }}：</label>
+					<select name="area" id="area" class="form-control">
+						<option value="">--{{ trans('customer.please_choice') }}--</option>
+						@foreach($area as $k => $v)
+							<option value="{{$v -> field_id}}">{{$v -> name}}</option>
+						@endforeach
+					</select>
+				</div>
+
+				<div class="form-group">
+					<label>{{ trans('customer.residence') }}：</label>
+					<select name="residence" id="residence" class="form-control">
+						<option value="">--{{ trans('customer.please_choice') }}--</option>
+						@foreach($residence as $k => $v)
+							<option value="{{$v -> field_id}}">{{$v -> name}}</option>
+						@endforeach
+					</select>
+				</div>
+
+				<div class="form-group">
+					<label>{{ trans('customer.structure') }}：</label>
+					<select name="structure" id="structure" class="form-control">
+						<option value="">--{{ trans('customer.please_choice') }}--</option>
+						@foreach($structure as $k => $v)
+							<option value="{{$v -> field_id}}">{{$v -> name}}</option>
+						@endforeach
+					</select>
+				</div>
+
+				<div class="form-group">
+					<label>{{ trans('customer.demand') }}：</label>
+					<select name="demand" id="demand" class="form-control">
+						<option value="">--{{ trans('customer.please_choice') }}--</option>
+						@foreach($demand as $k => $v)
+							<option value="{{$v -> field_id}}">{{$v -> name}}</option>
+						@endforeach
+					</select>
+				</div>
+
+				<div class="form-group">
+					<label>{{ trans('customer.apartment') }}：</label>
+					<select name="apartment" id="apartment" class="form-control">
+						<option value="">--{{ trans('customer.please_choice') }}--</option>
+						@foreach($apartment as $k => $v)
+							<option value="{{$v -> field_id}}">{{$v -> name}}</option>
+						@endforeach
+					</select>
+				</div>
+
+
+
+
 				{{--职业顾问--}}
 				<div class="form-group">
 					<label>{{ trans('customer.hous_id') }}：</label>
@@ -276,16 +349,16 @@
 		var first_contact = $( '#first_contact' ).val(); //首次接触方式
 		var status_id = $( '#status_id' ).val(); //客户状态hous_id
 		var hous_id = $( '#hous_id' ).val(); 	//职业顾问
-
-//		alert(hous_id);
-//		return false;
+		var ownership = $( '#ownership' ).val(); 	//职业顾问
+		var purpose = $( '#purpose' ).val(); 	//职业顾问
+		var area = $( '#area' ).val(); 	//职业顾问
+		var residence = $( '#residence' ).val(); 	//职业顾问
+		var structure = $( '#structure' ).val(); 	//职业顾问
+		var demand = $( '#demand' ).val(); 	//职业顾问
+		var apartment = $( '#apartment' ).val(); 	//职业顾问
 
 		if (
-			realname == '' || sex == '' || mobile == '' || proj_id == '' || comp_id == ''||
-			cognition == '' || family_str == '' || work_type =='' || address == '' ||
-			intention_area == '' || floor_like == '' || furniture_need == ''|| house_num == ''||
-			first_contact == ''	||	status_id == '' || hous_id == ''
-		) {
+			realname == '' || sex == '' || mobile == '' || proj_id == '' || comp_id == '' || hous_id == '') {
 			layer.msg( '{{trans('company.text_content1')}}' , { time : 1235 } );
 			$( "#store1" ).attr( 'disabled' , false );
 			return false;
@@ -312,13 +385,13 @@
 			}
 		}
 
-		if ( email != '' ) {
-			if ( !email_pattern.test( email ) ) {
-				layer.msg( '{{trans('consu.text_content2')}}' , { time : 1546 } );
-				$( "#store1" ).attr( 'disabled' , false );
-				return false;
-			}
-		}
+		{{--if ( email != '' ) {--}}
+			{{--if ( !email_pattern.test( email ) ) {--}}
+				{{--layer.msg( '{{trans('consu.text_content2')}}' , { time : 1546 } );--}}
+				{{--$( "#store1" ).attr( 'disabled' , false );--}}
+				{{--return false;--}}
+			{{--}--}}
+		{{--}--}}
 
 		{{--//验证顾问身份证号是否能合法--}}
 		if ( idcrad != '' ) {
@@ -354,6 +427,15 @@
 				first_contact : first_contact,   //首次接触方式
 				status_id : status_id,      //客户状态
 				hous_id : hous_id,			//职业顾问
+
+				ownership : ownership,			//职业顾问
+				purpose : purpose,			//职业顾问
+				area : area,			//职业顾问
+				residence : residence,			//职业顾问
+				structure : structure,			//职业顾问
+				demand : demand,			//职业顾问
+				apartment : apartment,			//职业顾问
+
 				_token : "{{csrf_token()}}"             //post提交token验证
 			} ,
 			success : function ( data ) {

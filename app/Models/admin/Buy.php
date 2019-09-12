@@ -91,7 +91,7 @@
 
 
 		//查询认购信息
-		public static function get_all_buy($page){
+		public static function get_all_buy($name,$iphone,$page){
 			return DB::table('buyinfo')
 							 ->select('buyinfo.*','customer.realname','homeinfo.buildnum','homeinfo.unitnum','homeinfo.status as home_status','homeinfo.roomnum','fieldinfob.name as buildnums','fieldinfou.name as unitnums','fieldinfor.name as roomnums')
 							 -> leftJoin('customer','buyinfo.cust_id','=','customer.cust_id')
@@ -100,6 +100,21 @@
 				-> leftJoin('fieldinfo as fieldinfou','homeinfo.unitnum','=','fieldinfou.field_id')
 				-> leftJoin('fieldinfo as fieldinfor','homeinfo.roomnum','=','fieldinfor.field_id')
 				-> where('buyinfo.status','!=',0)
+				->where( function( $query ) use ( $name ) {
+					if ( $name ) {
+
+						$a = DB::table('customer')-> select('cust_id') -> where('realname','like','%'.$name.'%') -> get() -> map(function($value){return (array)$value;}) -> toArray();
+
+						$query->whereIn( 'buyinfo.cust_id', $a );
+					}
+				} )
+				->where( function( $query ) use ( $iphone ) {
+					if ( $iphone ) {
+						$c = DB::table('customer')-> select('cust_id') -> where('mobile','like','%'.$iphone.'%') -> get() -> map(function($value){return (array)$value;}) -> toArray();
+						$query->whereIn( 'buyinfo.cust_id' , $c );
+					}
+				} )
+
 				-> paginate($page);
 		}
 
