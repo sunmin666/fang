@@ -91,10 +91,10 @@
 					<label>{{ trans('home.status') }}：</label>
 					<select name="status" id="status" class="form-control">
 						<option value="">--{{ trans('home.please_choice') }}--</option>
-						<option value="0" class=" btn-success btn-sm">{{ trans('home.subscription') }}</option>
-						<option value="1" class="btn-warning btn-sm" >{{ trans('home.reserved_application') }}</option>
-						<option value="2" class="btn-info btn-sm" >{{ trans('home.subscribed') }}</option>
-						<option value="3" class="btn-danger btn-sm" >{{ trans('home.signed') }}</option>
+						<option value="0" >{{ trans('home.subscription') }}</option>
+						<option value="1" >{{ trans('home.reserved_application') }}</option>
+						<option value="2" >{{ trans('home.subscribed') }}</option>
+						<option value="3" >{{ trans('home.signed') }}</option>
 					</select>
 				</div>
 

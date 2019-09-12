@@ -51,4 +51,7 @@
 
 
 		'changehome_num' => '换房数量',
+
+
+		'type_all'   => '客户关注',
 	];

@@ -8,11 +8,27 @@ use Illuminate\Database\Eloquent\Model;
 class Coownerinfo extends Model
 {
     //查询所有房屋共有人
-    public static function get_all_coowner($page)
+    public static function get_all_coowner($name,$iphone,$page)
     {
         return DB::table('coownerinfo')
             -> select('coownerinfo.*','customer.realname as name')
             -> leftJoin('customer','coownerinfo.cust_id','=','customer.cust_id')
+
+					->where( function( $query ) use ( $name ) {
+						if ( $name ) {
+
+							$a = DB::table('customer')-> select('cust_id') -> where('realname','like','%'.$name.'%') -> get() -> map(function($value){return (array)$value;}) -> toArray();
+
+							$query->whereIn( 'coownerinfo.cust_id', $a );
+						}
+					} )
+					->where( function( $query ) use ( $iphone ) {
+						if ( $iphone ) {
+							$c = DB::table('customer')-> select('cust_id') -> where('mobile','like','%'.$iphone.'%') -> get() -> map(function($value){return (array)$value;}) -> toArray();
+							$query->whereIn( 'coownerinfo.cust_id' , $c );
+						}
+					} )
+
             -> paginate($page);
     }
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Payloginfo;
 
 use Illuminate\Http\Request;
 use App\Models\admin\Payloginfo;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\SessionController;
 use Illuminate\Support\Facades\Session;
@@ -20,8 +21,14 @@ class PayloginfoController extends SessionController
         $data['page_tips'] = trans( 'index.page_tips' );
         $data['page_note'] = trans( 'index.page_note' );
         $page = config('myconfig.config.page_num');
+
+        //接受参数
+				$data['type'] = $type = Input::get('type');
+				$data['name'] = $name = Input::get('name');
+				$data['iphone'] = $iphone = Input::get('iphone');
+
         $data['ids'] = $perid;
-        $data['payloginfo'] = Payloginfo::get_all_pay($page);
+        $data['payloginfo'] = Payloginfo::get_all_pay($type,$name,$iphone,$page);
         //sdd($data['payloginfo']);
         return view('Admin/Payloginfo/index')->with($data);
     }

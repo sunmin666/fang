@@ -32,7 +32,7 @@ class Checkout extends Model
 
 
 	//查询退房信息每次十条
-	public static function get_all_change($page){
+	public static function get_all_change($name,$iphone,$page){
 		return DB::table('changeinfo')
 			-> select('changeinfo.*','customer.cust_id','customer.realname','customer.mobile','customer.idcard',
 				'homeinfo.buildnum','homeinfo.unitnum','homeinfo.roomnum',
@@ -43,6 +43,20 @@ class Checkout extends Model
 			->leftJoin( 'fieldinfo as fieldinfou' , 'homeinfo.unitnum' , '=' , 'fieldinfou.field_id' )
 			->leftJoin( 'fieldinfo as fieldinfor' , 'homeinfo.roomnum' , '=' , 'fieldinfor.field_id' )
 			-> where('changeinfo.type','=',3)
+			->where( function( $query ) use ( $name ) {
+				if ( $name ) {
+
+					$a = DB::table('customer')-> select('cust_id') -> where('realname','like','%'.$name.'%') -> get() -> map(function($value){return (array)$value;}) -> toArray();
+
+					$query->whereIn( 'changeinfo.cust_id', $a );
+				}
+			} )
+			->where( function( $query ) use ( $iphone ) {
+				if ( $iphone ) {
+					$c = DB::table('customer')-> select('cust_id') -> where('mobile','like','%'.$iphone.'%') -> get() -> map(function($value){return (array)$value;}) -> toArray();
+					$query->whereIn( 'changeinfo.cust_id' , $c );
+				}
+			} )
 			->paginate($page);
 	}
 

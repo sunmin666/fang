@@ -6,6 +6,7 @@
 	use Illuminate\Http\Request;
 	use App\Http\Controllers\SessionController;
 	use App\Models\admin\Change;
+	use Illuminate\Support\Facades\Input;
 	use Illuminate\Support\Facades\Validator;
 
 
@@ -20,19 +21,20 @@
 			$data['page_tips'] = trans( 'index.page_tips' );
 			$data['page_note'] = trans( 'index.page_note' );
 			$page = config('myconfig.config.page_num');
-			$data['change'] = Change::get_all_change($page);
+
+			$data['name'] = $name = Input::get('name');
+			$data['iphone'] = $iphone = Input::get('iphone');
+
+			$data['change'] = Change::get_all_change($name,$iphone,$page);
 //						dd($data['change']);
 			$data['ids'] = $perid;
-
 			return view('Admin.Change.Change.index') -> with($data);
-
 		}
 
 
 		//换房新增页面
 		public function create( $buyid , $homeid )
 		{
-
 			//查询客户认购的信息
 			$data['cust'] = Change::get_d_buy_home( $buyid );
 			//查询所购买的房源信息

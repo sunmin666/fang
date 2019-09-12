@@ -41,6 +41,22 @@
 						<option value="{{$vt -> field_id}}" @if($types == $vt -> field_id) selected @endif>{{$vt -> name}}</option>
 					@endforeach
 				</select>
+				<label>{{ trans('sales.type_all') }}：</label>
+				<select name="type_all" class="status">
+					<option value="">全部</option>
+					<option value="cognition" @if($type_all == 'cognition') selected @endif>认知渠道</option>
+					<option value="ownership" @if($type_all == 'ownership') selected @endif>置业关注</option>
+					<option value="purpose" @if($type_all == 'purpose') selected @endif>置业目的</option>
+					<option value="area" @if($type_all == 'area') selected @endif>客户区域</option>
+					<option value="residence" @if($type_all == 'residence') selected @endif>居住类型</option>
+					<option value="intention_area" @if($type_all == 'intention_area') selected @endif>意向面积区间</option>
+					<option value="floor_like" @if($type_all == 'floor_like') selected @endif>楼层偏好</option>
+					<option value="structure" @if($type_all == 'structure') selected @endif>户型结构</option>
+					<option value="demand" @if($type_all == 'demand') selected @endif>车位需求</option>
+					<option value="apartment" @if($type_all == 'apartment') selected @endif>关注户型</option>
+					<option value="furniture_need" @if($type_all == 'furniture_need') selected @endif>家具需求</option>
+					<option value="house_num" @if($type_all == 'house_num') selected @endif>置业次数</option>
+				</select>
 				<label>{{ trans('sales.stime') }}：</label>
 				<input type="text" value="{{$stimes}}" name="stime" class="layui-input status" id="test1" style="display: inline-block;">
 				
@@ -89,7 +105,7 @@
 		</div>
 		<!-- /.box-body -->
 		<div class="box-footer clearfix">
-			<div class=" pull-right">{{$customer -> links()}}</div>
+			<div class=" pull-right">{{$customer -> appends(['hous'=>$houss,'type'=> $types,'type_all' => $type_all,'stimes' => $stimes,'etimes'=> $etimes]) -> links()}}</div>
 			<input type="hidden" value="{{$customer -> count()}}" id="page_count">
 		</div>
 	</div>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Signinfo;
 use Illuminate\Http\Request;
 use App\Http\Controllers\SessionController;
 use App\Models\admin\Signinfo;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Validator;
 
 class SigninfoController extends SessionController
@@ -19,9 +20,9 @@ class SigninfoController extends SessionController
 		$data['page_tips'] = trans( 'index.page_tips' );
 		$data['page_note'] = trans( 'index.page_note' );
 		$page = config('myconfig.config.page_num');
-		$data['sig'] = Signinfo::get_all_sig($page);
-		//dd($data['sig']);
-//		dd($data['sig']);
+		$data['name'] = $name = Input::get('name');
+		$data['iphone'] = $iphone = Input::get('iphone');
+		$data['sig'] = Signinfo::get_all_sig($name,$iphone,$page);
 		$data['ids'] = $perid;
 		return view('Admin.Signinfo.Signinfo.index') -> with($data);
 	}
@@ -259,8 +260,11 @@ class SigninfoController extends SessionController
 		$data['page_tips'] = trans( 'index.page_tips' );
 		$data['page_note'] = trans( 'index.page_note' );
 		$page = config('myconfig.config.page_num');
-		$data['sig'] = Signinfo::get_all_delay($page);
-//		$data['sig'] = Signinfo::get_all_delay($page);
+
+		$data['name'] = $name = Input::get('name');
+		$data['iphone'] = $iphone = Input::get('iphone');
+		$data['sig'] = Signinfo::get_all_delay($name,$iphone,$page);
+
 //		dd($data['sig']);
 		$data['ids'] = $perid;
 		return view('Admin.Delaysig.Delaysig.index') -> with($data);

@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Session;
 use App\Models\admin\Consu;
 use Illuminate\Support\Facades\Validator;
 use App\Models\admin\Customer;
+use Illuminate\Support\Facades\Input;
 
 
 class CustomerController extends SessionController
@@ -30,10 +31,18 @@ class CustomerController extends SessionController
 		$data['page_tips'] = trans( 'index.page_tips' );
 		$data['page_note'] = trans( 'index.page_note' );
 		$page = config('myconfig.config.page_num');
-		$data['omer'] = Customer::get_all_omer($page);
-		//查询所有职业顾问
+
+		//接受参数 职业顾问id
+		$data['hous'] = $hous = Input::get('hous');
+		//客户姓名
+		$data['name'] = $name = Input::get('name');
+		//手机号
+		$data['iphone'] = $iphone = Input::get('iphone');
+
 		$data['hous_id'] = Customer::get_hous_id_all();
-//		dd($data['omer']);
+		$data['omer'] = Customer::get_all_omer($hous,$name,$iphone,$page);
+		//查询所有职业顾问
+
 		$data['ids'] = $perid;
 		return view('Admin.Customer.Customer.index') -> with($data);
 	}
@@ -69,6 +78,22 @@ class CustomerController extends SessionController
 		$data['status_id'] = Customer::get_status_id_all();
 		//查询所有职业顾问
 		$data['hous_id'] = Customer::get_hous_id_all();
+		//-------------------------------------------------------------------------------------//
+		//查询职业关注
+		$data['ownership'] = Customer::get_all_ownership();
+		//置业目的
+		$data['purpose'] = Customer::get_all_purpose();
+		//客户区域
+		$data['area'] = Customer::get_all_area();
+		//居住类型
+		$data['residence'] = Customer::get_all_residence();
+		//户型结构
+		$data['structure'] = Customer::get_all_structure();
+		//车位需求
+		$data['demand'] = Customer::get_all_demand();
+		//关注户型
+		$data['apartment'] = Customer::get_all_apartment();
+//		dd($data);
 		return view('Admin.Customer.Customer.create') -> with($data);
 	}
 
@@ -126,6 +151,13 @@ class CustomerController extends SessionController
 		$data['first_contact'] = $query -> input('first_contact');
 		$data['status_id'] = $query -> input('status_id');
 		$data['hous_id'] = $query -> input('hous_id');
+		$data['ownership'] = $query -> input('ownership');
+		$data['purpose'] = $query -> input('purpose');
+		$data['area'] = $query -> input('area');
+		$data['residence'] = $query -> input('residence');
+		$data['structure'] = $query -> input('structure');
+		$data['demand'] = $query -> input('demand');
+		$data['apartment'] = $query -> input('apartment');
 		$data['created_at'] = time();
 		$info = Customer::store_d_customer($data);
 		if($info){
@@ -175,6 +207,20 @@ class CustomerController extends SessionController
 		$data['status_id'] = Customer::get_status_id_all();
 		//查询所有职业顾问
 		$data['hous_id'] = Customer::get_hous_id_all();
+		//查询职业关注
+		$data['ownership'] = Customer::get_all_ownership();
+		//置业目的
+		$data['purpose'] = Customer::get_all_purpose();
+		//客户区域
+		$data['area'] = Customer::get_all_area();
+		//居住类型
+		$data['residence'] = Customer::get_all_residence();
+		//户型结构
+		$data['structure'] = Customer::get_all_structure();
+		//车位需求
+		$data['demand'] = Customer::get_all_demand();
+		//关注户型
+		$data['apartment'] = Customer::get_all_apartment();
 
 		return view('Admin.Customer.Customer.view') -> with($data);
 	}
@@ -213,7 +259,21 @@ class CustomerController extends SessionController
 		$data['status_id'] = Customer::get_status_id_all();
 		//查询所有职业顾问
 		$data['hous_id'] = Customer::get_hous_id_all();
-		//dd($data);
+		//查询职业关注
+		$data['ownership'] = Customer::get_all_ownership();
+		//置业目的
+		$data['purpose'] = Customer::get_all_purpose();
+		//客户区域
+		$data['area'] = Customer::get_all_area();
+		//居住类型
+		$data['residence'] = Customer::get_all_residence();
+		//户型结构
+		$data['structure'] = Customer::get_all_structure();
+		//车位需求
+		$data['demand'] = Customer::get_all_demand();
+		//关注户型
+		$data['apartment'] = Customer::get_all_apartment();
+
 		//dd($data['hous_id']);
 		return view('Admin.Customer.Customer.edit')  -> with($data);
 	}
@@ -273,6 +333,13 @@ class CustomerController extends SessionController
 		$data['first_contact'] = $query -> input('first_contact');
 		$data['status_id'] = $query -> input('status_id');
 		$data['hous_id'] = $query -> input('hous_id');
+		$data['ownership'] = $query -> input('ownership');
+		$data['purpose'] = $query -> input('purpose');
+		$data['area'] = $query -> input('area');
+		$data['residence'] = $query -> input('residence');
+		$data['structure'] = $query -> input('structure');
+		$data['demand'] = $query -> input('demand');
+		$data['apartment'] = $query -> input('apartment');
 		$info = Customer::update_d_omer($cust_id,$data);
 		if($info){
 			return [

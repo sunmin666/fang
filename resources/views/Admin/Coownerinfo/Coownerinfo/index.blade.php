@@ -4,6 +4,18 @@
 <link rel="stylesheet" href="{{URL::asset('bower_components/bootstrap-fileinput/css/fileinput.css')}}">
 <link rel="stylesheet" href="{{URL::asset('css/weekly.css')}}">
 <link rel="stylesheet" href="{{URL::asset('bower_components/layui/dist/css/layui.css')}}">
+        <style>
+            .status{
+                height: 30px;
+                border : 1px solid #DD4B39;
+                width: 200px;
+                padding-left: 10px;
+            }
+
+            .total{
+                padding-left: 20px;
+            }
+        </style>
 @endpush
 
 @section('content')
@@ -12,17 +24,19 @@
         <div class="box-header with-border">
             <button type="button" class="btn btn-dropbox btn-sm" id="refresh"><i
                         class="fa fa-refresh"></i> {{ trans('memberinfo.refresh') }}</button>
-
-            {{--<div class="box-tools pull-right">--}}
-            {{--@foreach($trackinfo as $k=>$v)--}}
-            {{--<button type="button" value="{{$v->cust_id}}" onclick="add({{$v->cust_id}})" class="btn btn-danger btn-sm weekly-day" id="news_day"--}}
-            {{--><i class="fa fa-plus"></i>--}}
-            {{--{{ trans('memberinfo.news_add') }}--}}
-            {{--</button>--}}
-            {{--@endforeach--}}
-            {{--</div>--}}
-
         </div>
+
+
+        <form action="{{URL('coownerinfo/42')}}" method="get">
+            <label>{{ trans('customer.name') }}：</label>
+            <input type="text" value="{{$name}}" autocomplete="off" name="name" class=" status" id="test1" style="display: inline-block;">
+            <label>{{ trans('customer.iphone') }}：</label>
+            <input type="text" value="{{$iphone}}" autocomplete="off" name="iphone" class=" status" id="test2" style="display: inline-block">
+
+            <button type='submit'  id="search" class="btn btn-sm {{config('myconfig.config.button_skin')}}">
+                <i class="glyphicon glyphicon-search"></i>&nbsp;{{trans('sales.search')}}
+            </button>
+        </form>
 
 
         <div class="box-body">
@@ -99,7 +113,7 @@
         <div class="box-footer clearfix">
             <a href="javascript:void(0)" class="btn btn-danger btn-xs pull-left select_all"><i
                         class="fa fa-trash"></i>{{ trans('memberinfo.select_all_delete') }}</a>
-            <div class=" pull-right">{{$coownerinfo -> links()}}</div>
+            <div class=" pull-right">{{$coownerinfo -> appends(['name' => $name,'iphone'=> $iphone]) -> links()}}</div>
             <input type="hidden" value="{{$coownerinfo -> count()}}" id="page_count">
         </div>
     </div>

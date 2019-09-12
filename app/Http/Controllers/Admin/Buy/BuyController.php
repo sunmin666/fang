@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Buy;
 use App\Models\admin\Buy;
 use Illuminate\Http\Request;
 use App\Http\Controllers\SessionController;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\Admin\Homeinfo\HomeController;
@@ -30,7 +31,12 @@ class BuyController extends SessionController
 			$data['page_tips'] = trans( 'index.page_tips' );
 			$data['page_note'] = trans( 'index.page_note' );
 			$page = config('myconfig.config.page_num');
-			$data['buy'] = Buy::get_all_buy($page);
+
+			$data['name'] = $name = Input::get('name');
+			$data['iphone'] = $iphone = Input::get('iphone');
+
+
+			$data['buy'] = Buy::get_all_buy($name,$iphone,$page);
 			//			dd($data['buy']);
 			$data['ids'] = $perid;
 			return view('Admin.Buy.Buy.index') -> with($data);

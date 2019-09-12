@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use App\Models\admin\Consu;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Input;
 
 class ConsultantController extends SessionController
 {
@@ -28,8 +29,18 @@ class ConsultantController extends SessionController
 			$data['page_tips'] = trans( 'index.page_tips' );
 			$data['page_note'] = trans( 'index.page_note' );
 			$page = config('myconfig.config.page_num');
-			$data['consu'] = Consu::get_all_consu($page);
-//			dd($data['consu']);
+			$data['role'] = Consu::get_all_role();  //查询角色
+//			dd($data);
+			//接受参数
+			//角色
+			$data['roles'] = $role = Input::get('role');
+			//职业顾问姓名
+			$data['name'] = $name = Input::get('name');
+			//登录者手机号
+			$data['iphone'] = $iphone = Input::get('iphone');
+
+			$data['consu'] = Consu::get_all_consu($role,$name,$iphone,$page);
+//			dd($data);
 			$data['ids'] = $perid;
 			return view('Admin.Consu.Consu.index') -> with($data);
 		}

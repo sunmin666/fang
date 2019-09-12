@@ -6,6 +6,7 @@ use DemeterChain\C;
 use Illuminate\Http\Request;
 use App\Http\Controllers\SessionController;
 use App\Models\admin\Checkout;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Validator;
 
 
@@ -21,7 +22,11 @@ class CheckoutController extends SessionController
 		$data['page_tips'] = trans( 'index.page_tips' );
 		$data['page_note'] = trans( 'index.page_note' );
 		$page = config('myconfig.config.page_num');
-		$data['checkout'] = Checkout::get_all_change($page);
+
+		$data['name'] = $name = Input::get('name');
+		$data['iphone'] = $iphone = Input::get('iphone');
+
+		$data['checkout'] = Checkout::get_all_change($name,$iphone,$page);
 //								dd($data['checkout']);
 		$data['ids'] = $perid;
 		return view('Admin.Checkout.Checkout.index') -> with($data);

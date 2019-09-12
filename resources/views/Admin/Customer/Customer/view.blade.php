@@ -87,6 +87,54 @@
 		@if($v -> field_id == $omer -> status_id) {{$v -> name}}  @endif
 	@endforeach
 </div>
+
+
+
+
+<div><span>{{ trans('customer.ownership') }}：</span>
+	@foreach($ownership as $k => $v)
+		@if($v -> field_id == $omer -> ownership) {{$v -> name}}  @endif
+	@endforeach
+</div>
+
+<div><span>{{ trans('customer.purpose') }}：</span>
+	@foreach($purpose as $k => $v)
+		@if($v -> field_id == $omer -> purpose) {{$v -> name}}  @endif
+	@endforeach
+</div>
+
+<div><span>{{ trans('customer.area') }}：</span>
+	@foreach($area as $k => $v)
+		@if($v -> field_id == $omer -> area) {{$v -> name}}  @endif
+	@endforeach
+</div>
+
+<div><span>{{ trans('customer.residence') }}：</span>
+	@foreach($residence as $k => $v)
+		@if($v -> field_id == $omer -> residence) {{$v -> name}}  @endif
+	@endforeach
+</div>
+
+<div><span>{{ trans('customer.structure') }}：</span>
+	@foreach($structure as $k => $v)
+		@if($v -> field_id == $omer -> structure) {{$v -> name}}  @endif
+	@endforeach
+</div>
+
+<div><span>{{ trans('customer.demand') }}：</span>
+	@foreach($demand as $k => $v)
+		@if($v -> field_id == $omer -> demand) {{$v -> name}}  @endif
+	@endforeach
+</div>
+
+<div><span>{{ trans('customer.apartment') }}：</span>
+	@foreach($apartment as $k => $v)
+		@if($v -> field_id == $omer -> apartment) {{$v -> name}}  @endif
+	@endforeach
+</div>
+
+
+
 <div><span>{{ trans('customer.hous_id') }}：</span>
 	@foreach($hous_id as $k => $v)
 		@if($v -> hous_id == $omer -> hous_id) {{$v -> name}}  @endif

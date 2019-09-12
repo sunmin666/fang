@@ -9,7 +9,7 @@ class Knowledge extends Model
 {
 	//查询分类
     public static function get_type_field(){
-    	return DB::table('fieldinfo') -> where('parent_field_id','=',18) -> get();
+    	return DB::table('fieldinfo') -> where('parent_field_id','=',19) -> get();
 		}
 
 		//添加入库
@@ -18,10 +18,20 @@ class Knowledge extends Model
 		}
 
 		//查询数据
-		public static function get_all_k($page){
+		public static function get_all_k($class_id,$title,$page){
     	return DB::table('knowledgeinfo') -> select('knowledgeinfo.*','fieldinfo.name')
 				-> leftJoin('fieldinfo','knowledgeinfo.class_id','=','fieldinfo.field_id')
-    	-> paginate($page);
+    	  ->where(function($query) use ($class_id){
+    	  	if($class_id){
+    	  		$query ->where('knowledgeinfo.class_id','=',$class_id);
+					}
+				})
+				->where(function($query) use ($title){
+					if($title){
+						$query ->where('knowledgeinfo.title','like','%'.$title.'%');
+					}
+				})
+				-> paginate($page);
 		}
 
 		//查询单挑数据

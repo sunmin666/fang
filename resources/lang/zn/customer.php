@@ -91,4 +91,21 @@
 		'hidden' => '隐藏',
 
 		'show' => '显示',
+
+
+		'ownership'  => '置业关注',
+		'purpose'  => ' 置业目的 ',
+		'area'   => '客户区域 ',
+		'residence' => '居住类型',
+		'structure' => '户型结构',
+		'demand'  => '车位需求',
+		'apartment' => '关注户型',
+
+
+		'name'   => '客户姓名',
+
+		'iphone'   => '手机号',
+
+		'type'   => '类型',
+
 	];

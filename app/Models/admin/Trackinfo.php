@@ -25,13 +25,18 @@ class Trackinfo extends Model
     }
 
     //查询所有客户跟踪信息
-    public static function get_all_trackinfo($page)
+    public static function get_all_trackinfo($hous_id,$page)
     {
         return DB::table('trackinfo')
             -> select('trackinfo.*','customer.realname','houserinfo.name')
             -> leftJoin('customer','trackinfo.cust_id','=','customer.cust_id')
             -> leftJoin('houserinfo','trackinfo.hous_id','=','houserinfo.hous_id')
-            -> paginate($page);
+            -> where(function($query) use ($hous_id){
+            	if($hous_id){
+            		$query -> where('trackinfo.hous_id','=',$hous_id);
+							}
+						})
+						-> paginate($page);
     }
 
     //客户跟踪修改查询单条数据

@@ -61,14 +61,6 @@
 			<button type="button" class="btn btn-dropbox btn-sm" id="refresh"><i
 					class="fa fa-refresh"></i> {{ trans('memberinfo.refresh') }}</button>
 
-
-			{{--<div class="box-tools pull-right">--}}
-				{{--<button type="button" class="btn btn-danger btn-sm weekly-day" id="news_day"--}}
-				{{--><i class="fa fa-plus"></i>--}}
-					{{--{{ trans('memberinfo.news_add') }}--}}
-				{{--</button>--}}
-			{{--</div>--}}
-
 		</div>
 		<div id="status_search">
 			<form action="{{URL('homegrp/{perid}')}}" method="get">
@@ -212,7 +204,7 @@
 									<div style="height: 30px">
 										<span style="height: 30px;width: 100px;display: inline-block;text-align: right">第{{$floor}}层:</span>
 										<span>
-								          @foreach($v['fang'] as $k7 => $v7)
+								        @foreach($v['fang'] as $k7 => $v7)
 												@if($floor == $v7['floor'])
 													@if($v7['status'] == 0)
 														<button class="btn btn-success btn-sm" onclick="update({{$v7['homeid']}})"

@@ -24,11 +24,12 @@ class TypesController extends SessionController
 			$data['type'] = Sales::get_field();
 			//接受参数
 			$data['houss'] = $hous = Input::get('hous');    //职业顾问
+			$data['type_all'] = $type_all = Input::get('type_all');   //客户关注
 			$data['types'] = $type = Input::get('type');    //接触方式
 			$data['stimes'] = $stime = Input::get('stime');   //开始时间
 			$data['etimes'] = $etime = Input::get('etime');    //结束时间
-			$data['customer'] = Sales::get_condition_cust($page,$hous,$type,$stime,$etime);
-			$data['total'] = Sales::get_total_cust($hous,$type,$stime,$etime);
+			$data['customer'] = Sales::get_condition_cust($page,$hous,$type,$stime,$etime,$type_all);
+			$data['total'] = Sales::get_total_cust($hous,$type,$stime,$etime,$type_all);
 			$data['ids'] = $perid;
 			return view('Admin.Sales.Types.index') -> with($data);
 		}
@@ -188,7 +189,7 @@ class TypesController extends SessionController
 		$data = $this -> session();
 		$data['per_menu'] = $this -> get_per();
 		$data['page_name'] = trans( 'sales.page_name' );
-		$data['page_detail'] = trans( 'sales.page_detailc' );
+		$data['page_detail'] = trans( 'sales.page_detailb' );
 		$data['page_tips'] = trans( 'index.page_tips' );
 		$data['page_note'] = trans( 'index.page_note' );
 		$page = config('myconfig.config.page_num');
@@ -323,7 +324,6 @@ class TypesController extends SessionController
 	public function amount_jinn($hous,$stime,$etime)
 	{
 
-
 		$houss = Sales::get_all_subscr( $hous );
 
 		foreach ( $houss as $key => $value ) {
@@ -335,12 +335,10 @@ class TypesController extends SessionController
 			$houss[$key]['num'] = array_sum( $num );
 		}
 
-
 		return $houss;
 	}
 
 	//销售房源统计
-
 	public function listing_jin($hous,$stime,$etime){
 		$houss = Sales::get_all_housts($hous);
 		foreach($houss as $k => $v){
@@ -385,12 +383,8 @@ class TypesController extends SessionController
 	//查询客户已更名的房子
 	public function amount_jiuinng($hous,$stime,$etime)
 	{
-
-//		return 111;
-		//查询出所有的职业顾问以及下面的用户
 		$rehous = Sales::get_all_subscr($hous);
-		//dd($rehous);
-		//dd($houss);
+
 		foreach ($rehous as $keyy => $valuee){
 			$num = array();
 			foreach($valuee['cust'] as $k1 => $v1){
@@ -399,7 +393,6 @@ class TypesController extends SessionController
 			}
 			$rehous[$keyy]['num'] = array_sum($num);
 		}
-
 		return $rehous;
 	}
 
@@ -407,11 +400,8 @@ class TypesController extends SessionController
 	public function amount_changehome($hous,$stime,$etime)
 	{
 
-//		return 111;
-		//查询出所有的职业顾问以及下面的用户
 		$rehous = Sales::get_all_subscr($hous);
 
-		//dd($houss);
 		foreach ($rehous as $keyy => $valuee){
 			$num = array();
 			foreach($valuee['cust'] as $k1 => $v1){

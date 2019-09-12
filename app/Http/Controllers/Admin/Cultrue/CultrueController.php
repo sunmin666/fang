@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\SessionController;
 use App\Models\admin\Cultrue;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Input;
 
 class CultrueController extends SessionController
 {
@@ -19,8 +20,12 @@ class CultrueController extends SessionController
         $data['page_tips'] = trans( 'index.page_tips' );
         $data['page_note'] = trans( 'index.page_note' );
         $page = config('myconfig.config.page_num');
-        $data['cultrue'] = Cultrue::get_all_cultrue($page);
+			  $data['name']=Cultrue::get_fieldinfo();
+				$data['class_id'] = $class_id = Input::get('class_id');
+				$data['title'] = $title = Input::get('title');
+        $data['cultrue'] = Cultrue::get_all_cultrue($class_id,$title,$page);
         $data['ids'] = $perid;
+//        dd($data);
         return view('Admin.Cultrue.Cultrue.index')->with($data);
     }
 

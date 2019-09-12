@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Changecust;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Validator;
 use App\Models\admin\Changecust;
 use App\Http\Controllers\SessionController;
@@ -21,9 +22,12 @@ class ChangecustController extends SessionController
         $data['page_note'] = trans( 'index.page_note' );
         $page = config('myconfig.config.page_num');
         $data['ids'] = $perid;
-        $data['changecust'] = Changecust::get_all_changecust($page);
-        //dd($data['changecust']);
-        //dd($data['changecust']);
+
+        $data['name'] = $name = Input::get('name');
+        $data['iphone'] = $iphone = Input::get('iphone');
+
+        $data['changecust'] = Changecust::get_all_changecust($name,$iphone,$page);
+
         return view('Admin/Changecust/Changecust/index')->with($data);
     }
 

@@ -90,4 +90,7 @@
 		'consultant_discount' =>'只有置业顾问有折扣',
 
 		'please_page_detail2' =>'请输入折扣信息',
+
+
+
 	];

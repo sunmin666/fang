@@ -4,6 +4,18 @@
 <link rel="stylesheet" href="{{URL::asset('bower_components/bootstrap-fileinput/css/fileinput.css')}}">
 <link rel="stylesheet" href="{{URL::asset('css/weekly.css')}}">
 <link rel="stylesheet" href="{{URL::asset('bower_components/layui/dist/css/layui.css')}}">
+        <style>
+            .status{
+                height: 30px;
+                border : 1px solid #DD4B39;
+                width: 200px;
+                padding-left: 10px;
+            }
+
+            .total{
+                padding-left: 20px;
+            }
+        </style>
 @endpush
 
 @section('content')
@@ -11,21 +23,22 @@
     <div class="box box-info">
         <div class="box-header with-border">
             <button type="button" class="btn btn-dropbox btn-sm" id="refresh"><i
-                        class="fa fa-refresh"></i> {{ trans('memberinfo.refresh') }}</button>
-
-
-            {{--<div class="box-tools pull-right">--}}
-                {{--@foreach($trackinfo as $k=>$v)--}}
-                {{--<button type="button" value="{{$v->cust_id}}" onclick="add({{$v->cust_id}})" class="btn btn-danger btn-sm weekly-day" id="news_day"--}}
-                {{--><i class="fa fa-plus"></i>--}}
-                    {{--{{ trans('memberinfo.news_add') }}--}}
-                {{--</button>--}}
-                {{--@endforeach--}}
-            {{--</div>--}}
+                        class="fa fa-refresh"></i> {{ trans('memberinfo.refresh') }}</button
 
         </div>
 
-
+        <form action="{{URL('trackinfo/40')}}" method="get">
+            <label>{{ trans('sales.cust') }}：</label>
+            <select name="hous_id"  class="status">
+                <option value="">全部</option>
+                @foreach($hous_id as $kay => $value)
+                    <option value="{{$value -> hous_id}}" @if($hous_ids == $value -> hous_id) selected @endif> {{$value -> name}}</option>
+                @endforeach
+            </select>
+            <button type='submit'  id="search" class="btn btn-sm {{config('myconfig.config.button_skin')}}">
+                <i class="glyphicon glyphicon-search"></i>&nbsp;{{trans('sales.search')}}
+            </button>
+        </form>
         <div class="box-body">
             <div class="table-responsive">
                 <table class="table no-margin">
@@ -61,7 +74,7 @@
                                 ></td>
                             <td>{{$v -> realname}}</td>
                             <td>{{ $v -> name}}</td>
-                            <td>@if($v -> track_type==1){{trans('trackinfo.text5')}}@else{{trans('trackinfo.text6')}}@endif</td>
+                            <td>@if($v -> track_type==0){{trans('trackinfo.text5')}}@else{{trans('trackinfo.text6')}}@endif</td>
                             <td>{{ $v -> content}}</td>
                             <td>{{date('Y-m-d H:i',$v -> track_time)}}</td>
                             <td>{{date('Y-m-d H:i',$v -> created_at)}}</td>
