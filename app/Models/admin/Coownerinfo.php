@@ -54,4 +54,5 @@ class Coownerinfo extends Model
     {
         return DB::table('coownerinfo') ->whereIn('coow_id',$all_id) ->delete();
     }
+
 }

@@ -13,7 +13,6 @@
             <button type="button" class="btn btn-dropbox btn-sm" id="refresh"><i
                         class="fa fa-refresh"></i> {{ trans('memberinfo.refresh') }}</button>
 
-
             {{--<div class="box-tools pull-right">--}}
             {{--@foreach($trackinfo as $k=>$v)--}}
             {{--<button type="button" value="{{$v->cust_id}}" onclick="add({{$v->cust_id}})" class="btn btn-danger btn-sm weekly-day" id="news_day"--}}

@@ -105,18 +105,18 @@
 							</td>
 							<td>
 								@if($value -> finance_verifytime === null)
-									经理未审核
+									财务未审核
 								@else
 									{{date('Y-m-d H:i',$value -> finance_verifytime)}}
 								@endif
 							</td>
 							<td>
 								@if($value -> sign_status === null)
-									经理未审核
+									财务未审核
 								@elseif($value -> sign_status === 1)
-									经理审核通过
+									财务审核通过
 								@elseif($value -> sign_status === 0)
-									经理审核未通过
+									财务审核未通过
 								@endif
 							</td>
 							<td>@if($value -> status == 1)

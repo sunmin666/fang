@@ -731,6 +731,40 @@
 		//退房统计
 		Route::get('theshy/{perid}','Admin\Sales\TypesController@theshy');
 
+
+		//提醒管理
+		Route::get('remindinfo/{perid}','Admin\Remindinfo\RemindinfoController@index');
+		//提醒添加页面
+		Route::get('remindinfoddd/create','Admin\Remindinfo\RemindinfoController@create');
+		//提醒添加
+		Route::post('remindinfo/store','Admin\Remindinfo\RemindinfoController@store');
+		//提醒修改页面
+		Route::get('remindinfo/edit/{remi_id}','Admin\Remindinfo\RemindinfoController@edit');
+		//提醒更新数据
+		Route::post('remindinfo/destroy','Admin\Remindinfo\RemindinfoController@destroy');
+		//提醒详情数据
+		Route::get('remindinfo/view/{remi_id}','Admin\Remindinfo\RemindinfoController@view');
+		//删除单条
+		Route::post('remindinfo/del','Admin\Remindinfo\RemindinfoController@del');
+		//全选删除
+		Route::post('remindinfo/destroy_all','Admin\Remindinfo\RemindinfoController@destroy_all');
+
+		//派遣管理
+		Route::get('delegate/{perid}','Admin\Delegate\DelegateController@index');
+		//派遣添加页面
+		Route::get('delegatee/create','Admin\Delegate\DelegateController@create');
+		//派遣添加数据
+		Route::post('delegate/store','Admin\Delegate\DelegateController@store');
+		//派遣修改页面
+		Route::get('delegate/edit/{gate_id}','Admin\Delegate\DelegateController@edit');
+		//派遣数据更新
+		Route::post('delegate/destroy','Admin\Delegate\DelegateController@destroy');
+		//派遣详情
+		Route::get('delegate/view/{gate_id}','Admin\Delegate\DelegateController@view');
+		//派遣删除单条
+		Route::post('delegate/del','Admin\Delegate\DelegateController@del');
+		//派遣全选删除
+		Route::post('delegate/destroy_all','Admin\Delegate\DelegateController@destroy_all');
 	});
 
 

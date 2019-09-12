@@ -180,6 +180,7 @@ return [
 				Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
 				//验证码
 				Mews\Captcha\CaptchaServiceProvider::class,
+
     ],
 
     /*

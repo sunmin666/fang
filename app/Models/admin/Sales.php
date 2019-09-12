@@ -207,13 +207,14 @@
 							 -> get() -> count();
 		}
 
-	//查询客户已签约的房子
+	//查询客户已认购的房子
 	public static function get_subscr($cust_id,$stime,$etime)
 	{
 		return DB::table( 'buyinfo' )
 						 ->where( 'buyinfo.cust_id' , '=' , $cust_id )
 						 ->where( 'buyinfo.finance_verify_status' , '=' , '1' )
-						 ->where( 'buyinfo.finance_verify_status' , '=' , '1' )
+						 ->where( 'buyinfo.status' , '!=' , '5' )
+						 ->where( 'buyinfo.status' , '!=' , '0' )
 						 ->where( function( $query ) use ( $stime ) {
 							 if ( $stime ) {
 								 $s = strtotime( $stime );

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\SessionController;
 use App\Models\admin\Coownerinfo;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Input;
 
 class CoownerinfoController extends SessionController
 {

@@ -129,8 +129,14 @@ class TypesController extends SessionController
 		$data['houss'] = $hous = Input::get('hous');  //接受职业顾问
 		$data['stime'] = $stime = Input::get('stime');  //接受开始时间
 		$data['etime'] = $etime = Input::get('etime');  //接受结束时间
+
+
+
 		$igg = $this ->amount_jinn($hous,$stime,$etime);
-		//dd($igg);
+
+
+//		dd($igg);
+
 		$sort_arr = [];
 		foreach ($igg as $key => $value) {
 			$sort_arr[] = $value ['num'];
@@ -144,6 +150,7 @@ class TypesController extends SessionController
 		$data['ids'] = $perid;
 		return view('Admin.Sales.Subscription.index') -> with($data);
 	}
+
 
 	//房源更名统计
 	public function renameho($perid){
@@ -178,6 +185,12 @@ class TypesController extends SessionController
 
 	//房源换房统计
 	public function changehome($perid){
+		$data = $this -> session();
+		$data['per_menu'] = $this -> get_per();
+		$data['page_name'] = trans( 'sales.page_name' );
+		$data['page_detail'] = trans( 'sales.page_detailc' );
+		$data['page_tips'] = trans( 'index.page_tips' );
+		$data['page_note'] = trans( 'index.page_note' );
 		$page = config('myconfig.config.page_num');
 		//查询所有的职业顾问
 		$data['hous'] = Sales::get_all_hous();
@@ -306,15 +319,13 @@ class TypesController extends SessionController
 	}
 
 
-	//查询客户已签约的房子
+	//查询客户已认购的房子
 	public function amount_jinn($hous,$stime,$etime)
 	{
 
-		//		return 111;
-		//查询出所有的职业顾问以及下面的用户
+
 		$houss = Sales::get_all_subscr( $hous );
 
-		//dd($houss);
 		foreach ( $houss as $key => $value ) {
 			$num = array ();
 			foreach ( $value['cust'] as $k1 => $v1 ) {
@@ -323,6 +334,9 @@ class TypesController extends SessionController
 			}
 			$houss[$key]['num'] = array_sum( $num );
 		}
+
+
+		return $houss;
 	}
 
 	//销售房源统计
@@ -409,5 +423,22 @@ class TypesController extends SessionController
 
 		return $rehous;
 	}
+
+
+
+//	//认购签约统计
+//	public function amount_rengou($hous,$stime,$etime){
+//		$houss = Sales::get_all_subscr( $hous );
+//
+//		foreach ( $houss as $key => $value ) {
+//			$num = array ();
+//			foreach ( $value['cust'] as $k1 => $v1 ) {
+//				$subscr = Sales::get_subscr( $v1['cust_id'] , $stime , $etime );
+//				array_push( $num , $subscr );
+//			}
+//			$houss[$key]['num'] = array_sum( $num );
+//		}
+//	}
+
 
 }

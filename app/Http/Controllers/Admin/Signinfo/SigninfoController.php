@@ -20,6 +20,7 @@ class SigninfoController extends SessionController
 		$data['page_note'] = trans( 'index.page_note' );
 		$page = config('myconfig.config.page_num');
 		$data['sig'] = Signinfo::get_all_sig($page);
+		//dd($data['sig']);
 //		dd($data['sig']);
 		$data['ids'] = $perid;
 		return view('Admin.Signinfo.Signinfo.index') -> with($data);
@@ -259,6 +260,7 @@ class SigninfoController extends SessionController
 		$data['page_note'] = trans( 'index.page_note' );
 		$page = config('myconfig.config.page_num');
 		$data['sig'] = Signinfo::get_all_delay($page);
+//		$data['sig'] = Signinfo::get_all_delay($page);
 //		dd($data['sig']);
 		$data['ids'] = $perid;
 		return view('Admin.Delaysig.Delaysig.index') -> with($data);
