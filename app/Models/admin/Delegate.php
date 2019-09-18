@@ -29,9 +29,9 @@ class Delegate extends Model
     public static function get_all_delegate($page)
     {
         return DB::table('delegate')
-            -> select('delegate.*','houserinfo.name','customer.realname')
+            -> select('delegate.*','houserinfo.name')
             -> leftJoin('houserinfo','delegate.hous_id','=','houserinfo.hous_id')
-            -> leftJoin('customer','delegate.cust_id','=','customer.cust_id')
+//            -> leftJoin('customer','delegate.cust_id','=','customer.cust_id')
             ->paginate($page);
     }
 

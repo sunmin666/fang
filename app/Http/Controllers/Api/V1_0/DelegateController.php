@@ -19,7 +19,7 @@ class DelegateController extends Controller
      *
      * @apiParam (参数) {int} hous_id 职业顾问id
      *
-     * @apiSampleRequest http://192.168.1.218/fang/public/api/1.0.0/delegate
+     * @apiSampleRequest http://192.168.1.13/fang/public/api/1.0.0/delegate
      * @apiVersion 1.0.0
      * @apiSuccessExample {json} 成功返回:
      *     HTTP/1.1 200 OK
@@ -70,7 +70,7 @@ class DelegateController extends Controller
      *
      * @apiParam (参数) {int} gate_id 派遣id
      *
-     * @apiSampleRequest http://192.168.1.218/fang/public/api/1.0.0/deleview
+     * @apiSampleRequest http://192.168.1.13/fang/public/api/1.0.0/deleview
      * @apiVersion 1.0.0
      * @apiSuccessExample {json} 成功返回:
      *     HTTP/1.1 200 OK

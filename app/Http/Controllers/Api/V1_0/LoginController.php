@@ -21,8 +21,8 @@ class LoginController extends Controller
 		 * @api {post} 1.0.0/login 登录
 		 * @apiName login
 		 * @apiGroup GroupLogin
-		 * @apiParam (参数) {string} [mobile] 客户姓名
-		 * @apiParam (参数) {string} [password] 手机号
+		 * @apiParam (参数) {string} mobile 客户姓名
+		 * @apiParam (参数) {string} password 手机号
 		 * @apiSampleRequest http://192.168.1.13/fang/public/api/1.0.0/login
 		 * @apiVersion 1.0.0
 		 * @apiSuccessExample {json} 成功返回:

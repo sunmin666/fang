@@ -19,7 +19,7 @@ class TrackinfoController extends Controller
      *
      * @apiParam (参数) {int} hous_id 职业顾问id
      *
-     * @apiSampleRequest http://192.168.1.218/fang/public/api/1.0.0/trackinfo
+     * @apiSampleRequest http://192.168.1.13/fang/public/api/1.0.0/trackinfo
      * @apiVersion 1.0.0
      * @apiSuccessExample {json} 成功返回:
      *     HTTP/1.1 200 OK

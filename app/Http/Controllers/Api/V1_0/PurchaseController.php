@@ -19,7 +19,7 @@ class PurchaseController extends Controller
      *
      * @apiParam (参数) {int} cust_id 用户id
      *
-     * @apiSampleRequest http://192.168.1.218/fang/public/api/1.0.0/purchase
+     * @apiSampleRequest http://192.168.1.13/fang/public/api/1.0.0/purchase
      * @apiVersion 1.0.0
      * @apiSuccessExample {json} 成功返回:
      *     HTTP/1.1 200 OK
@@ -84,7 +84,7 @@ class PurchaseController extends Controller
      *
      * @apiParam (参数) {int} planid 计划方案id
      *
-     * @apiSampleRequest http://192.168.1.218/fang/public/api/1.0.0/purcview
+     * @apiSampleRequest http://192.168.1.13/fang/public/api/1.0.0/purcview
      * @apiVersion 1.0.0
      * @apiSuccessExample {json} 成功返回:
      *     HTTP/1.1 200 OK
