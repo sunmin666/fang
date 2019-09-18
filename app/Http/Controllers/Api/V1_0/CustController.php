@@ -22,7 +22,7 @@ class CustController extends Controller
 	 * @apiGroup GroupName
 	 * @apiParam (参数) {int} hous_id 职业顾问id
 	 * @apiParam (参数) {int} page 页码
-	 * @apiSampleRequest http://192.168.1.13/fang/public/api/1.0.0/get/cust
+	 * @apiSampleRequest http://192.168.1.218/fang/public/api/1.0.0/get/cust
 	 * @apiVersion 1.0.0
 	 * @apiSuccessExample {json} 成功返回:
 	 *     HTTP/1.1 200 OK
@@ -68,7 +68,7 @@ class CustController extends Controller
 	 * @api {get} 1.0.0/first_contact 首次接触方式
 	 * @apiName first_contact
 	 * @apiGroup GroupName
-	 * @apiSampleRequest http://192.168.1.13/fang/public/api/1.0.0/first_contact
+	 * @apiSampleRequest http://192.168.1.218/fang/public/api/1.0.0/first_contact
 	 * @apiVersion 1.0.0
 	 * @apiSuccessExample {json} 成功返回:
 	 *     HTTP/1.1 200 OK
@@ -113,7 +113,7 @@ class CustController extends Controller
 	 * @api {get} 1.0.0/cognition 认知渠道
 	 * @apiName cognition
 	 * @apiGroup GroupName
-	 * @apiSampleRequest http://192.168.1.13/fang/public/api/1.0.0/cognition
+	 * @apiSampleRequest http://192.168.1.218/fang/public/api/1.0.0/cognition
 	 * @apiVersion 1.0.0
 	 * @apiSuccessExample {json} 成功返回:
 	 *     HTTP/1.1 200 OK
@@ -157,7 +157,7 @@ class CustController extends Controller
 	 * @api {get} 1.0.0/family_str 家庭结构
 	 * @apiName family_str
 	 * @apiGroup GroupName
-	 * @apiSampleRequest http://192.168.1.13/fang/public/api/1.0.0/family_str
+	 * @apiSampleRequest http://192.168.1.218/fang/public/api/1.0.0/family_str
 	 * @apiVersion 1.0.0
 	 * @apiSuccessExample {json} 成功返回:
 	 *     HTTP/1.1 200 OK
@@ -199,7 +199,7 @@ class CustController extends Controller
 	 * @api {get} 1.0.0/work_type 工作类型
 	 * @apiName work_type
 	 * @apiGroup GroupName
-	 * @apiSampleRequest http://192.168.1.13/fang/public/api/1.0.0/work_type
+	 * @apiSampleRequest http://192.168.1.218/fang/public/api/1.0.0/work_type
 	 * @apiVersion 1.0.0
 	 * @apiSuccessExample {json} 成功返回:
 	 *     HTTP/1.1 200 OK
@@ -242,7 +242,7 @@ class CustController extends Controller
 	 * @api {get} 1.0.0/ownership 职业关注
 	 * @apiName ownership
 	 * @apiGroup GroupName
-	 * @apiSampleRequest http://192.168.1.13/fang/public/api/1.0.0/ownership
+	 * @apiSampleRequest http://192.168.1.218/fang/public/api/1.0.0/ownership
 	 * @apiVersion 1.0.0
 	 * @apiSuccessExample {json} 成功返回:
 	 *     HTTP/1.1 200 OK
@@ -287,7 +287,7 @@ class CustController extends Controller
 	 * @api {get} 1.0.0/purpose 职业目的
 	 * @apiName purpose
 	 * @apiGroup GroupName
-	 * @apiSampleRequest http://192.168.1.13/fang/public/api/1.0.0/purpose
+	 * @apiSampleRequest http://192.168.1.218/fang/public/api/1.0.0/purpose
 	 * @apiVersion 1.0.0
 	 * @apiSuccessExample {json} 成功返回:
 	 *     HTTP/1.1 200 OK
@@ -330,7 +330,7 @@ class CustController extends Controller
 	 * @api {get} 1.0.0/area 客户区域
 	 * @apiName area
 	 * @apiGroup GroupName
-	 * @apiSampleRequest http://192.168.1.13/fang/public/api/1.0.0/area
+	 * @apiSampleRequest http://192.168.1.218/fang/public/api/1.0.0/area
 	 * @apiVersion 1.0.0
 	 * @apiSuccessExample {json} 成功返回:
 	 *     HTTP/1.1 200 OK
@@ -372,7 +372,7 @@ class CustController extends Controller
 	 * @api {get} 1.0.0/residence 居住类型
 	 * @apiName residence
 	 * @apiGroup GroupName
-	 * @apiSampleRequest http://192.168.1.13/fang/public/api/1.0.0/residence
+	 * @apiSampleRequest http://192.168.1.218/fang/public/api/1.0.0/residence
 	 * @apiVersion 1.0.0
 	 * @apiSuccessExample {json} 成功返回:
 	 *     HTTP/1.1 200 OK
@@ -415,7 +415,7 @@ class CustController extends Controller
 	 * @api {get} 1.0.0/intention_area 意向面积
 	 * @apiName intention_area
 	 * @apiGroup GroupName
-	 * @apiSampleRequest http://192.168.1.13/fang/public/api/1.0.0/intention_area
+	 * @apiSampleRequest http://192.168.1.218/fang/public/api/1.0.0/intention_area
 	 * @apiVersion 1.0.0
 	 * @apiSuccessExample {json} 成功返回:
 	 *     HTTP/1.1 200 OK
@@ -460,7 +460,7 @@ class CustController extends Controller
 	 * @api {get} 1.0.0/floor_like 楼层偏好
 	 * @apiName floor_like
 	 * @apiGroup GroupName
-	 * @apiSampleRequest http://192.168.1.13/fang/public/api/1.0.0/floor_like
+	 * @apiSampleRequest http://192.168.1.218/fang/public/api/1.0.0/floor_like
 	 * @apiVersion 1.0.0
 	 * @apiSuccessExample {json} 成功返回:
 	 *     HTTP/1.1 200 OK
@@ -506,7 +506,7 @@ class CustController extends Controller
 	 * @api {get} 1.0.0/structure 户型结构
 	 * @apiName structure
 	 * @apiGroup GroupName
-	 * @apiSampleRequest http://192.168.1.13/fang/public/api/1.0.0/structure
+	 * @apiSampleRequest http://192.168.1.218/fang/public/api/1.0.0/structure
 	 * @apiVersion 1.0.0
 	 * @apiSuccessExample {json} 成功返回:
 	 *     HTTP/1.1 200 OK
@@ -550,7 +550,7 @@ class CustController extends Controller
 	 * @api {get} 1.0.0/apartment 关注户型
 	 * @apiName apartment
 	 * @apiGroup GroupName
-	 * @apiSampleRequest http://192.168.1.13/fang/public/api/1.0.0/apartment
+	 * @apiSampleRequest http://192.168.1.218/fang/public/api/1.0.0/apartment
 	 * @apiVersion 1.0.0
 	 * @apiSuccessExample {json} 成功返回:
 	 *     HTTP/1.1 200 OK
@@ -593,7 +593,7 @@ class CustController extends Controller
 	 * @api {get} 1.0.0/furniture_need 家具需求
 	 * @apiName furniture_need
 	 * @apiGroup GroupName
-	 * @apiSampleRequest http://192.168.1.13/fang/public/api/1.0.0/furniture_need
+	 * @apiSampleRequest http://192.168.1.218/fang/public/api/1.0.0/furniture_need
 	 * @apiVersion 1.0.0
 	 * @apiSuccessExample {json} 成功返回:
 	 *     HTTP/1.1 200 OK
@@ -637,7 +637,7 @@ class CustController extends Controller
 	 * @api {get} 1.0.0/house_num 职业次数
 	 * @apiName house_num
 	 * @apiGroup GroupName
-	 * @apiSampleRequest http://192.168.1.13/fang/public/api/1.0.0/house_num
+	 * @apiSampleRequest http://192.168.1.218/fang/public/api/1.0.0/house_num
 	 * @apiVersion 1.0.0
 	 * @apiSuccessExample {json} 成功返回:
 	 *     HTTP/1.1 200 OK
@@ -679,7 +679,7 @@ class CustController extends Controller
 	 * @api {get} 1.0.0/demand 客户意向等级
 	 * @apiName demand
 	 * @apiGroup GroupName
-	 * @apiSampleRequest http://192.168.1.13/fang/public/api/1.0.0/demand
+	 * @apiSampleRequest http://192.168.1.218/fang/public/api/1.0.0/demand
 	 * @apiVersion 1.0.0
 	 * @apiSuccessExample {json} 成功返回:
 	 *     HTTP/1.1 200 OK
@@ -723,7 +723,7 @@ class CustController extends Controller
 	 * @api {get} 1.0.0/status_id 客户状态
 	 * @apiName status_id
 	 * @apiGroup GroupName
-	 * @apiSampleRequest http://192.168.1.13/fang/public/api/1.0.0/status_id
+	 * @apiSampleRequest http://192.168.1.218/fang/public/api/1.0.0/status_id
 	 * @apiVersion 1.0.0
 	 * @apiSuccessExample {json} 成功返回:
 	 *     HTTP/1.1 200 OK
@@ -791,7 +791,7 @@ class CustController extends Controller
 	 * @apiParam (参数) {int} [furniture_need] 家具需求
 	 * @apiParam (参数) {int} [house_num] 职业次数
 	 * @apiParam (参数) {string} demand 客户意向等级
-	 * @apiSampleRequest http://192.168.1.13/fang/public/api/1.0.0/store
+	 * @apiSampleRequest http://192.168.1.218/fang/public/api/1.0.0/store
 	 * @apiVersion 1.0.0
 	 * @apiSuccessExample {json} 成功返回:
 	 *     HTTP/1.1 200 OK
@@ -882,7 +882,7 @@ class CustController extends Controller
 	 * @apiParam (参数) {string} [starting_time] 开始时间
 	 * @apiParam (参数) {string} [end_time] 结束时间
 	 * @apiParam (参数) {int} [first_contact] 首次接触方式
-	 * @apiSampleRequest http://192.168.1.13/fang/public/api/1.0.0/search
+	 * @apiSampleRequest http://192.168.1.218/fang/public/api/1.0.0/search
 	 * @apiVersion 1.0.0
 	 * @apiSuccessExample {json} 成功返回:
 	 *     HTTP/1.1 200 OK
@@ -952,7 +952,7 @@ class CustController extends Controller
 	 * @apiName details
 	 * @apiGroup GroupName
 	 * @apiParam (参数) {string} cust_id 客户id
-	 * @apiSampleRequest http://192.168.1.13/fang/public/api/1.0.0/details
+	 * @apiSampleRequest http://192.168.1.218/fang/public/api/1.0.0/details
 	 * @apiVersion 1.0.0
 	 * @apiSuccessExample {json} 成功返回:
 	 *     HTTP/1.1 200 OK
@@ -1077,7 +1077,7 @@ class CustController extends Controller
 	 * @apiName rocedure
 	 * @apiGroup GroupName
 	 * @apiParam (参数) {string} cust_id 客户id
-	 * @apiSampleRequest http://192.168.1.13/fang/public/api/1.0.0/rocedure
+	 * @apiSampleRequest http://192.168.1.218/fang/public/api/1.0.0/rocedure
 	 * @apiVersion 1.0.0
 	 * @apiSuccessExample {json} 成功返回:
 	 *     HTTP/1.1 200 OK

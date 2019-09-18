@@ -5,10 +5,10 @@ namespace App\Models\Api\V1_0;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
-class Trackinfo extends Model
+class Trackge extends Model
 {
-    //根据置业顾问查询客户来访
-    public static function get_d_hous($hous_id,$page)
+    //根据置业顾问查询客户跟踪
+    public static function get_trackge_hous($hous_id,$page)
     {
         $pages =  	$page - 1;
         return DB::table('customer')
@@ -27,8 +27,8 @@ class Trackinfo extends Model
     {
         return DB::table('trackinfo')
             -> select('trackinfo.cust_id')
-            ->where('trackinfo.cust_id','=',$cust_id)
-            -> where('track_type','=',1)
+            -> where('track_type','=',0)
+            -> where('trackinfo.cust_id','=',$cust_id)
             ->count();
 
     }
@@ -39,7 +39,7 @@ class Trackinfo extends Model
         return DB::table('trackinfo')
             -> select('trackinfo.track_time')
             ->where('trackinfo.cust_id','=',$cust_id)
-            -> where('track_type','=',1)
+            -> where('track_type','=',0)
             -> orderBy('track_time','desc')
             ->first();
     }
@@ -53,9 +53,8 @@ class Trackinfo extends Model
             -> first();
     }
 
-
-    //查询某个客户所有的来访记录
-    public static function get_trak($cust_id,$page){
+    //查询某个客户所有的跟踪记录
+    public static function get_trakge($cust_id,$page){
         $pages =  	$page - 1;
         return DB::table('trackinfo')
             -> select('trackinfo.cust_id','trackinfo.content','trackinfo.created_at','fieldinfo.name','customer.demand')
@@ -72,15 +71,5 @@ class Trackinfo extends Model
         return DB::table('trackinfo') ->where('trackid','=',$trackid)->update($dataa);
     }
 
-    //添加客户跟踪时需要修改当前客户的意向
-    public static function update_d_trackin($cust_id,$dataa)
-    {
-        return DB::table('customer') -> where('cust_id','=',$cust_id) -> update($dataa);
-    }
 
-    //添加来访客户
-    public static function insert_track($datac)
-    {
-        return DB::table('trackinfo') -> insert($datac);
-    }
 }

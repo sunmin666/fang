@@ -4,23 +4,23 @@ namespace App\Http\Controllers\Api\V1_0;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Api\V1_0\Trackinfo;
+use App\Models\Api\V1_0\Trackge;
 
-class TrackinfoController extends Controller
+class TrackgeController extends Controller
 {
     /**
-     * @apiDefine GroupNamejj 客户跟踪管理
+     * @apiDefine GroupNamejl 客户跟踪管理
      */
 
     /**
-     * @api {post} api/1.0.0/trackinfo 客户来访查找
-     * @apiName delegate
-     * @apiGroup GroupNamejj
+     * @api {post} api/1.0.0/trackge 客户跟踪查找
+     * @apiName trackge
+     * @apiGroup GroupNamejl
      *
      * @apiParam (参数) {int} hous_id 职业顾问id
      * @apiParam (参数) {int} page 页码
      *
-     * @apiSampleRequest http://192.168.1.220/fang/public/api/1.0.0/trackinfo
+     * @apiSampleRequest http://192.168.1.220/fang/public/api/1.0.0/trackge
      * @apiVersion 1.0.0
      * @apiSuccessExample {json} 成功返回:
      *     HTTP/1.1 200 OK
@@ -38,9 +38,8 @@ class TrackinfoController extends Controller
      *       "error": "请求失败"
      *     }
      */
-    public function trackinfo(Request $api)
+    public function trackge(Request $api)
     {
-
         $hous_id = $api->input('hous_id');
         $page = $api->input('page');
 
@@ -50,26 +49,23 @@ class TrackinfoController extends Controller
                 'message' => '参数不全',
             ]);
         }
+        $data = Trackge::get_trackge_hous($hous_id, $page);
 
-        $data = Trackinfo::get_d_hous($hous_id, $page);
-
-        foreach ($data as $k => $v) {
-            $data[$k]['count'] = $c = Trackinfo::get_t_count($v['cust_id']);
-
-
+        foreach($data as $key => $value){
+            $data[$key]['count'] = $c = Trackge::get_t_count($value['cust_id']);
             if ($c == 0) {
-                unset($data[$k]);
+                unset($data[$key]);
             } else {
-                $a = Trackinfo::get_t_time($v['cust_id']);
-                $data[$k]['time'] = $a->track_time;
-                if ($v['sex'] == 1) {
-                    $data[$k]['sex'] = "男";
+                $a = Trackge::get_t_time($value['cust_id']);
+                $data[$key]['time'] = $a->track_time;
+                if ($value['sex'] == 1) {
+                    $data[$key]['sex'] = "男";
                 } else {
-                    $data[$k]['sex'] = "女";
+                    $data[$key]['sex'] = "女";
                 }
-                $data=array_values($data);
-            }
+           }
         }
+        $data=array_values($data);
         if ($data) {
             return response()->json([
                 'code' => '101',
@@ -83,16 +79,15 @@ class TrackinfoController extends Controller
             ]);
         }
     }
-
     /**
-     * @api {post} api/1.0.0/trackcust 获取客户来访记录
-     * @apiName trackcust
-     * @apiGroup GroupNamejj
+     * @api {post} api/1.0.0/trackgecust 获取客户跟踪记录
+     * @apiName trackgecust
+     * @apiGroup GroupNamejl
      *
      * @apiParam (参数) {int} cust_id 客户id
      * @apiParam (参数) {int} page 页码
      *
-     * @apiSampleRequest http://192.168.1.220/fang/public/api/1.0.0/trackcust
+     * @apiSampleRequest http://192.168.1.220/fang/public/api/1.0.0/trackgecust
      * @apiVersion 1.0.0
      * @apiSuccessExample {json} 成功返回:
      *     HTTP/1.1 200 OK
@@ -110,7 +105,7 @@ class TrackinfoController extends Controller
      *       "error": "请求失败"
      *     }
      */
-    public function trackcust(Request $api)
+    public function trackgecust(Request $api)
     {
         $cust_id = $api->input('cust_id');
         $page = $api->input('page');
@@ -120,37 +115,36 @@ class TrackinfoController extends Controller
                 'message' => '参数不全',
             ]);
         }
-        $data = Trackinfo::get_all_cust($cust_id);
-        $data->count = $c = Trackinfo::get_t_count($data->cust_id);
-        $e = Trackinfo::get_t_time($data->cust_id);
+        $data = Trackge::get_all_cust($cust_id);
+
+        $data->count = $c = Trackge::get_t_count($data->cust_id);
+        $e=Trackge::get_t_time($data->cust_id);
         $data->time = $e->track_time;
 
-        $data->trackinfo = Trackinfo::get_trak($cust_id, $page);
+        $data->trackinfo = Trackge::get_trakge($cust_id, $page);
 
         if ($data) {
-            return response()->json([
-                'code' => '101',
-                'message' => '请求成功',
-                'result' => $data
-            ]);
+              return response()->json([
+        'code' => '101',
+            'message' => '请求成功',
+            'result' => $data
+        ]);
         } else {
             return response()->json([
                 'code' => '103',
                 'message' => '内容为空'
             ]);
         }
-
     }
-
     /**
-     * @api {post} api/1.0.0/trackupdate 编辑客户来访
-     * @apiName trackupdate
-     * @apiGroup GroupNamejj
+     * @api {post} api/1.0.0/trackgeupdate 编辑客户跟踪
+     * @apiName trackgeupdate
+     * @apiGroup GroupNamejl
      *
-     * @apiParam (参数) {int} trackid 来访id
-     * @apiParam (参数) {string} content 来访内容
+     * @apiParam (参数) {int} trackid 跟踪id
+     * @apiParam (参数) {string} content 跟踪内容
      *
-     * @apiSampleRequest http://192.168.1.220/fang/public/api/1.0.0/trackupdate
+     * @apiSampleRequest http://192.168.1.220/fang/public/api/1.0.0/trackgeupdate
      * @apiVersion 1.0.0
      * @apiSuccessExample {json} 成功返回:
      *     HTTP/1.1 200 OK
@@ -168,7 +162,7 @@ class TrackinfoController extends Controller
      *       "error": "请求失败"
      *     }
      */
-    public function trackupdate(Request $api)
+    public function trackgeupdate(Request $api)
     {
         $trackid = $api->input('trackid');
         $dataa['content'] = $api->input('content');
@@ -178,12 +172,11 @@ class TrackinfoController extends Controller
                 'message' => '参数不全',
             ]);
         }
-        $data = Trackinfo::update_d_track($trackid, $dataa);
+        $data = Trackge::update_d_track($trackid, $dataa);
         if ($data) {
             return response()->json([
                 'code' => '101',
                 'message' => '请求成功',
-                'result' => $data
             ]);
         } else {
             return response()->json([
@@ -192,18 +185,17 @@ class TrackinfoController extends Controller
             ]);
         }
     }
-
     /**
-     * @api {post} api/1.0.0/trackinsert 添加客户来访
-     * @apiName trackinsert
-     * @apiGroup GroupNamejj
+     * @api {post} api/1.0.0/trackgeinsert 添加客户跟踪
+     * @apiName trackgeinsert
+     * @apiGroup GroupNamejl
      *
      * @apiParam (参数) {int} cust_id 客户id
      * @apiParam (参数) {int} hous_id 职业顾问id
      * @apiParam (参数) {string} demand 意向等级
-     * @apiParam (参数) {string} content 来访内容
+     * @apiParam (参数) {string} content 跟踪内容
      *
-     * @apiSampleRequest http://192.168.1.220/fang/public/api/1.0.0/trackinsert
+     * @apiSampleRequest http://192.168.1.220/fang/public/api/1.0.0/trackgeinsert
      * @apiVersion 1.0.0
      * @apiSuccessExample {json} 成功返回:
      *     HTTP/1.1 200 OK
@@ -221,7 +213,7 @@ class TrackinfoController extends Controller
      *       "error": "请求失败"
      *     }
      */
-    public function trackinsert(Request $api)
+    public function trackgeinsert(Request $api)
     {
         $cust_id = $api->input('cust_id');
         $dataa['demand'] = $api->input('demand');
@@ -231,12 +223,12 @@ class TrackinfoController extends Controller
                 'message' => '参数不全',
             ]);
         }
-        $data = Trackinfo::update_d_trackin($cust_id, $dataa);
+        $data = Trackge::update_d_trackin($cust_id, $dataa);
         if ($data) {
             $datac['cust_id'] = $api->input('cust_id');
             $datac['hous_id'] = $api->input('hous_id');
             $datac['content'] = $api->input('content');
-            $datac['track_type'] = 1;
+            $datac['track_type'] = 0;
             $datac['track_time'] = time();
             $datac['created_at'] = time();
             if (!$datac['cust_id'] || $datac['hous_id'] == '' || $datac['content'] == '') {
@@ -245,7 +237,7 @@ class TrackinfoController extends Controller
                     'message' => '参数不全',
                 ]);
             }
-            $datat = Trackinfo::insert_track($datac);
+            $datat = Trackge::insert_track($datac);
 
             if ($datat) {
                 return response()->json([
@@ -262,7 +254,8 @@ class TrackinfoController extends Controller
             return response()->json( [
                 'code' => '103' ,
                 'message'  => '请求失败'
-           ] );
-         }
+            ] );
         }
+    }
+
 }
