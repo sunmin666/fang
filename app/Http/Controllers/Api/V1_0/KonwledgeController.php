@@ -20,7 +20,7 @@ class KonwledgeController extends Controller
      * @apiGroup GroupNamec
      *
      *
-     * @apiSampleRequest http://192.168.1.218/fang/public/api/1.0.0/konwledge
+     * @apiSampleRequest http://192.168.1.13/fang/public/api/1.0.0/konwledge
      * @apiVersion 1.0.0
      * @apiSuccessExample {json} 成功返回:
      *     HTTP/1.1 200 OK

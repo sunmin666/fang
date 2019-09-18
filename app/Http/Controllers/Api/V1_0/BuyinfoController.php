@@ -19,7 +19,7 @@ class BuyinfoController extends Controller
      *
      * @apiParam (参数) {int} sponsor 职业顾问id
      *
-     * @apiSampleRequest http://192.168.1.218/fang/public/api/1.0.0/buyinfo
+     * @apiSampleRequest http://192.168.1.13/fang/public/api/1.0.0/buyinfo
      * @apiVersion 1.0.0
      * @apiSuccessExample {json} 成功返回:
      *     HTTP/1.1 200 OK

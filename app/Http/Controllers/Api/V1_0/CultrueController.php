@@ -19,7 +19,7 @@ class CultrueController extends Controller
      * @apiGroup GroupNameh
      *
      *
-     * @apiSampleRequest http://192.168.1.218/fang/public/api/1.0.0/cultrue
+     * @apiSampleRequest http://192.168.1.13/fang/public/api/1.0.0/cultrue
      * @apiVersion 1.0.0
      * @apiSuccessExample {json} 成功返回:
      *     HTTP/1.1 200 OK
