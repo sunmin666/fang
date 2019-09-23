@@ -8,6 +8,7 @@ use App\Http\Controllers\SessionController;
 use App\Models\admin\Checkout;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Session;
 
 
 class CheckoutController extends SessionController
@@ -180,6 +181,7 @@ class CheckoutController extends SessionController
 		$data['status'] = $status = $query -> input('status');
 		$data['verify_remarks'] = $query -> input('verify_remarks');
 		$data['verifytime'] = time();
+		$data['verify_admin']  =  Session::get('session_member.id');
 
 		$if = Checkout::update_review($chan_id,$data);
 		if($if){
@@ -219,7 +221,7 @@ class CheckoutController extends SessionController
 		$data['finance_status'] = $status = $query -> input('finance_status');
 		$data['finance_remarks'] = $query -> input('finance_remarks');
 		$data['finance_time'] = time();
-
+		$data['finance_admin']  =  Session::get('session_member.id');
 		$updatecw = Checkout::update_cwview($chan_id,$data);
 		if($updatecw){
 			if($status == 0){

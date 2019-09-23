@@ -7,6 +7,7 @@ use App\Http\Controllers\SessionController;
 use App\Models\admin\Signinfo;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Session;
 
 class SigninfoController extends SessionController
 {
@@ -174,6 +175,7 @@ class SigninfoController extends SessionController
 
 		$data['sign_status'] = $query -> input('sign_status');
 		$data['verify_remarks'] = $query -> input('verify_remarks');
+		$data['sign_admin'] = Session::get('session_member.id');
 		$data['sign_verifytime'] = time();
 		$review = Signinfo::update_review($sigid,$data);
 		if($review){
@@ -210,6 +212,7 @@ class SigninfoController extends SessionController
 		$sigid = $query -> input('sigid');
 		$data['finance_remarks'] = $query -> input('finance_remarks');
 		$data['finance_status'] = $query -> input('finance_status');
+		$data['finance_admin'] = Session::get('session_member.id');
 		$data['finance_verifytime'] = time();
 		$cwview = Signinfo::update_review($sigid,$data);
 

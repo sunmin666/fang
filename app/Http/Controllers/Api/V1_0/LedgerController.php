@@ -19,7 +19,7 @@ class LedgerController extends Controller
      *
      * @apiParam (参数) {int} hous_id 职业顾问id
      *
-     * @apiSampleRequest http://192.168.1.220/fang/public/api/1.0.0/buyinfo
+     * @apiSampleRequest http://192.168.1.13/fang/public/api/1.0.0/buyinfo
      * @apiVersion 1.0.0
      * @apiSuccessExample {json} 成功返回:
      *     HTTP/1.1 200 OK
@@ -81,7 +81,7 @@ class LedgerController extends Controller
      *
      * @apiParam (参数) {int} hous_id 职业顾问id
      *
-     * @apiSampleRequest http://192.168.1.220/fang/public/api/1.0.0/changecust
+     * @apiSampleRequest http://192.168.1.13/fang/public/api/1.0.0/changecust
      * @apiVersion 1.0.0
      * @apiSuccessExample {json} 成功返回:
      *     HTTP/1.1 200 OK
@@ -137,7 +137,7 @@ class LedgerController extends Controller
      *
      * @apiParam (参数) {int} hous_id 职业顾问id
      *
-     * @apiSampleRequest http://192.168.1.220/fang/public/api/1.0.0/changehome
+     * @apiSampleRequest http://192.168.1.13/fang/public/api/1.0.0/changehome
      * @apiVersion 1.0.0
      * @apiSuccessExample {json} 成功返回:
      *     HTTP/1.1 200 OK
@@ -199,7 +199,7 @@ class LedgerController extends Controller
      *
      * @apiParam (参数) {int} hous_id 职业顾问id
      *
-     * @apiSampleRequest http://192.168.1.220/fang/public/api/1.0.0/delaysing
+     * @apiSampleRequest http://192.168.1.13/fang/public/api/1.0.0/delaysing
      * @apiVersion 1.0.0
      * @apiSuccessExample {json} 成功返回:
      *     HTTP/1.1 200 OK
@@ -260,7 +260,7 @@ class LedgerController extends Controller
      *
      * @apiParam (参数) {int} hous_id 职业顾问id
      *
-     * @apiSampleRequest http://192.168.1.220/fang/public/api/1.0.0/signinfo
+     * @apiSampleRequest http://192.168.1.13/fang/public/api/1.0.0/signinfo
      * @apiVersion 1.0.0
      * @apiSuccessExample {json} 成功返回:
      *     HTTP/1.1 200 OK
@@ -322,7 +322,7 @@ class LedgerController extends Controller
      *
      * @apiParam (参数) {int} hous_id 职业顾问id
      *
-     * @apiSampleRequest http://192.168.1.220/fang/public/api/1.0.0/checkout
+     * @apiSampleRequest http://192.168.1.13/fang/public/api/1.0.0/checkout
      * @apiVersion 1.0.0
      * @apiSuccessExample {json} 成功返回:
      *     HTTP/1.1 200 OK
@@ -383,7 +383,7 @@ class LedgerController extends Controller
      *
      * @apiParam (参数) {int} hous_id 职业顾问id
      *
-     * @apiSampleRequest http://192.168.1.220/fang/public/api/1.0.0/buyinfopass
+     * @apiSampleRequest http://192.168.1.13/fang/public/api/1.0.0/buyinfopass
      * @apiVersion 1.0.0
      * @apiSuccessExample {json} 成功返回:
      *     HTTP/1.1 200 OK
@@ -438,7 +438,7 @@ class LedgerController extends Controller
      *
      * @apiParam (参数) {int} hous_id 职业顾问id
      *
-     * @apiSampleRequest http://192.168.1.220/fang/public/api/1.0.0/changepass
+     * @apiSampleRequest http://192.168.1.13/fang/public/api/1.0.0/changepass
      * @apiVersion 1.0.0
      * @apiSuccessExample {json} 成功返回:
      *     HTTP/1.1 200 OK
@@ -492,7 +492,7 @@ class LedgerController extends Controller
      *
      * @apiParam (参数) {int} hous_id 职业顾问id
      *
-     * @apiSampleRequest http://192.168.1.220/fang/public/api/1.0.0/chahomepass
+     * @apiSampleRequest http://192.168.1.13/fang/public/api/1.0.0/chahomepass
      * @apiVersion 1.0.0
      * @apiSuccessExample {json} 成功返回:
      *     HTTP/1.1 200 OK

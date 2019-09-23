@@ -258,4 +258,21 @@ class Cust extends Model
 	}
 
 
+	//查询客户认购信息
+	public static function get_buyinfo($cust_id){
+    	return DB::table('buyinfo')
+							 -> select(
+							 	'buyinfo.buyid','buyinfo.status','buyinfo.sig_status',
+								 'fieldinfob.name as buildnums','fieldinfou.name as unitnums','fieldinfor.name as roomnums'
+				)
+				-> leftJoin('homeinfo','buyinfo.homeid','=','homeinfo.homeid')
+				-> leftJoin('fieldinfo as fieldinfob','homeinfo.buildnum','=','fieldinfob.field_id')
+				-> leftJoin('fieldinfo as fieldinfou','homeinfo.unitnum','=','fieldinfou.field_id')
+				-> leftJoin('fieldinfo as fieldinfor','homeinfo.roomnum','=','fieldinfor.field_id')
+				-> where('buyinfo.cust_id','=',$cust_id)
+				-> where('buyinfo.status','!=',5)
+				-> get();
+	}
+
+
 }
