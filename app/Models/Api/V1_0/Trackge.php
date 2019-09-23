@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 class Trackge extends Model
 {
     //根据置业顾问查询客户跟踪
-    public static function get_trackge_hous($hous_id,$page)
+    public static function get_trackge_hous($hous_id,$page,$search)
     {
         $pages =  	$page - 1;
         return DB::table('customer')
@@ -16,6 +16,11 @@ class Trackge extends Model
             -> offset($pages)->limit(7)
             -> leftJoin('fieldinfo','customer.demand','=','fieldinfo.field_id')
             -> leftJoin('houserinfo','customer.hous_id','=','houserinfo.hous_id')
+            -> where(function($query) use ($search){
+                if($search){
+                    $query -> where('customer.realname','like','%'.$search.'%')->orWhere('customer.mobile','like','%'.$search.'%');
+                }
+            })
             -> where('customer.hous_id','=',$hous_id)
             -> get() -> map(function($value){
                 return (array)$value;
@@ -57,7 +62,7 @@ class Trackge extends Model
     public static function get_trakge($cust_id,$page){
         $pages =  	$page - 1;
         return DB::table('trackinfo')
-            -> select('trackinfo.cust_id','trackinfo.content','trackinfo.created_at','fieldinfo.name','customer.demand')
+            -> select('trackinfo.cust_id','trackinfo.content','trackinfo.created_at','fieldinfo.name','customer.demand','trackinfo.trackid')
             -> offset($pages)->limit(2)
             -> leftJoin('customer','trackinfo.cust_id','=','customer.cust_id')
             -> leftJoin('fieldinfo','customer.demand','=','fieldinfo.field_id')

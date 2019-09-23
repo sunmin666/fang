@@ -18,6 +18,7 @@ class TrackgeController extends Controller
      * @apiGroup GroupNamejl
      *
      * @apiParam (参数) {int} hous_id 职业顾问id
+     * @apiParam (参数) {string} search 客户姓名或手机号
      * @apiParam (参数) {int} page 页码
      *
      * @apiSampleRequest http://192.168.1.220/fang/public/api/1.0.0/trackge
@@ -41,6 +42,7 @@ class TrackgeController extends Controller
     public function trackge(Request $api)
     {
         $hous_id = $api->input('hous_id');
+        $search = $api->input('search');
         $page = $api->input('page');
 
         if (!$hous_id) {
@@ -49,7 +51,7 @@ class TrackgeController extends Controller
                 'message' => '参数不全',
             ]);
         }
-        $data = Trackge::get_trackge_hous($hous_id, $page);
+        $data = Trackge::get_trackge_hous($hous_id, $page,$search);
 
         foreach($data as $key => $value){
             $data[$key]['count'] = $c = Trackge::get_t_count($value['cust_id']);

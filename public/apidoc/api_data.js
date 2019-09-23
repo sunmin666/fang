@@ -27,11 +27,7 @@ define({ "api": [
     },
     "sampleRequest": [
       {
-
-        "url": "http://192.168.1.218/fang/public/api/1.0.0/login"
-
         "url": "http://192.168.1.13/fang/public/api/1.0.0/login"
-
       }
     ],
     "version": "1.0.0",
@@ -64,11 +60,7 @@ define({ "api": [
     "group": "GroupName",
     "sampleRequest": [
       {
-
-        "url": "http://192.168.1.218/fang/public/api/1.0.0/apartment"
-
-        "url": "http://192.168.1.13/fang/public/api/1.0.0/apartment"
-
+        "url": "http://192.168.1.220/fang/public/api/1.0.0/apartment"
       }
     ],
     "version": "1.0.0",
@@ -91,57 +83,7 @@ define({ "api": [
       ]
     },
     "filename": "app/Http/Controllers/Api/V1_0/CustController.php",
-
     "groupTitle": "ipad-客户管理"
-
-    "groupTitle": "客户跟踪管理"
-  },
-  {
-    "type": "post",
-    "url": "api/1.0.0/purchase",
-    "title": "计划方案查找",
-    "name": "purchase",
-    "group": "GroupNamea",
-    "parameter": {
-      "fields": {
-        "参数": [
-          {
-            "group": "参数",
-            "type": "int",
-            "optional": false,
-            "field": "cust_id",
-            "description": "<p>用户id</p>"
-          }
-        ]
-      }
-    },
-    "sampleRequest": [
-      {
-        "url": "http://192.168.1.13/fang/public/api/1.0.0/purchase"
-      }
-    ],
-    "version": "1.0.0",
-    "success": {
-      "examples": [
-        {
-          "title": "成功返回:",
-          "content": "HTTP/1.1 200 OK\n{\n  \"code\": \"101\",\n  \"message\": \"请求成功\",\n  \"result\" : $data\n\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "error": {
-      "examples": [
-        {
-          "title": "失败返回:",
-          "content": "HTTP/1.1 404 Not Found\n{\n  \"error\": \"请求失败\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "filename": "app/Http/Controllers/Api/V1_0/PurchaseController.php",
-    "groupTitle": "计划方案管理"
-
   },
   {
     "type": "post",
@@ -161,6 +103,13 @@ define({ "api": [
           },
           {
             "group": "参数",
+            "type": "string",
+            "optional": false,
+            "field": "search",
+            "description": "<p>客户姓名或手机号</p>"
+          },
+          {
+            "group": "参数",
             "type": "int",
             "optional": false,
             "field": "page",
@@ -171,11 +120,7 @@ define({ "api": [
     },
     "sampleRequest": [
       {
-
         "url": "http://192.168.1.220/fang/public/api/1.0.0/purchase"
-
-        "url": "http://192.168.1.13/fang/public/api/1.0.0/purcview"
-
       }
     ],
     "version": "1.0.0",
@@ -198,7 +143,6 @@ define({ "api": [
       ]
     },
     "filename": "app/Http/Controllers/Api/V1_0/PurchaseController.php",
-
     "groupTitle": "置业计划方案管理"
   },
   {
@@ -214,8 +158,8 @@ define({ "api": [
             "group": "参数",
             "type": "int",
             "optional": false,
-            "field": "cust_id",
-            "description": "<p>客户id</p>"
+            "field": "planid",
+            "description": "<p>方案id</p>"
           }
         ]
       }
@@ -223,19 +167,6 @@ define({ "api": [
     "sampleRequest": [
       {
         "url": "http://192.168.1.220/fang/public/api/1.0.0/purdetails"
-
-    "groupTitle": "计划方案管理"
-  },
-  {
-    "type": "get",
-    "url": "1.0.0/area",
-    "title": "客户区域",
-    "name": "area",
-    "group": "GroupName",
-    "sampleRequest": [
-      {
-        "url": "http://192.168.1.13/fang/public/api/1.0.0/area"
-
       }
     ],
     "version": "1.0.0",
@@ -257,7 +188,6 @@ define({ "api": [
         }
       ]
     },
-
     "filename": "app/Http/Controllers/Api/V1_0/PurchaseController.php",
     "groupTitle": "置业计划方案管理"
   },
@@ -332,9 +262,108 @@ define({ "api": [
     "sampleRequest": [
       {
         "url": "http://192.168.1.220/fang/public/api/1.0.0/purinsert"
-
+      }
+    ],
+    "version": "1.0.0",
+    "success": {
+      "examples": [
+        {
+          "title": "成功返回:",
+          "content": "HTTP/1.1 200 OK\n{\n  \"code\": \"101\",\n  \"message\": \"请求成功\",\n  \"result\" : $data\n\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "失败返回:",
+          "content": "HTTP/1.1 404 Not Found\n{\n  \"error\": \"请求失败\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/Http/Controllers/Api/V1_0/PurchaseController.php",
+    "groupTitle": "置业计划方案管理"
+  },
+  {
+    "type": "get",
+    "url": "1.0.0/area",
+    "title": "客户区域",
+    "name": "area",
+    "group": "GroupName",
+    "sampleRequest": [
+      {
+        "url": "http://192.168.1.220/fang/public/api/1.0.0/area"
+      }
+    ],
+    "version": "1.0.0",
+    "success": {
+      "examples": [
+        {
+          "title": "成功返回:",
+          "content": "HTTP/1.1 200 OK\n{\n  \"code\": \"101\",\n  \"message\": \"请求成功\",\n  \"result\" : $data\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "失败返回:",
+          "content": "HTTP/1.1 404 Not Found\n{\n  \"error\": \"请求失败\"\n}",
+          "type": "json"
+        }
+      ]
+    },
     "filename": "app/Http/Controllers/Api/V1_0/CustController.php",
-    "groupTitle": "客户跟踪管理"
+    "groupTitle": "ipad-客户管理"
+  },
+  {
+    "type": "post",
+    "url": "api/1.0.0/paydetails",
+    "title": "缴费记录详情",
+    "name": "paydetails",
+    "group": "GroupNameb",
+    "parameter": {
+      "fields": {
+        "参数": [
+          {
+            "group": "参数",
+            "type": "int",
+            "optional": false,
+            "field": "subscription_num",
+            "description": "<p>认购编号</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "http://192.168.1.220/fang/public/api/1.0.0/paydetails"
+      }
+    ],
+    "version": "1.0.0",
+    "success": {
+      "examples": [
+        {
+          "title": "成功返回:",
+          "content": "HTTP/1.1 200 OK\n{\n  \"code\": \"101\",\n  \"message\": \"请求成功\",\n  \"result\" : $data\n\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "失败返回:",
+          "content": "HTTP/1.1 404 Not Found\n{\n  \"error\": \"请求失败\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/Http/Controllers/Api/V1_0/PaylogController.php",
+    "groupTitle": "缴费记录管理"
   },
   {
     "type": "post",
@@ -349,15 +378,29 @@ define({ "api": [
             "group": "参数",
             "type": "int",
             "optional": false,
-            "field": "cust_id",
-            "description": "<p>用户id</p>"
+            "field": "hous_id",
+            "description": "<p>职业顾问id</p>"
+          },
+          {
+            "group": "参数",
+            "type": "string",
+            "optional": false,
+            "field": "search",
+            "description": "<p>客户姓名或手机号</p>"
+          },
+          {
+            "group": "参数",
+            "type": "int",
+            "optional": false,
+            "field": "page",
+            "description": "<p>页码</p>"
           }
         ]
       }
     },
     "sampleRequest": [
       {
-        "url": "http://192.168.1.13/fang/public/api/1.0.0/paylog"
+        "url": "http://192.168.1.220/fang/public/api/1.0.0/paylog"
       }
     ],
     "version": "1.0.0",
@@ -391,422 +434,6 @@ define({ "api": [
     "sampleRequest": [
       {
         "url": "http://192.168.1.13/fang/public/api/1.0.0/konwledge"
-
-      }
-    ],
-    "version": "1.0.0",
-    "success": {
-      "examples": [
-        {
-          "title": "成功返回:",
-          "content": "HTTP/1.1 200 OK\n{\n  \"code\": \"101\",\n  \"message\": \"请求成功\",\n  \"result\" : $data\n\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "error": {
-      "examples": [
-        {
-          "title": "失败返回:",
-          "content": "HTTP/1.1 404 Not Found\n{\n  \"error\": \"请求失败\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-
-    "filename": "app/Http/Controllers/Api/V1_0/PurchaseController.php",
-    "groupTitle": "置业计划方案管理"
-
-    "filename": "app/Http/Controllers/Api/V1_0/KonwledgeController.php",
-    "groupTitle": "营销知识库管理"
-
-  },
-  {
-    "type": "get",
-    "url": "1.0.0/area",
-    "title": "客户区域",
-    "name": "area",
-    "group": "GroupName",
-    "sampleRequest": [
-      {
- 
-        "url": "http://192.168.1.218/fang/public/api/1.0.0/area"
-
-        "url": "http://192.168.1.13/fang/public/api/1.0.0/cognition"
-
-      }
-    ],
-    "version": "1.0.0",
-    "success": {
-      "examples": [
-        {
-          "title": "成功返回:",
-          "content": "HTTP/1.1 200 OK\n{\n  \"code\": \"101\",\n  \"message\": \"请求成功\",\n  \"result\" : $data\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "error": {
-      "examples": [
-        {
-          "title": "失败返回:",
-          "content": "HTTP/1.1 404 Not Found\n{\n  \"error\": \"请求失败\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "filename": "app/Http/Controllers/Api/V1_0/CustController.php",
-
-    "groupTitle": "ipad-客户管理"
-  },
-  {
-    "type": "post",
-    "url": "api/1.0.0/paylog",
-    "title": "缴费记录查找",
-    "name": "paylog",
-    "group": "GroupNameb",
-
-    "groupTitle": "客户跟踪管理"
-  },
-  {
-    "type": "post",
-    "url": "api/1.0.0/delegate",
-    "title": "派遣查找",
-    "name": "delegate",
-    "group": "GroupNamed",
-
-    "parameter": {
-      "fields": {
-        "参数": [
-          {
-            "group": "参数",
-            "type": "int",
-            "optional": false,
- 
-            "field": "cust_id",
-            "description": "<p>用户id</p>"
-
-            "field": "hous_id",
-            "description": "<p>职业顾问id</p>"
-          }
-        ]
-      }
-    },
-    "sampleRequest": [
-      {
-        "url": "http://192.168.1.13/fang/public/api/1.0.0/delegate"
-      }
-    ],
-    "version": "1.0.0",
-    "success": {
-      "examples": [
-        {
-          "title": "成功返回:",
-          "content": "HTTP/1.1 200 OK\n{\n  \"code\": \"101\",\n  \"message\": \"请求成功\",\n  \"result\" : $data\n\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "error": {
-      "examples": [
-        {
-          "title": "失败返回:",
-          "content": "HTTP/1.1 404 Not Found\n{\n  \"error\": \"请求失败\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "filename": "app/Http/Controllers/Api/V1_0/DelegateController.php",
-    "groupTitle": "派遣管理"
-  },
-  {
-    "type": "post",
-    "url": "api/1.0.0/deleview",
-    "title": "派遣查找单条",
-    "name": "deleview",
-    "group": "GroupNamed",
-    "parameter": {
-      "fields": {
-        "参数": [
-          {
-            "group": "参数",
-            "type": "int",
-            "optional": false,
-            "field": "gate_id",
-            "description": "<p>派遣id</p>"
-          }
-        ]
-      }
-    },
-    "sampleRequest": [
-      {
-        "url": "http://192.168.1.13/fang/public/api/1.0.0/deleview"
-      }
-    ],
-    "version": "1.0.0",
-    "success": {
-      "examples": [
-        {
-          "title": "成功返回:",
-          "content": "HTTP/1.1 200 OK\n{\n  \"code\": \"101\",\n  \"message\": \"请求成功\",\n  \"result\" : $data\n\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "error": {
-      "examples": [
-        {
-          "title": "失败返回:",
-          "content": "HTTP/1.1 404 Not Found\n{\n  \"error\": \"请求失败\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "filename": "app/Http/Controllers/Api/V1_0/DelegateController.php",
-    "groupTitle": "派遣管理"
-  },
-  {
-    "type": "post",
-    "url": "api/1.0.0/trackinfo",
-    "title": "客户跟踪查找",
-    "name": "delegate",
-    "group": "GroupName",
-    "parameter": {
-      "fields": {
-        "参数": [
-          {
-            "group": "参数",
-            "type": "int",
-            "optional": false,
-            "field": "hous_id",
-            "description": "<p>职业顾问id</p>"
-          }
-        ]
-      }
-    },
-    "sampleRequest": [
-      {
-        "url": "http://192.168.1.13/fang/public/api/1.0.0/trackinfo"
-      }
-    ],
-    "version": "1.0.0",
-    "success": {
-      "examples": [
-        {
-          "title": "成功返回:",
-          "content": "HTTP/1.1 200 OK\n{\n  \"code\": \"101\",\n  \"message\": \"请求成功\",\n  \"result\" : $data\n\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "error": {
-      "examples": [
-        {
-          "title": "失败返回:",
-          "content": "HTTP/1.1 404 Not Found\n{\n  \"error\": \"请求失败\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "filename": "app/Http/Controllers/Api/V1_0/TrackinfoController.php",
-    "groupTitle": "客户跟踪管理"
-  },
-  {
-    "type": "get",
-    "url": "1.0.0/demand",
-    "title": "客户意向等级",
-    "name": "demand",
-    "group": "GroupName",
-    "sampleRequest": [
-      {
-        "url": "http://192.168.1.13/fang/public/api/1.0.0/demand"
-      }
-    ],
-    "version": "1.0.0",
-    "success": {
-      "examples": [
-        {
-          "title": "成功返回:",
-          "content": "HTTP/1.1 200 OK\n{\n  \"code\": \"101\",\n  \"message\": \"请求成功\",\n  \"result\" : $data\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "error": {
-      "examples": [
-        {
-          "title": "失败返回:",
-          "content": "HTTP/1.1 404 Not Found\n{\n  \"error\": \"请求失败\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "filename": "app/Http/Controllers/Api/V1_0/CustController.php",
-    "groupTitle": "客户跟踪管理"
-  },
-  {
-    "type": "post",
-    "url": "1.0.0/details",
-    "title": "客户详情",
-    "name": "details",
-    "group": "GroupName",
-    "parameter": {
-      "fields": {
-        "参数": [
-          {
-            "group": "参数",
-            "type": "string",
-            "optional": false,
-            "field": "cust_id",
-            "description": "<p>客户id</p>"
-
-          }
-        ]
-      }
-    },
- 
-    "sampleRequest": [
-      {
-        "url": "http://192.168.1.218/fang/public/api/1.0.0/paylog"
-
-    "sampleRequest": [
-      {
-        "url": "http://192.168.1.13/fang/public/api/1.0.0/details"
-      }
-    ],
-    "version": "1.0.0",
-    "success": {
-      "examples": [
-        {
-          "title": "成功返回:",
-          "content": "HTTP/1.1 200 OK\n{\n  \"code\": \"101\",\n  \"message\": \"请求成功\",\n  \"result\" : $data\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "error": {
-      "examples": [
-        {
-          "title": "失败返回:",
-          "content": "HTTP/1.1 404 Not Found\n{\n  \"error\": \"请求失败\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "filename": "app/Http/Controllers/Api/V1_0/CustController.php",
-    "groupTitle": "客户跟踪管理"
-  },
-  {
-    "type": "get",
-    "url": "1.0.0/family_str",
-    "title": "家庭结构",
-    "name": "family_str",
-    "group": "GroupName",
-    "sampleRequest": [
-      {
-        "url": "http://192.168.1.13/fang/public/api/1.0.0/family_str"
-
-      }
-    ],
-    "version": "1.0.0",
-    "success": {
-      "examples": [
-        {
-          "title": "成功返回:",
-          "content": "HTTP/1.1 200 OK\n{\n  \"code\": \"101\",\n  \"message\": \"请求成功\",\n  \"result\" : $data\n\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "error": {
-      "examples": [
-        {
-          "title": "失败返回:",
-          "content": "HTTP/1.1 404 Not Found\n{\n  \"error\": \"请求失败\"\n}",
-          "type": "json"
-        }
-      ]
-    },
- 
-    "filename": "app/Http/Controllers/Api/V1_0/PaylogController.php",
-    "groupTitle": "缴费记录管理"
-  },
-  {
-    "type": "post",
-    "url": "api/1.0.0/payview",
-    "title": "缴费记录查找",
-    "name": "payview",
-    "group": "GroupNameb",
-
-    "filename": "app/Http/Controllers/Api/V1_0/CustController.php",
-    "groupTitle": "客户跟踪管理"
-  },
-  {
-    "type": "post",
-    "url": "api/1.0.0/coowner",
-    "title": "房屋共有人查找",
-    "name": "coowner",
-    "group": "GroupNamef",
-
-    "parameter": {
-      "fields": {
-        "参数": [
-          {
-            "group": "参数",
-            "type": "int",
-            "optional": false,
- 
-            "field": "payl_id",
-            "description": "<p>缴费记录id</p>"
-
-            "field": "cust_id",
-            "description": "<p>用户id</p>"
-
-          }
-        ]
-      }
-    },
-    "sampleRequest": [
-      {
- 
-        "url": "http://192.168.1.218/fang/public/api/1.0.0/payview"
-
-        "url": "http://192.168.1.13/fang/public/api/1.0.0/coowner"
-
-      }
-    ],
-    "version": "1.0.0",
-    "success": {
-      "examples": [
-        {
-          "title": "成功返回:",
-          "content": "HTTP/1.1 200 OK\n{\n  \"code\": \"101\",\n  \"message\": \"请求成功\",\n  \"result\" : $data\n\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "error": {
-      "examples": [
-        {
-          "title": "失败返回:",
-          "content": "HTTP/1.1 404 Not Found\n{\n  \"error\": \"请求失败\"\n}",
-          "type": "json"
-        }
-      ]
-    },
- 
-    "filename": "app/Http/Controllers/Api/V1_0/PaylogController.php",
-    "groupTitle": "缴费记录管理"
-  },
-  {
-    "type": "get",
-    "url": "api/1.0.0/konwledge",
-    "title": "营销知识查找",
-    "name": "konwledge",
-    "group": "GroupNamec",
-    "sampleRequest": [
-      {
-        "url": "http://192.168.1.218/fang/public/api/1.0.0/konwledge"
       }
     ],
     "version": "1.0.0",
@@ -839,21 +466,7 @@ define({ "api": [
     "group": "GroupName",
     "sampleRequest": [
       {
-        "url": "http://192.168.1.218/fang/public/api/1.0.0/cognition"
-
-    "filename": "app/Http/Controllers/Api/V1_0/CoownerController.php",
-    "groupTitle": "房屋共有人管理"
-  },
-  {
-    "type": "get",
-    "url": "1.0.0/first_contact",
-    "title": "首次接触方式",
-    "name": "first_contact",
-    "group": "GroupName",
-    "sampleRequest": [
-      {
-        "url": "http://192.168.1.13/fang/public/api/1.0.0/first_contact"
-
+        "url": "http://192.168.1.220/fang/public/api/1.0.0/cognition"
       }
     ],
     "version": "1.0.0",
@@ -876,7 +489,6 @@ define({ "api": [
       ]
     },
     "filename": "app/Http/Controllers/Api/V1_0/CustController.php",
- 
     "groupTitle": "ipad-客户管理"
   },
   {
@@ -900,53 +512,7 @@ define({ "api": [
     },
     "sampleRequest": [
       {
-        "url": "http://192.168.1.218/fang/public/api/1.0.0/delegate"
-      }
-    ],
-    "version": "1.0.0",
-    "success": {
-      "examples": [
-        {
-          "title": "成功返回:",
-          "content": "HTTP/1.1 200 OK\n{\n  \"code\": \"101\",\n  \"message\": \"请求成功\",\n  \"result\" : $data\n\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "error": {
-      "examples": [
-        {
-          "title": "失败返回:",
-          "content": "HTTP/1.1 404 Not Found\n{\n  \"error\": \"请求失败\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "filename": "app/Http/Controllers/Api/V1_0/DelegateController.php",
-    "groupTitle": "派遣管理"
-  },
-  {
-    "type": "post",
-    "url": "api/1.0.0/deleview",
-    "title": "派遣查找单条",
-    "name": "deleview",
-    "group": "GroupNamed",
-    "parameter": {
-      "fields": {
-        "参数": [
-          {
-            "group": "参数",
-            "type": "int",
-            "optional": false,
-            "field": "gate_id",
-            "description": "<p>派遣id</p>"
-          }
-        ]
-      }
-    },
-    "sampleRequest": [
-      {
-        "url": "http://192.168.1.218/fang/public/api/1.0.0/deleview"
+        "url": "http://192.168.1.220/fang/public/api/1.0.0/delegate"
       }
     ],
     "version": "1.0.0",
@@ -979,7 +545,7 @@ define({ "api": [
     "group": "GroupName",
     "sampleRequest": [
       {
-        "url": "http://192.168.1.218/fang/public/api/1.0.0/demand"
+        "url": "http://192.168.1.220/fang/public/api/1.0.0/demand"
       }
     ],
     "version": "1.0.0",
@@ -1025,7 +591,7 @@ define({ "api": [
     },
     "sampleRequest": [
       {
-        "url": "http://192.168.1.218/fang/public/api/1.0.0/details"
+        "url": "http://192.168.1.220/fang/public/api/1.0.0/details"
       }
     ],
     "version": "1.0.0",
@@ -1058,7 +624,7 @@ define({ "api": [
     "group": "GroupName",
     "sampleRequest": [
       {
-        "url": "http://192.168.1.218/fang/public/api/1.0.0/family_str"
+        "url": "http://192.168.1.220/fang/public/api/1.0.0/family_str"
       }
     ],
     "version": "1.0.0",
@@ -1104,7 +670,7 @@ define({ "api": [
     },
     "sampleRequest": [
       {
-        "url": "http://192.168.1.218/fang/public/api/1.0.0/coowner"
+        "url": "http://192.168.1.13/fang/public/api/1.0.0/coowner"
       }
     ],
     "version": "1.0.0",
@@ -1137,7 +703,7 @@ define({ "api": [
     "group": "GroupName",
     "sampleRequest": [
       {
-        "url": "http://192.168.1.218/fang/public/api/1.0.0/first_contact"
+        "url": "http://192.168.1.220/fang/public/api/1.0.0/first_contact"
       }
     ],
     "version": "1.0.0",
@@ -1161,9 +727,6 @@ define({ "api": [
     },
     "filename": "app/Http/Controllers/Api/V1_0/CustController.php",
     "groupTitle": "ipad-客户管理"
-
-    "groupTitle": "客户跟踪管理"
-
   },
   {
     "type": "get",
@@ -1171,10 +734,9 @@ define({ "api": [
     "title": "楼层偏好",
     "name": "floor_like",
     "group": "GroupName",
- 
     "sampleRequest": [
       {
-        "url": "http://192.168.1.218/fang/public/api/1.0.0/floor_like"
+        "url": "http://192.168.1.220/fang/public/api/1.0.0/floor_like"
       }
     ],
     "version": "1.0.0",
@@ -1207,7 +769,7 @@ define({ "api": [
     "group": "GroupName",
     "sampleRequest": [
       {
-        "url": "http://192.168.1.218/fang/public/api/1.0.0/furniture_need"
+        "url": "http://192.168.1.220/fang/public/api/1.0.0/furniture_need"
       }
     ],
     "version": "1.0.0",
@@ -1253,7 +815,7 @@ define({ "api": [
     },
     "sampleRequest": [
       {
-        "url": "http://192.168.1.218/fang/public/api/1.0.0/buyinfo"
+        "url": "http://192.168.1.13/fang/public/api/1.0.0/buyinfo"
       }
     ],
     "version": "1.0.0",
@@ -1306,7 +868,7 @@ define({ "api": [
     },
     "sampleRequest": [
       {
-        "url": "http://192.168.1.218/fang/public/api/1.0.0/get/cust"
+        "url": "http://192.168.1.220/fang/public/api/1.0.0/get/cust"
       }
     ],
     "version": "1.0.0",
@@ -1339,7 +901,7 @@ define({ "api": [
     "group": "GroupNameh",
     "sampleRequest": [
       {
-        "url": "http://192.168.1.218/fang/public/api/1.0.0/cultrue"
+        "url": "http://192.168.1.220/fang/public/api/1.0.0/cultrue"
       }
     ],
     "version": "1.0.0",
@@ -1366,13 +928,261 @@ define({ "api": [
   },
   {
     "type": "get",
+    "url": "api/1.0.0/salesampay",
+    "title": "已售金额总量排行",
+    "name": "salesampay",
+    "group": "GroupNamehhc",
+    "sampleRequest": [
+      {
+        "url": "http://192.168.1.220/fang/public/api/1.0.0/salesampay"
+      }
+    ],
+    "version": "1.0.0",
+    "success": {
+      "examples": [
+        {
+          "title": "成功返回:",
+          "content": "HTTP/1.1 200 OK\n{\n  \"code\": \"101\",\n  \"message\": \"请求成功\",\n  \"result\" : $data\n\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "失败返回:",
+          "content": "HTTP/1.1 404 Not Found\n{\n  \"error\": \"请求失败\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/Http/Controllers/Api/V1_0/SalesamController.php",
+    "groupTitle": "销售排行管理"
+  },
+  {
+    "type": "post",
+    "url": "api/1.0.0/remdetails",
+    "title": "提醒详情",
+    "name": "remdetails",
+    "group": "GroupNamehh",
+    "parameter": {
+      "fields": {
+        "参数": [
+          {
+            "group": "参数",
+            "type": "int",
+            "optional": false,
+            "field": "remi_id",
+            "description": "<p>提醒id</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "http://192.168.1.220/fang/public/api/1.0.0/remdetails"
+      }
+    ],
+    "version": "1.0.0",
+    "success": {
+      "examples": [
+        {
+          "title": "成功返回:",
+          "content": "HTTP/1.1 200 OK\n{\n  \"code\": \"101\",\n  \"message\": \"请求成功\",\n  \"result\" : $data\n\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "失败返回:",
+          "content": "HTTP/1.1 404 Not Found\n{\n  \"error\": \"请求失败\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/Http/Controllers/Api/V1_0/RemindinfoController.php",
+    "groupTitle": "提醒管理"
+  },
+  {
+    "type": "post",
+    "url": "api/1.0.0/remind",
+    "title": "提醒查找",
+    "name": "remind",
+    "group": "GroupNamehh",
+    "parameter": {
+      "fields": {
+        "参数": [
+          {
+            "group": "参数",
+            "type": "int",
+            "optional": false,
+            "field": "hous_id",
+            "description": "<p>职业顾问id</p>"
+          },
+          {
+            "group": "参数",
+            "type": "string",
+            "optional": true,
+            "field": "realname",
+            "description": "<p>客户姓名</p>"
+          },
+          {
+            "group": "参数",
+            "type": "string",
+            "optional": true,
+            "field": "mobile",
+            "description": "<p>手机号</p>"
+          },
+          {
+            "group": "参数",
+            "type": "int",
+            "optional": true,
+            "field": "status",
+            "description": "<p>是否到期</p>"
+          },
+          {
+            "group": "参数",
+            "type": "int",
+            "optional": true,
+            "field": "modular",
+            "description": "<p>提醒类型</p>"
+          },
+          {
+            "group": "参数",
+            "type": "string",
+            "optional": true,
+            "field": "starting_time",
+            "description": "<p>开始时间</p>"
+          },
+          {
+            "group": "参数",
+            "type": "string",
+            "optional": true,
+            "field": "end_time",
+            "description": "<p>结束时间</p>"
+          },
+          {
+            "group": "参数",
+            "type": "int",
+            "optional": false,
+            "field": "page",
+            "description": "<p>页码</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "http://192.168.1.220/fang/public/api/1.0.0/remind"
+      }
+    ],
+    "version": "1.0.0",
+    "success": {
+      "examples": [
+        {
+          "title": "成功返回:",
+          "content": "HTTP/1.1 200 OK\n{\n  \"code\": \"101\",\n  \"message\": \"请求成功\",\n  \"result\" : $data\n\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "失败返回:",
+          "content": "HTTP/1.1 404 Not Found\n{\n  \"error\": \"请求失败\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/Http/Controllers/Api/V1_0/RemindinfoController.php",
+    "groupTitle": "提醒管理"
+  },
+  {
+    "type": "post",
+    "url": "api/1.0.0/reminsert",
+    "title": "添加提醒",
+    "name": "reminsert",
+    "group": "GroupNamehh",
+    "parameter": {
+      "fields": {
+        "参数": [
+          {
+            "group": "参数",
+            "type": "int",
+            "optional": false,
+            "field": "hous_id",
+            "description": "<p>职业顾问id</p>"
+          },
+          {
+            "group": "参数",
+            "type": "int",
+            "optional": false,
+            "field": "cust_id",
+            "description": "<p>客户id</p>"
+          },
+          {
+            "group": "参数",
+            "type": "string",
+            "optional": false,
+            "field": "content",
+            "description": "<p>提醒内容</p>"
+          },
+          {
+            "group": "参数",
+            "type": "int",
+            "optional": false,
+            "field": "remind_time",
+            "description": "<p>提醒到期时间</p>"
+          },
+          {
+            "group": "参数",
+            "type": "int",
+            "optional": false,
+            "field": "modular",
+            "description": "<p>提醒模块</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "http://192.168.1.220/fang/public/api/1.0.0/reminsert"
+      }
+    ],
+    "version": "1.0.0",
+    "success": {
+      "examples": [
+        {
+          "title": "成功返回:",
+          "content": "HTTP/1.1 200 OK\n{\n  \"code\": \"101\",\n  \"message\": \"请求成功\",\n  \"result\" : $data\n\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "失败返回:",
+          "content": "HTTP/1.1 404 Not Found\n{\n  \"error\": \"请求失败\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/Http/Controllers/Api/V1_0/RemindinfoController.php",
+    "groupTitle": "提醒管理"
+  },
+  {
+    "type": "get",
     "url": "1.0.0/house_num",
     "title": "职业次数",
     "name": "house_num",
     "group": "GroupName",
     "sampleRequest": [
       {
-        "url": "http://192.168.1.218/fang/public/api/1.0.0/house_num"
+        "url": "http://192.168.1.220/fang/public/api/1.0.0/house_num"
       }
     ],
     "version": "1.0.0",
@@ -1405,7 +1215,7 @@ define({ "api": [
     "group": "GroupName",
     "sampleRequest": [
       {
-        "url": "http://192.168.1.218/fang/public/api/1.0.0/intention_area"
+        "url": "http://192.168.1.220/fang/public/api/1.0.0/intention_area"
       }
     ],
     "version": "1.0.0",
@@ -1432,6 +1242,52 @@ define({ "api": [
   },
   {
     "type": "post",
+    "url": "api/1.0.0/buydetails",
+    "title": "认购详情",
+    "name": "buydetails",
+    "group": "GroupNameji",
+    "parameter": {
+      "fields": {
+        "参数": [
+          {
+            "group": "参数",
+            "type": "int",
+            "optional": false,
+            "field": "buyid",
+            "description": "<p>认购id</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "http://192.168.1.220/fang/public/api/1.0.0/buydetails"
+      }
+    ],
+    "version": "1.0.0",
+    "success": {
+      "examples": [
+        {
+          "title": "成功返回:",
+          "content": "HTTP/1.1 200 OK\n{\n  \"code\": \"101\",\n  \"message\": \"请求成功\",\n  \"result\" : $data\n\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "失败返回:",
+          "content": "HTTP/1.1 404 Not Found\n{\n  \"error\": \"请求失败\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/Http/Controllers/Api/V1_0/LedgerController.php",
+    "groupTitle": "置业台账"
+  },
+  {
+    "type": "post",
     "url": "api/1.0.0/buyinfo",
     "title": "已认购",
     "name": "buyinfo",
@@ -1445,6 +1301,20 @@ define({ "api": [
             "optional": false,
             "field": "hous_id",
             "description": "<p>职业顾问id</p>"
+          },
+          {
+            "group": "参数",
+            "type": "int",
+            "optional": false,
+            "field": "status",
+            "description": "<p>通过1 未通过2 未审核3</p>"
+          },
+          {
+            "group": "参数",
+            "type": "int",
+            "optional": false,
+            "field": "page",
+            "description": "<p>页码</p>"
           }
         ]
       }
@@ -1478,9 +1348,9 @@ define({ "api": [
   },
   {
     "type": "post",
-    "url": "api/1.0.0/buyinfopass",
-    "title": "认购未通过",
-    "name": "buyinfopass",
+    "url": "api/1.0.0/chahome",
+    "title": "换房",
+    "name": "chahome",
     "group": "GroupNameji",
     "parameter": {
       "fields": {
@@ -1491,13 +1361,20 @@ define({ "api": [
             "optional": false,
             "field": "hous_id",
             "description": "<p>职业顾问id</p>"
+          },
+          {
+            "group": "参数",
+            "type": "int",
+            "optional": false,
+            "field": "status",
+            "description": "<p>通过1 未通过2 未审核3</p>"
           }
         ]
       }
     },
     "sampleRequest": [
       {
-        "url": "http://192.168.1.220/fang/public/api/1.0.0/buyinfopass"
+        "url": "http://192.168.1.220/fang/public/api/1.0.0/chahome"
       }
     ],
     "version": "1.0.0",
@@ -1524,9 +1401,9 @@ define({ "api": [
   },
   {
     "type": "post",
-    "url": "api/1.0.0/changecust",
-    "title": "已更名",
-    "name": "changecust",
+    "url": "api/1.0.0/changname",
+    "title": "更名",
+    "name": "changname",
     "group": "GroupNameji",
     "parameter": {
       "fields": {
@@ -1537,243 +1414,20 @@ define({ "api": [
             "optional": false,
             "field": "hous_id",
             "description": "<p>职业顾问id</p>"
-          }
-        ]
-      }
-    },
-    "sampleRequest": [
-      {
-        "url": "http://192.168.1.220/fang/public/api/1.0.0/changecust"
-      }
-    ],
-    "version": "1.0.0",
-    "success": {
-      "examples": [
-        {
-          "title": "成功返回:",
-          "content": "HTTP/1.1 200 OK\n{\n  \"code\": \"101\",\n  \"message\": \"请求成功\",\n  \"result\" : $data\n\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "error": {
-      "examples": [
-        {
-          "title": "失败返回:",
-          "content": "HTTP/1.1 404 Not Found\n{\n  \"error\": \"请求失败\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "filename": "app/Http/Controllers/Api/V1_0/LedgerController.php",
-    "groupTitle": "置业台账"
-  },
-  {
-    "type": "post",
-    "url": "api/1.0.0/changehome",
-    "title": "已换房",
-    "name": "changehome",
-    "group": "GroupNameji",
-    "parameter": {
-      "fields": {
-        "参数": [
+          },
           {
             "group": "参数",
             "type": "int",
             "optional": false,
-            "field": "hous_id",
-            "description": "<p>职业顾问id</p>"
+            "field": "status",
+            "description": "<p>通过1 未通过2 未审核3</p>"
           }
         ]
       }
     },
     "sampleRequest": [
       {
-        "url": "http://192.168.1.220/fang/public/api/1.0.0/changehome"
-      }
-    ],
-    "version": "1.0.0",
-    "success": {
-      "examples": [
-        {
-          "title": "成功返回:",
-          "content": "HTTP/1.1 200 OK\n{\n  \"code\": \"101\",\n  \"message\": \"请求成功\",\n  \"result\" : $data\n\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "error": {
-      "examples": [
-        {
-          "title": "失败返回:",
-          "content": "HTTP/1.1 404 Not Found\n{\n  \"error\": \"请求失败\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "filename": "app/Http/Controllers/Api/V1_0/LedgerController.php",
-    "groupTitle": "置业台账"
-  },
-  {
-    "type": "post",
-    "url": "api/1.0.0/changepass",
-    "title": "更名未通过",
-    "name": "changepass",
-    "group": "GroupNameji",
-    "parameter": {
-      "fields": {
-        "参数": [
-          {
-            "group": "参数",
-            "type": "int",
-            "optional": false,
-            "field": "hous_id",
-            "description": "<p>职业顾问id</p>"
-          }
-        ]
-      }
-    },
-    "sampleRequest": [
-      {
-        "url": "http://192.168.1.220/fang/public/api/1.0.0/changepass"
-      }
-    ],
-    "version": "1.0.0",
-    "success": {
-      "examples": [
-        {
-          "title": "成功返回:",
-          "content": "HTTP/1.1 200 OK\n{\n  \"code\": \"101\",\n  \"message\": \"请求成功\",\n  \"result\" : $data\n\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "error": {
-      "examples": [
-        {
-          "title": "失败返回:",
-          "content": "HTTP/1.1 404 Not Found\n{\n  \"error\": \"请求失败\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "filename": "app/Http/Controllers/Api/V1_0/LedgerController.php",
-    "groupTitle": "置业台账"
-  },
-  {
-    "type": "post",
-    "url": "api/1.0.0/checkout",
-    "title": "已退房",
-    "name": "checkout",
-    "group": "GroupNameji",
-    "parameter": {
-      "fields": {
-        "参数": [
-          {
-            "group": "参数",
-            "type": "int",
-            "optional": false,
-            "field": "hous_id",
-            "description": "<p>职业顾问id</p>"
-          }
-        ]
-      }
-    },
-    "sampleRequest": [
-      {
-        "url": "http://192.168.1.220/fang/public/api/1.0.0/checkout"
-      }
-    ],
-    "version": "1.0.0",
-    "success": {
-      "examples": [
-        {
-          "title": "成功返回:",
-          "content": "HTTP/1.1 200 OK\n{\n  \"code\": \"101\",\n  \"message\": \"请求成功\",\n  \"result\" : $data\n\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "error": {
-      "examples": [
-        {
-          "title": "失败返回:",
-          "content": "HTTP/1.1 404 Not Found\n{\n  \"error\": \"请求失败\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "filename": "app/Http/Controllers/Api/V1_0/LedgerController.php",
-    "groupTitle": "置业台账"
-  },
-  {
-    "type": "post",
-    "url": "api/1.0.0/delaysing",
-    "title": "已延迟",
-    "name": "delaysing",
-    "group": "GroupNameji",
-    "parameter": {
-      "fields": {
-        "参数": [
-          {
-            "group": "参数",
-            "type": "int",
-            "optional": false,
-            "field": "hous_id",
-            "description": "<p>职业顾问id</p>"
-          }
-        ]
-      }
-    },
-    "sampleRequest": [
-      {
-        "url": "http://192.168.1.220/fang/public/api/1.0.0/delaysing"
-      }
-    ],
-    "version": "1.0.0",
-    "success": {
-      "examples": [
-        {
-          "title": "成功返回:",
-          "content": "HTTP/1.1 200 OK\n{\n  \"code\": \"101\",\n  \"message\": \"请求成功\",\n  \"result\" : $data\n\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "error": {
-      "examples": [
-        {
-          "title": "失败返回:",
-          "content": "HTTP/1.1 404 Not Found\n{\n  \"error\": \"请求失败\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "filename": "app/Http/Controllers/Api/V1_0/LedgerController.php",
-    "groupTitle": "置业台账"
-  },
-  {
-    "type": "post",
-    "url": "api/1.0.0/signinfo",
-    "title": "已签约",
-    "name": "signinfo",
-    "group": "GroupNameji",
-    "parameter": {
-      "fields": {
-        "参数": [
-          {
-            "group": "参数",
-            "type": "int",
-            "optional": false,
-            "field": "hous_id",
-            "description": "<p>职业顾问id</p>"
-          }
-        ]
-      }
-    },
-    "sampleRequest": [
-      {
-        "url": "http://192.168.1.220/fang/public/api/1.0.0/signinfo"
+        "url": "http://192.168.1.220/fang/public/api/1.0.0/changname"
       }
     ],
     "version": "1.0.0",
@@ -1816,6 +1470,13 @@ define({ "api": [
           },
           {
             "group": "参数",
+            "type": "string",
+            "optional": false,
+            "field": "search",
+            "description": "<p>客户姓名或手机号</p>"
+          },
+          {
+            "group": "参数",
             "type": "int",
             "optional": false,
             "field": "page",
@@ -1849,7 +1510,7 @@ define({ "api": [
       ]
     },
     "filename": "app/Http/Controllers/Api/V1_0/TrackinfoController.php",
-    "groupTitle": "客户跟踪管理"
+    "groupTitle": "客户来访管理"
   },
   {
     "type": "post",
@@ -1902,7 +1563,7 @@ define({ "api": [
       ]
     },
     "filename": "app/Http/Controllers/Api/V1_0/TrackinfoController.php",
-    "groupTitle": "客户跟踪管理"
+    "groupTitle": "客户来访管理"
   },
   {
     "type": "post",
@@ -1947,11 +1608,6 @@ define({ "api": [
     "sampleRequest": [
       {
         "url": "http://192.168.1.220/fang/public/api/1.0.0/trackinsert"
-
-    "sampleRequest": [
-      {
-        "url": "http://192.168.1.13/fang/public/api/1.0.0/floor_like"
-
       }
     ],
     "version": "1.0.0",
@@ -1959,7 +1615,7 @@ define({ "api": [
       "examples": [
         {
           "title": "成功返回:",
-          "content": "HTTP/1.1 200 OK\n{\n  \"code\": \"101\",\n  \"message\": \"请求成功\",\n  \"result\" : $data\n}",
+          "content": "HTTP/1.1 200 OK\n{\n  \"code\": \"101\",\n  \"message\": \"请求成功\",\n  \"result\" : $data\n\n}",
           "type": "json"
         }
       ]
@@ -1973,9 +1629,8 @@ define({ "api": [
         }
       ]
     },
- 
     "filename": "app/Http/Controllers/Api/V1_0/TrackinfoController.php",
-    "groupTitle": "客户跟踪管理"
+    "groupTitle": "客户来访管理"
   },
   {
     "type": "post",
@@ -2006,20 +1661,6 @@ define({ "api": [
     "sampleRequest": [
       {
         "url": "http://192.168.1.220/fang/public/api/1.0.0/trackupdate"
-
-    "filename": "app/Http/Controllers/Api/V1_0/CustController.php",
-    "groupTitle": "客户跟踪管理"
-  },
-  {
-    "type": "get",
-    "url": "1.0.0/furniture_need",
-    "title": "家具需求",
-    "name": "furniture_need",
-    "group": "GroupName",
-    "sampleRequest": [
-      {
-        "url": "http://192.168.1.13/fang/public/api/1.0.0/furniture_need"
-
       }
     ],
     "version": "1.0.0",
@@ -2041,26 +1682,15 @@ define({ "api": [
         }
       ]
     },
- 
     "filename": "app/Http/Controllers/Api/V1_0/TrackinfoController.php",
-
-    "filename": "app/Http/Controllers/Api/V1_0/CustController.php",
-
-    "groupTitle": "客户跟踪管理"
+    "groupTitle": "客户来访管理"
   },
   {
     "type": "post",
- 
     "url": "api/1.0.0/trackge",
     "title": "客户跟踪查找",
     "name": "trackge",
     "group": "GroupNamejl",
-
-    "url": "api/1.0.0/buyinfo",
-    "title": "认购管理",
-    "name": "buyinfo",
-    "group": "GroupNameg",
-
     "parameter": {
       "fields": {
         "参数": [
@@ -2068,9 +1698,15 @@ define({ "api": [
             "group": "参数",
             "type": "int",
             "optional": false,
- 
             "field": "hous_id",
             "description": "<p>职业顾问id</p>"
+          },
+          {
+            "group": "参数",
+            "type": "string",
+            "optional": false,
+            "field": "search",
+            "description": "<p>客户姓名或手机号</p>"
           },
           {
             "group": "参数",
@@ -2078,21 +1714,13 @@ define({ "api": [
             "optional": false,
             "field": "page",
             "description": "<p>页码</p>"
-
-            "field": "sponsor",
-            "description": "<p>职业顾问id</p>"
-
           }
         ]
       }
     },
     "sampleRequest": [
       {
- 
         "url": "http://192.168.1.220/fang/public/api/1.0.0/trackge"
-
-        "url": "http://192.168.1.13/fang/public/api/1.0.0/buyinfo"
-
       }
     ],
     "version": "1.0.0",
@@ -2114,7 +1742,6 @@ define({ "api": [
         }
       ]
     },
- 
     "filename": "app/Http/Controllers/Api/V1_0/TrackgeController.php",
     "groupTitle": "客户跟踪管理"
   },
@@ -2124,17 +1751,6 @@ define({ "api": [
     "title": "获取客户跟踪记录",
     "name": "trackgecust",
     "group": "GroupNamejl",
-
-    "filename": "app/Http/Controllers/Api/V1_0/BuyinfoController.php",
-    "groupTitle": "认购签约"
-  },
-  {
-    "type": "post",
-    "url": "1.0.0/get/cust",
-    "title": "客户列表",
-    "name": "get_cust",
-    "group": "GroupName",
-
     "parameter": {
       "fields": {
         "参数": [
@@ -2142,13 +1758,8 @@ define({ "api": [
             "group": "参数",
             "type": "int",
             "optional": false,
- 
             "field": "cust_id",
             "description": "<p>客户id</p>"
-
-            "field": "hous_id",
-            "description": "<p>职业顾问id</p>"
-
           },
           {
             "group": "参数",
@@ -2162,11 +1773,7 @@ define({ "api": [
     },
     "sampleRequest": [
       {
- 
         "url": "http://192.168.1.220/fang/public/api/1.0.0/trackgecust"
-
-        "url": "http://192.168.1.13/fang/public/api/1.0.0/get/cust"
-
       }
     ],
     "version": "1.0.0",
@@ -2188,7 +1795,6 @@ define({ "api": [
         }
       ]
     },
- 
     "filename": "app/Http/Controllers/Api/V1_0/TrackgeController.php",
     "groupTitle": "客户跟踪管理"
   },
@@ -2235,19 +1841,6 @@ define({ "api": [
     "sampleRequest": [
       {
         "url": "http://192.168.1.220/fang/public/api/1.0.0/trackgeinsert"
-
-    "filename": "app/Http/Controllers/Api/V1_0/CustController.php",
-    "groupTitle": "客户跟踪管理"
-  },
-  {
-    "type": "get",
-    "url": "api/1.0.0/cultrue",
-    "title": "企业文化查找",
-    "name": "cultrue",
-    "group": "GroupNameh",
-    "sampleRequest": [
-      {
-        "url": "http://192.168.1.13/fang/public/api/1.0.0/cultrue"
       }
     ],
     "version": "1.0.0",
@@ -2269,45 +1862,7 @@ define({ "api": [
         }
       ]
     },
-    "filename": "app/Http/Controllers/Api/V1_0/CultrueController.php",
-    "groupTitle": "企业文化管理"
-  },
-  {
-    "type": "get",
-    "url": "1.0.0/house_num",
-    "title": "职业次数",
-    "name": "house_num",
-    "group": "GroupName",
-    "sampleRequest": [
-      {
-        "url": "http://192.168.1.13/fang/public/api/1.0.0/house_num"
-
-      }
-    ],
-    "version": "1.0.0",
-    "success": {
-      "examples": [
-        {
-          "title": "成功返回:",
-          "content": "HTTP/1.1 200 OK\n{\n  \"code\": \"101\",\n  \"message\": \"请求成功\",\n  \"result\" : $data\n\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "error": {
-      "examples": [
-        {
-          "title": "失败返回:",
-          "content": "HTTP/1.1 404 Not Found\n{\n  \"error\": \"请求失败\"\n}",
-          "type": "json"
-        }
-      ]
-    },
- 
     "filename": "app/Http/Controllers/Api/V1_0/TrackgeController.php",
-
-    "filename": "app/Http/Controllers/Api/V1_0/CustController.php",
-
     "groupTitle": "客户跟踪管理"
   },
   {
@@ -2338,11 +1893,7 @@ define({ "api": [
     },
     "sampleRequest": [
       {
- 
         "url": "http://192.168.1.220/fang/public/api/1.0.0/trackgeupdate"
-
-        "url": "http://192.168.1.13/fang/public/api/1.0.0/intention_area"
-
       }
     ],
     "version": "1.0.0",
@@ -2350,11 +1901,7 @@ define({ "api": [
       "examples": [
         {
           "title": "成功返回:",
- 
           "content": "HTTP/1.1 200 OK\n{\n  \"code\": \"101\",\n  \"message\": \"请求成功\",\n  \"result\" : $data\n\n}",
-
-          "content": "HTTP/1.1 200 OK\n{\n  \"code\": \"101\",\n  \"message\": \"请求成功\",\n  \"result\" : $data\n}",
-
           "type": "json"
         }
       ]
@@ -2368,11 +1915,7 @@ define({ "api": [
         }
       ]
     },
- 
     "filename": "app/Http/Controllers/Api/V1_0/TrackgeController.php",
-
-    "filename": "app/Http/Controllers/Api/V1_0/CustController.php",
-
     "groupTitle": "客户跟踪管理"
   },
   {
@@ -2383,7 +1926,7 @@ define({ "api": [
     "group": "GroupName",
     "sampleRequest": [
       {
-        "url": "http://192.168.1.218/fang/public/api/1.0.0/ownership"
+        "url": "http://192.168.1.220/fang/public/api/1.0.0/ownership"
       }
     ],
     "version": "1.0.0",
@@ -2406,7 +1949,7 @@ define({ "api": [
       ]
     },
     "filename": "app/Http/Controllers/Api/V1_0/CustController.php",
-    "groupTitle": "客户跟踪管理"
+    "groupTitle": "ipad-客户管理"
   },
   {
     "type": "get",
@@ -2416,11 +1959,7 @@ define({ "api": [
     "group": "GroupName",
     "sampleRequest": [
       {
- 
-        "url": "http://192.168.1.218/fang/public/api/1.0.0/purpose"
-
-        "url": "http://192.168.1.13/fang/public/api/1.0.0/purpose"
-
+        "url": "http://192.168.1.220/fang/public/api/1.0.0/purpose"
       }
     ],
     "version": "1.0.0",
@@ -2443,7 +1982,7 @@ define({ "api": [
       ]
     },
     "filename": "app/Http/Controllers/Api/V1_0/CustController.php",
-    "groupTitle": "客户跟踪管理"
+    "groupTitle": "ipad-客户管理"
   },
   {
     "type": "get",
@@ -2453,7 +1992,7 @@ define({ "api": [
     "group": "GroupName",
     "sampleRequest": [
       {
-        "url": "http://192.168.1.218/fang/public/api/1.0.0/residence"
+        "url": "http://192.168.1.220/fang/public/api/1.0.0/residence"
       }
     ],
     "version": "1.0.0",
@@ -2476,7 +2015,7 @@ define({ "api": [
       ]
     },
     "filename": "app/Http/Controllers/Api/V1_0/CustController.php",
-    "groupTitle": "客户跟踪管理"
+    "groupTitle": "ipad-客户管理"
   },
   {
     "type": "post",
@@ -2499,11 +2038,7 @@ define({ "api": [
     },
     "sampleRequest": [
       {
- 
-        "url": "http://192.168.1.218/fang/public/api/1.0.0/rocedure"
-
-        "url": "http://192.168.1.13/fang/public/api/1.0.0/rocedure"
-
+        "url": "http://192.168.1.220/fang/public/api/1.0.0/rocedure"
       }
     ],
     "version": "1.0.0",
@@ -2526,7 +2061,7 @@ define({ "api": [
       ]
     },
     "filename": "app/Http/Controllers/Api/V1_0/CustController.php",
-    "groupTitle": "客户跟踪管理"
+    "groupTitle": "ipad-客户管理"
   },
   {
     "type": "get",
@@ -2598,11 +2133,7 @@ define({ "api": [
     },
     "sampleRequest": [
       {
- 
-        "url": "http://192.168.1.218/fang/public/api/1.0.0/search"
-
-        "url": "http://192.168.1.13/fang/public/api/1.0.0/search"
-
+        "url": "http://192.168.1.220/fang/public/api/1.0.0/search"
       }
     ],
     "version": "1.0.0",
@@ -2625,7 +2156,7 @@ define({ "api": [
       ]
     },
     "filename": "app/Http/Controllers/Api/V1_0/CustController.php",
-    "groupTitle": "客户跟踪管理"
+    "groupTitle": "ipad-客户管理"
   },
   {
     "type": "get",
@@ -2635,11 +2166,7 @@ define({ "api": [
     "group": "GroupName",
     "sampleRequest": [
       {
- 
-        "url": "http://192.168.1.218/fang/public/api/1.0.0/status_id"
-
-        "url": "http://192.168.1.13/fang/public/api/1.0.0/status_id"
-
+        "url": "http://192.168.1.220/fang/public/api/1.0.0/status_id"
       }
     ],
     "version": "1.0.0",
@@ -2662,7 +2189,7 @@ define({ "api": [
       ]
     },
     "filename": "app/Http/Controllers/Api/V1_0/CustController.php",
-    "groupTitle": "客户跟踪管理"
+    "groupTitle": "ipad-客户管理"
   },
   {
     "type": "post",
@@ -2839,11 +2366,7 @@ define({ "api": [
     },
     "sampleRequest": [
       {
- 
-        "url": "http://192.168.1.218/fang/public/api/1.0.0/store"
-
-        "url": "http://192.168.1.13/fang/public/api/1.0.0/store"
-
+        "url": "http://192.168.1.220/fang/public/api/1.0.0/store"
       }
     ],
     "version": "1.0.0",
@@ -2866,7 +2389,7 @@ define({ "api": [
       ]
     },
     "filename": "app/Http/Controllers/Api/V1_0/CustController.php",
-    "groupTitle": "客户跟踪管理"
+    "groupTitle": "ipad-客户管理"
   },
   {
     "type": "get",
@@ -2876,7 +2399,7 @@ define({ "api": [
     "group": "GroupName",
     "sampleRequest": [
       {
-        "url": "http://192.168.1.218/fang/public/api/1.0.0/structure"
+        "url": "http://192.168.1.220/fang/public/api/1.0.0/structure"
       }
     ],
     "version": "1.0.0",
@@ -2899,7 +2422,7 @@ define({ "api": [
       ]
     },
     "filename": "app/Http/Controllers/Api/V1_0/CustController.php",
-    "groupTitle": "客户跟踪管理"
+    "groupTitle": "ipad-客户管理"
   },
   {
     "type": "get",
@@ -2909,7 +2432,7 @@ define({ "api": [
     "group": "GroupName",
     "sampleRequest": [
       {
-        "url": "http://192.168.1.218/fang/public/api/1.0.0/work_type"
+        "url": "http://192.168.1.220/fang/public/api/1.0.0/work_type"
       }
     ],
     "version": "1.0.0",
@@ -2932,10 +2455,6 @@ define({ "api": [
       ]
     },
     "filename": "app/Http/Controllers/Api/V1_0/CustController.php",
- 
     "groupTitle": "ipad-客户管理"
-
-    "groupTitle": "客户跟踪管理"
-
   }
 ] });

@@ -19,7 +19,7 @@ class CultrueController extends Controller
      * @apiGroup GroupNameh
      *
      *
-     * @apiSampleRequest http://192.168.1.13/fang/public/api/1.0.0/cultrue
+     * @apiSampleRequest http://192.168.1.220/fang/public/api/1.0.0/cultrue
      * @apiVersion 1.0.0
      * @apiSuccessExample {json} 成功返回:
      *     HTTP/1.1 200 OK
@@ -40,7 +40,16 @@ class CultrueController extends Controller
     public function cultrue()
     {
         $data = Cultrue::get_d_cultrue();
-
+        foreach ($data as $k => $v){
+            if($v -> sort == null){
+                $v -> sort = "";
+            }
+            $v -> imgpath = explode('/',$v -> imgpath);
+            $v -> imgpath = array_filter($v -> imgpath);
+            if($v -> updated_at == null){
+                $v -> updated_at ="";
+            }
+        }
         return response()->json( [
             'code' => '101' ,
             'message'  => '请求成功',

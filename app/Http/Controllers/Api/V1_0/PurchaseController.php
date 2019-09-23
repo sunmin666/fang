@@ -18,6 +18,7 @@ class PurchaseController extends Controller
      * @apiGroup GroupNamea
      *
      * @apiParam (参数) {int} hous_id 职业顾问id
+     * @apiParam (参数) {string} search 客户姓名或手机号
      * @apiParam (参数) {int} page 页码
      *
      * @apiSampleRequest http://192.168.1.220/fang/public/api/1.0.0/purchase
@@ -41,6 +42,7 @@ class PurchaseController extends Controller
     public function purchase(Request $api)
     {
         $hous_id = $api->input('hous_id');
+        $search = $api->input('search');
         $page = $api->input('page');
         if (!$hous_id) {
             return response()->json([
@@ -48,19 +50,17 @@ class PurchaseController extends Controller
                 'message' => '参数不全',
             ]);
         }
-        $data = Purchase::get_purch_hous($hous_id, $page);
+        $data = Purchase::get_purch_hous($hous_id, $page,$search);
 
         foreach ($data as $key => $value) {
-            $value->home = Purchase::get_purch_home($value->cust_id);
-            if ($value->sex == 1) {
-                $value->sex = '男';
-            } else {
-                $value->sex = '女';
+            $data[$key]['home'] = $c=Purchase::get_purch_home($value['cust_id']);
+            if($c == null){
+                unset($data[$key]);
             }
-            if ($value->type == 0) {
-                $value->type = '一次性付款';
+            if ($value['sex'] == 1) {
+                $value['sex'] = '男';
             } else {
-                $value->type = '按揭付款';
+                $value['sex'] = '女';
             }
         }
 
@@ -172,7 +172,7 @@ class PurchaseController extends Controller
      * @apiName purdetails
      * @apiGroup GroupNamea
      *
-     * @apiParam (参数) {int} cust_id 客户id
+     * @apiParam (参数) {int} planid 方案id
      * @apiSampleRequest http://192.168.1.220/fang/public/api/1.0.0/purdetails
      * @apiVersion 1.0.0
      * @apiSuccessExample {json} 成功返回:
@@ -193,24 +193,38 @@ class PurchaseController extends Controller
      */
     public function purdetails(Request $api)
     {
-        $cust_id = $api -> input('cust_id');
-        if (!$cust_id) {
+        $planid = $api -> input('planid');
+        if (!$planid) {
             return response()->json([
                 'code' => '102',
                 'message' => '参数不全',
             ]);
         }
-        $data = Purchase::get_purch_cust($cust_id);
+        $data = Purchase::get_pur_home($planid);
+
         if ($data->sex == 1) {
             $data->sex = '男';
         } else {
             $data->sex = '女';
         }
-        $data -> home = Purchase::get_pur_home($cust_id);
-        return response()->json([
-            'code' => '101',
-            'message' => '请求成功',
-            'result' => $data
-        ]);
+        if($data -> type == 0){
+            $data -> years = "";
+            $data -> month_price = "";
+            $data -> month_total = "";
+        }else{
+            $data -> once_total = "";
+        }
+        if ($data) {
+            return response()->json([
+                'code' => '101',
+                'message' => '请求成功',
+                'result' => $data,
+            ]);
+        } else {
+            return response()->json([
+                'code' => '103',
+                'message' => '请求失败'
+            ]);
+        }
     }
 }

@@ -35,10 +35,23 @@ Route::post('1.0.0/purinsert','Api\V1_0\PurchaseController@purinsert');
 Route::post('1.0.0/purdetails','Api\V1_0\PurchaseController@purdetails');
 
 
-//单条计划方案接口
-Route::post('1.0.0/purcview','Api\V1_0\PurchaseController@purcview');
 //缴费记录接口
 Route::post('1.0.0/paylog','Api\V1_0\PaylogController@paylog');
+//缴费记录详情接口
+Route::post('1.0.0/paydetails','Api\V1_0\PaylogController@paydetails');
+
+//提醒查找接口
+Route::post('1.0.0/remind','Api\V1_0\RemindinfoController@remind');
+//添加提醒
+Route::post('1.0.0/reminsert','Api\V1_0\RemindinfoController@reminsert');
+//提醒详情
+Route::post('1.0.0/remdetails','Api\V1_0\RemindinfoController@remdetails');
+//提醒搜索
+Route::post('1.0.0/remsearch','Api\V1_0\RemindinfoController@remsearch');
+
+
+
+
 //房屋共有人接口
 Route::post('1.0.0/coowner','Api\V1_0\CoownerController@coowner');
 
@@ -61,23 +74,29 @@ Route::post('1.0.0/trackgeupdate','Api\V1_0\TrackgeController@trackgeupdate');
 Route::post('1.0.0/trackgeinsert','Api\V1_0\TrackgeController@trackgeinsert');
 
 
+//销售排行接口
+//已售金额总量排行
+Route::get('1.0.0/salesampay','Api\V1_0\SalesamController@salesampay');
+
+
+
+
+
+
+
+
+
+
 //置业台账接口
-//已认购接口
+//认购接口
 Route::post('1.0.0/buyinfo','Api\V1_0\LedgerController@buyinfo');
-//已更名接口
-Route::post('1.0.0/changecust','Api\V1_0\LedgerController@changecust');
-//已换房接口
-Route::post('1.0.0/changehome','Api\V1_0\LedgerController@changehome');
-//已延迟接口
-Route::post('1.0.0/delaysing','Api\V1_0\LedgerController@delaysing');
-//已签约接口
-Route::post('1.0.0/signinfo','Api\V1_0\LedgerController@signinfo');
-//已退房接口
-Route::post('1.0.0/checkout','Api\V1_0\LedgerController@checkout');
-//认购未通过
-Route::post('1.0.0/buyinfopass','Api\V1_0\LedgerController@buyinfopass');
-//更名未通过
-Route::post('1.0.0/changepass','Api\V1_0\LedgerController@changepass');
+//认购详情
+Route::post('1.0.0/buydetails','Api\V1_0\LedgerController@buydetails');
+//更名接口
+Route::post('1.0.0/changname','Api\V1_0\LedgerController@changname');
+//换房接口
+Route::post('1.0.0/chahome','Api\V1_0\LedgerController@chahome');
+
 
 
 

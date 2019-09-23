@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\SessionController;
 use Illuminate\Support\Facades\Validator;
 use App\Models\admin\Delegate;
+use Illuminate\Support\Facades\Session;
 
 class DelegateController extends SessionController
 {
@@ -48,6 +49,7 @@ class DelegateController extends SessionController
         $data['hous_id'] = $query -> input('hous_id');
 //        $data['cust_id'] = $query -> input('cust_id');
         $data['remarks'] = $query -> input('remarks');
+        $data['appointees'] = Session::get('session_member.id');
         $data['created_at'] = time();
         $store = Delegate::store_d_delegate($data);
         if($store){

@@ -10,6 +10,6 @@ class Cultrue extends Model
     //查询所有企业文化
     public static function get_d_cultrue()
     {
-        return DB::table('cultureinfo') -> paginate(2);
+        return DB::table('cultureinfo')->get();
     }
 }

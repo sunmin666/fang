@@ -9,7 +9,7 @@ use App\Models\Api\V1_0\Trackinfo;
 class TrackinfoController extends Controller
 {
     /**
-     * @apiDefine GroupNamejj 客户跟踪管理
+     * @apiDefine GroupNamejj 客户来访管理
      */
 
     /**
@@ -18,6 +18,7 @@ class TrackinfoController extends Controller
      * @apiGroup GroupNamejj
      *
      * @apiParam (参数) {int} hous_id 职业顾问id
+     * @apiParam (参数) {string} search 客户姓名或手机号
      * @apiParam (参数) {int} page 页码
      *
      * @apiSampleRequest http://192.168.1.220/fang/public/api/1.0.0/trackinfo
@@ -42,6 +43,7 @@ class TrackinfoController extends Controller
     {
 
         $hous_id = $api->input('hous_id');
+        $search = $api->input('search');
         $page = $api->input('page');
 
         if (!$hous_id) {
@@ -51,7 +53,7 @@ class TrackinfoController extends Controller
             ]);
         }
 
-        $data = Trackinfo::get_d_hous($hous_id, $page);
+        $data = Trackinfo::get_d_hous($hous_id,$search,$page);
 
         foreach ($data as $k => $v) {
             $data[$k]['count'] = $c = Trackinfo::get_t_count($v['cust_id']);
