@@ -191,6 +191,7 @@ class ChangecustController extends SessionController
         $data['status'] = $query -> input('status');
         $data['verify_remarks'] = $query -> input('verify_remarks');
         $data['verifytime'] = time();
+        $data['verify_admin'] = Session::get('session_member.id');
         $review = Changecust::update_review($chan_id,$data);
         if($review){
            if($data['status'] == 1){

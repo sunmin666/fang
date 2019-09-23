@@ -21,7 +21,7 @@ class TrackgeController extends Controller
      * @apiParam (参数) {string} search 客户姓名或手机号
      * @apiParam (参数) {int} page 页码
      *
-     * @apiSampleRequest http://192.168.1.220/fang/public/api/1.0.0/trackge
+     * @apiSampleRequest http://192.168.1.13/fang/public/api/1.0.0/trackge
      * @apiVersion 1.0.0
      * @apiSuccessExample {json} 成功返回:
      *     HTTP/1.1 200 OK
@@ -89,7 +89,7 @@ class TrackgeController extends Controller
      * @apiParam (参数) {int} cust_id 客户id
      * @apiParam (参数) {int} page 页码
      *
-     * @apiSampleRequest http://192.168.1.220/fang/public/api/1.0.0/trackgecust
+     * @apiSampleRequest http://192.168.1.13/fang/public/api/1.0.0/trackgecust
      * @apiVersion 1.0.0
      * @apiSuccessExample {json} 成功返回:
      *     HTTP/1.1 200 OK
@@ -146,7 +146,7 @@ class TrackgeController extends Controller
      * @apiParam (参数) {int} trackid 跟踪id
      * @apiParam (参数) {string} content 跟踪内容
      *
-     * @apiSampleRequest http://192.168.1.220/fang/public/api/1.0.0/trackgeupdate
+     * @apiSampleRequest http://192.168.1.13/fang/public/api/1.0.0/trackgeupdate
      * @apiVersion 1.0.0
      * @apiSuccessExample {json} 成功返回:
      *     HTTP/1.1 200 OK
@@ -197,7 +197,7 @@ class TrackgeController extends Controller
      * @apiParam (参数) {string} demand 意向等级
      * @apiParam (参数) {string} content 跟踪内容
      *
-     * @apiSampleRequest http://192.168.1.220/fang/public/api/1.0.0/trackgeinsert
+     * @apiSampleRequest http://192.168.1.13/fang/public/api/1.0.0/trackgeinsert
      * @apiVersion 1.0.0
      * @apiSuccessExample {json} 成功返回:
      *     HTTP/1.1 200 OK

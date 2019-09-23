@@ -284,6 +284,8 @@ class BuyController extends SessionController
 			$buyid = $query -> input('buyid');
 			$data['manager_verify_status'] = $query -> input('manager_verify_status');
 			$data['manager_verify_remarks'] = $query -> input('manager_verify_remarks');
+			$data['manage_admin'] = Session::get('session_member.id');
+
 			$data['manager_verify_time'] = time();
 			$review = Buy::update_review($buyid,$data);
 
@@ -315,6 +317,8 @@ class BuyController extends SessionController
 		$buyid = $query -> input('buyid');
 		$data['finance_verify_status'] = $query -> input('manager_verify_status');
 		$data['finance_verify_remarks'] = $query -> input('manager_verify_remarks');
+		$data['finance_admin'] = Session::get('session_member.id');
+
 		$data['finance_verify_time'] = time();
 		$review = Buy::update_review($buyid,$data);
 

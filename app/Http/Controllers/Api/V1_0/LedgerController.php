@@ -22,7 +22,7 @@ class LedgerController extends Controller
      * @apiParam (参数) {int} status 通过1 未通过2 未审核3
      * @apiParam (参数) {int} page 页码
      *
-     * @apiSampleRequest http://192.168.1.220/fang/public/api/1.0.0/buyinfo
+     * @apiSampleRequest http://192.168.1.13/fang/public/api/1.0.0/buyinfo
      * @apiVersion 1.0.0
      * @apiSuccessExample {json} 成功返回:
      *     HTTP/1.1 200 OK
@@ -58,6 +58,7 @@ class LedgerController extends Controller
                     unset($data[$k]);
                 }
             }
+
             $data=array_values($data);
             if ($data) {
                 return response()->json([
@@ -83,15 +84,14 @@ class LedgerController extends Controller
                         $data[$k]['finance_verify_status'] = '';
                     }else{
                         if($v['finance_verify_status'] === '0'){
-
                         }else{
                             unset($data[$k]);
                         }
                     }
                 }
             }
-            $data=array_values($data);
 
+            $data=array_values($data);
 //            print_r($data);die;
 
             if ($data) {
@@ -362,6 +362,7 @@ class LedgerController extends Controller
                     }
                 }
             }
+
             if ($data) {
                 return response()->json([
                     'code' => '101',
@@ -397,6 +398,5 @@ class LedgerController extends Controller
                 ]);
             }
         }
-
     }
 }
