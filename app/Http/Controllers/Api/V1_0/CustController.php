@@ -1160,6 +1160,15 @@ class CustController extends Controller
 			] );
 		}
 		$data = Cust::get_buyinfo($cust_id);
+
+		foreach ($data as $k => $v){
+			if($v -> manager_verify_status === null){
+				$v -> manager_verify_status = '';
+				if($v -> finance_verify_status === null){
+					$v -> finance_verify_status = '';
+				}
+			}
+		}
 		if($data){
 			return response()->json( [
 				'code' => '101' ,

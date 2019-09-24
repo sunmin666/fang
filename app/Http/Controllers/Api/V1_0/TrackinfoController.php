@@ -45,7 +45,6 @@ class TrackinfoController extends Controller
         $hous_id = $api->input('hous_id');
         $search = $api->input('search');
         $page = $api->input('page');
-
         if (!$hous_id) {
             return response()->json([
                 'code' => '102',
@@ -53,12 +52,11 @@ class TrackinfoController extends Controller
             ]);
         }
 
+
         $data = Trackinfo::get_d_hous($hous_id,$search,$page);
 
         foreach ($data as $k => $v) {
             $data[$k]['count'] = $c = Trackinfo::get_t_count($v['cust_id']);
-
-
             if ($c == 0) {
                 unset($data[$k]);
             } else {

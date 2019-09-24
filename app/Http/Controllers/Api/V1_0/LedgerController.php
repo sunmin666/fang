@@ -10,9 +10,9 @@ use App\Models\Api\V1_0\Ledger;
 class LedgerController extends Controller
 {
     /**
-     * @apiDefine GroupNameji 置业台账
-     */
-
+ * @apiDefine GroupNameji 置业台账
+ */
+    
     /**
      * @api {post} api/1.0.0/buyinfo 已认购
      * @apiName buyinfo
