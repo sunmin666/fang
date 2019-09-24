@@ -21,7 +21,7 @@ class TrackinfoController extends Controller
      * @apiParam (参数) {string} search 客户姓名或手机号
      * @apiParam (参数) {int} page 页码
      *
-     * @apiSampleRequest http://192.168.1.220/fang/public/api/1.0.0/trackinfo
+     * @apiSampleRequest http://192.168.1.13/fang/public/api/1.0.0/trackinfo
      * @apiVersion 1.0.0
      * @apiSuccessExample {json} 成功返回:
      *     HTTP/1.1 200 OK
@@ -94,7 +94,7 @@ class TrackinfoController extends Controller
      * @apiParam (参数) {int} cust_id 客户id
      * @apiParam (参数) {int} page 页码
      *
-     * @apiSampleRequest http://192.168.1.220/fang/public/api/1.0.0/trackcust
+     * @apiSampleRequest http://192.168.1.13/fang/public/api/1.0.0/trackcust
      * @apiVersion 1.0.0
      * @apiSuccessExample {json} 成功返回:
      *     HTTP/1.1 200 OK
@@ -152,7 +152,7 @@ class TrackinfoController extends Controller
      * @apiParam (参数) {int} trackid 来访id
      * @apiParam (参数) {string} content 来访内容
      *
-     * @apiSampleRequest http://192.168.1.220/fang/public/api/1.0.0/trackupdate
+     * @apiSampleRequest http://192.168.1.13/fang/public/api/1.0.0/trackupdate
      * @apiVersion 1.0.0
      * @apiSuccessExample {json} 成功返回:
      *     HTTP/1.1 200 OK
@@ -205,7 +205,7 @@ class TrackinfoController extends Controller
      * @apiParam (参数) {string} demand 意向等级
      * @apiParam (参数) {string} content 来访内容
      *
-     * @apiSampleRequest http://192.168.1.220/fang/public/api/1.0.0/trackinsert
+     * @apiSampleRequest http://192.168.1.13/fang/public/api/1.0.0/trackinsert
      * @apiVersion 1.0.0
      * @apiSuccessExample {json} 成功返回:
      *     HTTP/1.1 200 OK

@@ -25,7 +25,7 @@ class LedgerController extends Controller
      * @apiParam (参数) {string} [end_time] 结束时间
      * @apiParam (参数) {int} page 页码
      *
-     * @apiSampleRequest http://192.168.1.220/fang/public/api/1.0.0/buyinfo
+     * @apiSampleRequest http://192.168.1.13/fang/public/api/1.0.0/buyinfo
      * @apiVersion 1.0.0
      * @apiSuccessExample {json} 成功返回:
      *     HTTP/1.1 200 OK
@@ -66,8 +66,10 @@ class LedgerController extends Controller
                     unset($data['result'][$k]);
                 }
             }
+
             $data['count'] = sizeof($data['result']);
             $data['result']=array_values($data['result']);
+
             if ($data) {
                 return response()->json([
                     'code' => '101',
@@ -94,7 +96,6 @@ class LedgerController extends Controller
                     }else{
 
                         if($v['finance_verify_status'] === '0'){
-
                         }else{
                             unset( $data['result'][$k]);
 
@@ -395,8 +396,10 @@ class LedgerController extends Controller
                     }
                 }
             }
+
             $data['count'] = sizeof($data['result']);
             $data['result']=array_values($data);
+
             if ($data) {
                 return response()->json([
                     'code' => '101',
@@ -441,7 +444,6 @@ class LedgerController extends Controller
                 ]);
             }
         }
-
     }
     /**
      * @api {post} api/1.0.0/chakouthome 退房

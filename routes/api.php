@@ -186,7 +186,35 @@ Route::post('1.0.0/get/cust','Api\V1_0\CustController@get_cust');
 	//客户手续记录
 
 	Route::post('1.0.0/rocedure','Api\V1_0\CustController@rocedure');
-
 	//客户信息详情
 	Route::post('1.0.0/details','Api\V1_0\CustController@details');
+	//查询客户认购信息
+	Route::post('1.0.0/buyinfo','Api\V1_0\CustController@buyinfo');
 
+
+
+	//房源字段信息接口
+	Route::get('1.0.0/buildnum','Api\V1_0\FieldController@buildnum');
+	//查询单元号
+	Route::get('1.0.0/unitnum','Api\V1_0\FieldController@unitnum');
+	//查询为认购的房源
+	Route::get('1.0.0/roomnum','Api\V1_0\FieldController@roomnum');
+
+
+	//----------------------------------------------- 认购签约---------------------//
+	//认购发起
+	Route::post('1.0.0/buyinfo/store','Api\V1_0\BuyinfoController@buyinfo_store');
+	//认购审核详情
+	Route::post('1.0.0/buyinfo/view','Api\V1_0\BuyinfoController@buyinfo_view');
+	//认购列表搜索
+	Route::get('1.0.0/buyinfo/search','Api\V1_0\BuyinfoController@buyinfo_search');
+
+
+	//更名发起
+	Route::get('1.0.0/Changecust/create','Api\V1_0\ChangecustController@changecust_create');
+	//更名发起添加
+	Route::post('1.0.0/Changecust/store','Api\V1_0\ChangecustController@changecust_store');
+	//更名列表与检索
+	Route::get('1.0.0/Changecust/search','Api\V1_0\ChangecustController@changecust_search');
+	//更名详情
+	Route::get('1.0.0/Changecust/view','Api\V1_0\ChangecustController@changecust_view');

@@ -8,6 +8,7 @@
 	use App\Models\admin\Change;
 	use Illuminate\Support\Facades\Input;
 	use Illuminate\Support\Facades\Validator;
+	use Illuminate\Support\Facades\Session;
 
 
 	class ChaneController extends SessionController {
@@ -175,6 +176,8 @@
 			$chan_id = $query -> input('chan_id');
 			$data['status'] = $status = $query -> input('status');
 			$data['verify_remarks'] = $query -> input('verify_remarks');
+			$data['verify_admin'] = Session::get('session_member.id');
+
 			$data['verifytime'] = time();
 
 			$update_re = Change::update_re_change($chan_id,$data);
@@ -221,6 +224,7 @@
 
 			$data['finance_status'] = $status = $query -> input('finance_status');
 			$data['finance_remarks'] = $query -> input('finance_remarks');
+			$data['finance_admin'] = Session::get('session_member.id');
 			$data['finance_time'] = time();
 			$update_cw = Change::update_re_change($chan_id,$data);
 			if($update_cw){

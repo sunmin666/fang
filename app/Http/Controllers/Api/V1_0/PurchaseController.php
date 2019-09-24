@@ -21,7 +21,7 @@ class PurchaseController extends Controller
      * @apiParam (参数) {string} search 客户姓名或手机号
      * @apiParam (参数) {int} page 页码
      *
-     * @apiSampleRequest http://192.168.1.220/fang/public/api/1.0.0/purchase
+     * @apiSampleRequest http://192.168.1.13/fang/public/api/1.0.0/purchase
      * @apiVersion 1.0.0
      * @apiSuccessExample {json} 成功返回:
      *     HTTP/1.1 200 OK
@@ -91,7 +91,7 @@ class PurchaseController extends Controller
      * @apiParam (参数) {string} years 按揭时年限
      * @apiParam (参数) {string} month_price 按揭月供
      * @apiParam (参数) {string} month_total 按揭总价
-     * @apiSampleRequest http://192.168.1.220/fang/public/api/1.0.0/purinsert
+     * @apiSampleRequest http://192.168.1.13/fang/public/api/1.0.0/purinsert
      * @apiVersion 1.0.0
      * @apiSuccessExample {json} 成功返回:
      *     HTTP/1.1 200 OK
