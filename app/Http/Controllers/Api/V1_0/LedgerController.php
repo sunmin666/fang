@@ -9,34 +9,34 @@ use App\Models\Api\V1_0\Ledger;
 class LedgerController extends Controller
 {
     /**
-     * @apiDefine GroupNameji 置业台账
-     */
+ * @apiDefine GroupNameji 置业台账
+ */
 
-    /**
-     * @api {post} api/1.0.0/buyinfo 已认购
-     * @apiName buyinfo
-     * @apiGroup GroupNameji
-     *
-     * @apiParam (参数) {int} hous_id 职业顾问id
-     *
-     * @apiSampleRequest http://192.168.1.13/fang/public/api/1.0.0/buyinfo
-     * @apiVersion 1.0.0
-     * @apiSuccessExample {json} 成功返回:
-     *     HTTP/1.1 200 OK
-     *     {
-     *       "code": "101",
-     *       "message": "请求成功",
-     *       "result" : $data
-     *
-     *     }
-     *
-     *
-     * @apiErrorExample {json} 失败返回:
-     *     HTTP/1.1 404 Not Found
-     *     {
-     *       "error": "请求失败"
-     *     }
-     */
+	/**
+	 * @api {post} api/1.0.0/buyinfo 已认购
+	 * @apiName buyinfo
+	 * @apiGroup GroupNameji
+	 *
+	 * @apiParam (参数) {int} hous_id 职业顾问id
+	 *
+	 * @apiSampleRequest http://192.168.1.13/fang/public/api/1.0.0/buyinfo
+	 * @apiVersion 1.0.0
+	 * @apiSuccessExample {json} 成功返回:
+	 *     HTTP/1.1 200 OK
+	 *     {
+	 *       "code": "101",
+	 *       "message": "请求成功",
+	 *       "result" : $data
+	 *
+	 *     }
+	 *
+	 *
+	 * @apiErrorExample {json} 失败返回:
+	 *     HTTP/1.1 404 Not Found
+	 *     {
+	 *       "error": "请求失败"
+	 *     }
+	 */
     public function buyinfo(Request $api)
     {
         $hous_id = $api -> input('hous_id');

@@ -53,6 +53,7 @@
 				] );
 			}
 			$data = Changecust::get_buyid( $buyid );
+			$data -> buyid = $buyid;
 			if($data -> pay_type == 0){
 				$data -> month_pay  = '';
 				$data -> loan_term  = '';

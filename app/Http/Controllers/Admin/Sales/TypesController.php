@@ -58,7 +58,7 @@ class TypesController extends SessionController
 		$data['amount'] = $ig;
 //		dd($data['amount']);
 		$data['total'] =  array_sum($sort_arr);
-//		dd($data['amount']);
+//		dd($data);
 		$data['ids'] = $perid;
 		return view('Admin.Sales.Amount.index') -> with($data);
 	}
@@ -131,12 +131,8 @@ class TypesController extends SessionController
 		$data['stime'] = $stime = Input::get('stime');  //接受开始时间
 		$data['etime'] = $etime = Input::get('etime');  //接受结束时间
 
-
-
 		$igg = $this ->amount_jinn($hous,$stime,$etime);
 
-
-//		dd($igg);
 
 		$sort_arr = [];
 		foreach ($igg as $key => $value) {

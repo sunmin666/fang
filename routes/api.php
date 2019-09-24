@@ -193,3 +193,59 @@ Route::post('1.0.0/get/cust','Api\V1_0\CustController@get_cust');
 	Route::get('1.0.0/Changecust/search','Api\V1_0\ChangecustController@changecust_search');
 	//更名详情
 	Route::get('1.0.0/Changecust/view','Api\V1_0\ChangecustController@changecust_view');
+
+
+	//签约发起
+	Route::get('1.0.0/signing/create','Api\V1_0\SigningController@signing_create');
+	//签约新增
+	Route::post('1.0.0/signing/store','Api\V1_0\SigningController@signing_store');
+	//签约列表与检索
+	Route::get('1.0.0/signing/search','Api\V1_0\SigningController@signing_search');
+//签约列表详情
+	Route::get('1.0.0/signing/view','Api\V1_0\SigningController@signing_view');
+
+
+
+	//延迟签约发起
+	Route::get('1.0.0/delayed/create','Api\V1_0\DelayedController@delayed_create');
+	//延迟新增
+	Route::post('1.0.0/delayed/store','Api\V1_0\DelayedController@delayed_store');
+	//延迟列表与检索
+	Route::get('1.0.0/delayed/search','Api\V1_0\DelayedController@delayed_search');
+	//延迟列表详情
+	Route::get('1.0.0/delayed/view','Api\V1_0\DelayedController@delayed_view');
+
+
+	//退房发起
+	Route::get('1.0.0/checkout/create','Api\V1_0\CheckoutController@checkout_create');
+	//退房信息增数据库
+	Route::post('1.0.0/checkout/store','Api\V1_0\CheckoutController@checkout_store');
+	//退房列表与检索
+	Route::get('1.0.0/checkout/search','Api\V1_0\CheckoutController@checkout_search');
+	//退房详情
+	Route::get('1.0.0/checkout/view','Api\V1_0\CheckoutController@checkout_view');
+
+
+
+	//-------------------------销售排行------------------------------------------------------//
+//金额
+ Route::get('1.0.0/small/amount','Api\V1_0\SmallController@small_amount');
+//套数
+Route::get('1.0.0/small/listing','Api\V1_0\SmallController@small_listing');
+
+
+//---------------------------------------销控表--------------------------------------------//
+
+Route::get('1.0.0/home/index','Api\V1_0\HomeController@home_index');
+//房号总量
+Route::get('1.0.0/home/count','Api\V1_0\HomeController@home_count');
+//可售总量
+Route::get('1.0.0/home/counts','Api\V1_0\HomeController@home_counts');
+//销控状态
+Route::get('1.0.0/home/countss','Api\V1_0\HomeController@home_countss');
+//已售总量
+Route::get('1.0.0/home/countsss','Api\V1_0\HomeController@home_countsss');
+//房源信息详情
+Route::get('1.0.0/home/details','Api\V1_0\HomeController@home_details');
+
+

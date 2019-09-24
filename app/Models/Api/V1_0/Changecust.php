@@ -10,7 +10,7 @@ class Changecust extends Model
     //更名发起
 	public static function get_buyid( $buyid ){
 		return DB::table('buyinfo') -> select(
-			'buyinfo.pay_type','buyinfo.month_pay','buyinfo.loan_term','buyinfo.total_price','buyinfo.buy_number',
+			'buyinfo.pay_type','buyinfo.month_pay','buyinfo.loan_term','buyinfo.total_price','buyinfo.buy_number','buyinfo.pay_num',
 			'customer.realname','customer.idcard','customer.mobile','customer.address','customer.cust_id',
 			'homeinfo.discount','homeinfo.build_area','homeinfo.price','homeinfo.total','homeinfo.homeid',
 			'fieldinfob.name as buildnums','fieldinfou.name as unitnums','fieldinfor.name as roomnums'

@@ -97,7 +97,7 @@ class Cust extends Model
 						 -> select('customer.*','fieldinfo.name as cognition', 'fieldinfoa.name as first_contact', 'fieldinfob.name as family_str',
 							 'fieldinfoc.name as work_type', 'fieldinfod.name as ownership', 'fieldinfoe.name as purpose', 'fieldinfof.name as area', 'fieldinfog.name as residence',
 							 'fieldinfoh.name as intention_area', 'fieldinfoi.name as floor_like', 'fieldinfoj.name as structure', 'fieldinfok.name as apartment', 'fieldinfol.name as furniture_need',
-							 'fieldinfom.name as house_num', 'fieldinfon.name as demand', 'fieldinfo.name as status_id'
+							 'fieldinfom.name as house_num', 'fieldinfon.name as demand', 'fieldinfoo.name as status_id'
 						 )
 						 -> leftJoin('fieldinfo','customer.cognition','=','fieldinfo.field_id')
 						 -> leftJoin('fieldinfo as fieldinfoa','customer.first_contact','=','fieldinfoa.field_id')
@@ -262,7 +262,8 @@ class Cust extends Model
 	public static function get_buyinfo($cust_id){
     	return DB::table('buyinfo')
 							 -> select(
-							 	'buyinfo.buyid','buyinfo.status','buyinfo.sig_status',
+							 	'buyinfo.buyid','buyinfo.status','buyinfo.sig_status','buyinfo.manager_verify_status','buyinfo.finance_verify_status',
+								 'homeinfo.status as home_status',
 								 'fieldinfob.name as buildnums','fieldinfou.name as unitnums','fieldinfor.name as roomnums'
 				)
 				-> leftJoin('homeinfo','buyinfo.homeid','=','homeinfo.homeid')

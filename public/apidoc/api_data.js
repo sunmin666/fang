@@ -3004,5 +3004,992 @@ define({ "api": [
     },
     "filename": "app/Http/Controllers/Api/V1_0/ChangecustController.php",
     "groupTitle": "更名"
+  },
+  {
+    "type": "get",
+    "url": "api/1.0.0/checkout/create",
+    "title": "退房发起",
+    "name": "create",
+    "group": "Groupcheckout",
+    "parameter": {
+      "fields": {
+        "参数": [
+          {
+            "group": "参数",
+            "type": "string",
+            "optional": false,
+            "field": "buyid",
+            "description": "<p>认购id</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "http://192.168.1.13/fang/public/api/1.0.0/checkout/create"
+      }
+    ],
+    "version": "1.0.0",
+    "success": {
+      "examples": [
+        {
+          "title": "成功返回:",
+          "content": "HTTP/1.1 200 OK\n{\n  \"code\": \"101\",\n  \"message\": \"请求成功\",\n  \"result\" : $data\n\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "失败返回:",
+          "content": "HTTP/1.1 404 Not Found\n{\n  \"error\": \"请求失败\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/Http/Controllers/Api/V1_0/CheckoutController.php",
+    "groupTitle": "退房"
+  },
+  {
+    "type": "get",
+    "url": "api/1.0.0/checkout/search",
+    "title": "退房列表与检索",
+    "name": "search",
+    "group": "Groupcheckout",
+    "parameter": {
+      "fields": {
+        "参数": [
+          {
+            "group": "参数",
+            "type": "string",
+            "optional": false,
+            "field": "hous_id",
+            "description": "<p>职业顾问id</p>"
+          },
+          {
+            "group": "参数",
+            "type": "int",
+            "optional": false,
+            "field": "page",
+            "description": "<p>分页</p>"
+          },
+          {
+            "group": "参数",
+            "type": "string",
+            "optional": false,
+            "field": "parameter",
+            "description": "<p>客户手机号或姓名</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "http://192.168.1.13/fang/public/api/1.0.0/checkout/search"
+      }
+    ],
+    "version": "1.0.0",
+    "success": {
+      "examples": [
+        {
+          "title": "成功返回:",
+          "content": "HTTP/1.1 200 OK\n{\n  \"code\": \"101\",\n  \"message\": \"请求成功\",\n  \"result\" : $data\n\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "失败返回:",
+          "content": "HTTP/1.1 404 Not Found\n{\n  \"error\": \"请求失败\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/Http/Controllers/Api/V1_0/CheckoutController.php",
+    "groupTitle": "退房"
+  },
+  {
+    "type": "post",
+    "url": "api/1.0.0/checkout/store",
+    "title": "退房新增",
+    "name": "store",
+    "group": "Groupcheckout",
+    "parameter": {
+      "fields": {
+        "参数": [
+          {
+            "group": "参数",
+            "type": "string",
+            "optional": false,
+            "field": "buyid",
+            "description": "<p>认购id</p>"
+          },
+          {
+            "group": "参数",
+            "type": "string",
+            "optional": false,
+            "field": "old_homeid",
+            "description": "<p>房源id</p>"
+          },
+          {
+            "group": "参数",
+            "type": "string",
+            "optional": false,
+            "field": "cust_id",
+            "description": "<p>客户id</p>"
+          },
+          {
+            "group": "参数",
+            "type": "string",
+            "optional": true,
+            "field": "remarks",
+            "description": "<p>备注信息</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "http://192.168.1.13/fang/public/api/1.0.0/checkout/store"
+      }
+    ],
+    "version": "1.0.0",
+    "success": {
+      "examples": [
+        {
+          "title": "成功返回:",
+          "content": "HTTP/1.1 200 OK\n{\n  \"code\": \"101\",\n  \"message\": \"请求成功\",\n  \"result\" : $data\n\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "失败返回:",
+          "content": "HTTP/1.1 404 Not Found\n{\n  \"error\": \"请求失败\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/Http/Controllers/Api/V1_0/CheckoutController.php",
+    "groupTitle": "退房"
+  },
+  {
+    "type": "get",
+    "url": "api/1.0.0/checkout/view",
+    "title": "退房详情",
+    "name": "view",
+    "group": "Groupcheckout",
+    "parameter": {
+      "fields": {
+        "参数": [
+          {
+            "group": "参数",
+            "type": "string",
+            "optional": false,
+            "field": "chan_id",
+            "description": "<p>退房id</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "http://192.168.1.13/fang/public/api/1.0.0/checkout/view"
+      }
+    ],
+    "version": "1.0.0",
+    "success": {
+      "examples": [
+        {
+          "title": "成功返回:",
+          "content": "HTTP/1.1 200 OK\n{\n  \"code\": \"101\",\n  \"message\": \"请求成功\",\n  \"result\" : $data\n\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "失败返回:",
+          "content": "HTTP/1.1 404 Not Found\n{\n  \"error\": \"请求失败\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/Http/Controllers/Api/V1_0/CheckoutController.php",
+    "groupTitle": "退房"
+  },
+  {
+    "type": "get",
+    "url": "api/1.0.0/delayed/create",
+    "title": "签约发起",
+    "name": "create",
+    "group": "Groupdelayed",
+    "parameter": {
+      "fields": {
+        "参数": [
+          {
+            "group": "参数",
+            "type": "string",
+            "optional": false,
+            "field": "buyid",
+            "description": "<p>认购id</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "http://192.168.1.13/fang/public/api/1.0.0/delayed/create"
+      }
+    ],
+    "version": "1.0.0",
+    "success": {
+      "examples": [
+        {
+          "title": "成功返回:",
+          "content": "HTTP/1.1 200 OK\n{\n  \"code\": \"101\",\n  \"message\": \"请求成功\",\n  \"result\" : $data\n\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "失败返回:",
+          "content": "HTTP/1.1 404 Not Found\n{\n  \"error\": \"请求失败\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/Http/Controllers/Api/V1_0/DelayedController.php",
+    "groupTitle": "延迟签约"
+  },
+  {
+    "type": "get",
+    "url": "api/1.0.0/delayed/search",
+    "title": "签约列表与检索",
+    "name": "search",
+    "group": "Groupdelayed",
+    "parameter": {
+      "fields": {
+        "参数": [
+          {
+            "group": "参数",
+            "type": "string",
+            "optional": false,
+            "field": "hous_id",
+            "description": "<p>职业顾问id</p>"
+          },
+          {
+            "group": "参数",
+            "type": "int",
+            "optional": false,
+            "field": "page",
+            "description": "<p>分页</p>"
+          },
+          {
+            "group": "参数",
+            "type": "string",
+            "optional": false,
+            "field": "parameter",
+            "description": "<p>客户手机号或姓名</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "http://192.168.1.13/fang/public/api/1.0.0/delayed/search"
+      }
+    ],
+    "version": "1.0.0",
+    "success": {
+      "examples": [
+        {
+          "title": "成功返回:",
+          "content": "HTTP/1.1 200 OK\n{\n  \"code\": \"101\",\n  \"message\": \"请求成功\",\n  \"result\" : $data\n\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "失败返回:",
+          "content": "HTTP/1.1 404 Not Found\n{\n  \"error\": \"请求失败\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/Http/Controllers/Api/V1_0/DelayedController.php",
+    "groupTitle": "延迟签约"
+  },
+  {
+    "type": "post",
+    "url": "api/1.0.0/delayed/store",
+    "title": "签约新增",
+    "name": "store",
+    "group": "Groupdelayed",
+    "parameter": {
+      "fields": {
+        "参数": [
+          {
+            "group": "参数",
+            "type": "string",
+            "optional": false,
+            "field": "cust_id",
+            "description": "<p>客户id</p>"
+          },
+          {
+            "group": "参数",
+            "type": "string",
+            "optional": false,
+            "field": "homeid",
+            "description": "<p>房源id</p>"
+          },
+          {
+            "group": "参数",
+            "type": "string",
+            "optional": false,
+            "field": "sign_remarks",
+            "description": "<p>职业顾问备注</p>"
+          },
+          {
+            "group": "参数",
+            "type": "string",
+            "optional": false,
+            "field": "buyid",
+            "description": "<p>认购id</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "http://192.168.1.13/fang/public/api/1.0.0/delayed/store"
+      }
+    ],
+    "version": "1.0.0",
+    "success": {
+      "examples": [
+        {
+          "title": "成功返回:",
+          "content": "HTTP/1.1 200 OK\n{\n  \"code\": \"101\",\n  \"message\": \"请求成功\",\n  \"result\" : $data\n\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "失败返回:",
+          "content": "HTTP/1.1 404 Not Found\n{\n  \"error\": \"请求失败\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/Http/Controllers/Api/V1_0/DelayedController.php",
+    "groupTitle": "延迟签约"
+  },
+  {
+    "type": "get",
+    "url": "api/1.0.0/delayed/view",
+    "title": "签约详情",
+    "name": "view",
+    "group": "Groupdelayed",
+    "parameter": {
+      "fields": {
+        "参数": [
+          {
+            "group": "参数",
+            "type": "string",
+            "optional": false,
+            "field": "signid",
+            "description": "<p>签约id</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "http://192.168.1.13/fang/public/api/1.0.0/delayed/view"
+      }
+    ],
+    "version": "1.0.0",
+    "success": {
+      "examples": [
+        {
+          "title": "成功返回:",
+          "content": "HTTP/1.1 200 OK\n{\n  \"code\": \"101\",\n  \"message\": \"请求成功\",\n  \"result\" : $data\n\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "失败返回:",
+          "content": "HTTP/1.1 404 Not Found\n{\n  \"error\": \"请求失败\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/Http/Controllers/Api/V1_0/DelayedController.php",
+    "groupTitle": "延迟签约"
+  },
+  {
+    "type": "get",
+    "url": "api/1.0.0/home/index",
+    "title": "销控信息",
+    "name": "amount",
+    "group": "Grouphome",
+    "parameter": {
+      "fields": {
+        "参数": [
+          {
+            "group": "参数",
+            "type": "string",
+            "optional": false,
+            "field": "buildnum",
+            "description": "<p>楼号信息</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "http://192.168.1.13/fang/public/api/1.0.0/home/index"
+      }
+    ],
+    "version": "1.0.0",
+    "success": {
+      "examples": [
+        {
+          "title": "成功返回:",
+          "content": "HTTP/1.1 200 OK\n{\n  \"code\": \"101\",\n  \"message\": \"请求成功\",\n  \"result\" : $data\n\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "失败返回:",
+          "content": "HTTP/1.1 404 Not Found\n{\n  \"error\": \"请求失败\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/Http/Controllers/Api/V1_0/HomeController.php",
+    "groupTitle": "销控表"
+  },
+  {
+    "type": "get",
+    "url": "api/1.0.0/home/count",
+    "title": "楼号房源总量",
+    "name": "count",
+    "group": "Grouphome",
+    "sampleRequest": [
+      {
+        "url": "http://192.168.1.13/fang/public/api/1.0.0/home/count"
+      }
+    ],
+    "version": "1.0.0",
+    "success": {
+      "examples": [
+        {
+          "title": "成功返回:",
+          "content": "HTTP/1.1 200 OK\n{\n  \"code\": \"101\",\n  \"message\": \"请求成功\",\n  \"result\" : $data\n\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "失败返回:",
+          "content": "HTTP/1.1 404 Not Found\n{\n  \"error\": \"请求失败\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/Http/Controllers/Api/V1_0/HomeController.php",
+    "groupTitle": "销控表"
+  },
+  {
+    "type": "get",
+    "url": "api/1.0.0/home/counts",
+    "title": "楼号房源可售总量",
+    "name": "counts",
+    "group": "Grouphome",
+    "sampleRequest": [
+      {
+        "url": "http://192.168.1.13/fang/public/api/1.0.0/home/counts"
+      }
+    ],
+    "version": "1.0.0",
+    "success": {
+      "examples": [
+        {
+          "title": "成功返回:",
+          "content": "HTTP/1.1 200 OK\n{\n  \"code\": \"101\",\n  \"message\": \"请求成功\",\n  \"result\" : $data\n\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "失败返回:",
+          "content": "HTTP/1.1 404 Not Found\n{\n  \"error\": \"请求失败\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/Http/Controllers/Api/V1_0/HomeController.php",
+    "groupTitle": "销控表"
+  },
+  {
+    "type": "get",
+    "url": "api/1.0.0/home/countss",
+    "title": "楼号房源销控总量",
+    "name": "countss",
+    "group": "Grouphome",
+    "sampleRequest": [
+      {
+        "url": "http://192.168.1.13/fang/public/api/1.0.0/home/countss"
+      }
+    ],
+    "version": "1.0.0",
+    "success": {
+      "examples": [
+        {
+          "title": "成功返回:",
+          "content": "HTTP/1.1 200 OK\n{\n  \"code\": \"101\",\n  \"message\": \"请求成功\",\n  \"result\" : $data\n\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "失败返回:",
+          "content": "HTTP/1.1 404 Not Found\n{\n  \"error\": \"请求失败\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/Http/Controllers/Api/V1_0/HomeController.php",
+    "groupTitle": "销控表"
+  },
+  {
+    "type": "get",
+    "url": "api/1.0.0/home/countsss",
+    "title": "楼号房源已售总量",
+    "name": "countsss",
+    "group": "Grouphome",
+    "sampleRequest": [
+      {
+        "url": "http://192.168.1.13/fang/public/api/1.0.0/home/countsss"
+      }
+    ],
+    "version": "1.0.0",
+    "success": {
+      "examples": [
+        {
+          "title": "成功返回:",
+          "content": "HTTP/1.1 200 OK\n{\n  \"code\": \"101\",\n  \"message\": \"请求成功\",\n  \"result\" : $data\n\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "失败返回:",
+          "content": "HTTP/1.1 404 Not Found\n{\n  \"error\": \"请求失败\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/Http/Controllers/Api/V1_0/HomeController.php",
+    "groupTitle": "销控表"
+  },
+  {
+    "type": "get",
+    "url": "api/1.0.0/home/details",
+    "title": "房源信息详情",
+    "name": "details",
+    "group": "Grouphome",
+    "parameter": {
+      "fields": {
+        "参数": [
+          {
+            "group": "参数",
+            "type": "string",
+            "optional": false,
+            "field": "homeid",
+            "description": "<p>房号id</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "http://192.168.1.13/fang/public/api/1.0.0/home/details"
+      }
+    ],
+    "version": "1.0.0",
+    "success": {
+      "examples": [
+        {
+          "title": "成功返回:",
+          "content": "HTTP/1.1 200 OK\n{\n  \"code\": \"101\",\n  \"message\": \"请求成功\",\n  \"result\" : $data\n\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "失败返回:",
+          "content": "HTTP/1.1 404 Not Found\n{\n  \"error\": \"请求失败\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/Http/Controllers/Api/V1_0/HomeController.php",
+    "groupTitle": "销控表"
+  },
+  {
+    "type": "get",
+    "url": "api/1.0.0/signing/create",
+    "title": "签约发起",
+    "name": "create",
+    "group": "Groupsigning",
+    "parameter": {
+      "fields": {
+        "参数": [
+          {
+            "group": "参数",
+            "type": "string",
+            "optional": false,
+            "field": "buyid",
+            "description": "<p>认购id</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "http://192.168.1.13/fang/public/api/1.0.0/signing/create"
+      }
+    ],
+    "version": "1.0.0",
+    "success": {
+      "examples": [
+        {
+          "title": "成功返回:",
+          "content": "HTTP/1.1 200 OK\n{\n  \"code\": \"101\",\n  \"message\": \"请求成功\",\n  \"result\" : $data\n\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "失败返回:",
+          "content": "HTTP/1.1 404 Not Found\n{\n  \"error\": \"请求失败\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/Http/Controllers/Api/V1_0/SigningController.php",
+    "groupTitle": "签约"
+  },
+  {
+    "type": "get",
+    "url": "api/1.0.0/signing/search",
+    "title": "签约列表与检索",
+    "name": "search",
+    "group": "Groupsigning",
+    "parameter": {
+      "fields": {
+        "参数": [
+          {
+            "group": "参数",
+            "type": "string",
+            "optional": false,
+            "field": "hous_id",
+            "description": "<p>职业顾问id</p>"
+          },
+          {
+            "group": "参数",
+            "type": "int",
+            "optional": false,
+            "field": "page",
+            "description": "<p>分页</p>"
+          },
+          {
+            "group": "参数",
+            "type": "string",
+            "optional": false,
+            "field": "parameter",
+            "description": "<p>客户手机号或姓名</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "http://192.168.1.13/fang/public/api/1.0.0/signing/search"
+      }
+    ],
+    "version": "1.0.0",
+    "success": {
+      "examples": [
+        {
+          "title": "成功返回:",
+          "content": "HTTP/1.1 200 OK\n{\n  \"code\": \"101\",\n  \"message\": \"请求成功\",\n  \"result\" : $data\n\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "失败返回:",
+          "content": "HTTP/1.1 404 Not Found\n{\n  \"error\": \"请求失败\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/Http/Controllers/Api/V1_0/SigningController.php",
+    "groupTitle": "签约"
+  },
+  {
+    "type": "post",
+    "url": "api/1.0.0/signing/store",
+    "title": "签约新增",
+    "name": "store",
+    "group": "Groupsigning",
+    "parameter": {
+      "fields": {
+        "参数": [
+          {
+            "group": "参数",
+            "type": "string",
+            "optional": false,
+            "field": "cust_id",
+            "description": "<p>客户id</p>"
+          },
+          {
+            "group": "参数",
+            "type": "string",
+            "optional": false,
+            "field": "homeid",
+            "description": "<p>房源id</p>"
+          },
+          {
+            "group": "参数",
+            "type": "string",
+            "optional": false,
+            "field": "sign_remarks",
+            "description": "<p>职业顾问备注</p>"
+          },
+          {
+            "group": "参数",
+            "type": "string",
+            "optional": false,
+            "field": "buyid",
+            "description": "<p>认购id</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "http://192.168.1.13/fang/public/api/1.0.0/signing/store"
+      }
+    ],
+    "version": "1.0.0",
+    "success": {
+      "examples": [
+        {
+          "title": "成功返回:",
+          "content": "HTTP/1.1 200 OK\n{\n  \"code\": \"101\",\n  \"message\": \"请求成功\",\n  \"result\" : $data\n\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "失败返回:",
+          "content": "HTTP/1.1 404 Not Found\n{\n  \"error\": \"请求失败\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/Http/Controllers/Api/V1_0/SigningController.php",
+    "groupTitle": "签约"
+  },
+  {
+    "type": "get",
+    "url": "api/1.0.0/signing/view",
+    "title": "签约详情",
+    "name": "view",
+    "group": "Groupsigning",
+    "parameter": {
+      "fields": {
+        "参数": [
+          {
+            "group": "参数",
+            "type": "string",
+            "optional": false,
+            "field": "signid",
+            "description": "<p>签约id</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "http://192.168.1.13/fang/public/api/1.0.0/signing/view"
+      }
+    ],
+    "version": "1.0.0",
+    "success": {
+      "examples": [
+        {
+          "title": "成功返回:",
+          "content": "HTTP/1.1 200 OK\n{\n  \"code\": \"101\",\n  \"message\": \"请求成功\",\n  \"result\" : $data\n\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "失败返回:",
+          "content": "HTTP/1.1 404 Not Found\n{\n  \"error\": \"请求失败\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/Http/Controllers/Api/V1_0/SigningController.php",
+    "groupTitle": "签约"
+  },
+  {
+    "type": "get",
+    "url": "api/1.0.0/small/amount",
+    "title": "销售金额排行",
+    "name": "amount",
+    "group": "Groupsmall",
+    "parameter": {
+      "fields": {
+        "参数": [
+          {
+            "group": "参数",
+            "type": "string",
+            "optional": false,
+            "field": "stime",
+            "description": "<p>开始时间</p>"
+          },
+          {
+            "group": "参数",
+            "type": "string",
+            "optional": false,
+            "field": "etime",
+            "description": "<p>结束时间</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "http://192.168.1.13/fang/public/api/1.0.0/small/amount"
+      }
+    ],
+    "version": "1.0.0",
+    "success": {
+      "examples": [
+        {
+          "title": "成功返回:",
+          "content": "HTTP/1.1 200 OK\n{\n  \"code\": \"101\",\n  \"message\": \"请求成功\",\n  \"result\" : $data\n\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "失败返回:",
+          "content": "HTTP/1.1 404 Not Found\n{\n  \"error\": \"请求失败\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/Http/Controllers/Api/V1_0/SmallController.php",
+    "groupTitle": "销售排行"
+  },
+  {
+    "type": "get",
+    "url": "api/1.0.0/small/listing",
+    "title": "销售套数排命",
+    "name": "listing",
+    "group": "Groupsmall",
+    "parameter": {
+      "fields": {
+        "参数": [
+          {
+            "group": "参数",
+            "type": "string",
+            "optional": false,
+            "field": "stime",
+            "description": "<p>开始时间</p>"
+          },
+          {
+            "group": "参数",
+            "type": "string",
+            "optional": false,
+            "field": "etime",
+            "description": "<p>结束时间</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "http://192.168.1.13/fang/public/api/1.0.0/small/listing"
+      }
+    ],
+    "version": "1.0.0",
+    "success": {
+      "examples": [
+        {
+          "title": "成功返回:",
+          "content": "HTTP/1.1 200 OK\n{\n  \"code\": \"101\",\n  \"message\": \"请求成功\",\n  \"result\" : $data\n\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "失败返回:",
+          "content": "HTTP/1.1 404 Not Found\n{\n  \"error\": \"请求失败\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/Http/Controllers/Api/V1_0/SmallController.php",
+    "groupTitle": "销售排行"
   }
 ] });
