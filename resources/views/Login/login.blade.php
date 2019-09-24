@@ -215,7 +215,7 @@
 						$( "#submit_btn" ).attr( 'disabled' , false );
 						return false;
 					}
-				} ,
+				},
 			} );
 			return false;
 		} );

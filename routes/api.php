@@ -96,6 +96,12 @@ Route::post('1.0.0/buydetails','Api\V1_0\LedgerController@buydetails');
 Route::post('1.0.0/changname','Api\V1_0\LedgerController@changname');
 //换房接口
 Route::post('1.0.0/chahome','Api\V1_0\LedgerController@chahome');
+//退房接口
+Route::post('1.0.0/chakouthome','Api\V1_0\LedgerController@chakouthome');
+//签约接口
+Route::post('1.0.0/signt','Api\V1_0\LedgerController@signt');
+//延迟签约接口
+Route::post('1.0.0/sdelay','Api\V1_0\LedgerController@sdelay');
 
 
 
