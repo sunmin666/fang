@@ -356,7 +356,6 @@ class CustomerController extends SessionController
 
 	public function destroy(Request $query){
 		$cust_id = (int)$query -> input('cust_id');
-
 		$is_show = $query -> input('is_show');
 
 		if($is_show == 1){
