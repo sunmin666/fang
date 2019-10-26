@@ -73,7 +73,7 @@ class FieldController extends SessionController
 	 */
 		public function store(Request $query){
 			$validator = Validator::make($query ->all(),[
-				'name'  => 'max:20|min:2'
+				'name'  => 'max:20|min:1'
 			]);
 
 			if($validator -> errors() -> get('name')){

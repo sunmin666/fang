@@ -85,7 +85,7 @@ class HomeController extends SessionController
     	$data['house_img'] = $query -> input('n_img');  //户型图
     	$data['house_str'] = $query -> input('house_str');  //户型结构
     	$data['price'] = $query -> input('price');  //单价
-			$data['total'] =  $data['build_area'] * $data['price'];      //总价
+		$data['total'] =  $data['build_area'] * $data['price'];      //总价
     	$data['discount'] = $query -> input('discount');  //折扣
     	$data['status'] = $query -> input('status');  //状态
     	$data['buyid'] = $query -> input('buyid');  //认购编号
