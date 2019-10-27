@@ -288,7 +288,7 @@ Route::get('1.0.0/cushounum','Api\V1_0\xiao\CustController@cushounum');
 //首次接触方式
 Route::get('1.0.0/first_contact','Api\V1_0\xiao\CustController@first_contact');
 //职业关注
-<<<<<<< HEAD
+ 
 	Route::get('1.0.0/ownership','Api\V1_0\CustController@ownership');
 	//职业目的
 	Route::get('1.0.0/purpose','Api\V1_0\CustController@purpose');
@@ -409,7 +409,7 @@ Route::get('1.0.0/home/countsss','Api\V1_0\HomeController@home_countsss');
 Route::get('1.0.0/home/details','Api\V1_0\HomeController@home_details');
 
 
-=======
+
 Route::get('1.0.0/ownership','Api\V1_0\xiao\CustController@ownership');
 //职业目的
 Route::get('1.0.0/purpose','Api\V1_0\xiao\CustController@purpose');
@@ -608,4 +608,4 @@ Route::post('1.0.0/buyedit','Api\V1_0\xiao\BuyinfoController@buyedit');
 Route::post('1.0.0/buydel','Api\V1_0\xiao\BuyinfoController@buydel');
 //认购全选删除
 Route::post('1.0.0/buyalldel','Api\V1_0\xiao\BuyinfoController@buyalldel');
->>>>>>> sun
+
