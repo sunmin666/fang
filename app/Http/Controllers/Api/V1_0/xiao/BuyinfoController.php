@@ -19,7 +19,7 @@ class BuyinfoController extends Controller
      * @apiParam (参数) {int} field_id 单元id
      * @apiParam (参数) {int} floorid 楼层id
      *
-     * @apiSampleRequest http://192.168.1.220/fang/public/api/1.0.0/homestaus
+     * @apiSampleRequest http://192.168.1.5/fang/public/api/1.0.0/homestaus
      * @apiVersion 1.0.0
      * @apiSuccessExample {json} 成功返回:
      *     HTTP/1.1 200 OK
@@ -438,7 +438,7 @@ class BuyinfoController extends Controller
      *
      * @apiParam (参数) {int} page 页码
      *
-     * @apiSampleRequest http://192.168.1.220/fang/public/api/1.0.0/buyshow
+     * @apiSampleRequest http://192.168.1.5/fang/public/api/1.0.0/buyshow
      * @apiVersion 1.0.0
      * @apiSuccessExample {json} 成功返回:
      *     HTTP/1.1 200 OK

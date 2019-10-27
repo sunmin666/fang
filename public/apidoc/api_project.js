@@ -3,13 +3,13 @@ define({
   "version": "1.0.0",
   "description": "接口",
   "title": "房源信息api管理",
-  "url": "http://192.168.1.5/laravel/public/",
+  "url": "http://192.168.1.5/fang/public/",
   "sampleUrl": false,
   "defaultVersion": "0.0.0",
   "apidoc": "0.3.0",
   "generator": {
     "name": "apidoc",
-    "time": "2019-10-27T08:23:52.031Z",
+    "time": "2019-10-27T12:18:53.836Z",
     "url": "http://apidocjs.com",
     "version": "0.17.7"
   }

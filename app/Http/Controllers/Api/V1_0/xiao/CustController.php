@@ -875,7 +875,7 @@ class CustController extends Controller
      * @apiParam (参数) {string} [realname] 客户姓名筛选
      * @apiParam (参数) {int} [mobile] 手机号筛选
      *
-     * @apiSampleRequest http://192.168.1.220/fang/public/api/1.0.0/custshow
+     * @apiSampleRequest http://192.168.1.5/fang/public/api/1.0.0/custshow
      * @apiVersion 1.0.0
      * @apiSuccessExample {json} 成功返回:
      *     HTTP/1.1 200 OK

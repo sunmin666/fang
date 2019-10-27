@@ -4622,7 +4622,7 @@
     },
     "sampleRequest": [
       {
-        "url": "http://192.168.1.220/fang/public/api/1.0.0/custshow"
+        "url": "http://192.168.1.5/fang/public/api/1.0.0/custshow"
       }
     ],
     "version": "1.0.0",
@@ -9924,7 +9924,7 @@
     },
     "sampleRequest": [
       {
-        "url": "http://192.168.1.220/fang/public/api/1.0.0/buyshow"
+        "url": "http://192.168.1.5/fang/public/api/1.0.0/buyshow"
       }
     ],
     "version": "1.0.0",
@@ -10069,7 +10069,7 @@
     },
     "sampleRequest": [
       {
-        "url": "http://192.168.1.220/fang/public/api/1.0.0/homestaus"
+        "url": "http://192.168.1.5/fang/public/api/1.0.0/homestaus"
       }
     ],
     "version": "1.0.0",
